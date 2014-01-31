@@ -113,7 +113,7 @@ public class Employe {
      * 
      * @return <b>int</b> - Nombre de timesheets.
      */
-    public int getTimeSheetNum() {
+    public int getTimeSheetsNum() {
         
         return timesheets.size();
         
