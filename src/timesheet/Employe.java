@@ -24,7 +24,11 @@ public class Employe {
     
     public Employe() {
         
+        TimeSheetData timesheet = new TimeSheetData();
+        
         timesheets = new ArrayList();
+        
+        timesheets.add(timesheet);
         
     }
     
