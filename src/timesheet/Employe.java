@@ -53,6 +53,8 @@ public class Employe {
         
         this.employeId = id;
         
+        timesheets.get(0).setEmployeId(id);
+        
     }
 
     
@@ -76,6 +78,12 @@ public class Employe {
     public void setId(int id) {
         
         this.employeId = id;
+        
+        for(TimeSheetData timesheet : timesheets) {
+            
+            timesheet.setEmployeId(id);
+            
+        }
         
     }
 
