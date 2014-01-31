@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author user
+ * Objet Day - Une journée
+ * 
  */
 public class Day {
 
@@ -28,7 +28,8 @@ public class Day {
 
     
     /**
-     *
+     * Constructeur de Day()
+     * 
      */
     public Day() {
         
@@ -38,8 +39,9 @@ public class Day {
 
     
     /**
-     *
-     * @return
+     * Retourne le nombre de tâches dans la journée
+     * 
+     * @return <b>int</b> - nombre de tâches
      */
     public int getTasksNum() {
         
@@ -49,8 +51,9 @@ public class Day {
 
     
     /**
-     *
-     * @return
+     * Retourne le nom de la journée
+     * 
+     * @return <b>String</b> - le nom de la journée
      */
     public String getName() {
         
@@ -60,8 +63,9 @@ public class Day {
 
     
     /**
-     *
-     * @param name
+     * Modifie le nom de la journée
+     * 
+     * @param name nom de la journée
      */
     public void setName(String name) {
         
@@ -89,7 +93,7 @@ public class Day {
      * Retourne la tâche numéro index.
      * 
      * @param index position de la tâche
-     * @return la tâche (<b>Task</b>) à la position <b>index</b>
+     * @return <b>Task</b> - la tâche à la position <b>index</b>
      */
     public Task getTask(int index) {
             
@@ -103,7 +107,7 @@ public class Day {
     /**
      * Retourne la liste des tâches de la journée.
      * 
-     * @return un <b>ArrayList&lt Task&gt</B> contenant les tâches de la journée
+     * @return <b>ArrayList&lt Task&gt</B> - liste des tâches de la journée
      */
     public List<Task> getTasks() {
             
@@ -115,7 +119,7 @@ public class Day {
     /**
      * Est-ce que le jour est une jour de semaine ?
      * 
-     * @return <b>true</b> si le jour est un jour de semaine.
+     * @return <b>boolean</b> - <b>true</b> si le jour est un jour de semaine.
      */
     public boolean isWorkingDay() {
         
