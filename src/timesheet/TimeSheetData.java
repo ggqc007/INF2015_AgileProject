@@ -20,7 +20,7 @@ import java.util.List;
 
 public class TimeSheetData {
     
-    private List<Day> days;
+    private final List<Day> days;
 
     public TimeSheetData() {
         

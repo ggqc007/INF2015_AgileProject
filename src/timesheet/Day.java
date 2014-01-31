@@ -20,7 +20,7 @@ import java.util.List;
 
 public class Day {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
         
     
     public Day() {
