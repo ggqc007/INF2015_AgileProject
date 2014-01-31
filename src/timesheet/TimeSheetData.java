@@ -89,6 +89,26 @@ public class TimeSheetData {
 
     
     /**
+     * Retourne la journée ayant le nom <b>name</b>.
+     * 
+     * @param name - Nom de la journée.
+     * @return <b>Day</b> - La journée demandée, null si non trouvée.
+     */        
+    public Day getDayByName(String name) {
+
+        for (Day day : days ) {
+        
+            if (day.getName().equals(name))
+                return day;
+            
+        }
+        
+        return null;
+                    
+    }  
+    
+    
+    /**
      * Retourne la liste des journées.
      * 
      * @return <b>List&lt Day&gt</b> - La journée demandée.
