@@ -50,13 +50,30 @@ public class TimeSheet {
      */
     public static void main(String[] args) {
 
+        String  inputFileName;
+        String  ouputFileName;
         Employe employe = new Employe();
 
         employees = new ArrayList();
 
         employees.add(employe);
         
+        // Vérification des arguments de ligne de commande
+        if ( args.length != 2 ) {
+            
+            System.out.println("Utilisation: TimeSheet.jar input.json output.json");
+            
+            System.exit(1);
+            
+        }
         
+        // Lecture des arguments
+        inputFileName = args[0];
+        ouputFileName = args[1];
+        
+        // ATTENTION!!!
+        // Guillaume, je n'ai pas modifier ton code pour ajouter les noms de fichiers
+        // passés en argument!
         
         // Input
         JSONText = readFile(); // eventuellement faire avec args
