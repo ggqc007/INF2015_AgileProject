@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Objet Day - Une journée
+ * Objet Day - Une journée.
  * 
  */
 public class Day {
@@ -28,7 +28,7 @@ public class Day {
 
     
     /**
-     * Constructeur de Day()
+     * Constructeur de Day().
      * 
      */
     public Day() {
@@ -39,9 +39,9 @@ public class Day {
 
     
     /**
-     * Retourne le nombre de tâches dans la journée
+     * Retourne le nombre de tâches dans la journée.
      * 
-     * @return <b>int</b> - nombre de tâches
+     * @return <b>int</b> - nombre de tâches.
      */
     public int getTasksNum() {
         
@@ -51,9 +51,9 @@ public class Day {
 
     
     /**
-     * Retourne le nom de la journée
+     * Retourne le nom de la journée.
      * 
-     * @return <b>String</b> - le nom de la journée
+     * @return <b>String</b> - le nom de la journée.
      */
     public String getName() {
         
@@ -63,9 +63,9 @@ public class Day {
 
     
     /**
-     * Modifie le nom de la journée
+     * Modifie le nom de la journée.
      * 
-     * @param name nom de la journée
+     * @param name nom de la journée.
      */
     public void setName(String name) {
         
@@ -75,10 +75,10 @@ public class Day {
 
     
     /**
-     * Ajoute une tâche à la journée
+     * Ajoute une tâche à la journée.
      * 
-     * @param id   numéro d'identification du projet
-     * @param time le temps en minutes passé sur le projet
+     * @param id   numéro d'identification du projet.
+     * @param time le temps en minutes passé sur le projet.
      */
     public void addTask(int id, int time) {
         
@@ -92,8 +92,8 @@ public class Day {
     /**
      * Retourne la tâche numéro index.
      * 
-     * @param index position de la tâche
-     * @return <b>Task</b> - la tâche à la position <b>index</b>
+     * @param index position de la tâche.
+     * @return <b>Task</b> - la tâche à la position <b>index</b>.
      */
     public Task getTask(int index) {
             
@@ -107,7 +107,7 @@ public class Day {
     /**
      * Retourne la liste des tâches de la journée.
      * 
-     * @return <b>ArrayList&lt Task&gt</B> - liste des tâches de la journée
+     * @return <b>ArrayList&lt Task&gt</B> - liste des tâches de la journée.
      */
     public List<Task> getTasks() {
             
@@ -117,7 +117,7 @@ public class Day {
     
     
     /**
-     * Est-ce que le jour est une jour de semaine ?
+     * Est-ce que le jour est une jour de semaine?
      * 
      * @return <b>boolean</b> - <b>true</b> si le jour est un jour de semaine.
      */
