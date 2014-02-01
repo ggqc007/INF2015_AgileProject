@@ -18,24 +18,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class RulesAdmins extends Rules {
+public class RulesEmployes extends Rules {
 
-    public RulesAdmins() {
+    public RulesEmployes() {
         
     }
     
     public boolean hasMinimumOfficeWeekHours() {
-        // TODO: Définition de la classe par Khaled
+        // TODO: Définition de la classe par Christian
         return true;
     }
     
     public boolean hasMinimumOfficeDailyHours(Employe employe){
-        // TODO: Définition de la classe par Khaled
+        // TODO: Définition de la classe par Christian
         return true;
     }
     
     public boolean hasValidHomeWeekHours(){
-        // TODO: Définition de la classe par Khaled
+        // TODO: Définition de la classe par Christian
         return true;
     }
 }

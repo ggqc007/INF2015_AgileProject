@@ -13,15 +13,81 @@
 
 package timesheet;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
-
 abstract public class Rules {
+    
+    protected int maxOfficeWeekHours;
+    protected int minOfficeWeekHours;
+    protected int maxHomeWeekHours;
+    protected int minOfficeDailyHours;
+    protected int totalWeekHours;
+    protected int totalOfficeWeekHours;
+    protected int totalHomeWeekHours;
 
-    public Rules() {
-        
+    public Rules() 
+    {
+        this.maxOfficeWeekHours = 43;
+        //System.out.println( "Rules!" );
     }
     
+    abstract public boolean hasMinimumOfficeWeekHours();
+    
+    abstract public boolean hasMinimumOfficeDailyHours(Employe employe);
+    
+    abstract public boolean hasValidHomeWeekHours();
+
+    public int getMaxOfficeWeekHours() {
+        return maxOfficeWeekHours;
+    }
+
+    public void setMaxOfficeWeekHours(int maxOfficeWeekHours) {
+        this.maxOfficeWeekHours = maxOfficeWeekHours;
+    }
+
+    public int getMinOfficeWeekHours() {
+        return minOfficeWeekHours;
+    }
+
+    public void setMinOfficeWeekHours(int minOfficeWeekHours) {
+        this.minOfficeWeekHours = minOfficeWeekHours;
+    }
+
+    public int getMaxHomeWeekHours() {
+        return maxHomeWeekHours;
+    }
+
+    public void setMaxHomeWeekHours(int maxHomeWeekHours) {
+        this.maxHomeWeekHours = maxHomeWeekHours;
+    }
+
+    public int getMinOfficeDailyHours() {
+        return minOfficeDailyHours;
+    }
+
+    public void setMinOfficeDailyHours(int minOfficeDailyHours) {
+        this.minOfficeDailyHours = minOfficeDailyHours;
+    }
+
+    public int getTotalWeekHours() {
+        return totalWeekHours;
+    }
+
+    public void setTotalWeekHours(int totalWeekHours) {
+        this.totalWeekHours = totalWeekHours;
+    }
+
+    public int getTotalOfficeWeekHours() {
+        return totalOfficeWeekHours;
+    }
+
+    public void setTotalOfficeWeekHours(int totalOfficeWeekHours) {
+        this.totalOfficeWeekHours = totalOfficeWeekHours;
+    }
+
+    public int getTotalHomeWeekHours() {
+        return totalHomeWeekHours;
+    }
+
+    public void setTotalHomeWeekHours(int totalHomeWeekHours) {
+        this.totalHomeWeekHours = totalHomeWeekHours;
+    }   
 }
