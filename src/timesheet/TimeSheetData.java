@@ -24,9 +24,9 @@ import java.util.List;
  */
 public class TimeSheetData {
     
-    private int             employeId;
-    private final List<Day> days;
-    private final String[]  WEEKDAYS_INDEX;
+    private int                    employeId;
+    private final List<Day>        days;
+    private static final String[]  WEEKDAYS_INDEX = {"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
 
     
     /**
@@ -34,8 +34,6 @@ public class TimeSheetData {
      * 
      */
     public TimeSheetData() {
-        
-        this.WEEKDAYS_INDEX = new String[]{"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
         
         this.days = new ArrayList(7);  
         
@@ -84,7 +82,7 @@ public class TimeSheetData {
         
         for (int i = 0; i < this.days.size(); i++) {
             
-            if (this.days.get(i).getName().equals(day.getName()))
+            if (WEEKDAYS_INDEX[i].equals(day.getName()))
                 this.days.set(i, day);
             
         }
