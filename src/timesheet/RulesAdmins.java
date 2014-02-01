@@ -24,16 +24,19 @@ public class RulesAdmins extends Rules {
         
     }
     
+    @Override
     public boolean hasMinimumOfficeWeekHours() {
         // TODO: Définition de la classe par Khaled
         return true;
     }
     
+    @Override
     public boolean hasMinimumOfficeDailyHours(Employe employe){
         // TODO: Définition de la classe par Khaled
         return true;
     }
     
+    @Override
     public boolean hasValidHomeWeekHours(){
         // TODO: Définition de la classe par Khaled
         return true;
