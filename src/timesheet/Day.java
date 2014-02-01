@@ -41,6 +41,20 @@ public class Day {
 
     
     /**
+     * Constructeur avec paramètre de Day().
+     * 
+     * @param name - <b>String</b> Nom de la journée
+     */
+    public Day(String name) {
+        
+        this();
+        
+        this.name = name;
+        
+    }    
+    
+    
+    /**
      * Retourne le nombre de tâches dans la journée.
      * 
      * @return <b>int</b> - nombre de tâches.
