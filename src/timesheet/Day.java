@@ -113,7 +113,7 @@ public class Day {
      */
     public Task getTask(int index) {
             
-        if (index <= 0 || index >= this.tasks.size())
+        if (index < 0 || index >= this.tasks.size())
             return null;
             
         return tasks.get(index);

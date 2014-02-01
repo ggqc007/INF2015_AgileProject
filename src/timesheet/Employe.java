@@ -96,7 +96,7 @@ public class Employe {
      */
     public TimeSheetData getTimeSheet(int index) {
         
-        if (index <= 0 || index >= this.timesheets.size())
+        if (index < 0 || index >= this.timesheets.size())
             return null;
         
         return timesheets.get(index);

@@ -67,6 +67,9 @@ public class TimeSheetData {
      */
     public void setDay(int index, Day day) {
         
+        if (index < 0 || index >= this.days.size())
+            return;
+        
         this.days.set(index, day);
         
     } 
@@ -110,7 +113,7 @@ public class TimeSheetData {
      */        
     public Day getDay(int index) {
            
-        if (index <= 0 || index >= this.days.size())
+        if (index < 0 || index >= this.days.size())
             return null;
             
         return this.days.get(index);
