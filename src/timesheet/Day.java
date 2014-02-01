@@ -73,7 +73,7 @@ public class Day {
      */
     public String getName() {
         
-        return this.name;
+        return name;
         
     }
 
@@ -113,7 +113,7 @@ public class Day {
      */
     public Task getTask(int index) {
             
-        if (index < 0 || index >= this.tasks.size())
+        if (index < 0 || index >= tasks.size())
             return null;
             
         return tasks.get(index);
@@ -140,7 +140,7 @@ public class Day {
      */
     public boolean isWorkingDay() {
         
-        return name.substring(0, 5).equals("jour");
+        return name.substring(0, 4).equals("jour");
         
     }
     

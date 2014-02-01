@@ -51,7 +51,7 @@ public class Employe {
         
         this();
         
-        this.employeId = id;
+        employeId = id;
         
         timesheets.get(0).setEmployeId(id);
         
@@ -65,7 +65,7 @@ public class Employe {
      */
     public int getId() {
         
-        return this.employeId;
+        return employeId;
         
     }
 
@@ -73,11 +73,11 @@ public class Employe {
     /**
      * Modification du numéro d'identification de l'employé.
      * 
-     * @param id - Numéro d'identification de l'employé.
+     * @param id Numéro d'identification de l'employé.
      */
     public void setId(int id) {
         
-        this.employeId = id;
+        employeId = id;
         
         for(TimeSheetData timesheet : timesheets) {
             
@@ -96,7 +96,7 @@ public class Employe {
      */
     public TimeSheetData getTimeSheet(int index) {
         
-        if (index < 0 || index >= this.timesheets.size())
+        if (index < 0 || index >= timesheets.size())
             return null;
         
         return timesheets.get(index);
@@ -114,9 +114,18 @@ public class Employe {
         return timesheets;
         
     }
+
     
-    
-    // TODO: addTimeSheet(TimeSheetData timesheet)
+    /**
+     * Ajoute un timesheet à la liste des timesheets de l'employé.
+     * 
+     * @param timesheet Timesheet à ajouter à la liste.
+     */
+    public void addTimeSheet(TimeSheetData timesheet) {
+        
+        timesheets.add(timesheet);
+        
+    }
     
     
     /**

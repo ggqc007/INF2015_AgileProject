@@ -33,8 +33,8 @@ public class Task {
      */
     public Task(int id, int time) {
         
-        this.projectId = id;
-        this.time      = time;
+        projectId = id;
+        this.time = time;
         
     }
 
@@ -46,7 +46,7 @@ public class Task {
      */
     public int getProjectId() {
         
-        return this.projectId;
+        return projectId;
         
     }
 
@@ -58,7 +58,7 @@ public class Task {
      */
     public int getTime() {
         
-        return this.time;
+        return time;
         
     }
 
@@ -70,7 +70,7 @@ public class Task {
      */
     public void setProjectId(int id) {
         
-        this.projectId = id;
+        projectId = id;
         
     }
 

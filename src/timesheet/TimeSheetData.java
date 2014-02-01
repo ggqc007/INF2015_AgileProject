@@ -35,7 +35,7 @@ public class TimeSheetData {
      */
     public TimeSheetData() {
         
-        this.days = new ArrayList(7);  
+        days = new ArrayList(7);  
         
     }   
     
@@ -43,7 +43,7 @@ public class TimeSheetData {
     /**
      * Ajoute une journée dans le timesheet.
      * 
-     * @param name - <b>String</b> Nom de la journée à ajouter.
+     * @param name <b>String</b> Nom de la journée à ajouter.
      * @return <b>Day</b> - Référence vers l'objet Day ajouté.
      */
     public Day addDay(String name) {
@@ -52,7 +52,7 @@ public class TimeSheetData {
         
         day.setName(name);
         
-        this.days.add(day);
+        days.add(day);
         
         return day;
         
@@ -62,15 +62,15 @@ public class TimeSheetData {
     /**
      * Place une journée à une position spécifique en mémoire.
      * 
-     * @param index - Position de la journée dans la liste.
-     * @param day - Objet <b>day</d> à placer.
+     * @param index Position de la journée dans la liste.
+     * @param day Objet <b>Day</b> à placer.
      */
     public void setDay(int index, Day day) {
         
-        if (index < 0 || index >= this.days.size())
+        if (index < 0 || index >= days.size())
             return;
         
-        this.days.set(index, day);
+        days.set(index, day);
         
     } 
     
@@ -79,14 +79,14 @@ public class TimeSheetData {
      * Ajoute la journée selon son nom à sa position respective.
      * soit index 0 à 6 dans cet ordre <i>dim,lun,mar,mer,jeu,ven,sam</i>
      * 
-     * @param day - Objet <b>day</d> à placer.
+     * @param day Objet <b>Day</b> à placer.
      */        
     public void setDayByName(Day day) {
         
-        for (int i = 0; i < this.days.size(); i++) {
+        for (int i = 0; i < days.size(); i++) {
             
             if (WEEKDAYS_INDEX[i].equals(day.getName()))
-                this.days.set(i, day);
+                days.set(i, day);
             
         }
         
@@ -100,7 +100,7 @@ public class TimeSheetData {
      */
     public int getDaysNum() {
         
-        return this.days.size();
+        return days.size();
         
     }    
 
@@ -108,15 +108,15 @@ public class TimeSheetData {
     /**
      * Retourne la journée à la position <b>index</b>.
      * 
-     * @param index - Position de la journée.
+     * @param index Position de la journée.
      * @return <b>Day</b> - La journée demandée.
      */        
     public Day getDay(int index) {
            
-        if (index < 0 || index >= this.days.size())
+        if (index < 0 || index >= days.size())
             return null;
             
-        return this.days.get(index);
+        return days.get(index);
                     
     }    
 
@@ -124,12 +124,12 @@ public class TimeSheetData {
     /**
      * Retourne la journée ayant le nom <b>name</b>.
      * 
-     * @param name - Nom de la journée.
+     * @param name Nom de la journée.
      * @return <b>Day</b> - La journée demandée, <b>null</b> si non trouvée.
      */        
     public Day getDayByName(String name) {
 
-        for (Day day : days ) {
+        for (Day day : days) {
         
             if (day.getName().equals(name))
                 return day;
@@ -160,7 +160,7 @@ public class TimeSheetData {
      */
     public int getEmployeId() {
         
-        return this.employeId;
+        return employeId;
         
     }
 
@@ -168,11 +168,11 @@ public class TimeSheetData {
     /**
      * Modification du numéro d'identification de l'employé.
      * 
-     * @param id - <b>int</b> numéro d'identification.
+     * @param id <b>int</b> numéro d'identification.
      */
     public void setEmployeId(int id) {
         
-        this.employeId = id;
+        employeId = id;
         
     }
 
