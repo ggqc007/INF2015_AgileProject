@@ -25,8 +25,10 @@ public class RulesEmployes extends Rules {
     }
     
     public boolean hasMinimumOfficeWeekHours() {
-        // TODO: Définition de la classe par Christian
-        return true;
+        int officeWeekHours;
+        officeWeekHours = this.totalWeekHours - this.totalHomeWeekHours;
+        
+        return (officeWeekHours >= this.minOfficeWeekHours);
     }
     
     public boolean hasMinimumOfficeDailyHours(Employe employe){
