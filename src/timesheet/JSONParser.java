@@ -24,16 +24,16 @@ public class JSONParser {
     private static final String[] REPLACEMENT_KEYS = {"jour6", "jour7"};
     private static int replaceCount;
 
-    public static TimeSheet toTimeSheet(JSONObject json) {
+    public static TimeSheetData toTimeSheetData(JSONObject json) {
 
-        TimeSheet timesheet = new TimeSheet();
+        TimeSheetData timeSheetData = new TimeSheetData();
         JSONArray jsonElements = json.names();
 
         for (int i = 0; i < jsonElements.size(); i++) {
             if (jsonElements.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE)) {
-                timesheet.setUserId(json.getInt(jsonElements.getString(i)));
+                timeSheetData.setEmployeId(json.getInt(jsonElements.getString(i)));
             } else {
-                Day newDay = timesheet.addDay(jsonElements.getString(i));
+                Day newDay = timeSheetData.addDay(jsonElements.getString(i));
                 JSONArray day = json.getJSONArray(jsonElements.getString(i));
 
                 if (!day.isEmpty()) {
@@ -47,7 +47,7 @@ public class JSONParser {
                 }
             }
         }
-        return timesheet;
+        return timeSheetData;
     }
 
     public static String format(String theString) {
