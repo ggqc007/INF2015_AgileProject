@@ -41,4 +41,14 @@ public class RulesAdmins extends Rules {
         // TODO: Définition de la classe par Khaled
         return true;
     }
+
+    @Override
+    public boolean hasMaximumOfficeWeekHours() {
+        return true;
+    }
+
+    @Override
+    public boolean hasMaximumteletravailWeekHours() {
+       return true;
+    }
 }

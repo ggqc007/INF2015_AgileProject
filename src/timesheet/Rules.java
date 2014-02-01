@@ -22,10 +22,11 @@ abstract public class Rules {
     protected int totalWeekHours;
     protected int totalOfficeWeekHours;
     protected int totalHomeWeekHours;
-
+    protected int MaximumteletravailWeekHours;
     public Rules() 
     {
         this.maxOfficeWeekHours = 43;
+        this.MaximumteletravailWeekHours = 10;
         //System.out.println( "Rules!" );
     }
     
@@ -34,7 +35,10 @@ abstract public class Rules {
     abstract public boolean hasMinimumOfficeDailyHours(Employe employe);
     
     abstract public boolean hasValidHomeWeekHours();
-
+    
+    abstract public boolean hasMaximumOfficeWeekHours();
+    abstract public boolean hasMaximumteletravailWeekHours();
+    
     public int getMaxOfficeWeekHours() {
         return maxOfficeWeekHours;
     }
@@ -89,5 +93,12 @@ abstract public class Rules {
 
     public void setTotalHomeWeekHours(int totalHomeWeekHours) {
         this.totalHomeWeekHours = totalHomeWeekHours;
-    }   
+    }  
+    
+    public int getMaximumteletravailWeekHours(){
+        return MaximumteletravailWeekHours;
+    }
+    public void setMaximumteletravailWeekHours(int MaximumteletravailWeekHours){
+        this.MaximumteletravailWeekHours = MaximumteletravailWeekHours;
+    }
 }
