@@ -83,7 +83,7 @@ public class TimeSheetData {
      */        
     public void setDayByName(Day day) {
         
-        for (int i = 0; i < days.size(); i++) {
+        for (int i = 0; i < WEEKDAYS_INDEX.length; i++) {
             
             if (WEEKDAYS_INDEX[i].equals(day.getName()))
                 days.set(i, day);
@@ -144,7 +144,7 @@ public class TimeSheetData {
     /**
      * Retourne la liste des journées.
      * 
-     * @return <b>List&lt Day&gt</b> - La journée demandée.
+     * @return <b>List&lt Day&gt</b> - Liste des journées dans le timesheet.
      */        
     public List<Day> getDays() {
       
