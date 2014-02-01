@@ -99,7 +99,8 @@ public class Day {
      */
     public Task getTask(int index) {
             
-        // if index >= getTasksNum() throw exception
+        if (index <= 0 || index >= this.tasks.size())
+            return null;
             
         return tasks.get(index);
                     

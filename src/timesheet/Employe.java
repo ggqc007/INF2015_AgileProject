@@ -96,20 +96,31 @@ public class Employe {
      */
     public TimeSheetData getTimeSheet(int index) {
         
-        // TODO: throw exception si out of bound!
+        if (index <= 0 || index >= this.timesheets.size())
+            return null;
         
         return timesheets.get(index);
         
     }
     
+
+    /**
+     * Retourne la liste des timesheets de l'employé
+     * 
+     * @return <b>List&lt TimeSheetData&gt</b> - Liste des timesheets.
+     */
+    public List<TimeSheetData> getTimeSheets() {
+        
+        return timesheets;
+        
+    }
     
-    // TODO: List<TimeSheetData> getTimeSheets()
     
     // TODO: addTimeSheet(TimeSheetData timesheet)
     
     
     /**
-     * Retourne le nombre de timesheet de l'employé.
+     * Retourne le nombre de timesheets de l'employé.
      * 
      * @return <b>int</b> - Nombre de timesheets.
      */

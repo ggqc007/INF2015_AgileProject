@@ -94,7 +94,7 @@ public class Task {
      */
     public boolean isRemoteTask() {
         
-        return projectId > 900;
+        return (projectId > 900);
                 
     }
     

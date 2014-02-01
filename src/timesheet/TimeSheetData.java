@@ -39,9 +39,6 @@ public class TimeSheetData {
     }   
     
     
-    // public TimeSheet(JSONObject json)
-
-    
     /**
      * Ajoute une journée dans le timesheet.
      * 
@@ -81,7 +78,8 @@ public class TimeSheetData {
      */        
     public Day getDay(int index) {
            
-        // if index >= getDayNum() throw exception
+        if (index <= 0 || index >= this.days.size())
+            return null;
             
         return this.days.get(index);
                     
@@ -92,7 +90,7 @@ public class TimeSheetData {
      * Retourne la journée ayant le nom <b>name</b>.
      * 
      * @param name - Nom de la journée.
-     * @return <b>Day</b> - La journée demandée, null si non trouvée.
+     * @return <b>Day</b> - La journée demandée, <b>null</b> si non trouvée.
      */        
     public Day getDayByName(String name) {
 
