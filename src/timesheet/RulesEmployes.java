@@ -40,7 +40,7 @@ public class RulesEmployes extends Rules {
 
         for (int i = 0; i < (days.size()) && validHours == true; i++) {    
             if(days.get(i).isWorkingDay() == true) {
-                int totalMinutes = this.getTotalHoursByDay(days.get(i));
+                int totalMinutes = this.getTotalMinutesByDay(days.get(i));
                 validHours = (totalMinutes >= 360);
             }
         }
@@ -54,7 +54,7 @@ public class RulesEmployes extends Rules {
         return true;
     }
     
-    private int getTotalHoursByDay(Day day) {
+    private int getTotalMinutesByDay(Day day) {
         int totalMinutes = 0;
         List<Task> tasks = day.getTasks();
         
