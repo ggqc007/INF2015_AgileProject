@@ -26,6 +26,7 @@ public class TimeSheetData {
     
     private int             employeId;
     private final List<Day> days;
+    private final String[]  WEEKDAYS_INDEX;
 
     
     /**
@@ -34,7 +35,9 @@ public class TimeSheetData {
      */
     public TimeSheetData() {
         
-        this.days = new ArrayList();  
+        this.WEEKDAYS_INDEX = new String[]{"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
+        
+        this.days = new ArrayList(7);  
         
     }   
     
@@ -56,6 +59,37 @@ public class TimeSheetData {
         return day;
         
     }
+
+    
+    /**
+     * Place une journée à une position spécifique en mémoire.
+     * 
+     * @param index - Position de la journée dans la liste.
+     * @param day - Objet <b>day</d> à placer.
+     */
+    public void setDay(int index, Day day) {
+        
+        this.days.set(index, day);
+        
+    } 
+    
+    
+    /**
+     * Ajoute la journée selon son nom à sa position respective.
+     * soit index 0 à 6 dans cet ordre <i>dim,lun,mar,mer,jeu,ven,sam</i>
+     * 
+     * @param day - Objet <b>day</d> à placer.
+     */        
+    public void setDayByName(Day day) {
+        
+        for (int i = 0; i < this.days.size(); i++) {
+            
+            if (this.days.get(i).getName().equals(day.getName()))
+                this.days.set(i, day);
+            
+        }
+        
+    }    
 
     
     /**
@@ -103,7 +137,7 @@ public class TimeSheetData {
         
         return null;
                     
-    }  
+    }      
     
     
     /**
