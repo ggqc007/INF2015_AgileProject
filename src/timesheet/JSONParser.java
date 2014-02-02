@@ -45,8 +45,8 @@ public class JSONParser {
 
     private static void taskToADayIfAny(Day aDay, JSONArray taskForADay) {
         if (!taskForADay.isEmpty()) {
-            for (int j = 0; j < taskForADay.size(); j++) {
-                JSONObject taskObj = taskForADay.getJSONObject(j);
+            for (int i = 0; i < taskForADay.size(); i++) {
+                JSONObject taskObj = taskForADay.getJSONObject(i);
                 if (!taskObj.isNullObject()) {
                     aDay.addTask(taskObj.getInt(NOM_CHAMP_PROJET), taskObj.getInt(NOM_CHAMP_MINUTES));
                 }
