@@ -32,7 +32,7 @@ public class TimeSheetData {
     
     
     /**
-     * Construncteur de l'objet TimeSheetData().
+     * Constructeur de l'objet TimeSheetData().
      * 
      */
     public TimeSheetData() {
@@ -171,6 +171,77 @@ public class TimeSheetData {
         return days;
                     
     }    
+    
+  
+    // TODO: PEUT-ÊTRE A RETIRER SI PAS UTILE! (CE QUI SUIT)
+    
+    public Task addTaskToDay(int dayIndex, Task task) {
+        
+        if (dayIndex < 0 || dayIndex >= days.size())
+            return null;
+        
+        // TODO: Devrait rajouter un addTask(Task task) dans Day pour eviter de passer les membres de task un par un
+        days.get(dayIndex).addTask(task.getProjectId(), task.getTime());
+        
+        // TODO: Peut-être modifié addTask pour retourner une valeur pour savoir si l'opération est ok.
+        return task;
+        
+    }
+    
+    
+    public Task addTaskToDayByName(String dayName, Task task) {
+        
+        Day day = getDayByName(dayName);
+        
+        if (day != null) {
+            
+            // TODO: Devrait rajouter un addTask(Task task) dans Day pour eviter de passer les membres de task un par un
+            day.addTask(task.getProjectId(), task.getTime());
+            
+            // TODO: Peut-être modifié addTask pour retourner une valeur pour savoir si l'opération est ok.
+            return task;
+            
+        }
+        
+        return null;
+        
+    } 
+    
+    
+    public Task getTaskFromDay(int dayIndex, int taskIndex) {
+  
+        if (dayIndex < 0 || dayIndex >= days.size())
+            return null;
+        
+        if (taskIndex < 0 || taskIndex >= days.get(dayIndex).getTasksNum())
+            return null;              
+        
+        return days.get(dayIndex).getTask(dayIndex);
+                
+    }
+    
+ 
+    public Task getTaskFromDayByName(String dayName, int taskIndex) {
+ 
+        if (taskIndex < 0)
+            return null;
+        
+        Day day = getDayByName(dayName);
+        
+        if (day != null) {
+            
+            if (taskIndex >= day.getTasksNum())
+                return null;
+            
+            return day.getTask(taskIndex);
+            
+        }
+        
+        return null;
+        
+    }  
+    
+    // TODO: PEUT-ÊTRE A RETIRER SI PAS UTILE! (CE QUI PRECEDE)
     
     
     /**
