@@ -83,6 +83,7 @@ public class TimeSheet {
 
         // Output
         //writeFile(JSONParser.reportToJSONText(testJSONParser));
+        
     }
 
     public void setUserId(int id) {
