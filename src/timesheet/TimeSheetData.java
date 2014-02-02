@@ -279,4 +279,34 @@ public class TimeSheetData {
         
     } 
     
+    
+    @Override
+    public String toString() {
+        
+        String outStr = new String();
+        
+        for (int i = 0; i < getDaysNum(); i++) {
+                
+                Day day = getDay(i);
+                
+                outStr += "Day : " + day.getName() + "\n";
+                
+                for (int j = 0; j < day.getTasksNum(); j ++) {
+                    
+                    Task task = day.getTask(j);
+                    
+                    outStr += "  Task : " + (j+1) + "\n";
+                    outStr += "    ID    : " + task.getProjectId() + "\n";
+                    outStr += "    Time : " + task.getTime() + "\n";
+                    
+                }
+                
+                outStr += "----\n";
+                        
+        }
+        
+        return outStr;
+        
+    }
+    
 }
