@@ -36,9 +36,12 @@ public class JSONParser {
         return timeSheetData;
     }
 
-    public static String reportToJSONText(JSONObject JSONObj) {
-        // est-ce plutot un array dans l'enonce???
-        return JSONObj.toString();
+    public static JSONArray reportToJSONArray(String[] errorReport) {
+        JSONArray jsonErrorReport = new JSONArray();
+        for (String error : errorReport) {
+            jsonErrorReport.add(error);
+        }
+        return jsonErrorReport;
     }
 
     private static void taskToADayIfAny(Day aDay, JSONArray taskForADay) {

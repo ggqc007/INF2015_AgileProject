@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class TimeSheet {
@@ -44,9 +45,9 @@ public class TimeSheet {
         return JSONText;
     }
 
-    public static void writeFile(String theString) {
+    public static void writeFile(JSONArray jsonArray) {
         try {
-            FileWriter.writeStringIntoFile(theString, FILE_OUT_PATH, FILE_ENCODING);
+            FileWriter.writeStringIntoFile(jsonArray.toString(), FILE_OUT_PATH, FILE_ENCODING);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -74,14 +75,16 @@ public class TimeSheet {
         // TODO: ATTENTION!!!
         // Guillaume, je n'ai pas modifier ton code pour ajouter les noms de fichiers
         // passés en argument!
-        // Input
+        // Input test
         JSONText = readFile(); // eventuellement faire avec args
         JSONObject objectFromFile = JSONObject.fromObject(JSONText);
         TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
         System.out.println("DEBUG toTimeSheetData: " + testToTimeSheetData.getDays());
-
-        // Output
-        //writeFile(JSONParser.reportToJSONText(testJSONParser));
+        
+        // Output test
+        String[] testReportToJSONArray = {"Message Erreur 1", "Message Erreur 2", "Message Erreur 3", ",Message Erreur 4", "Message Erreur 5"};
+        System.out.println(JSONParser.reportToJSONArray(testReportToJSONArray));
+        writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
         
     }
 
