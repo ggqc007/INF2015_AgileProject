@@ -38,6 +38,11 @@ abstract public class Rules {
     
     abstract public boolean hasMaximumOfficeWeekMinutes();
     
+    public void prepData(){
+        this.setTotalWeekMinutesByEmploye();
+        this.setTotalRemoteWeekMinutesByEmploye();
+    }
+    
     protected int getTotalMinutesByDay(Day day) {
         int totalMinutes = 0;
         List<Task> tasks = day.getTasks();
