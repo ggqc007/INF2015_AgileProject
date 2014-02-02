@@ -100,4 +100,12 @@ public class Task {
                 
     }
     
+    
+    @Override
+    public String toString() {
+        
+        return "ProjectID: " + projectId + " Time: " + time;
+        
+    }
+    
 }
