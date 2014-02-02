@@ -37,6 +37,9 @@ public class TimeSheetData {
         
         days = new ArrayList(7);  
         
+        for (int i = 0; i < 7; i++)
+            days.add(new Day());
+        
     }   
     
     
@@ -85,8 +88,13 @@ public class TimeSheetData {
         
         for (int i = 0; i < WEEKDAYS_INDEX.length; i++) {
             
-            if (WEEKDAYS_INDEX[i].equals(day.getName()))
+            if (WEEKDAYS_INDEX[i].equals(day.getName())) {
+                            
                 days.set(i, day);
+            
+                break;
+                
+            }
             
         }
         
@@ -130,7 +138,10 @@ public class TimeSheetData {
     public Day getDayByName(String name) {
 
         for (Day day : days) {
-        
+            
+            if (day.getName() == null)
+                continue;
+            
             if (day.getName().equals(name))
                 return day;
             
