@@ -57,33 +57,25 @@ public class TimeSheet {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String inputFileName;
-        String ouputFileName;
+        // Vérification des arguments de ligne de commande (TURNED OFF WHILE TESTING!)
+        // String inputFileName = args[0];
+        // String ouputFileName = args[1];
+        // verifyCmdArgs(args);
+        
         Employe employe = new Employe();
-
         employees = new ArrayList();
         employees.add(employe);
 
-        // Vérification des arguments de ligne de commande (TURNED OFF WHILE TESTING!)
-        //verifyCmdArgs(args);
-        
-        // Lecture des arguments
-        //inputFileName = args[0];
-        //ouputFileName = args[1];
 
-        
-        // TODO: ATTENTION!!!
-        // Guillaume, je n'ai pas modifier ton code pour ajouter les noms de fichiers
-        // passés en argument!
-        // Input test
-        JSONText = readFile(); // eventuellement faire avec args
+        // Input test GG
+        JSONText = readFile(); //TODO: eventuellement faire avec args
         JSONObject objectFromFile = JSONObject.fromObject(JSONText);
         TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
-        System.out.println("DEBUG toTimeSheetData: " + testToTimeSheetData.getDays());
+        System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
         
-        // Output test
-        String[] testReportToJSONArray = {"Message Erreur 1", "Message Erreur 2", "Message Erreur 3", ",Message Erreur 4", "Message Erreur 5"};
-        System.out.println(JSONParser.reportToJSONArray(testReportToJSONArray));
+        // Output test GG
+        String[] testReportToJSONArray = {"Message Erreur 1", "Message Erreur 2", "Message Erreur 3", "Message Erreur 4", "Message Erreur 5"};
+        System.out.println("DEBUG JSONParser.ReportToJSONArray: "+ JSONParser.reportToJSONArray(testReportToJSONArray));
         writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
         
     }
