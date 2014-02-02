@@ -22,9 +22,16 @@ public class TimeSheet {
 
     private static List<Employe> employees;
     public static final String FILE_ENCODING = "UTF-8";
-    public static final String FILE_IN_PATH = "fichier.json";
-    public static final String FILE_OUT_PATH = "fichier_out.json";
+    public static final String FILE_IN_PATH = "json/timesheet.json";
+    public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
+
+    public static void verifyCmdArgs(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Utilisation: TimeSheet.jar input.json output.json");
+            System.exit(1);
+        }
+    }
 
     public static String readFile() {
         try {
@@ -49,47 +56,39 @@ public class TimeSheet {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        String  inputFileName;
-        String  ouputFileName;
+        String inputFileName;
+        String ouputFileName;
         Employe employe = new Employe();
 
         employees = new ArrayList();
-
         employees.add(employe);
-        
-        // Vérification des arguments de ligne de commande
-        if ( args.length != 2 ) {
-            
-            System.out.println("Utilisation: TimeSheet.jar input.json output.json");
-            
-            System.exit(1);
-            
-        }
+
+        // Vérification des arguments de ligne de commande (TURNED OFF WHILE TESTING!)
+        //verifyCmdArgs(args);
         
         // Lecture des arguments
-        inputFileName = args[0];
-        ouputFileName = args[1];
+        //inputFileName = args[0];
+        //ouputFileName = args[1];
+
         
-        // ATTENTION!!!
+        // TODO: ATTENTION!!!
         // Guillaume, je n'ai pas modifier ton code pour ajouter les noms de fichiers
         // passés en argument!
-        
         // Input
         JSONText = readFile(); // eventuellement faire avec args
-        JSONObject objTest = JSONObject.fromObject(JSONParser.format(JSONText));
-        System.out.println("DEBUG format: " + objTest.names());
+        JSONObject objectFromFile = JSONObject.fromObject(JSONText);
+        //TimeSheetData testJSONParser = 
+        JSONParser.toTimeSheetData(objectFromFile);
+        //System.out.println("DEBUG format: " + testJSONParser);
 
         // Output
-        writeFile(JSONParser.reportToJSONText(objTest));
-        System.out.println("DEBUG report: " + JSONParser.reportToJSONText(objTest));
-
+        //writeFile(JSONParser.reportToJSONText(testJSONParser));
     }
-    
+
     public void setUserId(int id) {
         // TO DO: Thomas, est-ce que tu peux définir ces méthodes, elles sont appelées dans le main. J'ai mis du code de manière proivoir pour pouvoir compiler. Merci! CC
     }
-    
+
     public Day addDay(String str) {
         // TO DO: Thomas, est-ce que tu peux définir ces méthodes, elles sont appelées dans le main. J'ai mis du code de manière proivoir pour pouvoir compiler. Merci! CC
         Day d = new Day();
