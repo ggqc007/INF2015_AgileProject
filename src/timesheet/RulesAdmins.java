@@ -12,30 +12,27 @@
  */
 
 package timesheet;
-
-
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class RulesAdmins extends Rules {
 
     public RulesAdmins() {
-        this.minOfficeWeekHours = 36;
-        this.minOfficeDailyHours = 4; 
-        this.MaximumteletravailWeekHours = 10;
+        this.minOfficeWeekMinutes = 36;
+        this.minOfficeDailyMinutes = 4; 
+        this.MaximumteletravailWeekMinutes = 10;
     }
     
     @Override
-    public boolean hasMinimumOfficeWeekHours() {
+    public boolean hasMinimumOfficeWeekMinutes(Employe employe) {
         int officeWeekHours;
-        officeWeekHours = this.totalWeekHours - this.totalHomeWeekHours;
+        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
         
-        return (officeWeekHours >= this.minOfficeWeekHours);
+        return (officeWeekHours >= this.minOfficeWeekMinutes);
     }
     
     @Override
-    public boolean hasMinimumOfficeDailyHours(Employe employe){
+    public boolean hasMinimumOfficeDailyMinutes(Employe employe){
        boolean  validHours = true;
         List<Day> days = employe.getTimeSheet(0).getDays();
 
@@ -50,10 +47,10 @@ public class RulesAdmins extends Rules {
     }
     
     @Override
-    public boolean hasValidHomeWeekHours(){
+    public boolean hasValidHomeWeekMinutes(){
         boolean ValidHomeWeekHours;
         Employe employe = new Employe();
-        ValidHomeWeekHours =hasMinimumOfficeDailyHours(employe);
+        ValidHomeWeekHours =hasMinimumOfficeDailyMinutes(employe);
         if (ValidHomeWeekHours) {
             return ValidHomeWeekHours;
         }
@@ -61,29 +58,18 @@ public class RulesAdmins extends Rules {
     }
 
     @Override
-    public boolean hasMaximumOfficeWeekHours() {
+    public boolean hasMaximumOfficeWeekMinutes() {
         int officeWeekHours;
-        officeWeekHours = this.totalWeekHours - this.totalHomeWeekHours;
+        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
         
-        return (officeWeekHours >= this.maxOfficeWeekHours);
+        return (officeWeekHours >= this.maxOfficeWeekMinutes);
     }
 
     @Override
-    public boolean hasMaximumteletravailWeekHours() {
+    public boolean hasMaximumteletravailWeekMinutes() {
       int officeWeekHours;
-        officeWeekHours = this.totalWeekHours - this.totalHomeWeekHours;
+        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
         
-        return (officeWeekHours >= this.MaximumteletravailWeekHours);
-    }
-    
-    private int getTotalMinutesByDay(Day day) {
-        int totalMinutes = 0;
-        List<Task> tasks = day.getTasks();
-        
-        for (int j=0; j<tasks.size(); j++) {
-            totalMinutes += (int)tasks.get(j).getTime();
-        }
-           
-        return totalMinutes;
+        return (officeWeekHours >= this.MaximumteletravailWeekMinutes);
     }
 }
