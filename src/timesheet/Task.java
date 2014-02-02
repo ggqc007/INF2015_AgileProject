@@ -23,6 +23,8 @@ public class Task {
     
     private int projectId;
     private int time;
+    
+    private static final int REMOTE_TASK_IDS = 900;
 
     
     /**
@@ -94,7 +96,7 @@ public class Task {
      */
     public boolean isRemoteTask() {
         
-        return (projectId > 900);
+        return (projectId > REMOTE_TASK_IDS);
                 
     }
     

@@ -24,10 +24,12 @@ import java.util.List;
  */
 public class TimeSheetData {
     
-    private int                    employeId;
-    private final List<Day>        days;
-    private static final String[]  WEEKDAYS_INDEX = {"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
-
+    private int             employeId;
+    private final List<Day> days;
+    
+    private static final String[] WEEKDAYS_INDEX = {"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
+    private static final int      ADMIN_IDS      = 1000;
+    
     
     /**
      * Construncteur de l'objet TimeSheetData().
@@ -143,12 +145,13 @@ public class TimeSheetData {
      */        
     public Day getDayByName(String name) {
 
+        String dayName;
+        
         for (Day day : days) {
             
-            if (day.getName() == null)
-                continue;
+            dayName = day.getName();
             
-            if (day.getName().equals(name))
+            if (dayName != null && dayName.equals(name))
                 return day;
             
         }
@@ -201,7 +204,7 @@ public class TimeSheetData {
      */
     public boolean isAdmin() {
         
-        return (employeId < 1000);
+        return (employeId < ADMIN_IDS);
         
     } 
     

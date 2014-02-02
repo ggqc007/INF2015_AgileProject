@@ -27,6 +27,8 @@ public class Employe {
     private int                       employeId;
     private final List<TimeSheetData> timesheets;
     
+    private static final int ADMIN_IDS = 1000;
+    
     
     /**
      * Constructeur de Employe.
@@ -147,7 +149,7 @@ public class Employe {
     */
     public boolean isAdmin() {
         
-        return (employeId < 1000);
+        return (employeId < ADMIN_IDS);
         
     } 
     

@@ -27,6 +27,8 @@ public class Day {
 
     private String           name;
     private final List<Task> tasks;
+    
+    private static final String WEEKDAY_STR_MATCH = "jour";
 
     
     /**
@@ -140,7 +142,7 @@ public class Day {
      */
     public boolean isWorkingDay() {
         
-        return name.substring(0, 4).equals("jour");
+        return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);
         
     }
     
