@@ -38,8 +38,6 @@ abstract public class Rules {
     
     abstract public boolean hasMaximumOfficeWeekMinutes();
     
-    abstract public boolean hasMaximumteletravailWeekMinutes();
-    
     protected int getTotalMinutesByDay(Day day) {
         int totalMinutes = 0;
         List<Task> tasks = day.getTasks();

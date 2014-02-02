@@ -16,36 +16,21 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class JSONParser {
-
     private static final String NOM_CHAMP_NUMERO_EMPLOYE = "numero_employe";
     private static final String NOM_CHAMP_PROJET = "projet";
     private static final String NOM_CHAMP_MINUTES = "minutes";
 
     public static TimeSheetData toTimeSheetData(JSONObject jsonObjectFromFile) {
         TimeSheetData timeSheetData = new TimeSheetData();
-        JSONArray jsonElements = jsonObjectFromFile.names();
+        JSONArray jsonKeysFromFile = jsonObjectFromFile.names();
 
-        for (int i = 0; i < jsonElements.size(); i++) {
-            if (jsonElements.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE)) {
-                timeSheetData.setEmployeId(jsonObjectFromFile.getInt(jsonElements.getString(i)));
+        for (int i = 0; i < jsonKeysFromFile.size(); i++) {
+            if (jsonKeysFromFile.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE)) {
+                timeSheetData.setEmployeId(jsonObjectFromFile.getInt(jsonKeysFromFile.getString(i)));
             } else {
-                //Day newDay = timeSheetData.addDay(jsonElements.getString(i));
-                timeSheetData.setDayByName(new Day(jsonElements.getString(i)));
-                Day test = timeSheetData.getDayByName(jsonElements.getString(i));
-                
-                JSONArray dayFromFile = jsonObjectFromFile.getJSONArray(jsonElements.getString(i));
-
-                
-                if (!dayFromFile.isEmpty()) {
-                    for (int j = 0; j < dayFromFile.size(); j++) {
-                        JSONObject taskObj = dayFromFile.getJSONObject(j);
-                        // Lire le nom du jour ici
-                        if (!taskObj.isNullObject()) {
-                            //newDay.addTask(taskObj.getInt(NOM_CHAMP_PROJET), taskObj.getInt(NOM_CHAMP_MINUTES));
-                            test.addTask(taskObj.getInt(NOM_CHAMP_PROJET), taskObj.getInt(NOM_CHAMP_MINUTES));
-                        }
-                    }
-                }
+                Day aDay = timeSheetData.setDayByName(new Day(jsonKeysFromFile.getString(i)));
+                JSONArray taskForADay = jsonObjectFromFile.getJSONArray(jsonKeysFromFile.getString(i));
+                taskToADayIfAny(aDay, taskForADay);
             }
         }
         return timeSheetData;
@@ -54,5 +39,16 @@ public class JSONParser {
     public static String reportToJSONText(JSONObject JSONObj) {
         // est-ce plutot un array dans l'enonce???
         return JSONObj.toString();
+    }
+
+    private static void taskToADayIfAny(Day aDay, JSONArray taskForADay) {
+        if (!taskForADay.isEmpty()) {
+            for (int j = 0; j < taskForADay.size(); j++) {
+                JSONObject taskObj = taskForADay.getJSONObject(j);
+                if (!taskObj.isNullObject()) {
+                    aDay.addTask(taskObj.getInt(NOM_CHAMP_PROJET), taskObj.getInt(NOM_CHAMP_MINUTES));
+                }
+            }
+        }
     }
 }

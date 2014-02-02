@@ -77,9 +77,8 @@ public class TimeSheet {
         // Input
         JSONText = readFile(); // eventuellement faire avec args
         JSONObject objectFromFile = JSONObject.fromObject(JSONText);
-        //TimeSheetData testJSONParser = 
-        JSONParser.toTimeSheetData(objectFromFile);
-        //System.out.println("DEBUG format: " + testJSONParser);
+        TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
+        System.out.println("DEBUG toTimeSheetData: " + testToTimeSheetData.getDays());
 
         // Output
         //writeFile(JSONParser.reportToJSONText(testJSONParser));

@@ -48,13 +48,10 @@ public class RulesAdmins extends Rules {
     
     @Override
     public boolean hasValidHomeWeekMinutes(){
-        boolean ValidHomeWeekHours;
-        Employe employe = new Employe();
-        ValidHomeWeekHours =hasMinimumOfficeDailyMinutes(employe);
-        if (ValidHomeWeekHours) {
-            return ValidHomeWeekHours;
-        }
-        return false;
+        int officeWeekHours;
+        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
+        
+        return (officeWeekHours >= this.MaximumteletravailWeekMinutes);
     }
 
     @Override
@@ -65,11 +62,14 @@ public class RulesAdmins extends Rules {
         return (officeWeekHours >= this.maxOfficeWeekMinutes);
     }
 
-    @Override
-    public boolean hasMaximumteletravailWeekMinutes() {
-      int officeWeekHours;
-        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
+    protected int getTotalMinutesByDay(Day day) {
+        int totalMinutes = 0;
+        List<Task> tasks = day.getTasks();
         
-        return (officeWeekHours >= this.MaximumteletravailWeekMinutes);
+        for (int j=0; j<tasks.size(); j++) {
+            totalMinutes += (int)tasks.get(j).getTime();
+        }
+           
+        return totalMinutes;
     }
 }

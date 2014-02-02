@@ -58,9 +58,5 @@ public class RulesEmployes extends Rules {
     public boolean hasMaximumOfficeWeekMinutes() {
        return true; 
     }
-
-    @Override
-    public boolean hasMaximumteletravailWeekMinutes() {
-       return true; 
-    }
+    
 }
