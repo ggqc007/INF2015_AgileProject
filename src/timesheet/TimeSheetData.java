@@ -67,13 +67,16 @@ public class TimeSheetData {
      * 
      * @param index Position de la journée dans la liste.
      * @param day Objet <b>Day</b> à placer.
+     * @return <b>Day</b> - <b>null</b> si non ajouté, <b>day</b> si ajouté.
      */
-    public void setDay(int index, Day day) {
+    public Day setDay(int index, Day day) {
         
         if (index < 0 || index >= days.size())
-            return;
+            return null;
         
         days.set(index, day);
+        
+        return day;
         
     } 
     
@@ -83,8 +86,9 @@ public class TimeSheetData {
      * soit index 0 à 6 dans cet ordre <i>dim,lun,mar,mer,jeu,ven,sam</i>
      * 
      * @param day Objet <b>Day</b> à placer.
+     * @return <b>Day</b> - <b>null</b> si non ajouté, <b>day</b> si ajouté.
      */        
-    public void setDayByName(Day day) {
+    public Day setDayByName(Day day) {
         
         for (int i = 0; i < WEEKDAYS_INDEX.length; i++) {
             
@@ -92,11 +96,13 @@ public class TimeSheetData {
                             
                 days.set(i, day);
             
-                break;
+                return day;
                 
             }
             
         }
+        
+        return null;
         
     }    
 
