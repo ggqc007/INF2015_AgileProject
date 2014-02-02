@@ -285,17 +285,15 @@ public class TimeSheetData {
         
         String outStr = new String();
         
-        for (int i = 0; i < getDaysNum(); i++) {
-                
-                Day day = getDay(i);
+        for (Day day: days) {
                 
                 outStr += "Day : " + day.getName() + "\n";
                 
-                for (int j = 0; j < day.getTasksNum(); j ++) {
+                for (int num = 0; num < day.getTasksNum(); num ++) {
                     
-                    Task task = day.getTask(j);
+                    Task task = day.getTask(num);
                     
-                    outStr += "  Task : " + (j+1) + "\n";
+                    outStr += "  Task : " + (num + 1) + "\n";
                     outStr += "    ID    : " + task.getProjectId() + "\n";
                     outStr += "    Time : " + task.getTime() + "\n";
                     
