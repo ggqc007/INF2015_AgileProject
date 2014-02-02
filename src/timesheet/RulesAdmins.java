@@ -18,9 +18,9 @@ import java.util.List;
 public class RulesAdmins extends Rules {
 
     public RulesAdmins() {
-        this.minOfficeWeekMinutes = 36;
-        this.minOfficeDailyMinutes = 4; 
-        this.MaximumteletravailWeekMinutes = 10;
+        this.minOfficeWeekMinutes = 36*60;
+        this.minOfficeDailyMinutes = 4*60; 
+        this.maxHomeWeekMinutes = 10*60;
     }
     
     @Override
@@ -51,7 +51,7 @@ public class RulesAdmins extends Rules {
         int officeWeekHours;
         officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
         
-        return (officeWeekHours >= this.MaximumteletravailWeekMinutes);
+        return (officeWeekHours >= this.maxHomeWeekMinutes);
     }
 
     @Override
@@ -62,14 +62,5 @@ public class RulesAdmins extends Rules {
         return (officeWeekHours >= this.maxOfficeWeekMinutes);
     }
 
-    protected int getTotalMinutesByDay(Day day) {
-        int totalMinutes = 0;
-        List<Task> tasks = day.getTasks();
-        
-        for (int j=0; j<tasks.size(); j++) {
-            totalMinutes += (int)tasks.get(j).getTime();
-        }
-           
-        return totalMinutes;
-    }
+    
 }

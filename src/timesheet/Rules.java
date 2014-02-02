@@ -27,7 +27,7 @@ abstract public class Rules {
     
     public Rules() {
         this.maxOfficeWeekMinutes = 43*60;
-        this.MaximumteletravailWeekMinutes = 10*60;
+        
     }
     
     abstract public boolean hasMinimumOfficeWeekMinutes(Employe employe);
@@ -130,4 +130,5 @@ abstract public class Rules {
     public void setMaximumteletravailWeekMinutes(int MaximumteletravailWeekMinutes) {
         this.MaximumteletravailWeekMinutes = MaximumteletravailWeekMinutes;
     }
+    
 }
