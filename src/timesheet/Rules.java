@@ -37,7 +37,7 @@ abstract public class Rules {
     abstract public boolean hasValidHomeWeekHours();
     
     abstract public boolean hasMaximumOfficeWeekHours();
-    abstract public boolean hasMaximumteletravailWeekHours();
+    
     
     public int getMaxOfficeWeekHours() {
         return maxOfficeWeekHours;
