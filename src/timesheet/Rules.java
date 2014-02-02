@@ -18,12 +18,12 @@ abstract public class Rules {
     
     protected int maxOfficeWeekMinutes;
     protected int minOfficeWeekMinutes;
-    protected int maxHomeWeekMinutes;
+    protected int maxRemoteWeekMinutes;
     protected int minOfficeDailyMinutes;
     protected int totalWeekMinutes;
     protected int totalOfficeWeekMinutes;
-    protected int totalHomeWeekMinutes;
-    protected int MaximumteletravailWeekMinutes;
+    protected int totalRemoteWeekMinutes;
+    
     
     public Rules() {
         this.maxOfficeWeekMinutes = 43*60;
@@ -34,7 +34,7 @@ abstract public class Rules {
     
     abstract public boolean hasMinimumOfficeDailyMinutes(Employe employe);
     
-    abstract public boolean hasValidHomeWeekMinutes();
+    abstract public boolean hasValidRemoteWeekMinutes();
     
     abstract public boolean hasMaximumOfficeWeekMinutes();
     
@@ -60,10 +60,10 @@ abstract public class Rules {
         this.totalWeekMinutes = totalMinutes;
     }
     
-    public void setTotalHomeWeekMinutesByEmploye(Employe employe) {
+    public void setTotalRemoteWeekMinutesByEmploye(Employe employe) {
         int totalMinutes = 0;
         // TODO : Définir méthode calcul du total d'heures de télétravail
-        this.totalHomeWeekMinutes = totalMinutes;
+        this.totalRemoteWeekMinutes = totalMinutes;
     }    
     
 
@@ -83,12 +83,12 @@ abstract public class Rules {
         this.minOfficeWeekMinutes = minOfficeWeekMinutes;
     }
 
-    public int getMaxHomeWeekMinutes() {
-        return maxHomeWeekMinutes;
+    public int getMaxRemoteWeekMinutes() {
+        return maxRemoteWeekMinutes;
     }
 
-    public void setMaxHomeWeekMinutes(int maxHomeWeekMinutes) {
-        this.maxHomeWeekMinutes = maxHomeWeekMinutes;
+    public void setMaxRemoteWeekMinutes(int maxRemoteWeekMinutes) {
+        this.maxRemoteWeekMinutes = maxRemoteWeekMinutes;
     }
 
     public int getMinOfficeDailyMinutes() {
@@ -115,20 +115,13 @@ abstract public class Rules {
         this.totalOfficeWeekMinutes = totalOfficeWeekMinutes;
     }
 
-    public int getTotalHomeWeekMinutes() {
-        return totalHomeWeekMinutes;
+    public int getTotalRemoteWeekMinutes() {
+        return totalRemoteWeekMinutes;
     }
 
-    public void setTotalHomeWeekMinutes(int totalHomeWeekMinutes) {
-        this.totalHomeWeekMinutes = totalHomeWeekMinutes;
+    public void setTotalRemoteWeekMinutes(int totalRemoteWeekMinutes) {
+        this.totalRemoteWeekMinutes = totalRemoteWeekMinutes;
     }
 
-    public int getMaximumteletravailWeekMinutes() {
-        return MaximumteletravailWeekMinutes;
-    }
-
-    public void setMaximumteletravailWeekMinutes(int MaximumteletravailWeekMinutes) {
-        this.MaximumteletravailWeekMinutes = MaximumteletravailWeekMinutes;
-    }
-    
+   
 }

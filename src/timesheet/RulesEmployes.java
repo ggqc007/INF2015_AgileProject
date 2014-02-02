@@ -25,10 +25,10 @@ public class RulesEmployes extends Rules {
     @Override
     public boolean hasMinimumOfficeWeekMinutes(Employe employe) {
         this.setTotalWeekMinutesByEmploye(employe);
-        this.setTotalHomeWeekMinutesByEmploye(employe);
+        this.setTotalRemoteWeekMinutesByEmploye(employe);
         
         int officeWeekHours;
-        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
+        officeWeekHours = this.totalWeekMinutes - this.totalRemoteWeekMinutes;
         
         return (officeWeekHours >= this.minOfficeWeekMinutes);
     }
@@ -49,7 +49,7 @@ public class RulesEmployes extends Rules {
     }
     
     @Override
-    public boolean hasValidHomeWeekMinutes(){
+    public boolean hasValidRemoteWeekMinutes(){
         
         return true;
     }

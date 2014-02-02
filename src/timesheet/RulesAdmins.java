@@ -20,13 +20,13 @@ public class RulesAdmins extends Rules {
     public RulesAdmins() {
         this.minOfficeWeekMinutes = 36*60;
         this.minOfficeDailyMinutes = 4*60; 
-        this.maxHomeWeekMinutes = 10*60;
+        this.maxRemoteWeekMinutes = 10*60;
     }
     
     @Override
     public boolean hasMinimumOfficeWeekMinutes(Employe employe) {
         int officeWeekHours;
-        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
+        officeWeekHours = this.totalWeekMinutes - this.totalRemoteWeekMinutes;
         
         return (officeWeekHours >= this.minOfficeWeekMinutes);
     }
@@ -47,17 +47,17 @@ public class RulesAdmins extends Rules {
     }
     
     @Override
-    public boolean hasValidHomeWeekMinutes(){
+    public boolean hasValidRemoteWeekMinutes(){
         int officeWeekHours;
-        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
+        officeWeekHours = this.totalWeekMinutes - this.totalRemoteWeekMinutes;
         
-        return (officeWeekHours >= this.maxHomeWeekMinutes);
+        return (officeWeekHours >= this.maxRemoteWeekMinutes);
     }
 
     @Override
     public boolean hasMaximumOfficeWeekMinutes() {
         int officeWeekHours;
-        officeWeekHours = this.totalWeekMinutes - this.totalHomeWeekMinutes;
+        officeWeekHours = this.totalWeekMinutes - this.totalRemoteWeekMinutes;
         
         return (officeWeekHours >= this.maxOfficeWeekMinutes);
     }
