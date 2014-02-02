@@ -23,16 +23,16 @@ abstract public class Rules {
     protected int totalWeekMinutes;
     protected int totalOfficeWeekMinutes;
     protected int totalRemoteWeekMinutes;
-    
+    protected Employe employe;
     
     public Rules() {
         this.maxOfficeWeekMinutes = 43*60;
         
     }
     
-    abstract public boolean hasMinimumOfficeWeekMinutes(Employe employe);
+    abstract public boolean hasMinimumOfficeWeekMinutes();
     
-    abstract public boolean hasMinimumOfficeDailyMinutes(Employe employe);
+    abstract public boolean hasMinimumOfficeDailyMinutes();
     
     abstract public boolean hasValidRemoteWeekMinutes();
     
@@ -49,7 +49,7 @@ abstract public class Rules {
         return totalMinutes;
     }
 
-    public void setTotalWeekMinutesByEmploye(Employe employe) {
+    public void setTotalWeekMinutesByEmploye() {
         List<Day> days = employe.getTimeSheet(0).getDays();
         
         int totalMinutes = 0;
@@ -60,7 +60,7 @@ abstract public class Rules {
         this.totalWeekMinutes = totalMinutes;
     }
     
-    public void setTotalRemoteWeekMinutesByEmploye(Employe employe) {
+    public void setTotalRemoteWeekMinutesByEmploye() {
         int totalMinutes = 0;
         // TODO : Définir méthode calcul du total d'heures de télétravail
         this.totalRemoteWeekMinutes = totalMinutes;

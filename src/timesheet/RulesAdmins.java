@@ -24,7 +24,7 @@ public class RulesAdmins extends Rules {
     }
     
     @Override
-    public boolean hasMinimumOfficeWeekMinutes(Employe employe) {
+    public boolean hasMinimumOfficeWeekMinutes() {
         int officeWeekHours;
         officeWeekHours = this.totalWeekMinutes - this.totalRemoteWeekMinutes;
         
@@ -32,7 +32,7 @@ public class RulesAdmins extends Rules {
     }
     
     @Override
-    public boolean hasMinimumOfficeDailyMinutes(Employe employe){
+    public boolean hasMinimumOfficeDailyMinutes(){
        boolean  validHours = true;
         List<Day> days = employe.getTimeSheet(0).getDays();
 
