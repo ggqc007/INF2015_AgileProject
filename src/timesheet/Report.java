@@ -16,6 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Report {
+    // Rules for all
+    private static final String ERROR_ALL_1 = "Cet employe a passe plus d'heures physiquement au bureau que la quantite permise.";
+    
+    // Rules for admin
+    private static final String ERROR_ADM_1 = "Cet administrateur n'a pas travaille le nombre d'heures minimal physiquement au bureau.";
+    private static final String ERROR_ADM_2 = "Cet administrateur a fait plus d'heures de teletravail que la quantite permise";
+    private static final String ERROR_ADM_3 = "Cet administrateur n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
+    
+    // Rules for employee
+    private static final String ERROR_EMP_1 = "Cet employe n'a pas travaille le nombre d'heure minimal physiquement au bureau.";
+    private static final String ERROR_EMP_2 = "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ";
+    
 
     private Employe employe;
     
