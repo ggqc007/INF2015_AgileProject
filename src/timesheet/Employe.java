@@ -157,7 +157,7 @@ public class Employe {
     @Override
     public String toString() {
         
-        return "ID: " + employeId + "(#Timesheets:" + getTimeSheetsNum() + ")";
+        return "{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";
         
     }
     

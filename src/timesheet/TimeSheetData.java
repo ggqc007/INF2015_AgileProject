@@ -283,6 +283,7 @@ public class TimeSheetData {
     @Override
     public String toString() {
         
+        /*
         String outStr = new String();
         
         for (Day day: days) {
@@ -304,6 +305,10 @@ public class TimeSheetData {
         }
         
         return outStr;
+        
+        */
+        
+        return getDays().toString();
         
     }
     

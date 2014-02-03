@@ -150,7 +150,7 @@ public class Day {
     @Override
     public String toString() {
         
-        return "Day: " + name + "(#Tasks:" + getTasksNum() + ")";
+        return "{name: \"" + name + "\", tasks:" + getTasks() + "}";
         
     }
     
