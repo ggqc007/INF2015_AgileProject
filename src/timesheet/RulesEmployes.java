@@ -24,7 +24,6 @@ public class RulesEmployes extends Rules {
     
     @Override
     public boolean hasMinimumOfficeWeekMinutes() {
-        prepData();
         int officeWeekHours;
         officeWeekHours = this.totalWeekMinutes - this.totalRemoteWeekMinutes;
         

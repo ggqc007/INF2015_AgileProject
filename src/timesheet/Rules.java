@@ -9,6 +9,13 @@
  *   Guillaume Gagnon
  *   Thomas Robert de Massy
  *
+ *  Example
+ *  =======
+ *  RulesEmployes rules = new RulesEmployes();
+ *  rules.setEmploye(employe);
+ *  if(rules.hasMinimumOfficeDailyMinutes() == false) {
+ *      // violation, code d'erreur ici
+ *  }
  */
 
 package timesheet;
@@ -67,11 +74,19 @@ abstract public class Rules {
     
     public void setTotalRemoteWeekMinutesByEmploye() {
         int totalMinutes = 0;
-        // TODO : Définir méthode calcul du total d'heures de télétravail
+        // TODO Khaled: Définir méthode calcul du total d'heures de télétravail (remote)
         this.totalRemoteWeekMinutes = totalMinutes;
     }    
     
+    public Employe getEmploye() {
+        return employe;
+    }
 
+    public void setEmploye(Employe employe) {
+        this.employe = employe;
+        prepData();
+    }
+    
     public int getMaxOfficeWeekMinutes() {
         return maxOfficeWeekMinutes;
     }
@@ -127,6 +142,4 @@ abstract public class Rules {
     public void setTotalRemoteWeekMinutes(int totalRemoteWeekMinutes) {
         this.totalRemoteWeekMinutes = totalRemoteWeekMinutes;
     }
-
-   
 }

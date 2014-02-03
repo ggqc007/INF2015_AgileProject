@@ -61,6 +61,4 @@ public class RulesAdmins extends Rules {
         
         return (officeWeekHours >= this.maxOfficeWeekMinutes);
     }
-
-    
 }
