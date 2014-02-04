@@ -57,7 +57,15 @@ public class TimeSheetData {
         
         day.setName(name);
         
-        days.add(day);
+        try {
+                    
+            days.add(day);
+        
+        } catch (Exception e) {
+                    
+            return null;
+                    
+        }          
         
         return day;
         
@@ -76,7 +84,15 @@ public class TimeSheetData {
         if (index < 0 || index >= days.size())
             return null;
         
-        days.set(index, day);
+        try {
+            
+            days.set(index, day);
+        
+        } catch (Exception e) {
+                    
+            return null;
+                    
+        }        
         
         return day;
         
@@ -95,8 +111,16 @@ public class TimeSheetData {
         for (int i = 0; i < WEEKDAYS_INDEX.length; i++) {
             
             if (WEEKDAYS_INDEX[i].equals(day.getName())) {
-                            
-                days.set(i, day);
+                
+                try {
+                    
+                    days.set(i, day);
+                    
+                } catch (Exception e) {
+                    
+                    return null;
+                    
+                }
             
                 return day;
                 
@@ -173,42 +197,63 @@ public class TimeSheetData {
     }    
     
   
-    // TODO: PEUT-ÊTRE A RETIRER SI PAS UTILE! (CE QUI SUIT)
-    
-    public Task addTaskToDay(int dayIndex, Task task) {
+    /**
+     * Ajoute une tâche à la journée à la position <b>index</b>.
+     * 
+     * @param task La tâche.
+     * @param dayIndex Positions du jour dans la liste.
+     * @return <b>Task</b> - La tâche ajoutée. <b>null</b> si non ajoutée.
+     */        
+    public Task addTaskToDay(Task task, int dayIndex) {
         
         if (dayIndex < 0 || dayIndex >= days.size())
             return null;
         
-        // TODO: Devrait rajouter un addTask(Task task) dans Day pour eviter de passer les membres de task un par un
-        days.get(dayIndex).addTask(task.getProjectId(), task.getTime());
-        
-        // TODO: Peut-être modifié addTask pour retourner une valeur pour savoir si l'opération est ok.
+        try {
+            
+            task = days.get(dayIndex).addTask(task);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+
         return task;
         
     }
     
-    
-    public Task addTaskToDayByName(String dayName, Task task) {
+
+    /**
+     * Ajoute une tâche à la journée nommée  <b>dayName</b>.
+     * 
+     * @param task La tâche.
+     * @param dayName Nom de la journée.
+     * @return <b>Task</b> - La tâche ajoutée. <b>null</b> si non ajoutée.
+     */
+    public Task addTaskToDayByName(Task task, String dayName) {
         
         Day day = getDayByName(dayName);
         
-        if (day != null) {
-            
-            // TODO: Devrait rajouter un addTask(Task task) dans Day pour eviter de passer les membres de task un par un
-            day.addTask(task.getProjectId(), task.getTime());
-            
-            // TODO: Peut-être modifié addTask pour retourner une valeur pour savoir si l'opération est ok.
-            return task;
+        if (day != null) {            
+
+            return day.addTask(task);
             
         }
         
         return null;
         
-    } 
+    }
     
-    
-    public Task getTaskFromDay(int dayIndex, int taskIndex) {
+
+    /**
+     * Retourne la no <b>taskIndex</b> de la journée à la position <b>index</b>.
+     *
+     * @param taskIndex Numéro de la tâche (position dans la liste).
+     * @param dayIndex Positions du jour dans la liste.
+     * @return <b>Task</b> - La tâche trouvée, <b>null</b> si non trouvée. 
+     */
+    public Task getTaskFromDay(int taskIndex, int dayIndex) {
   
         if (dayIndex < 0 || dayIndex >= days.size())
             return null;
@@ -216,12 +261,31 @@ public class TimeSheetData {
         if (taskIndex < 0 || taskIndex >= days.get(dayIndex).getTasksNum())
             return null;              
         
-        return days.get(dayIndex).getTask(dayIndex);
+        Task task;
+        
+        try {
+            
+            task = days.get(dayIndex).getTask(dayIndex);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }  
+        
+        return task;
                 
     }
     
- 
-    public Task getTaskFromDayByName(String dayName, int taskIndex) {
+
+    /**
+     * Retourne la no <b>taskIndex</b> de la journée nommée <b>dayName</b>.
+     *
+     * @param taskIndex Numéro de la tâche (position dans la liste).
+     * @param dayName Nom de la journée.
+     * @return <b>Task</b> - La tâche trouvée, <b>null</b> si non trouvée. 
+     */
+    public Task getTaskFromDayByName(int taskIndex, String dayName) {
  
         if (taskIndex < 0)
             return null;
@@ -240,9 +304,7 @@ public class TimeSheetData {
         return null;
         
     }  
-    
-    // TODO: PEUT-ÊTRE A RETIRER SI PAS UTILE! (CE QUI PRECEDE)
-    
+
     
     /**
      * Retourne le numéro d'identification de l'employé.
@@ -280,35 +342,15 @@ public class TimeSheetData {
     } 
     
     
+    /**
+     * Override de la méthode toString() par défaut
+     * 
+     * @return "TimeSheetData{employeId: " + employeId + ", days: " + getDays() + "}"
+     */ 
     @Override
     public String toString() {
         
-        /*
-        String outStr = new String();
-        
-        for (Day day: days) {
-                
-                outStr += "Day : " + day.getName() + "\n";
-                
-                for (int num = 0; num < day.getTasksNum(); num ++) {
-                    
-                    Task task = day.getTask(num);
-                    
-                    outStr += "  Task : " + (num + 1) + "\n";
-                    outStr += "    ID    : " + task.getProjectId() + "\n";
-                    outStr += "    Time : " + task.getTime() + "\n";
-                    
-                }
-                
-                outStr += "----\n";
-                        
-        }
-        
-        return outStr;
-        
-        */
-        
-        return getDays().toString();
+        return "TimeSheetData{employeId: " + employeId + ", days: " + getDays() + "}";
         
     }
     

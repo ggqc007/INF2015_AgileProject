@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class Day {
 
-    private String           name;
+    private String           name = "";
     private final List<Task> tasks;
     
     private static final String WEEKDAY_STR_MATCH = "jour";
@@ -97,28 +97,74 @@ public class Day {
      * 
      * @param id   numéro d'identification du projet.
      * @param time le temps en minutes passé sur le projet.
+     * @return <b>Task</b> - <b>null</b> si erreur, sinon la tâche ajoutée
      */
-    public void addTask(int id, int time) {
+    public Task addTask(int id, int time) {
         
         Task task = new Task(id, time); 
         
-        tasks.add(task);
+        try {
+            
+            tasks.add(task);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+        
+        return task;
         
     }
+    
+    
+    /**
+     * Ajoute une tâche à la journée.
+     * 
+     * @param task la tâche à ajoutée
+     * @return <b>Task</b> - <b>null</b> si erreur, sinon la tâche ajoutée
+     */
+    public Task addTask(Task task) { 
+        
+        try {
+            
+            tasks.add(task);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+        
+        return task;
+        
+    }       
 
     
     /**
      * Retourne la tâche numéro index.
      * 
      * @param index position de la tâche.
-     * @return <b>Task</b> - la tâche à la position <b>index</b>.
+     * @return <b>Task</b> - la tâche à la position <b>index</b>. <b>null</b> si non trouvée.
      */
     public Task getTask(int index) {
             
         if (index < 0 || index >= tasks.size())
             return null;
+        
+        Task task;
+                
+        try {
             
-        return tasks.get(index);
+            task = tasks.get(index);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }     
+        
+        return task;
                     
     }
 
@@ -147,10 +193,15 @@ public class Day {
     }
     
     
+    /**
+     * Override de la méthode toString() par défaut
+     * 
+     * @return "Day{name: \"" + name + "\", tasks:" + getTasks() + "}"
+     */     
     @Override
     public String toString() {
         
-        return "{name: \"" + name + "\", tasks:" + getTasks() + "}";
+        return "Day{name: \"" + name + "\", tasks:" + getTasks() + "}";
         
     }
     

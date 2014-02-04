@@ -100,8 +100,16 @@ public class Employe {
         
         if (index < 0 || index >= timesheets.size())
             return null;
-        
-        return timesheets.get(index);
+       
+        try {
+                    
+            return timesheets.get(index);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
         
     }
     
@@ -122,10 +130,20 @@ public class Employe {
      * Ajoute un timesheet à la liste des timesheets de l'employé.
      * 
      * @param timesheet Timesheet à ajouter à la liste.
+     * @return <b>TimeSheetData</b> - Le timesheet ajouté, <b>null</b> si erreur.
      */
-    public void addTimeSheet(TimeSheetData timesheet) {
+    public TimeSheetData addTimeSheet(TimeSheetData timesheet) {
         
-        timesheets.add(timesheet);
+        try {
+            timesheets.add(timesheet);
+            
+        } catch (Exception e) {
+            
+            return null;
+            
+        }
+        
+        return timesheet;
         
     }
     
@@ -154,10 +172,15 @@ public class Employe {
     } 
     
     
+    /**
+     * Override de la méthode toString() par défaut
+     * 
+     * @return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}"
+     */    
     @Override
     public String toString() {
         
-        return "{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";
+        return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";
         
     }
     

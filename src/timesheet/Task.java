@@ -101,10 +101,15 @@ public class Task {
     }
     
     
+    /**
+     * Override de la méthode toString() par défaut
+     * 
+     * @return "Task{projectId: " + projectId + ", time: " + time +"}"
+     */
     @Override
     public String toString() {
         
-        return "{[projectID: " + projectId + ", time: " + time +"}";
+        return "Task{projectId: " + projectId + ", time: " + time +"}";
         
     }
     
