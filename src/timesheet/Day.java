@@ -24,11 +24,11 @@ import java.util.List;
  * 
  */
 public class Day {
-
+        
+    private static final String WEEKDAY_STR_MATCH = "jour";
+    
     private String           name = "";
     private final List<Task> tasks;
-    
-    private static final String WEEKDAY_STR_MATCH = "jour";
 
     
     /**

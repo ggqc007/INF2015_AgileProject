@@ -24,12 +24,12 @@ import java.util.List;
  */
 public class TimeSheetData {
     
+    private static final String[] WEEKDAYS_INDEX   = {"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
+    private static final int      ADMIN_IDS        = 1000;
+    private static final int      DEFAULT_DAYS_NUM = 7;   
+    
     private int             employeId;
-    private final List<Day> days;
-    
-    private static final String[] WEEKDAYS_INDEX = {"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};
-    private static final int      ADMIN_IDS      = 1000;
-    
+    private final List<Day> days;    
     
     /**
      * Constructeur de l'objet TimeSheetData().
@@ -37,9 +37,9 @@ public class TimeSheetData {
      */
     public TimeSheetData() {
         
-        days = new ArrayList(7);  
+        days = new ArrayList(DEFAULT_DAYS_NUM);  
         
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
             days.add(new Day());
         
     }   

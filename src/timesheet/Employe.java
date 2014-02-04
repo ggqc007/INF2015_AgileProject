@@ -24,10 +24,10 @@ import java.util.List;
  */
 public class Employe {
 
-    private int                       employeId;
-    private final List<TimeSheetData> timesheets;
-    
     private static final int ADMIN_IDS = 1000;
+        
+    private int                       employeId;
+    private final List<TimeSheetData> timesheets;    
     
     
     /**
@@ -134,9 +134,13 @@ public class Employe {
      */
     public TimeSheetData addTimeSheet(TimeSheetData timesheet) {
         
+        TimeSheetData newTimesheet = new TimeSheetData();
+        
         try {
+
+            newTimesheet.setEmployeId(employeId);
             
-            timesheets.add(timesheet);
+            timesheets.add(newTimesheet);
             
         } catch (Exception e) {
             
@@ -144,7 +148,7 @@ public class Employe {
             
         }
         
-        return timesheet;
+        return newTimesheet;
         
     }
     

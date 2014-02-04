@@ -21,10 +21,10 @@ package timesheet;
  */
 public class Task {
     
-    private int projectId;
-    private int time;
+    private static final int REMOTE_TASK_IDS = 900;    
     
-    private static final int REMOTE_TASK_IDS = 900;
+    private int projectId;
+    private int time;    
 
     
     /**
