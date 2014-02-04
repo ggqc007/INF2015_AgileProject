@@ -80,14 +80,4 @@ public class TimeSheet {
         
     }
 
-    public void setUserId(int id) {
-        // TO DO: Thomas, est-ce que tu peux définir ces méthodes, elles sont appelées dans le main. J'ai mis du code de manière proivoir pour pouvoir compiler. Merci! CC
-    }
-
-    public Day addDay(String str) {
-        // TO DO: Thomas, est-ce que tu peux définir ces méthodes, elles sont appelées dans le main. J'ai mis du code de manière proivoir pour pouvoir compiler. Merci! CC
-        Day d = new Day();
-        return d;
-    }
-
 }

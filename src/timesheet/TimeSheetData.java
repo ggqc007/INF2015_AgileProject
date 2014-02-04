@@ -49,7 +49,7 @@ public class TimeSheetData {
      * Ajoute une journée dans le timesheet.
      * 
      * @param name <b>String</b> Nom de la journée à ajouter.
-     * @return <b>Day</b> - Référence vers l'objet Day ajouté.
+     * @return <b>Day</b> - Référence vers l'objet Day ajouté, <b>null</b> si non ajouté.
      */
     public Day addDay(String name) {
         
@@ -149,7 +149,7 @@ public class TimeSheetData {
      * Retourne la journée à la position <b>index</b>.
      * 
      * @param index Position de la journée.
-     * @return <b>Day</b> - La journée demandée.
+     * @return <b>Day</b> - La journée demandée. <b>null</b> si non trouvée.
      */        
     public Day getDay(int index) {
            
