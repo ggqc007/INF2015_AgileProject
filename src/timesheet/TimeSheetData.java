@@ -31,6 +31,7 @@ public class TimeSheetData {
     private int             employeId;
     private final List<Day> days;    
     
+    
     /**
      * Constructeur de l'objet TimeSheetData().
      * 
@@ -43,6 +44,18 @@ public class TimeSheetData {
             days.add(new Day());
         
     }   
+  
+    
+    /**
+     * Constructeur par copie de l'objet TimeSheetData().
+     * 
+     */
+    public TimeSheetData(TimeSheetData timesheet) {
+        
+        this.employeId = timesheet.getEmployeId();        
+        this.days      = timesheet.getDays();
+        
+    } 
     
     
     /**

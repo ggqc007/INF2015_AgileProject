@@ -134,11 +134,11 @@ public class Employe {
      */
     public TimeSheetData addTimeSheet(TimeSheetData timesheet) {
         
-        TimeSheetData newTimesheet = new TimeSheetData();
+        TimeSheetData newTimesheet = new TimeSheetData(timesheet);
+        
+        newTimesheet.setEmployeId(employeId);
         
         try {
-
-            newTimesheet.setEmployeId(employeId);
             
             timesheets.add(newTimesheet);
             
