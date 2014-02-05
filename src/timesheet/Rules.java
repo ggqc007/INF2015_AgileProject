@@ -11,7 +11,7 @@
  *
  *  Example
  *  =======
- *  RulesEmployes rules = new RulesEmployes();
+ *  Rules rules = new RulesEmployes();
  *  rules.setEmploye(employe);
  *  if(rules.hasMinimumOfficeDailyMinutes() == false) {
  *      // violation, code d'erreur ici
@@ -39,6 +39,7 @@ abstract public class Rules {
     
     abstract public boolean hasMinimumOfficeWeekMinutes();
     
+    // TODO call protected methode from abstract class
     abstract public boolean hasMinimumOfficeDailyMinutes();
     
     abstract public boolean hasValidRemoteWeekMinutes();

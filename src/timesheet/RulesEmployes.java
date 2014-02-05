@@ -32,6 +32,7 @@ public class RulesEmployes extends Rules {
     
     @Override 
     public boolean hasMinimumOfficeDailyMinutes(){
+        //TODO retourne list avec nb jours fail
         boolean  validHours = true;
         List<Day> days = employe.getTimeSheet(0).getDays();
 
