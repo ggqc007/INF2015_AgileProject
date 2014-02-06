@@ -9,13 +9,6 @@
  *   Guillaume Gagnon
  *   Thomas Robert de Massy
  *
- *  Example
- *  =======
- *  Rules rules = new RulesEmployes();
- *  rules.setEmploye(employe);
- *  if(rules.hasMinimumOfficeDailyMinutes() == false) {
- *      // violation, code d'erreur ici
- *  }
  */
 
 package timesheet;
@@ -33,51 +26,59 @@ abstract public class Rules {
     protected Employe employe;
     
     public Rules() {
-        this.maxOfficeWeekMinutes = 43*60;
-        
+        maxOfficeWeekMinutes = 43*60;
     }
     
-    abstract public boolean hasMinimumOfficeWeekMinutes();
+    abstract public boolean hasMinimumWeeklyTimeInOffice();
     
-    // TODO call protected methode from abstract class
-    abstract public boolean hasMinimumOfficeDailyMinutes();
+    abstract public  List<Day> getInvalidDaysWithMinimumDailyTimeInOffice();
     
-    abstract public boolean hasValidRemoteWeekMinutes();
+    abstract public boolean hasValidWeeklyTimeRemote();
     
-    abstract public boolean hasMaximumOfficeWeekMinutes();
+    abstract public boolean hasValidWeeklyTimeInOffice();
     
     public void prepData(){
-        this.setTotalWeekMinutesByEmploye();
-        this.setTotalRemoteWeekMinutesByEmploye();
+        setTotalOfficeWeekMinutesByEmploye();
+        setTotalRemoteWeekMinutesByEmploye();
     }
     
-    protected int getTotalMinutesByDay(Day day) {
+    public void setTotalOfficeWeekMinutesByEmploye() {
+        int totalMinutes = 0;
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++) {    
+            totalMinutes += getTotalOfficeMinutesByDay(days.get(i));  
+        }   
+        totalWeekMinutes = totalMinutes;
+    }
+ 
+    protected int getTotalOfficeMinutesByDay(Day day) {
         int totalMinutes = 0;
         List<Task> tasks = day.getTasks();
-        
-        for (int j=0; j<tasks.size(); j++) {
-            totalMinutes += (int)tasks.get(j).getTime();
+        for (int i = 0; i < tasks.size(); i++) {
+            totalMinutes += (int)tasks.get(i).getTime();
         }
-           
         return totalMinutes;
-    }
-
-    public void setTotalWeekMinutesByEmploye() {
-        List<Day> days = employe.getTimeSheet(0).getDays();
-        
-        int totalMinutes = 0;
-        for (int i = 0; i < days.size() == true; i++) {    
-                totalMinutes += this.getTotalMinutesByDay(days.get(i));  
-        }   
-        
-        this.totalWeekMinutes = totalMinutes;
     }
     
     public void setTotalRemoteWeekMinutesByEmploye() {
         int totalMinutes = 0;
-        // TODO Khaled: Définir méthode calcul du total d'heures de télétravail (remote)
-        this.totalRemoteWeekMinutes = totalMinutes;
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++) {  
+            totalMinutes += getTotalRemoteMinutesByDay(days.get(i));
+        }   
+        totalRemoteWeekMinutes = totalMinutes;
     }    
+    
+    protected int getTotalRemoteMinutesByDay(Day day) {
+        int totalMinutes = 0;
+        List<Task> tasks = day.getTasks();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).isRemoteTask()) {
+                totalMinutes += (int)tasks.get(i).getTime();
+            }
+        }
+        return totalMinutes;
+    }
     
     public Employe getEmploye() {
         return employe;
@@ -85,7 +86,6 @@ abstract public class Rules {
 
     public void setEmploye(Employe employe) {
         this.employe = employe;
-        prepData();
     }
     
     public int getMaxOfficeWeekMinutes() {

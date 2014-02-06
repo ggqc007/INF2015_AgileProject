@@ -40,11 +40,13 @@ public class Report {
 
         // TODO: Instancier rulesEmployes ou rulesAdmins, valider les enoncés à l'aide des méthodes et générer List avec codes d'erreur et messages
         Rules rules = getInstanceRules(employe);
-        if (rules.hasMinimumOfficeDailyMinutes() == false) {
-            
+        rules.setEmploye(employe);
+        rules.prepData();
+        
+        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {            
             report.add("admin"+ ERROR_ALL_1);
         }
-        System.out.println(report);
+        
         return report;
     }
 
