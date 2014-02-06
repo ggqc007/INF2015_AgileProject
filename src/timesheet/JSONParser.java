@@ -13,6 +13,7 @@
 package timesheet;
 
 import java.util.Arrays;
+import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -37,9 +38,11 @@ public class JSONParser {
         return timeSheetData;
     }
 
-    public static JSONArray reportToJSONArray(String[] errorReport) {
+    public static JSONArray reportToJSONArray(List errorReport) {
         JSONArray jsonErrorReport = new JSONArray();
-        jsonErrorReport.addAll(Arrays.asList(errorReport));
+        for (int i = 0; i < errorReport.size(); i++) {
+            jsonErrorReport.add(errorReport.get(i));
+        }
         return jsonErrorReport;
     }
 

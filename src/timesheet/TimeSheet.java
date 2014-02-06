@@ -74,7 +74,10 @@ public class TimeSheet {
         System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
         
         // Output test GG
-        String[] testReportToJSONArray = {"Message Erreur 1", "Message Erreur 2", "Message Erreur 3", "Message Erreur 4", "Message Erreur 5"};
+        List testReportToJSONArray = new ArrayList();
+        testReportToJSONArray.add("Bonjour");
+        testReportToJSONArray.add("Mon");
+        testReportToJSONArray.add("Ami");
         System.out.println("DEBUG JSONParser.ReportToJSONArray: "+ JSONParser.reportToJSONArray(testReportToJSONArray));
         writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
         
