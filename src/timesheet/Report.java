@@ -18,16 +18,11 @@ import java.util.List;
 public class Report {
 
     // Rules for all
-    private static final String ERROR_ALL_1 = "Cet employe a passe plus d'heures physiquement au bureau que la quantite permise.";
-
-    // Rules for admin
-    private static final String ERROR_ADM_1 = "Cet administrateur n'a pas travaille le nombre d'heures minimal physiquement au bureau.";
-    private static final String ERROR_ADM_2 = "Cet administrateur a fait plus d'heures de teletravail que la quantite permise";
-    private static final String ERROR_ADM_3 = "Cet administrateur n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
-
-    // Rules for employee
-    private static final String ERROR_EMP_1 = "Cet employe n'a pas travaille le nombre d'heure minimal physiquement au bureau.";
-    private static final String ERROR_EMP_2 = "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ";
+    private static final String ERROR_1 = "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ";
+    private static final String ERROR_2 = "Cet employe n'a pas travaille le nombre d'heures minimal physiquement au bureau.";
+    private static final String ERROR_3 = "Cet employe a fait plus d'heures de teletravail que la quantite permise";
+    private static final String ERROR_4 = "Cet employe a passe plus d'heures physiquement au bureau que la quantite permise.";
+ 
 
     private Employe employe;
 
@@ -43,10 +38,23 @@ public class Report {
         rules.setEmploye(employe);
         rules.prepData();
         
-        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {            
-            report.add("admin"+ ERROR_ALL_1);
+        if (!rules.hasMinimumWeeklyTimeInOffice()) {
+            report.add(ERROR_1);
         }
         
+        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
+                report.add(ERROR_2);
+            }
+        }
+        
+        if (!rules.hasValidWeeklyTimeRemote()) {
+            report.add(ERROR_3);
+        }
+        
+        if (!rules.hasValidWeeklyTimeInOffice()) {
+            report.add(ERROR_4);
+        }
         return report;
     }
 
