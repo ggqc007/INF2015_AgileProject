@@ -47,7 +47,7 @@ public class TimeSheet {
 
     public static void writeFile(JSONArray jsonArray) {
         try {
-            FileWriter.writeStringIntoFile(jsonArray.toString(), FILE_OUT_PATH, FILE_ENCODING);
+            FileWriter.writeStringIntoFile(jsonArray.toString(2), FILE_OUT_PATH, FILE_ENCODING);
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -78,7 +78,7 @@ public class TimeSheet {
         testReportToJSONArray.add("Bonjour");
         testReportToJSONArray.add("Mon");
         testReportToJSONArray.add("Ami");
-        System.out.println("DEBUG JSONParser.ReportToJSONArray: "+ JSONParser.reportToJSONArray(testReportToJSONArray));
+        System.out.println("DEBUG JSONParser.ReportToJSONArray: \n"+ JSONParser.reportToJSONArray(testReportToJSONArray).toString(2));
         writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
         
     }
