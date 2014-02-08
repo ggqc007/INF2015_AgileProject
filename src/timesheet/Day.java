@@ -78,14 +78,12 @@ public class Day {
      * @return <b>Task</b> - <b>null</b> si erreur, sinon la tâche ajoutée
      */
     public Task addTask(int id, int time) {        
-        Task task = new Task(id, time); 
-        
+        Task task = new Task(id, time);         
         try {            
             tasks.add(task);            
         } catch (Exception e) {            
             return null;            
-        }
-        
+        }        
         return task;        
     }    
     
@@ -96,12 +94,11 @@ public class Day {
      * @return <b>Task</b> - <b>null</b> si erreur, sinon la tâche ajoutée
      */
     public Task addTask(Task task) {         
-        try {            
+        try {           
             tasks.add(task);            
         } catch (Exception e) {            
             return null;            
-        }
-        
+        }        
         return task;        
     }       
     
@@ -112,18 +109,14 @@ public class Day {
      * @return <b>Task</b> - la tâche à la position <b>index</b>. <b>null</b> si non trouvée.
      */
     public Task getTask(int index) {            
-        if (index < 0 || index >= tasks.size()) {
-            return null;
-        }
-        
         Task task;
-                
+        if (index < 0 || index >= tasks.size())
+            return null;                                
         try {            
             task = tasks.get(index);            
         } catch (Exception e) {            
             return null;            
-        }     
-        
+        }             
         return task;                    
     }
     

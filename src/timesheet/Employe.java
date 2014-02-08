@@ -60,11 +60,9 @@ public class Employe {
      * @param id Numéro d'identification de l'employé.
      */
     public void setId(int id) {        
-        employeId = id;        
-        
-        for(TimeSheetData timesheet : timesheets) {            
-            timesheet.setEmployeId(id);            
-        }        
+        employeId = id;                
+        for(TimeSheetData timesheet : timesheets)            
+            timesheet.setEmployeId(id);                            
     }
     
     /**
@@ -74,10 +72,8 @@ public class Employe {
      * @return <b>TimeSheetData</b> - Le timesheet demandé de l'employé.
      */
     public TimeSheetData getTimeSheet(int index) {        
-        if (index < 0 || index >= timesheets.size()) {
-            return null;
-        }
-       
+        if (index < 0 || index >= timesheets.size())
+            return null;               
         try {                    
             return timesheets.get(index);            
         } catch (Exception e) {            
@@ -121,14 +117,12 @@ public class Employe {
      */
     public TimeSheetData addTimeSheet(TimeSheetData timesheet) {        
         TimeSheetData newTimesheet = new TimeSheetData(timesheet);        
-        newTimesheet.setEmployeId(employeId);
-        
+        newTimesheet.setEmployeId(employeId);        
         try {            
             timesheets.add(newTimesheet);            
         } catch (Exception e) {            
             return null;            
-        }
-        
+        }        
         return newTimesheet;        
     }
     

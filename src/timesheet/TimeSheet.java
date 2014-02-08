@@ -35,6 +35,8 @@ public class TimeSheet {
         }
     }
 
+    // Guillaume, Pourquoi ne pas éliminer cette méthode et faire les try..catch directement 
+    // dans le FileReader ? Elle me semble inutile.
     public static String readFile() {
         try {
             JSONText = FileReader.loadFileIntoString(FILE_IN_PATH, FILE_ENCODING);
@@ -46,6 +48,8 @@ public class TimeSheet {
         return JSONText;
     }
 
+    // Guillaume, Pourquoi ne pas éliminer cette méthode et faire les try..catch directement 
+    // dans le FileWriter ? Elle me semble inutile.    
     public static void writeFile(JSONArray jsonArray) {
         try {
             FileWriter.writeStringIntoFile(jsonArray.toString(2), FILE_OUT_PATH, FILE_ENCODING);
@@ -98,8 +102,9 @@ public class TimeSheet {
         */
         
         // TEST Thomas
-        employe.setTimeSheet(0, JSONParser.toTimeSheetData(objectFromFile)); // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE
-    
+        
+        // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE    
+        employe.setTimeSheet(0, JSONParser.toTimeSheetData(objectFromFile)); 
         // DEBUG
         System.out.println("\n\nDEBUG JSON Input : " + objectFromFile.toString(2));
         
