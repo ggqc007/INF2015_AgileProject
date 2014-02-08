@@ -134,8 +134,7 @@ public class TimeSheetData {
         for (Day day : days) {            
             dayName = day.getName();                        
             if (dayName != null && dayName.equals(name))
-                return day;            
-            
+                return day;                        
         }                
         return null;                    
     }      
