@@ -68,9 +68,9 @@ public class Employe {
     }
     
     /**
-     * Retourne le timesheet à la position <b>index</b> de l'employé.
+     * Retourne le timesheet à la position <b>index</b> dans la liste des timesheets de l'employé.
      * 
-     * @param index Position de l'employé dans l'index.
+     * @param index Position du timesheet dans l'index.
      * @return <b>TimeSheetData</b> - Le timesheet demandé de l'employé.
      */
     public TimeSheetData getTimeSheet(int index) {        
@@ -85,12 +85,12 @@ public class Employe {
         }        
     }
     
-    // TODO JAVADOCS
     /**
+     * Modification du timesheet à la position <b>index</b> dans la liste des timesheets de l'employé.
      * 
-     * @param index
-     * @param timesheet
-     * @return 
+     * @param index Position du timesheet dans l'index.
+     * @param timesheet Nouveau timesheet.
+     * @return <b>TimeSheetData</b> - Le timesheet modifié, <b>null</b> si erreur. 
      */
     public TimeSheetData setTimeSheet(int index, TimeSheetData timesheet) {        
         if (index < 0 || index >= timesheets.size())

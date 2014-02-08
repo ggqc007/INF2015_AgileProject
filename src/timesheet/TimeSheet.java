@@ -15,6 +15,7 @@ package timesheet;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -63,13 +64,27 @@ public class TimeSheet {
         // verifyCmdArgs(args);
         
         Employe employe = new Employe();
-        employees = new ArrayList();
-        employees.add(employe);
 
+        // TEST THOMAS 
+        
+        //employees = new ArrayList();
+        //employees.add(employe);
+        
+        // POUR FAIRE LE TOUT EN UNE LIGNE
+        employees = new ArrayList(Arrays.asList(employe));
 
+        // ON PEUT AUSSI FAIRE LES 2 LIGNES SUIVANTES EN UNE LIGNE :
+        //
+        // JSONText = readFile(); //TODO: eventuellement faire avec args
+        // JSONObject objectFromFile = JSONObject.fromObject(JSONText);
+        //
+        JSONObject objectFromFile = JSONObject.fromObject(readFile()); //TODO: eventuellement faire avec args
+        
+        // FIN TEST THOMAS
+        
         // Input test GG
-        JSONText = readFile(); //TODO: eventuellement faire avec args
-        JSONObject objectFromFile = JSONObject.fromObject(JSONText);
+        //JSONText = readFile(); //TODO: eventuellement faire avec args
+        //JSONObject objectFromFile = JSONObject.fromObject(JSONText);
         //TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
         //System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
         
