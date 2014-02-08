@@ -24,7 +24,7 @@ public class TimeSheet {
 
     private static List<Employe> employees;
     public static final String FILE_ENCODING = "UTF-8";
-    public static final String FILE_IN_PATH = "json/timesheet_norm_3.json";
+    public static final String FILE_IN_PATH = "json/timesheet_admin_3.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
 
