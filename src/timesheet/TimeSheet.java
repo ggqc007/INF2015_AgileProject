@@ -70,24 +70,35 @@ public class TimeSheet {
         // Input test GG
         JSONText = readFile(); //TODO: eventuellement faire avec args
         JSONObject objectFromFile = JSONObject.fromObject(JSONText);
-        TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
-        System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
+        //TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
+        //System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
         
         // Output test GG
-        List testReportToJSONArray = new ArrayList();
+        /*List testReportToJSONArray = new ArrayList();
         testReportToJSONArray.add("Bonjour");
         testReportToJSONArray.add("Mon");
         testReportToJSONArray.add("Ami");
         System.out.println("DEBUG JSONParser.ReportToJSONArray: \n"+ JSONParser.reportToJSONArray(testReportToJSONArray).toString(2));
         writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
+        */
         
         // TEST Thomas
-        employe.setTimeSheet(0, testToTimeSheetData); // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE
-        System.out.println(employe.getTimeSheet(0));
-        Report report = new Report();
-        report.setEmploye(employe);               
-        JSONArray output = JSONParser.reportToJSONArray(report.generate(employe));
-        System.out.println(output);
+        employe.setTimeSheet(0, JSONParser.toTimeSheetData(objectFromFile)); // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE
+    
+        // DEBUG
+        System.out.println("\n\nDEBUG JSON Input : " + objectFromFile.toString(2));
+        
+        // DEBUG
+        System.out.println("\n\nDEBUG Parsed TimeSheet : " + employe.getTimeSheet(0));
+        
+        Report report = new Report(employe);             
+        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));
+        
+        // DEBUG
+        System.out.println("\n\nDEBUG JSON Output : " + outputJSON.toString(2)+"\n\n");
+        
+        writeFile(outputJSON);
+        // FIN TEST Thomas
         
     }
 

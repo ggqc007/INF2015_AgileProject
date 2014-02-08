@@ -29,6 +29,24 @@ public class Report {
     public Report() {
 
     }
+    
+    // AJOUTE PAR THOMAS
+    // Pour éviter d'avoir à faire :
+    //
+    //   Report report = new Report();
+    //   report.setEmploye(employe);      
+    //
+    // Et pouvoir faire le tout en une ligne :
+    //
+    //   Report report = new Report(employe);
+    //
+    public Report(Employe employe) {
+        
+        this();
+        
+        this.employe = employe;
+
+    }    
 
     public List generate(Employe employe) {
         List report = new ArrayList();
