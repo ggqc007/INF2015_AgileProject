@@ -63,7 +63,7 @@ public class TimeSheet {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) {                
         // Vérification des arguments de ligne de commande (TURNED OFF WHILE TESTING!)
         // String inputFileName = args[0];
         // String ouputFileName = args[1];
@@ -71,8 +71,15 @@ public class TimeSheet {
         
         /* QUELQUES IDEES POUR LA STRUCTURE DU MAIN
         
+           - On peut sortir les variables inputFileName et ouputFileName à l'extérieur du main :
+        
+             private String inputFileName;
+             private String ouputFileName;
+        
+             et les setter à l'intérieur de verifyCmdArgs()
+        
            - Comme c'est là, une fois les instructions de DEBUG retirées, le main va
-             contenir 7 lignes (plus le code pour les arguments)
+             contenir 7 lignes (plus verifyCmdArgs(args);)
         
              Soit :
         
@@ -84,7 +91,7 @@ public class TimeSheet {
                 JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
                 writeFile(outputJSON);
         
-           - Mais on peut passer à 5 (plus le code pour les arguments) car pour l'instant on n'a pas 
+           - Mais on peut passer à 5 (plus verifyCmdArgs(args);) car pour l'instant on n'a pas 
              besoin de la liste d'employé et si on rajoute la ligne suivante dans Report.generate() :
         
              this.employe = employe; // Placé juste après la ligne rules.setEmploye(employe);
@@ -105,7 +112,7 @@ public class TimeSheet {
                 JSONArray outputJSON = JSONParser.reportToJSONArray(Report.generate(employe));        
                 writeFile(outputJSON);
         
-           - On pourrait même aller jusqu'à 4 lignes (plus le code pour les arguments) en ajoutant la 
+           - On pourrait même aller jusqu'à 4 lignes (plus verifyCmdArgs(args);) en ajoutant la 
              méthode suivante dans JSONParser
         
              public TimeSheetData readTimeSheetData(String jsonFilename) {
@@ -177,26 +184,20 @@ public class TimeSheet {
         // Set le ID de l'employé et ajoute le premier timesheet en même temps
         employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));
         
-        // DEBUG
+        Report report = new Report(employe);             
+        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
+        writeFile(outputJSON);
+        
+        // AFFICHE LES INFORMATIONS DE DEBUG
         System.out.print("\nDEBUG Employe ID " + employe.getId());
         if (employe.isAdmin())
             System.out.println(" is an administrator");
         else
-            System.out.println(" is a normal employe");         
-        
-        // DEBUG
-        System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));
-        
-        // DEBUG
+            System.out.println(" is a normal employe");           
+        System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));        
         System.out.println("\nDEBUG Parsed TimeSheet : " + employe.getTimeSheet(0));
+        System.out.println("\nDEBUG JSON Output : " + outputJSON.toString(2)+"\n");  
         
-        Report report = new Report(employe);             
-        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));
-        
-        // DEBUG
-        System.out.println("\nDEBUG JSON Output : " + outputJSON.toString(2)+"\n");
-        
-        writeFile(outputJSON);
         // FIN TEST Thomas
         
     }
