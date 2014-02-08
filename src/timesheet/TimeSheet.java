@@ -24,7 +24,7 @@ public class TimeSheet {
 
     private static List<Employe> employees;
     public static final String FILE_ENCODING = "UTF-8";
-    public static final String FILE_IN_PATH = "json/timesheet_admin_3.json";
+    public static final String FILE_IN_PATH = "json/timesheet_admin_1.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
 
@@ -103,21 +103,32 @@ public class TimeSheet {
         writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
         */
         
-        // TEST Thomas
+     
         
         // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE    
         employe.setTimeSheet(0, JSONParser.toTimeSheetData(objectFromFile)); 
-        // DEBUG
-        System.out.println("\n\nDEBUG JSON Input : " + objectFromFile.toString(2));
+        
+        // TEMPORAIRE JE VAIS TROUVER UNE MEILLEURE SOLUTION DEMAIN
+        employe.setId(employe.getTimeSheet(0).getEmployeId());
         
         // DEBUG
-        System.out.println("\n\nDEBUG Parsed TimeSheet : " + employe.getTimeSheet(0));
+        System.out.print("\nDEBUG Employe ID " + employe.getId());
+        if (employe.isAdmin())
+            System.out.println(" is an administrator");
+        else
+            System.out.println(" is a normal employe");         
+        
+        // DEBUG
+        System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));
+        
+        // DEBUG
+        System.out.println("\nDEBUG Parsed TimeSheet : " + employe.getTimeSheet(0));
         
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));
         
         // DEBUG
-        System.out.println("\n\nDEBUG JSON Output : " + outputJSON.toString(2)+"\n\n");
+        System.out.println("\nDEBUG JSON Output : " + outputJSON.toString(2)+"\n");
         
         writeFile(outputJSON);
         // FIN TEST Thomas
