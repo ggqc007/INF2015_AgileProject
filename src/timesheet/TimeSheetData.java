@@ -32,11 +32,9 @@ public class TimeSheetData {
      * 
      */
     public TimeSheetData() {        
-        days = new ArrayList(DEFAULT_DAYS_NUM);  
-        
-        for (int i = 0; i < DEFAULT_DAYS_NUM; i++) {
-            days.add(new Day());        
-        }
+        days = new ArrayList(DEFAULT_DAYS_NUM);          
+        for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
+            days.add(new Day());                
     }     
     
     /**
@@ -56,14 +54,12 @@ public class TimeSheetData {
      */
     public Day addDay(String name) {        
         Day day = new Day();        
-        day.setName(name);  
-        
+        day.setName(name);          
         try {                    
             days.add(day);        
         } catch (Exception e) {                    
             return null;                    
-        }                
-        
+        }                        
         return day;        
     }
     
@@ -75,16 +71,13 @@ public class TimeSheetData {
      * @return <b>Day</b> - <b>null</b> si non ajouté, <b>day</b> si ajouté.
      */
     public Day setDay(int index, Day day) {        
-        if (index < 0 || index >= days.size()) {
-            return null;
-        }     
-        
+        if (index < 0 || index >= days.size())
+            return null;                     
         try {            
             days.set(index, day);        
         } catch (Exception e) {                    
             return null;                    
-        }                
-        
+        }                        
         return day;        
     }     
     
@@ -105,8 +98,7 @@ public class TimeSheetData {
                 }            
                 return day;                
             }            
-        }  
-        
+        }          
         return null;        
     }    
     
@@ -126,10 +118,8 @@ public class TimeSheetData {
      * @return <b>Day</b> - La journée demandée. <b>null</b> si non trouvée.
      */        
     public Day getDay(int index) {           
-        if (index < 0 || index >= days.size()) {
-            return null;            
-        }
-        
+        if (index < 0 || index >= days.size())
+            return null;                            
         return days.get(index);                    
     }    
     
@@ -140,16 +130,13 @@ public class TimeSheetData {
      * @return <b>Day</b> - La journée demandée, <b>null</b> si non trouvée.
      */        
     public Day getDayByName(String name) {
-        String dayName;     
-        
+        String dayName;             
         for (Day day : days) {            
-            dayName = day.getName();            
-            
-            if (dayName != null && dayName.equals(name)) {
+            dayName = day.getName();                        
+            if (dayName != null && dayName.equals(name))
                 return day;            
-            }
-        }        
-        
+            
+        }                
         return null;                    
     }      
     
@@ -171,14 +158,12 @@ public class TimeSheetData {
      */        
     public Task addTaskToDay(Task task, int dayIndex) {        
         if (dayIndex < 0 || dayIndex >= days.size())
-            return null;
-        
+            return null;        
         try {            
             task = days.get(dayIndex).addTask(task);            
         } catch (Exception e) {            
             return null;            
         }
-
         return task;        
     }    
 
@@ -190,12 +175,9 @@ public class TimeSheetData {
      * @return <b>Task</b> - La tâche ajoutée. <b>null</b> si non ajoutée.
      */
     public Task addTaskToDayByName(Task task, String dayName) {        
-        Day day = getDayByName(dayName);
-        
-        if (day != null) {            
-            return day.addTask(task);            
-        }
-        
+        Day day = getDayByName(dayName);        
+        if (day != null)           
+            return day.addTask(task);                            
         return null;        
     }    
 
@@ -207,22 +189,16 @@ public class TimeSheetData {
      * @return <b>Task</b> - La tâche trouvée, <b>null</b> si non trouvée. 
      */
     public Task getTaskFromDay(int taskIndex, int dayIndex) {  
-        if (dayIndex < 0 || dayIndex >= days.size()) {
-            return null;
-        }
-        
-        if (taskIndex < 0 || taskIndex >= days.get(dayIndex).getTasksNum()) {
-            return null;              
-        }
-        
         Task task;
-        
+        if (dayIndex < 0 || dayIndex >= days.size())
+            return null;                
+        if (taskIndex < 0 || taskIndex >= days.get(dayIndex).getTasksNum())
+            return null;                                      
         try {            
             task = days.get(dayIndex).getTask(dayIndex);            
         } catch (Exception e) {            
             return null;            
-        }  
-        
+        }          
         return task;                
     }    
 
@@ -234,20 +210,14 @@ public class TimeSheetData {
      * @return <b>Task</b> - La tâche trouvée, <b>null</b> si non trouvée. 
      */
     public Task getTaskFromDayByName(int taskIndex, String dayName) { 
-        if (taskIndex < 0) {
-            return null;
-        }
-        
-        Day day = getDayByName(dayName);
-        
+        if (taskIndex < 0)
+            return null;                
+        Day day = getDayByName(dayName);        
         if (day != null) {            
-            if (taskIndex >= day.getTasksNum()) {
-                return null;
-            }
-            
+            if (taskIndex >= day.getTasksNum())
+                return null;                        
             return day.getTask(taskIndex);            
-        }
-        
+        }        
         return null;        
     }  
     
