@@ -69,9 +69,64 @@ public class TimeSheet {
         // String ouputFileName = args[1];
         // verifyCmdArgs(args);
         
+        /* QUELQUES IDEES POUR LA STRUCTURE DU MAIN
+        
+           - Comme c'est là, une fois les instructions de DEBUG retirées, le main va
+             contenir 7 lignes (plus le code pour les arguments)
+        
+             Soit :
+        
+                Employe employe = new Employe();
+                employees = new ArrayList(Arrays.asList(employe));
+                JSONObject objectFromFile = JSONObject.fromObject(readFile());
+                employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));        
+                Report report = new Report(employe);             
+                JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
+                writeFile(outputJSON);
+        
+           - Mais on peut passer à 5 (plus le code pour les arguments) car pour l'instant on n'a pas 
+             besoin de la liste d'employé et si on rajoute la ligne suivante dans Report.generate() :
+        
+             this.employe = employe; // Placé juste après la ligne rules.setEmploye(employe);
+        
+             On pourrait remplacer :
+        
+                Report report = new Report(employe);             
+                JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));
+        
+             Par 
+                JSONArray outputJSON = JSONParser.reportToJSONArray(Report.generate(employe));   
+        
+             Donc ça donnerait :
+        
+                Employe employe = new Employe();
+                JSONObject objectFromFile = JSONObject.fromObject(readFile());
+                employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));         
+                JSONArray outputJSON = JSONParser.reportToJSONArray(Report.generate(employe));        
+                writeFile(outputJSON);
+        
+           - On pourrait même aller jusqu'à 4 lignes (plus le code pour les arguments) en ajoutant la 
+             méthode suivante dans JSONParser
+        
+             public TimeSheetData readTimeSheetData(String jsonFilename) {
+                JSONObject objectFromFile = JSONObject.fromObject(readFile(jsonFilename));
+                return JSONParser.toTimeSheetData(objectFromFile);
+             }
+        
+             Donc ça donnerait :
+        
+                Employe employe = new Employe();
+                employe.initFromFirstTimeSheet(JSONParser.readTimeSheetData(jsonFilename));         
+                JSONArray outputJSON = JSONParser.reportToJSONArray(Report.generate(employe));        
+                writeFile(outputJSON); 
+        
+           Ce qui nous donnerait plus de marge de manoeuvre pour la suite du projet :-)
+        
+        */
+        
         Employe employe = new Employe();
 
-        // TEST THOMAS 
+        // TEST THOMAS                 
         
         //employees = new ArrayList();
         //employees.add(employe);
