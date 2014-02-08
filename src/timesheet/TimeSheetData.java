@@ -13,8 +13,8 @@
 
 package timesheet;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Objet TimeSheetData - Une feuille de temps hebdomadaire d'un employé
@@ -200,7 +200,7 @@ public class TimeSheetData {
     }    
 
     /**
-     * Retourne la no <b>taskIndex</b> de la journée à la position <b>index</b>.
+     * Retourne la tâche no <b>taskIndex</b> de la journée à la position <b>index</b>.
      *
      * @param taskIndex Numéro de la tâche (position dans la liste).
      * @param dayIndex Positions du jour dans la liste.
@@ -227,7 +227,7 @@ public class TimeSheetData {
     }    
 
     /**
-     * Retourne la no <b>taskIndex</b> de la journée nommée <b>dayName</b>.
+     * Retourne la tâche no <b>taskIndex</b> de la journée nommée <b>dayName</b>.
      *
      * @param taskIndex Numéro de la tâche (position dans la liste).
      * @param dayName Nom de la journée.

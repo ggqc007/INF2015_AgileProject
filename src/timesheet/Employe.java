@@ -13,8 +13,8 @@
 
 package timesheet;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Objet Employe
@@ -83,6 +83,25 @@ public class Employe {
         } catch (Exception e) {            
             return null;            
         }        
+    }
+    
+    // TODO JAVADOCS
+    /**
+     * 
+     * @param index
+     * @param timesheet
+     * @return 
+     */
+    public TimeSheetData setTimeSheet(int index, TimeSheetData timesheet) {        
+        if (index < 0 || index >= timesheets.size())
+            return null;        
+        try {                    
+            timesheets.set(index,timesheet);            
+        } catch (Exception e) {            
+            return null;            
+        } 
+        return timesheet;
+        
     }
     
     /**

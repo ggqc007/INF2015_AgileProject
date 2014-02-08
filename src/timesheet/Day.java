@@ -13,8 +13,8 @@
 
 package timesheet;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Objet Day - Une journée.

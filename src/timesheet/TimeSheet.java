@@ -81,6 +81,14 @@ public class TimeSheet {
         System.out.println("DEBUG JSONParser.ReportToJSONArray: \n"+ JSONParser.reportToJSONArray(testReportToJSONArray).toString(2));
         writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
         
+        // TEST Thomas
+        employe.setTimeSheet(0, testToTimeSheetData); // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE
+        System.out.println(employe.getTimeSheet(0));
+        Report report = new Report();
+        report.setEmploye(employe);               
+        JSONArray output = JSONParser.reportToJSONArray(report.generate(employe));
+        System.out.println(output);
+        
     }
 
 }
