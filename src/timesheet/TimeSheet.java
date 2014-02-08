@@ -120,6 +120,13 @@ public class TimeSheet {
                 JSONArray outputJSON = JSONParser.reportToJSONArray(Report.generate(employe));        
                 writeFile(outputJSON); 
         
+             On pourrait même aller jusqu'à 3 mais la dernière ligne devient un peu complexe, il
+             ne faut sûrement pas exagérer :
+        
+                Employe employe = new Employe();
+                employe.initFromFirstTimeSheet(JSONParser.readTimeSheetData(jsonFilename)); 
+                writeFile(JSONParser.reportToJSONArray(Report.generate(employe)));        
+ 
            Ce qui nous donnerait plus de marge de manoeuvre pour la suite du projet :-)
         
         */
