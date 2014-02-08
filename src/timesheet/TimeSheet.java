@@ -24,7 +24,7 @@ public class TimeSheet {
 
     private static List<Employe> employees;
     public static final String FILE_ENCODING = "UTF-8";
-    public static final String FILE_IN_PATH = "json/timesheet_admin_1.json";
+    public static final String FILE_IN_PATH = "json/timesheet_admin_3.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
 
@@ -106,10 +106,14 @@ public class TimeSheet {
      
         
         // C'EST CE QUI MANQUAIT POUR METTRE LE TIMESHEET DANS L'EMPLOYE    
-        employe.setTimeSheet(0, JSONParser.toTimeSheetData(objectFromFile)); 
+        //employe.setTimeSheet(0, JSONParser.toTimeSheetData(objectFromFile)); 
         
         // TEMPORAIRE JE VAIS TROUVER UNE MEILLEURE SOLUTION DEMAIN
-        employe.setId(employe.getTimeSheet(0).getEmployeId());
+        //employe.setId(employe.getTimeSheet(0).getEmployeId());
+        
+        // FINALEMENT J'AI AJOUTE UNE FAÇON PLUS ELEGANTE AUJOURD'HUI
+        // Set le ID de l'employé et ajoute le premier timesheet en même temps
+        employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));
         
         // DEBUG
         System.out.print("\nDEBUG Employe ID " + employe.getId());

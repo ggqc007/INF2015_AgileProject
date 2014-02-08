@@ -46,6 +46,16 @@ public class Employe {
     }
     
     /**
+     * Initialise l'employé par sa première timesheet
+     * 
+     * @param timesheet La première timesheet de l'employé
+     */
+    public void initFromFirstTimeSheet(TimeSheetData timesheet) {
+        employeId = timesheet.getEmployeId();
+        timesheets.set(0, timesheet);        
+    }
+    
+    /**
      * Retourne le numéro d'identification de l'employé.
      * 
      * @return <b>int</b> - Id de l'employé.
