@@ -1,0 +1,8 @@
+Employé administrateur ou le mimimum par jour est respecté (exactement 240 minutes = 4 heures), mais pas minimum par semaine
+L'employé dans ce timesheet n'a rien fait la fin de semaine. Aucun télétravail
+
+Résultat attendu :
+
+[
+  "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ",
+]

@@ -1,0 +1,10 @@
+Employé normal 2 jours ou le minimum par jour n'est pas respecté (359 au lieu de 360 minutes), mais pas minimum par semaine (30 heures - 2 minutes au lieu de 38)
+L'employé dans ce timesheet n'a rien fait la fin de semaine. Aucun télétravail
+
+Résultat attendu :
+
+[
+  "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ",
+  "Cet employe n'a pas travaille le nombre d'heures minimal physiquement au bureau.", // Mardi
+  "Cet employe n'a pas travaille le nombre d'heures minimal physiquement au bureau."  // Jeudi
+]
