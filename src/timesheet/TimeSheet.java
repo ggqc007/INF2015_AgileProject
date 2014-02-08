@@ -24,7 +24,7 @@ public class TimeSheet {
 
     private static List<Employe> employees;
     public static final String FILE_ENCODING = "UTF-8";
-    public static final String FILE_IN_PATH = "json/timesheet.json";
+    public static final String FILE_IN_PATH = "json/timesheet_norm_3.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
 
@@ -36,7 +36,8 @@ public class TimeSheet {
     }
 
     // Guillaume, Pourquoi ne pas éliminer cette méthode et faire les try..catch directement 
-    // dans le FileReader ? Elle me semble inutile.
+    // dans le FileReader ? Elle me semble inutile. Ou au moins la transférer dans le FileReader
+    // car elle n'est pas vraiment à sa place ici.
     public static String readFile() {
         try {
             JSONText = FileReader.loadFileIntoString(FILE_IN_PATH, FILE_ENCODING);
@@ -49,7 +50,8 @@ public class TimeSheet {
     }
 
     // Guillaume, Pourquoi ne pas éliminer cette méthode et faire les try..catch directement 
-    // dans le FileWriter ? Elle me semble inutile.    
+    // dans le FileWriter ? Elle me semble inutile. Ou au moins la transférer dans le FileWriter
+    // car elle n'est pas vraiment à sa place ici.   
     public static void writeFile(JSONArray jsonArray) {
         try {
             FileWriter.writeStringIntoFile(jsonArray.toString(2), FILE_OUT_PATH, FILE_ENCODING);
