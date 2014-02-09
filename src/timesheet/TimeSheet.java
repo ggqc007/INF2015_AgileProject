@@ -50,17 +50,6 @@ public class TimeSheet {
         return JSONText;
     }
 
-    // Guillaume, Pourquoi ne pas éliminer cette méthode et faire les try..catch directement 
-    // dans le FileWriter ? Elle me semble inutile. Ou au moins la transférer dans le FileWriter
-    // car elle n'est pas vraiment à sa place ici.   
-    public static void writeFile(JSONArray jsonArray) {
-        try {
-            FileWriter.writeStringIntoFile(jsonArray.toString(2), FILE_OUT_PATH, FILE_ENCODING);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
     /**
      * @param args the command line arguments
      */
@@ -165,13 +154,15 @@ public class TimeSheet {
         //System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
         
         // Output test GG
-        /*List testReportToJSONArray = new ArrayList();
+        /*
+        List testReportToJSONArray = new ArrayList();
         testReportToJSONArray.add("Bonjour");
         testReportToJSONArray.add("Mon");
         testReportToJSONArray.add("Ami");
         System.out.println("DEBUG JSONParser.ReportToJSONArray: \n"+ JSONParser.reportToJSONArray(testReportToJSONArray).toString(2));
-        writeFile(JSONParser.reportToJSONArray(testReportToJSONArray));
+        FileWriter.writeFile(JSONParser.reportToJSONArray(testReportToJSONArray), FILE_OUT_PATH);
         */
+        
         
      
         
