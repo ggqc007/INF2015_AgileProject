@@ -24,7 +24,7 @@ public class FileWriter {
         IOUtils.write(data, new FileOutputStream(unFile), encoding);
     }
 
-    public static void writeFile(JSONArray jsonArray, String fileOutPath) {
+    public static void writeJSONFile(JSONArray jsonArray, String fileOutPath) {
         try {
             FileWriter.writeStringIntoFile(jsonArray.toString(2), fileOutPath, FILE_ENCODING);
         } catch (IOException e) {

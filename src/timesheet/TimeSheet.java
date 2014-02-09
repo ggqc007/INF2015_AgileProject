@@ -160,7 +160,7 @@ public class TimeSheet {
         testReportToJSONArray.add("Mon");
         testReportToJSONArray.add("Ami");
         System.out.println("DEBUG JSONParser.ReportToJSONArray: \n"+ JSONParser.reportToJSONArray(testReportToJSONArray).toString(2));
-        FileWriter.writeFile(JSONParser.reportToJSONArray(testReportToJSONArray), FILE_OUT_PATH);
+        FileWriter.writeJSONFile(JSONParser.reportToJSONArray(testReportToJSONArray), FILE_OUT_PATH);
         */
         
         
@@ -178,7 +178,7 @@ public class TimeSheet {
         
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
-        FileWriter.writeFile(outputJSON, FILE_OUT_PATH);
+        FileWriter.writeJSONFile(outputJSON, FILE_OUT_PATH);
         
         // AFFICHE LES INFORMATIONS DE DEBUG           
         System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));        
