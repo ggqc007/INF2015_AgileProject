@@ -17,14 +17,11 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import java.io.IOException;
-import java.io.FileNotFoundException;
 
 
 public class TimeSheet {
 
     private static List<Employe> employees;
-    public static final String FILE_ENCODING = "UTF-8";
     public static final String FILE_IN_PATH = "json/timesheet.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
@@ -34,20 +31,6 @@ public class TimeSheet {
             System.out.println("Utilisation: TimeSheet.jar input.json output.json");
             System.exit(1);
         }
-    }
-
-    // Guillaume, Pourquoi ne pas éliminer cette méthode et faire les try..catch directement 
-    // dans le FileReader ? Elle me semble inutile. Ou au moins la transférer dans le FileReader
-    // car elle n'est pas vraiment à sa place ici.
-    public static String readFile() {
-        try {
-            JSONText = FileReader.loadFileIntoString(FILE_IN_PATH, FILE_ENCODING);
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        return JSONText;
     }
 
     /**
@@ -143,15 +126,17 @@ public class TimeSheet {
         // JSONText = readFile(); //TODO: eventuellement faire avec args
         // JSONObject objectFromFile = JSONObject.fromObject(JSONText);
         //
-        JSONObject objectFromFile = JSONObject.fromObject(readFile()); //TODO: eventuellement faire avec args
+        JSONObject objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(FILE_IN_PATH)); //TODO: eventuellement faire avec args
         
         // FIN TEST THOMAS
         
         // Input test GG
-        //JSONText = readFile(); //TODO: eventuellement faire avec args
-        //JSONObject objectFromFile = JSONObject.fromObject(JSONText);
-        //TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
-        //System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
+        /*
+        JSONText = FileReader.readJSONFile(FILE_IN_PATH); //TODO: eventuellement faire avec args
+        JSONObject objectFromFile22 = JSONObject.fromObject(JSONText);
+        TimeSheetData testToTimeSheetData = JSONParser.toTimeSheetData(objectFromFile22);
+        System.out.println("DEBUG JSONParser.toTimeSheetData: " + testToTimeSheetData.getDays());
+        */
         
         // Output test GG
         /*

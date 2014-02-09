@@ -10,7 +10,6 @@
  *   Thomas Robert de Massy
  *
  */
-
 package timesheet;
 
 import java.io.FileInputStream;
@@ -20,9 +19,23 @@ import org.apache.commons.io.IOUtils;
 
 public class FileReader {
 
-    public static String loadFileIntoString(String filePath, String fileEncoding) throws FileNotFoundException, IOException {
+    private static final String FILE_ENCODING = "UTF-8";
+
+    private static String loadFileIntoString(String filePath, String fileEncoding) throws FileNotFoundException, IOException {
         return IOUtils.toString(new FileInputStream(filePath), fileEncoding);
     }
 
-}
+    public static String readJSONFile(String fileInPath) {
+        String JSONText = "";
 
+        try {
+            JSONText = FileReader.loadFileIntoString(fileInPath, FILE_ENCODING);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        return JSONText;
+    }
+
+}
