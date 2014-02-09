@@ -21,16 +21,20 @@ import net.sf.json.JSONObject;
 
 public class TimeSheet {
 
-    private static List<Employe> employees;
     public static final String FILE_IN_PATH = "json/timesheet.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
-
+    private static List<Employe> employes;
+    private static String inputFileName;
+    private static String ouputFileName;
+    
     public static void verifyCmdArgs(String[] args) {
         if (args.length != 2) {
             System.out.println("Utilisation: TimeSheet.jar input.json output.json");
             System.exit(1);
         }
+        inputFileName = args[0];
+        ouputFileName = args[1];        
     }
 
     /**
@@ -38,8 +42,6 @@ public class TimeSheet {
      */
     public static void main(String[] args) {                
         // Vérification des arguments de ligne de commande (TURNED OFF WHILE TESTING!)
-        // String inputFileName = args[0];
-        // String ouputFileName = args[1];
         // verifyCmdArgs(args);
         
         /* QUELQUES IDEES POUR LA STRUCTURE DU MAIN
@@ -119,7 +121,7 @@ public class TimeSheet {
         //employees.add(employe);
         
         // POUR FAIRE LE TOUT EN UNE LIGNE
-        employees = new ArrayList(Arrays.asList(employe));
+        employes = new ArrayList(Arrays.asList(employe));
 
         // ON PEUT AUSSI FAIRE LES 2 LIGNES SUIVANTES EN UNE LIGNE :
         //
