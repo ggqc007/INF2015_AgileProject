@@ -98,7 +98,8 @@ public class Employe {
      * @param timesheet Nouveau timesheet.
      * @return <b>TimeSheetData</b> - Le timesheet modifié, <b>null</b> si erreur. 
      */
-    public TimeSheetData setTimeSheet(int index, TimeSheetData timesheet) {        
+    public TimeSheetData setTimeSheet(int index, TimeSheetData timesheet) {   
+        // TODO: PEUT-ETRE CLONER LE TIMESHEET ET MODIFIER LE ID COMME addTimeSheet
         if (index < 0 || index >= timesheets.size())
             return null;        
         try {                    
@@ -106,8 +107,7 @@ public class Employe {
         } catch (Exception e) {            
             return null;            
         } 
-        return timesheet;
-        
+        return timesheet;        
     }
     
     /**

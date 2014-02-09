@@ -12,19 +12,20 @@
  */
 package timesheet;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
 
 public class TimeSheet {
 
     private static List<Employe> employees;
     public static final String FILE_ENCODING = "UTF-8";
-    public static final String FILE_IN_PATH = "json/timesheet_admin_3.json";
+    public static final String FILE_IN_PATH = "json/timesheet.json";
     public static final String FILE_OUT_PATH = "json/fichier_out.json";
     public static String JSONText;
 
@@ -188,14 +189,83 @@ public class TimeSheet {
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
         writeFile(outputJSON);
         
-        // AFFICHE LES INFORMATIONS DE DEBUG
+        // AFFICHE LES INFORMATIONS DE DEBUG           
+        System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));        
+        System.out.println("\nDEBUG Parsed TimeSheetData : " + employe.getTimeSheet(0));
+
+        // AFFICHE TYPE EMPLOYE
         System.out.print("\nDEBUG Employe ID " + employe.getId());
         if (employe.isAdmin())
-            System.out.println(" is an administrator");
+            System.out.println(" is an ADMIN employe");
         else
-            System.out.println(" is a normal employe");           
-        System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));        
-        System.out.println("\nDEBUG Parsed TimeSheet : " + employe.getTimeSheet(0));
+            System.out.println(" is a NORMAL employe");
+        
+        // INFORMATIONS DEBUG DES TEMPS
+        Day day;        
+        Rules rules;   
+        int hours, minutes;
+        if (employe.isAdmin()) {
+            rules = new RulesAdmins();
+        } else {
+            rules = new RulesEmployes();
+        }        
+        rules.setEmploye(employe);
+        rules.prepData();    
+        
+        System.out.println("\nDEBUG Working hours :");
+
+        // MIN OFFICE DAY HOURS
+        System.out.printf("      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
+
+        // MIN/MAX WEEK HOURS
+        System.out.printf("      Office week min/max  : " + rules.getMinOfficeWeekMinutes() + "m(%.0fh)/", rules.getMinOfficeWeekMinutes()/60.0);
+        System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%.0fh)\n", rules.getMaxOfficeWeekMinutes()/60.0);
+
+        // MAX REMOTE HOURS
+        if (rules.getMaxRemoteWeekMinutes() != 0)
+            System.out.printf("      Remote week max      : " + rules.getMaxRemoteWeekMinutes() + "m(%.0fh)\n", rules.getMaxRemoteWeekMinutes()/60.0);
+        else        
+            System.out.println("      Remote week max      : N/A");               
+        
+        // TOTAL BY WEEK TOTAL/OFFICE/REMOTE
+        hours = rules.getTotalWeekMinutes() / 60;
+        minutes = rules.getTotalWeekMinutes() % 60;
+        System.out.printf("      Total by week        : " + rules.getTotalWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
+        hours = rules.getTotalOfficeWeekMinutes() / 60;
+        minutes = rules.getTotalOfficeWeekMinutes() % 60;        
+        System.out.printf("      Total office by week : " + rules.getTotalOfficeWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);        
+        hours = rules.getTotalRemoteWeekMinutes() / 60;
+        minutes = rules.getTotalRemoteWeekMinutes() % 60;        
+        System.out.printf("      Total remote by week : " + rules.getTotalRemoteWeekMinutes() +"m(%d:%02dh)\n", hours, minutes);        
+        
+        // TOTAL OFFICE BY DAY
+        System.out.printf("      Total office by day  : ");               
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            hours = rules.getTotalOfficeMinutesByDay(day) / 60;
+            minutes = rules.getTotalOfficeMinutesByDay(day) % 60;            
+            System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
+        }
+        day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
+        hours = rules.getTotalOfficeMinutesByDay(day) / 60;
+        minutes = rules.getTotalOfficeMinutesByDay(day) % 60;        
+        System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);
+        
+        // TOTAL REMOTE BY DAY
+        System.out.printf("      Total remote by day  : ");       
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            hours = rules.getTotalRemoteMinutesByDay(day) / 60;
+            minutes = rules.getTotalRemoteMinutesByDay(day) % 60;            
+            System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
+        }
+        day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
+        hours = rules.getTotalRemoteMinutesByDay(day) / 60;
+        minutes = rules.getTotalRemoteMinutesByDay(day) % 60;        
+        System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);
+              
+        
+        // JSON OUTPUT
         System.out.println("\nDEBUG JSON Output : " + outputJSON.toString(2)+"\n");  
         
         // FIN TEST Thomas
