@@ -178,7 +178,7 @@ public class TimeSheet {
         
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
-        writeFile(outputJSON);
+        FileWriter.writeFile(outputJSON, FILE_OUT_PATH);
         
         // AFFICHE LES INFORMATIONS DE DEBUG           
         System.out.println("\nDEBUG JSON Input : " + objectFromFile.toString(2));        
