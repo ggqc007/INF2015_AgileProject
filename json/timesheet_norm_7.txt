@@ -1,0 +1,6 @@
+Employé norm a exactement une minutes de moins que le temps min (37:59h) par semaine. Temps minimum par jours respectés.
+L'employé dans ce timesheet n'a rien fait la fin de semaine. Aucun télétravail
+
+Résultat attendu :
+
+["Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau "]

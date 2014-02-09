@@ -1,0 +1,6 @@
+Employé admin depasse le temps max de exactement une minute le temps max (43:01h) par semaine. Temps minimum par jours respectés.
+L'employé dans ce timesheet n'a rien fait la fin de semaine. Aucun télétravail
+
+Résultat attendu :
+
+["Cet employe a passe plus d'heures physiquement au bureau que la quantite permise."]
