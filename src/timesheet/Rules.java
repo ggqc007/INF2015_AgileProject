@@ -38,29 +38,32 @@ abstract public class Rules {
     abstract public boolean hasValidWeeklyTimeInOffice();
     
     public void prepData(){
-        setTotalOfficeWeekMinutesByEmploye();
-        setTotalRemoteWeekMinutesByEmploye();
+        setTotalOfficeWeekMinutes();
+        setTotalRemoteWeekMinutes();
+        setTotalWeekMinutes(totalOfficeWeekMinutes + totalRemoteWeekMinutes);
     }
     
-    public void setTotalOfficeWeekMinutesByEmploye() {
+    public void setTotalOfficeWeekMinutes() {
         int totalMinutes = 0;
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++) {    
             totalMinutes += getTotalOfficeMinutesByDay(days.get(i));  
         }   
-        totalWeekMinutes = totalMinutes;
+        totalOfficeWeekMinutes = totalMinutes;
     }
  
     protected int getTotalOfficeMinutesByDay(Day day) {
         int totalMinutes = 0;
         List<Task> tasks = day.getTasks();
         for (int i = 0; i < tasks.size(); i++) {
-            totalMinutes += (int)tasks.get(i).getTime();
+            if (!tasks.get(i).isRemoteTask()) {
+                totalMinutes += (int)tasks.get(i).getTime();
+            }
         }
         return totalMinutes;
     }
     
-    public void setTotalRemoteWeekMinutesByEmploye() {
+    public void setTotalRemoteWeekMinutes() {
         int totalMinutes = 0;
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++) {  
