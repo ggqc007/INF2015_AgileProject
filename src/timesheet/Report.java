@@ -62,7 +62,7 @@ public class Report {
         
         if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
-                report.add(ERROR_2);
+                report.add(ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
             }
         }
         
