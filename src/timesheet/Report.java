@@ -18,10 +18,10 @@ import java.util.List;
 public class Report {
 
     // Rules for all
-    private static final String ERROR_1 = "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ";
-    private static final String ERROR_2 = "Cet employe n'a pas travaille le nombre d'heures minimal physiquement au bureau.";
-    private static final String ERROR_3 = "Cet employe a fait plus d'heures de teletravail que la quantite permise";
-    private static final String ERROR_4 = "Cet employe a passe plus d'heures physiquement au bureau que la quantite permise.";
+    private static final String ERROR_1 = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
+    private static final String ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
+    private static final String ERROR_3 = "Cet employé a fait plus d'heures de teletravail que la quantité permise.";
+    private static final String ERROR_4 = "Cet employé a passe plus d'heures physiquement au bureau que la quantité permise.";
  
 
     private Employe employe;
@@ -30,16 +30,6 @@ public class Report {
 
     }
     
-    // AJOUTE PAR THOMAS
-    // Pour éviter d'avoir à faire :
-    //
-    //   Report report = new Report();
-    //   report.setEmploye(employe);      
-    //
-    // Et pouvoir faire le tout en une ligne :
-    //
-    //   Report report = new Report(employe);
-    //
     public Report(Employe employe) {
         
         this();
