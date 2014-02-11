@@ -23,7 +23,7 @@ public class TimeSheet {
     
     public static void verifyCmdArgs(String[] args) {
         if (args.length != 2) {
-            System.out.println("Utilisation: TimeSheet.jar input.json output.json");
+            System.out.println("Utilisation: TimeSheet.jar input.json output.json\n");
             System.exit(1);
         }
         inputFileName = args[0];
@@ -47,7 +47,7 @@ public class TimeSheet {
             verifyCmdArgs(args);
             Employe employe = new Employe();
             employe.initFromFirstTimeSheet(JSONParser.readTimeSheetData(inputFileName));
-            FileWriter.writeJSONFile(JSONParser.reportToJSONArray(Report.generate(employe), ouputFileName)); 
+            FileWriter.writeJSONFile(JSONParser.reportToJSONArray(Report.generate(employe)), ouputFileName); 
         
         */
     }
