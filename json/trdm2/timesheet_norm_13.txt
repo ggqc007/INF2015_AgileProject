@@ -1,0 +1,5 @@
+Employe norm. Exactement 43h de travail au bureau.
+
+Résultat attendu :
+
+DEBUG JSON Output data : []

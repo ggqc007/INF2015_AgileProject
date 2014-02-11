@@ -1,0 +1,7 @@
+Employé admin à fait 10h de télétravail donc respecte le maximum de 10h par semaine! 
+minimum requis par jour de semaine (4 heures) mais sur plusieurs jobs. Fait du télétravail
+et à travaillé au bureau la fin de semaine. 36h au bureau donc minimum de 36h respecté.
+
+Résultat attendu :
+
+DEBUG JSON Output data : []

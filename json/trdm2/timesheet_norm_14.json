@@ -1,0 +1,117 @@
+{
+"numero_employe": 3888,
+"jour1": [
+{
+"projet": 200,
+"minutes": 100
+},
+{
+"projet": 210,
+"minutes": 101
+},
+{
+"projet": 220,
+"minutes": 301
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+],
+"jour2": [
+{
+"projet": 200,
+"minutes": 100
+},
+{
+"projet": 210,
+"minutes": 300
+},
+{
+"projet": 220,
+"minutes": 40
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+],
+"jour3": [
+{
+"projet": 200,
+"minutes": 100
+},
+{
+"projet": 210,
+"minutes": 300
+},
+{
+"projet": 220,
+"minutes": 160
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+],
+"jour4": [
+{
+"projet": 20,
+"minutes": 100
+},
+{
+"projet": 10,
+"minutes": 200
+},
+{
+"projet": 20,
+"minutes": 60
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+],
+"jour5": [
+{
+"projet": 20,
+"minutes": 100
+},
+{
+"projet": 20,
+"minutes": 260
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+],
+"weekend1": [
+{
+"projet": 20,
+"minutes": 220
+},
+{
+"projet": 20,
+"minutes": 60
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+],
+"weekend2": [
+{
+"projet": 20,
+"minutes": 19
+},
+{
+"projet": 20,
+"minutes": 60
+},
+{
+"projet": 1220,
+"minutes": 10
+}
+]
+}

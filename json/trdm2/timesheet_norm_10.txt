@@ -1,0 +1,6 @@
+Employé normal minimum requis par jour de semaine (6 heures) mais sur plusieurs jobs. Fait du télétravail et à travaillé au bureau 
+la fin de semaine. 38h au bureau donc minimum respecté.
+
+Résultat attendu :
+
+DEBUG JSON Output data : []
