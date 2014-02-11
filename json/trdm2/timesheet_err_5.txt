@@ -1,0 +1,13 @@
+2 jours ont le même nom, mais tous les jours sont la. JSONLint dit que le fichier est
+un JSON legal.
+
+Résultat attendu : EST-CE QUE ÇA NE DEVRAIT PAS MARCHER?
+
+Le résultat est :
+
+Exception in thread "main" net.sf.json.JSONException: JSONArray[2] is not a JSONObject.
+	at net.sf.json.JSONArray.getJSONObject(JSONArray.java:1982)
+	at timesheet.JSONParser.taskToADayIfAny(JSONParser.java:51)
+	at timesheet.JSONParser.toTimeSheetData(JSONParser.java:34)
+	at timesheet.TimeSheet.main(TimeSheet.java:37)
+Java Result: 1

@@ -1,0 +1,72 @@
+{
+"numero_employe": 999,
+"jour1": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}
+],
+"jour2": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}
+],
+"jour3": [],
+"jour4": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}
+],
+"jour5": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}
+],
+"jour2": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}
+],
+"weekend1": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}],
+"weekend2": [
+{
+"projet": 900,
+"minutes": 100
+},
+{
+"projet": 901,
+"minutes": 100
+}]
+}

@@ -1,0 +1,5 @@
+Employe norm. Seulement pas assez d'heures le jour3
+
+Résultat attendu :
+
+DEBUG JSON Output data : ["Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)"]

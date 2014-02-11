@@ -1,0 +1,18 @@
+Test des detections des code de tache, jours semaine devrait être détecté BUREAU, fin de
+semaine TELETRAVAIL.
+
+Résultat attendu :
+
+Total office by day  : 0m(0:00h),180m(3:00h),100m(1:40h),0m(0:00h),100m(1:40h),100m(1:40h),0m(0:00h)
+Total remote by day  : 500m(8:20h),0m(0:00h),0m(0:00h),0m(0:00h),0m(0:00h),0m(0:00h),1500m(25:00h)
+      
+DEBUG JSON Output data :
+[
+  "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour1)",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour2)",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour5)",
+  "Cet employé a fait plus d'heures de télétravail que la quantité permise."
+]

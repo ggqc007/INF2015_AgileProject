@@ -1,0 +1,10 @@
+Certains jours on le même nom. Donc il manque 2 jours.
+
+Résultat attendu :
+
+Exception in thread "main" net.sf.json.JSONException: JSONArray[2] is not a JSONObject.
+	at net.sf.json.JSONArray.getJSONObject(JSONArray.java:1982)
+	at timesheet.JSONParser.taskToADayIfAny(JSONParser.java:51)
+	at timesheet.JSONParser.toTimeSheetData(JSONParser.java:34)
+	at timesheet.TimeSheet.main(TimeSheet.java:37)
+Java Result: 1
