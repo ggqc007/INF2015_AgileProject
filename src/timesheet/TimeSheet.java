@@ -40,7 +40,7 @@ public class TimeSheet {
         FileWriter.writeJSONFile(outputJSON, ouputFileName);   
         
         // Déboguage à retirer plus tard
-        debug(employe, objectFromFile, outputJSON);   
+        // debug(employe, objectFromFile, outputJSON);   
         
         /* Nous pourions avec quelques petites modifications reduire le main à ceci :
         
