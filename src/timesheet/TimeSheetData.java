@@ -137,7 +137,9 @@ public class TimeSheetData {
         return employeId;        
     }
     
-    public void setEmployeId(final int id) {        
+    public void setEmployeId(final int id) { 
+        if (id < 0)
+            throw new IllegalArgumentException("Employe id " + id + " is not valid!");
         employeId = id;        
     }
     
