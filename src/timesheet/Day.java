@@ -16,133 +16,88 @@ package timesheet;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Objet Day - Une journée.
- * 
- */
-public class Day {        
-    private static final String WEEKDAY_STR_MATCH = "jour";    
+public class Day {  
+    protected static final String WEEKDAY_STR_MATCH = "jour";
+    
     private String name = "";
     private final List<Task> tasks;
     
-    /**
-     * Constructeur de Day().
-     * 
-     */
     public Day() {        
         tasks = new ArrayList();        
     }
     
-    /**
-     * Constructeur avec paramètre de Day().
-     * 
-     * @param name - <b>String</b> Nom de la journée
-     */
-    public Day(String name) {        
-        this();        
+    public Day(final String name) { 
+        this();
+        if (!isValidDayName(name))
+            throw new IllegalArgumentException("Day name " + name + " is not a valid day name!");         
         this.name = name;        
-    }    
-        
-    /**
-     * Retourne le nombre de tâches dans la journée.
-     * 
-     * @return <b>int</b> - nombre de tâches.
-     */
-    public int getTasksNum() {        
-        return tasks.size();        
+    }                 
+    
+    public void setName(final String name) {
+        if (!isValidDayName(name))
+            throw new IllegalArgumentException("Day name " + name + " is not a valid day name!");         
+        this.name = name;        
+    }
+
+    public static boolean isValidDayName(final String name) {
+        for (String dayName : TimeSheetData.WEEKDAYS_NAMES) {
+            if (dayName.equals(name))
+                return true;         
+        }
+        return false;
     }
     
-    /**
-     * Retourne le nom de la journée.
-     * 
-     * @return <b>String</b> - le nom de la journée.
-     */
     public String getName() {        
         return name;        
-    }
+    } 
     
-    /**
-     * Modifie le nom de la journée.
-     * 
-     * @param name nom de la journée.
-     */
-    public void setName(String name) {        
-        this.name = name;        
-    }
+    public int getTasksNum() {        
+        return tasks.size();        
+    }      
     
-    /**
-     * Ajoute une tâche à la journée.
-     * 
-     * @param id   numéro d'identification du projet.
-     * @param time le temps en minutes passé sur le projet.
-     * @return <b>Task</b> - <b>null</b> si erreur, sinon la tâche ajoutée
-     */
-    public Task addTask(int id, int time) {        
+    public Task addTask(final int id, final int time) {        
         Task task = new Task(id, time);         
         try {            
             tasks.add(task);            
-        } catch (Exception e) {            
-            return null;            
-        }        
+        } catch (Exception e) { throw e; }        
         return task;        
     }    
     
-    /**
-     * Ajoute une tâche à la journée.
-     * 
-     * @param task la tâche à ajoutée
-     * @return <b>Task</b> - <b>null</b> si erreur, sinon la tâche ajoutée
-     */
-    public Task addTask(Task task) {         
+    public Task addTask(final Task task) {         
         try {           
             tasks.add(task);            
-        } catch (Exception e) {            
-            return null;            
-        }        
+        } catch (Exception e) { throw e; }        
         return task;        
     }       
     
-    /**
-     * Retourne la tâche numéro index.
-     * 
-     * @param index position de la tâche.
-     * @return <b>Task</b> - la tâche à la position <b>index</b>. <b>null</b> si non trouvée.
-     */
-    public Task getTask(int index) {            
+    public Task getTask(final int index) {            
         Task task;
         if (index < 0 || index >= tasks.size())
-            return null;                                
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                
         try {            
             task = tasks.get(index);            
-        } catch (Exception e) {            
-            return null;            
-        }             
+        } catch (Exception e) { throw e; }             
         return task;                    
     }
     
-    /**
-     * Retourne la liste des tâches de la journée.
-     * 
-     * @return <b>ArrayList&lt Task&gt</B> - liste des tâches de la journée.
-     */
     public List<Task> getTasks() {            
         return tasks;                    
     }    
     
-    /**
-     * Est-ce que le jour est une jour de semaine?
-     * 
-     * @return <b>boolean</b> - <b>true</b> si le jour est un jour de semaine.
-     */
     public boolean isWorkingDay() {        
         return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
     }
-        
-    /**
-     * Override de la méthode toString() par défaut
-     * 
-     * @return "Day{name: \"" + name + "\", tasks:" + getTasks() + "}"
-     */     
+    
+    public boolean hasValidHours() {
+        int totalHours = 0;
+        for (Task task : getTasks()) {            
+            totalHours += task.getTime();
+            if (totalHours > 24 * 60)
+                return false;            
+        }                
+        return true;        
+    }
+           
     @Override
     public String toString() {        
         return "Day{name: \"" + name + "\", tasks:" + getTasks() + "}";        

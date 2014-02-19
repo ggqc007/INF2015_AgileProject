@@ -13,76 +13,35 @@
 
 package timesheet;
 
-/**
- * Objet Task - Une tâche exécutée sur un projet.
- * 
- */
-public class Task {  
-    private static final int REMOTE_TASK_IDS = 900;        
+public class Task {         
     private int projectId;
     private int time;    
     
-    /**
-     * Constructeur avec paramêtres de Task().
-     * 
-     * @param id - Numéro d'identification du projet.
-     * @param time - Temps en minutes de la tâche.
-     */
-    public Task(int id, int time) {        
+    public Task(final int id, final int time) {        
         projectId = id;
         this.time = time;        
     }
     
-    /**
-     * Retourne le numéro de projet sur lequel la tâche est exécutée.
-     * 
-     * @return <b>int</b> - nombre du minutes passées sur la tâche.
-     */
     public int getProjectId() {        
         return projectId;        
     }
     
-    /**
-     * Retourne la durée de la tâche en minutes.
-     * 
-     * @return <b>int</b> - durée de la tâche en minutes.
-     */
     public int getTime() {        
         return time;        
     }
     
-    /**
-     * Modification du numéro de projet sur lequel la tâche est exécutée.
-     * 
-     * @param id - <b>int</b> nombre de minutes.
-     */
-    public void setProjectId(int id) {        
+    public void setProjectId(final int id) {        
         projectId = id;        
     }
     
-    /**
-     * Modification de la durée de la tâche en minutes.
-     * 
-     * @param time - <b>int</b> - nombre de minutes passées sur le projet.
-     */
-    public void setTime(int time) {        
+    public void setTime(final int time) {        
         this.time = time;        
     }
     
-    /**
-     * Est-ce que la tâche est une tâche sur un projet télétravail?
-     * 
-     * @return - <b>boolean</b> - <b>true</b> si télétravail.
-     */
     public boolean isRemoteTask() {        
-        return (projectId > REMOTE_TASK_IDS);                
+        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR);                
     }
-        
-    /**
-     * Override de la méthode toString() par défaut
-     * 
-     * @return "Task{projectId: " + projectId + ", time: " + time +"}"
-     */
+
     @Override
     public String toString() {        
         return "Task{projectId: " + projectId + ", time: " + time +"}";        

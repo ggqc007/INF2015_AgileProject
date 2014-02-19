@@ -16,149 +16,94 @@ package timesheet;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Objet Employe
- * 
- */
-public class Employe {
-    private static final int ADMIN_IDS = 1000;      
+public class Employe {   
     private int employeId;
     private final List<TimeSheetData> timesheets;    
         
-    /**
-     * Constructeur de Employe.
-     */
     public Employe() {        
         TimeSheetData timesheet = new TimeSheetData();        
         timesheets = new ArrayList();        
         timesheets.add(timesheet);        
     }
     
-    /**
-     * Constructeur avec paramètres de Employe.
-     * 
-     * @param id Numéro d'identification de l'employé.
-     */
-    public Employe(int id) {        
-        this();        
+    public Employe(final int id) {        
+        this();    
+        if (id < 0)
+            throw new IllegalArgumentException("Employe id " + id + " is not valid!");
         employeId = id;        
         timesheets.get(0).setEmployeId(id);        
     }
     
-    /**
-     * Initialise l'employé par sa première timesheet
-     * 
-     * @param timesheet La première timesheet de l'employé
-     */
-    public void initFromFirstTimeSheet(TimeSheetData timesheet) {
+    public void initFromFirstTimeSheet(final TimeSheetData timesheet) {
+        if (timesheet.getEmployeId() < 0)
+            throw new IllegalArgumentException("Employe id in timesheet is not valid!");
         employeId = timesheet.getEmployeId();
         timesheets.set(0, timesheet);        
     }
     
-    /**
-     * Retourne le numéro d'identification de l'employé.
-     * 
-     * @return <b>int</b> - Id de l'employé.
-     */
     public int getId() {        
         return employeId;        
     }
     
-    /**
-     * Modification du numéro d'identification de l'employé.
-     * 
-     * @param id Numéro d'identification de l'employé.
-     */
-    public void setId(int id) {        
+    public void setId(final int id) {  
+        if (id < 0)
+            throw new IllegalArgumentException("Employe id " + id + " is not valid!");        
         employeId = id;                
         for(TimeSheetData timesheet : timesheets)            
             timesheet.setEmployeId(id);                            
     }
     
-    /**
-     * Retourne le timesheet à la position <b>index</b> dans la liste des timesheets de l'employé.
-     * 
-     * @param index Position du timesheet dans l'index.
-     * @return <b>TimeSheetData</b> - Le timesheet demandé de l'employé.
-     */
-    public TimeSheetData getTimeSheet(int index) {        
+    public TimeSheetData getTimeSheet(final int index) {        
         if (index < 0 || index >= timesheets.size())
-            return null;               
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                
         try {                    
             return timesheets.get(index);            
-        } catch (Exception e) {            
-            return null;            
-        }        
+        } catch (Exception e) { throw e; }        
     }
     
-    /**
-     * Modification du timesheet à la position <b>index</b> dans la liste des timesheets de l'employé.
-     * 
-     * @param index Position du timesheet dans l'index.
-     * @param timesheet Nouveau timesheet.
-     * @return <b>TimeSheetData</b> - Le timesheet modifié, <b>null</b> si erreur. 
-     */
-    public TimeSheetData setTimeSheet(int index, TimeSheetData timesheet) {   
+    public TimeSheetData setTimeSheet(final int index, final TimeSheetData timesheet) {   
         // TODO: PEUT-ETRE CLONER LE TIMESHEET ET MODIFIER LE ID COMME addTimeSheet
+        if (timesheet.getEmployeId() < 0)
+            throw new IllegalArgumentException("Employe id in timesheet is not valid!");        
         if (index < 0 || index >= timesheets.size())
-            return null;        
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");        
         try {                    
             timesheets.set(index,timesheet);            
-        } catch (Exception e) {            
-            return null;            
-        } 
+        } catch (Exception e) { throw e; } 
         return timesheet;        
     }
     
-    /**
-     * Retourne la liste des timesheets de l'employé
-     * 
-     * @return <b>List&lt TimeSheetData&gt</b> - Liste des timesheets.
-     */
     public List<TimeSheetData> getTimeSheets() {        
         return timesheets;        
     }
     
-    /**
-     * Ajoute une copie d'un timesheet à la liste des timesheets de l'employé.
-     * 
-     * @param timesheet Timesheet à ajouter à la liste.
-     * @return <b>TimeSheetData</b> - Le timesheet ajouté, <b>null</b> si erreur.
-     */
-    public TimeSheetData addTimeSheet(TimeSheetData timesheet) {        
+    public TimeSheetData addTimeSheet(final TimeSheetData timesheet) { 
+        if (timesheet.getEmployeId() < 0)
+            throw new IllegalArgumentException("Employe id in timesheet is not valid!");        
         TimeSheetData newTimesheet = new TimeSheetData(timesheet);        
         newTimesheet.setEmployeId(employeId);        
         try {            
             timesheets.add(newTimesheet);            
-        } catch (Exception e) {            
-            return null;            
-        }        
+        } catch (Exception e) { throw e; }        
         return newTimesheet;        
     }
     
-    /**
-     * Retourne le nombre de timesheets de l'employé.
-     * 
-     * @return <b>int</b> - Nombre de timesheets.
-     */
     public int getTimeSheetsNum() {        
         return timesheets.size();        
     }      
     
-    /**
-    * Est-ce que l'employé est un administrateur?
-    *
-    * @return <b>boolean</b> - <b>true</b> si administrateur.
-    */
     public boolean isAdmin() {        
-        return (employeId < ADMIN_IDS);        
-    }     
+        return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
+    } 
     
-    /**
-     * Override de la méthode toString() par défaut
-     * 
-     * @return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}"
-     */    
+    public boolean isProdEmploye() {        
+       return ((employeId >= TimeSheet.EMPLOYE_ADMIN_ID_CEILING) && (employeId < TimeSheet.EMPLOYE_PROD_ID_CEILING));           
+    }
+    
+    public boolean isExplEmploye() {        
+       return ( employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
+    }    
+       
     @Override
     public String toString() {        
         return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";        

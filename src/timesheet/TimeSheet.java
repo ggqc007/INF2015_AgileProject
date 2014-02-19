@@ -16,12 +16,15 @@ package timesheet;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-public class TimeSheet {
+public class TimeSheet {    
+    protected static final int REMOTE_TASK_ID_FLOOR = 900;
+    protected static final int EMPLOYE_ADMIN_ID_CEILING = 1000;
+    protected static final int EMPLOYE_PROD_ID_CEILING = 2000;
 
     private static String inputFileName;
     private static String ouputFileName;
     
-    public static void verifyCmdArgs(String[] args) {
+    public static void verifyCmdArgs(final String[] args) {
         if (args.length != 2) {
             System.out.println("Utilisation: TimeSheet.jar input.json output.json\n");
             System.exit(1);
@@ -37,29 +40,11 @@ public class TimeSheet {
         employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
-        FileWriter.writeJSONFile(outputJSON, ouputFileName);   
-        
-        // Déboguage à retirer plus tard
-        // debug(employe, objectFromFile, outputJSON);   
-        
-        /* Nous pourions avec quelques petites modifications reduire le main à ceci :
-        
-            verifyCmdArgs(args);
-            Employe employe = new Employe();
-            employe.initFromFirstTimeSheet(JSONParser.readTimeSheetData(inputFileName));
-            FileWriter.writeJSONFile(JSONParser.reportToJSONArray(Report.generate(employe)), ouputFileName); 
-        
-        */
+        FileWriter.writeJSONFile(outputJSON, ouputFileName);           
+        debug(employe, objectFromFile, outputJSON);   
     }
     
-    /**
-     * Affichage temporaire d'informations de déboguage
-     * 
-     * @param employe
-     * @param objectFromFile
-     * @param outputJSON 
-     */
-    private static void debug (Employe employe, JSONObject objectFromFile, JSONArray outputJSON) { 
+    private static void debug (final Employe employe, final JSONObject objectFromFile, final JSONArray outputJSON) { 
         System.out.println("\nDEBUG JSON Input filename : " + inputFileName);
         System.out.println("\nDEBUG JSON Input data : " + objectFromFile.toString(2));        
         System.out.println("\nDEBUG Parsed TimeSheetData : " + employe.getTimeSheet(0));
@@ -67,8 +52,16 @@ public class TimeSheet {
         System.out.print("\nDEBUG Employe ID " + employe.getId());
         if (employe.isAdmin())
             System.out.println(" is an ADMIN employe");
-        else
-            System.out.println(" is a NORMAL employe");
+        else {
+            if ((employe.isExplEmploye()))
+                System.out.println(" is an EXPLOITATION employe");
+            else {
+                if ((employe.isProdEmploye()))
+                    System.out.println(" is an PRODUCTION employe");
+                else
+                    System.out.println(" is an UNKNOWN employe"); 
+            }
+        }
         
         Day day;        
         Rules rules;   
@@ -82,7 +75,19 @@ public class TimeSheet {
         rules.prepData();    
         
         System.out.println("\nDEBUG Working hours :");
-        System.out.printf("      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
+        System.out.printf("      Valid days           : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (day.hasValidHours())
+                System.out.printf(day.getName() + " ");
+        }
+        System.out.printf("\n      Non Valid days (>24h): ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (!day.hasValidHours())
+                System.out.printf(day.getName() + " ");
+        }                
+        System.out.printf("\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
 
         System.out.printf("      Office week min/max  : " + rules.getMinOfficeWeekMinutes() + "m(%.0fh)/", rules.getMinOfficeWeekMinutes()/60.0);
         System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%.0fh)\n", rules.getMaxOfficeWeekMinutes()/60.0);
