@@ -17,52 +17,29 @@ import java.util.List;
 
 public class Report {
 
-    // Rules for all
-    private static final String ERROR_1 = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
-    private static final String ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
-    private static final String ERROR_3 = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
-    private static final String ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
- 
+    private static final String RULES_ERROR_1 = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
+    private static final String RULES_ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
+    private static final String RULES_ERROR_3 = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
+    private static final String RULES_ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
 
     private Employe employe;
 
     public Report() {
 
     }
-    
-    public Report(Employe employe) {
-        
-        this();
-        
-        this.employe = employe;
 
-    }    
+    public Report(Employe employe) {
+        this();
+        this.employe = employe;
+    }
 
     public List generate(Employe employe) {
         List report = new ArrayList();
-
-        // TODO: Instancier rulesEmployes ou rulesAdmins, valider les enoncés à l'aide des méthodes et générer List avec codes d'erreur et messages
-        Rules rules = getInstanceRules(employe);
-        rules.setEmploye(employe);
-        rules.prepData();
-        
-        if (!rules.hasMinimumWeeklyTimeInOffice()) {
-            report.add(ERROR_1);
-        }
-        
-        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
-            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
-                report.add(ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
-            }
-        }
-        
-        if (!rules.hasValidWeeklyTimeRemote()) {
-            report.add(ERROR_3);
-        }
-        
-        if (!rules.hasValidWeeklyTimeInOffice()) {
-            report.add(ERROR_4);
-        }
+        Rules rules = intitializeRulesForThisEmploye(employe);
+        reportHasNotMinimumWeeklyTimeInOffice(rules, report);
+        reportInvalidDaysWithMinimumDailyTimeInOffice(rules, report);
+        reportHasNotValidWeeklyTimeRemote(rules, report);
+        reportHasNotValidWeeklyTimeInOffice(rules, report);
         return report;
     }
 
@@ -74,13 +51,46 @@ public class Report {
         this.employe = employe;
     }
 
-    private Rules getInstanceRules(Employe employe) {
-        Rules rules;
-        if (employe.isAdmin()) {
-            rules = new RulesAdmins();
-        } else {
-            rules = new RulesEmployes();
-        }
+    private Rules intitializeRulesForThisEmploye(Employe employe) {
+        Rules rules = getRulesForEmployeType(employe);
+        rules.setEmploye(employe);
+        rules.prepData();
         return rules;
+    }
+
+    private Rules getRulesForEmployeType(Employe employe) {
+        Rules properRules;
+        if (employe.isAdmin()) {
+            properRules = new RulesAdmins();
+        } else {
+            properRules = new RulesEmployes();
+        }
+        return properRules;
+    }
+
+    private void reportHasNotMinimumWeeklyTimeInOffice(Rules rules, List report) {
+        if (!rules.hasMinimumWeeklyTimeInOffice()) {
+            report.add(RULES_ERROR_1);
+        }
+    }
+
+    private void reportInvalidDaysWithMinimumDailyTimeInOffice(Rules rules, List report) {
+        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
+                report.add(RULES_ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
+            }
+        }
+    }
+
+    private void reportHasNotValidWeeklyTimeRemote(Rules rules, List report) {
+        if (!rules.hasValidWeeklyTimeRemote()) {
+            report.add(RULES_ERROR_3);
+        }
+    }
+
+    private void reportHasNotValidWeeklyTimeInOffice(Rules rules, List report) {
+        if (!rules.hasValidWeeklyTimeInOffice()) {
+            report.add(RULES_ERROR_4);
+        }
     }
 }
