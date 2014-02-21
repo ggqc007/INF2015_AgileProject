@@ -74,6 +74,13 @@ public class TimeSheet {
         rules.setEmploye(employe);
         rules.prepData();    
         
+        System.out.println("\nDEBUG JSON Validation :");
+        System.out.print("      Weekdays valid : ");
+        if (employe.getTimeSheet(0).hasValidWeek())
+            System.out.println("YES");
+        else
+            System.out.println("NO");
+        
         System.out.println("\nDEBUG Working hours :");
         System.out.printf("      Valid days           : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {

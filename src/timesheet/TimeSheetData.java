@@ -146,6 +146,15 @@ public class TimeSheetData {
     public boolean isAdmin() {        
         return (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING);        
     } 
+    
+    public boolean hasValidWeek() {        
+        for (int i = 0; i < days.size(); i++) {
+            String name = days.get(i).getName();
+            if (name == null || !name.equals(WEEKDAYS_NAMES[i]))
+                return false;  
+        }
+        return true;        
+    }
         
     @Override
     public String toString() {        

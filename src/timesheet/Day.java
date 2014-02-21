@@ -84,8 +84,13 @@ public class Day {
         return tasks;                    
     }    
     
-    public boolean isWorkingDay() {        
-        return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
+    // DEVRAIT FAIRE AUTRE CHOSE A LA PLACE DU TRY CATCH ?
+    public boolean isWorkingDay() {
+        try {
+            return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
+        } catch (Exception e) {            
+            return false;
+        }
     }
     
     public boolean hasValidHours() {
