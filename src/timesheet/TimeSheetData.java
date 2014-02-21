@@ -24,7 +24,7 @@ public class TimeSheetData {
     private final List<Day> days;    
         
     public TimeSheetData() {        
-        days = new ArrayList(DEFAULT_DAYS_NUM);          
+        days = new ArrayList<Day>(DEFAULT_DAYS_NUM);          
         for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
             days.add(new Day());                
     }     
@@ -55,14 +55,15 @@ public class TimeSheetData {
     }     
          
     public Day setDayByName(final Day day) {        
-        for (int i = 0; i < WEEKDAYS_NAMES.length; i++) {            
-            if (WEEKDAYS_NAMES[i].equals(day.getName())) {                
+        if (containsDay(day.getName()))
+            throw new IllegalArgumentException("Day name " + day.getName() + " is already in the timesheet!");             
+        for (int i = 0; i < WEEKDAYS_NAMES.length; i++)            
+            if (WEEKDAYS_NAMES[i].equals(day.getName())) {
                 try {                    
                     days.set(i, day);                    
                 } catch (Exception e) { throw e; }            
                 return day;                
-            }            
-        }          
+            }                              
         throw new IllegalArgumentException("Day name " + day.getName() + " is not a valid day name!");    
     }    
     
@@ -75,7 +76,16 @@ public class TimeSheetData {
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                           
         return days.get(index);                    
     }    
-            
+    
+    public boolean containsDay(final String name) {
+        try {        
+            Day day = getDayByName(name);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }        
+        return true;        
+    }
+        
     public Day getDayByName(final String name) {
         String dayName;             
         for (Day day : days) {            

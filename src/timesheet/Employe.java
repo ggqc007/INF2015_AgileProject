@@ -22,7 +22,7 @@ public class Employe {
         
     public Employe() {        
         TimeSheetData timesheet = new TimeSheetData();        
-        timesheets = new ArrayList();        
+        timesheets = new ArrayList<TimeSheetData>();        
         timesheets.add(timesheet);        
     }
     
