@@ -75,26 +75,26 @@ public class TimeSheet {
         rules.prepData();    
         
         System.out.println("\nDEBUG JSON Validation :");
-        System.out.print("      Weekdays valid : ");
+        System.out.print("\n      Weekdays valid : ");
         if (employe.getTimeSheet(0).hasValidWeek())
-            System.out.println("YES");
+            System.out.println("YES (all 7 days with valid names)");
         else
-            System.out.println("NO");
+            System.out.println("NO (one or more invalid name(s) or not 7 days)");
         
-        System.out.println("\nDEBUG Working hours :");
-        System.out.printf("      Valid days           : ");
+        System.out.println("\nDEBUG Working hours stats :");
+        System.out.printf("\n      Valid days           : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (day.hasValidHours())
                 System.out.printf(day.getName() + " ");
         }
-        System.out.printf("\n      Non Valid days (>24h): ");
+        System.out.printf("\n      Invalid days   (>24h): ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (!day.hasValidHours())
                 System.out.printf(day.getName() + " ");
         }                
-        System.out.printf("\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
+        System.out.printf("\n\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
 
         System.out.printf("      Office week min/max  : " + rules.getMinOfficeWeekMinutes() + "m(%.0fh)/", rules.getMinOfficeWeekMinutes()/60.0);
         System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%.0fh)\n", rules.getMaxOfficeWeekMinutes()/60.0);
@@ -106,7 +106,7 @@ public class TimeSheet {
 
         hours = rules.getTotalWeekMinutes() / 60;
         minutes = rules.getTotalWeekMinutes() % 60;
-        System.out.printf("      Total by week        : " + rules.getTotalWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
+        System.out.printf("\n      Total by week        : " + rules.getTotalWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
         hours = rules.getTotalOfficeWeekMinutes() / 60;
         minutes = rules.getTotalOfficeWeekMinutes() % 60;        
         System.out.printf("      Total office by week : " + rules.getTotalOfficeWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);        
@@ -114,6 +114,18 @@ public class TimeSheet {
         minutes = rules.getTotalRemoteWeekMinutes() % 60;        
         System.out.printf("      Total remote by week : " + rules.getTotalRemoteWeekMinutes() +"m(%d:%02dh)\n", hours, minutes);        
 
+        System.out.printf("\n      Total by day         : ");               
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
+            minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60;            
+            System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh),", hours, minutes);
+        }
+        day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
+        hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
+        minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60;        
+        System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)\n", hours, minutes);        
+        
         System.out.printf("      Total office by day  : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);

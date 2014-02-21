@@ -92,6 +92,7 @@ public class Employe {
         return timesheets.size();        
     }      
     
+    // TODO : Répétition des méthodes de TimeSheetData
     public boolean isAdmin() {        
         return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
     } 
@@ -101,7 +102,7 @@ public class Employe {
     }
     
     public boolean isExplEmploye() {        
-       return ( employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
+       return (employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
     }    
        
     @Override

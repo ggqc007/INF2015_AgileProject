@@ -153,8 +153,17 @@ public class TimeSheetData {
         employeId = id;        
     }
     
+    // TODO : Répétition des méthodes de Employe
     public boolean isAdmin() {        
-        return (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING);        
+        return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
+    } 
+    
+    public boolean isProdEmploye() {        
+       return ((employeId >= TimeSheet.EMPLOYE_ADMIN_ID_CEILING) && (employeId < TimeSheet.EMPLOYE_PROD_ID_CEILING));           
+    }
+    
+    public boolean isExplEmploye() {        
+       return (employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
     } 
     
     public boolean hasValidWeek() {        
