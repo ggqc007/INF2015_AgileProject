@@ -24,7 +24,7 @@ public class TimeSheetData {
     private final List<Day> days;    
         
     public TimeSheetData() {        
-        days = new ArrayList<Day>(DEFAULT_DAYS_NUM);          
+        days = new ArrayList<>(DEFAULT_DAYS_NUM);          
         for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
             days.add(new Day());                
     }     
