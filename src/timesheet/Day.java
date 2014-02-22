@@ -93,37 +93,42 @@ public class Day {
         }
     }    
     
+    // PEUT-ETRE A REFACTORER
     public boolean isValidPublicHoliday() {
-        if (!isWorkingDay() && !isPublicHoliday())
+        if (!isWorkingDay() && !hasPublicHolidayTask())
             return false; 
+        Task pubHolidayTask = new Task(0,0);
         for (Task task : tasks) {
-            if (!task.isRemoteTask() && (task.getProjectId() != TimeSheet.PUBLIC_HOLIDAY_TASK_ID))
+            if (!task.isRemoteTask() && !task.isPublicHolidayTask())
                 return false;
+            if (task.isPublicHolidayTask())
+               pubHolidayTask = task; 
         }           
-        return (tasks.get(0).getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
+        return (pubHolidayTask.getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
     
-    public boolean isPublicHoliday() {        
+    public boolean hasPublicHolidayTask() {        
         for (Task task : tasks) {
-            if (task.getProjectId() == TimeSheet.PUBLIC_HOLIDAY_TASK_ID)
+            if (task.isPublicHolidayTask())
                 return true;
         }
         return false;        
     }
     
-    public boolean isSickLeave() {
+    public boolean isValidSickLeave() {
+        Task task = tasks.get(0);
+        if (!isWorkingDay() || (tasks.size() != 1) || !task.isSickLeaveTask())
+            return false;        
+        return (task.getTime() == TimeSheet.SICK_LEAVE_TIME);
+    }     
+    
+    public boolean hasSickLeaveTask() {
         for (Task task : tasks) {
-            if (task.getProjectId() == TimeSheet.SICK_LEAVE_TASK_ID)
+            if (task.isSickLeaveTask())
                 return true;
         }          
         return false;
-    }
-    
-    public boolean isValidSickLeave() {
-        if (!isWorkingDay() || (tasks.size() != 1) || (tasks.get(0).getProjectId() != TimeSheet.SICK_LEAVE_TASK_ID))
-            return false;        
-        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);
-    }    
+    }      
     
     public boolean hasValidHours() {
         int totalHours = 0;

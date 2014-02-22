@@ -118,25 +118,25 @@ public class TimeSheet {
         System.out.printf("\n      Valid pub holiday    : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.isPublicHoliday() && day.isValidPublicHoliday())
+            if (day.hasPublicHolidayTask() && day.isValidPublicHoliday())
                 System.out.printf(day.getName() + " ");
         }          
         System.out.printf("\n      Invalid pub holiday  : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.isPublicHoliday() && !day.isValidPublicHoliday())
+            if (day.hasPublicHolidayTask() && !day.isValidPublicHoliday())
                 System.out.printf(day.getName() + " ");
         }  
         System.out.printf("\n      Valid sick leave     : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.isSickLeave() && day.isValidSickLeave())
+            if (day.hasSickLeaveTask() && day.isValidSickLeave())
                 System.out.printf(day.getName() + " ");
         }  
         System.out.printf("\n      Invalid sick leave   : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.isSickLeave() && !day.isValidSickLeave())
+            if (day.hasSickLeaveTask() && !day.isValidSickLeave())
                 System.out.printf(day.getName() + " ");
         } 
         

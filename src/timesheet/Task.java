@@ -41,6 +41,14 @@ public class Task {
     public boolean isRemoteTask() {        
         return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR);                
     }
+    
+    public boolean isPublicHolidayTask() {        
+        return (projectId == TimeSheet.PUBLIC_HOLIDAY_TASK_ID);        
+    }
+    
+    public boolean isSickLeaveTask() {      
+        return (projectId == TimeSheet.SICK_LEAVE_TASK_ID); 
+    }    
 
     @Override
     public String toString() {        
