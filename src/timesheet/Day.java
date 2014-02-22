@@ -91,6 +91,16 @@ public class Day {
         } catch (Exception e) {            
             return false;
         }
+    }    
+    
+    public boolean isValidPublicHoliday() {
+        if (!isWorkingDay() && !isPublicHoliday())
+            return false; 
+        for (Task task : tasks) {
+            if (!task.isRemoteTask() && (task.getProjectId() != TimeSheet.PUBLIC_HOLIDAY_TASK_ID))
+                return false;
+        }           
+        return (tasks.get(0).getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
     
     public boolean isPublicHoliday() {        
@@ -99,12 +109,6 @@ public class Day {
                 return true;
         }
         return false;        
-    }
-    
-    public boolean isValidPublicHoliday() {
-        if (!isWorkingDay() || (tasks.size() != 1) || (tasks.get(0).getProjectId() != TimeSheet.PUBLIC_HOLIDAY_TASK_ID))
-            return false;             
-        return (tasks.get(0).getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
     
     public boolean isSickLeave() {
