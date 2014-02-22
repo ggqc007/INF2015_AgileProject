@@ -18,6 +18,10 @@ import net.sf.json.JSONObject;
 
 public class TimeSheet {    
     protected static final int REMOTE_TASK_ID_FLOOR = 900;
+    protected static final int SICK_LEAVE_TASK_ID = 999;
+    protected static final int SICK_LEAVE_TIME = 420;    
+    protected static final int PUBLIC_HOLIDAY_TASK_ID = 998;    
+    protected static final int PUBLIC_HOLIDAY_TIME = 420;    
     protected static final int EMPLOYE_ADMIN_ID_CEILING = 1000;
     protected static final int EMPLOYE_PROD_ID_CEILING = 2000;
 
@@ -110,7 +114,32 @@ public class TimeSheet {
             day = employe.getTimeSheet(0).getDay(i);
             if (!day.hasValidHours())
                 System.out.printf(day.getName() + " ");
-        }                
+        }  
+        System.out.printf("\n      Valid pub holiday    : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (day.isPublicHoliday() && day.isValidPublicHoliday())
+                System.out.printf(day.getName() + " ");
+        }          
+        System.out.printf("\n      Invalid pub holiday  : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (day.isPublicHoliday() && !day.isValidPublicHoliday())
+                System.out.printf(day.getName() + " ");
+        }  
+        System.out.printf("\n      Valid sick leave     : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (day.isSickLeave() && day.isValidSickLeave())
+                System.out.printf(day.getName() + " ");
+        }  
+        System.out.printf("\n      Invalid sick leave   : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (day.isSickLeave() && !day.isValidSickLeave())
+                System.out.printf(day.getName() + " ");
+        } 
+        
         System.out.printf("\n\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
 
         System.out.printf("      Office week min/max  : " + rules.getMinOfficeWeekMinutes() + "m(%.0fh)/", rules.getMinOfficeWeekMinutes()/60.0);

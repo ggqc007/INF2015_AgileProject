@@ -93,6 +93,38 @@ public class Day {
         }
     }
     
+    public boolean isPublicHoliday() {        
+        for (Task task : tasks) {
+            if (task.getProjectId() == TimeSheet.PUBLIC_HOLIDAY_TASK_ID)
+                return true;
+        }
+        return false;        
+    }
+    
+    public boolean isValidPublicHoliday() {
+        if ((tasks.size() != 1) && (tasks.get(0).getProjectId() != TimeSheet.PUBLIC_HOLIDAY_TASK_ID))
+            return false;     
+        if (!isWorkingDay())
+            return false;          
+        return (tasks.get(0).getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
+    }
+    
+    public boolean isSickLeave() {
+        for (Task task : tasks) {
+            if (task.getProjectId() == TimeSheet.SICK_LEAVE_TASK_ID)
+                return true;
+        }          
+        return false;
+    }
+    
+    public boolean isValidSickLeave() {
+        if ((tasks.size() != 1) && (tasks.get(0).getProjectId() != TimeSheet.SICK_LEAVE_TASK_ID))
+            return false; 
+        if (!isWorkingDay())
+            return false;        
+        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);
+    }    
+    
     public boolean hasValidHours() {
         int totalHours = 0;
         for (Task task : getTasks()) {            
