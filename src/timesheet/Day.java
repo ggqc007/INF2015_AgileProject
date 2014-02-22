@@ -116,10 +116,9 @@ public class Day {
     }
     
     public boolean isValidSickLeave() {
-        Task task = tasks.get(0);
-        if (!isWorkingDay() || (tasks.size() != 1) || !task.isSickLeaveTask())
+        if (!isWorkingDay() || (tasks.size() != 1) || !tasks.get(0).isSickLeaveTask())
             return false;        
-        return (task.getTime() == TimeSheet.SICK_LEAVE_TIME);
+        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);
     }     
     
     public boolean hasSickLeaveTask() {
