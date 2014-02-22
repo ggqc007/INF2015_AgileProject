@@ -33,16 +33,28 @@ public class TimeSheet {
         outputFileName = args[1];        
     }
     
+    private static TimeSheetData tryJSONParserToTimeSheetData(JSONObject objectFromFile) {
+        TimeSheetData newTimeSheetData = null;
+        try {
+            newTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
+        } catch (Exception e) {
+            System.out.println("Erreur dans le traitement du fichier JSON, Fin du programme. : ("+ e +")");
+            exitWithEmptyJSONArrayFile();
+        }
+        return newTimeSheetData;
+    }
+    
     private static void exitWithEmptyJSONArrayFile() {
         JSONArray fileOutput = new JSONArray();
         FileWriter.writeJSONFile(fileOutput, outputFileName);
+        System.exit(1);
     }
 
     public static void main(String[] args) {                
         verifyCmdArgs(args);                
         Employe employe = new Employe();
         JSONObject objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
-        employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));        
+        employe.initFromFirstTimeSheet(tryJSONParserToTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
         FileWriter.writeJSONFile(outputJSON, outputFileName);           

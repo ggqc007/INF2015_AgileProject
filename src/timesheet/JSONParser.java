@@ -22,7 +22,7 @@ public class JSONParser {
     private static final String NOM_CHAMP_PROJET = "projet";
     private static final String NOM_CHAMP_MINUTES = "minutes";
 
-    public static TimeSheetData toTimeSheetData(JSONObject jsonObjectFromFile) {
+    public static TimeSheetData toTimeSheetData(JSONObject jsonObjectFromFile) throws Exception {
         TimeSheetData timeSheetData = new TimeSheetData();
         employeIdToTimeSheetData(timeSheetData, jsonObjectFromFile);
         createDaysWithTasksInTimeSheetData(timeSheetData, jsonObjectFromFile);
