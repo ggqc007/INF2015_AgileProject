@@ -95,7 +95,7 @@ public class Day {
     
     // PEUT-ETRE A REFACTORER
     public boolean isValidPublicHoliday() {
-        if (!isWorkingDay() && !hasPublicHolidayTask())
+        if (!isWorkingDay() || !hasPublicHolidayTask())
             return false; 
         Task pubHolidayTask = new Task();
         for (Task task : tasks) {
