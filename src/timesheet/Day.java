@@ -97,7 +97,7 @@ public class Day {
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() && !hasPublicHolidayTask())
             return false; 
-        Task pubHolidayTask = new Task(0,0);
+        Task pubHolidayTask = new Task();
         for (Task task : tasks) {
             if (!task.isRemoteTask() && !task.isPublicHolidayTask())
                 return false;

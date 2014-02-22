@@ -17,6 +17,11 @@ public class Task {
     private int projectId;
     private int time;    
     
+    public Task() {
+        projectId = 0;
+        time = 0;                
+    }
+    
     public Task(final int id, final int time) {        
         projectId = id;
         this.time = time;        
