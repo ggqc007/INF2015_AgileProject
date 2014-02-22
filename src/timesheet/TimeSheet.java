@@ -22,7 +22,7 @@ public class TimeSheet {
     protected static final int EMPLOYE_PROD_ID_CEILING = 2000;
 
     private static String inputFileName;
-    private static String ouputFileName;
+    private static String outputFileName;
     
     public static void verifyCmdArgs(final String[] args) {
         if (args.length != 2) {
@@ -30,7 +30,12 @@ public class TimeSheet {
             System.exit(1);
         }
         inputFileName = args[0];
-        ouputFileName = args[1];        
+        outputFileName = args[1];        
+    }
+    
+    private static void exitWithEmptyJSONArrayFile() {
+        JSONArray fileOutput = new JSONArray();
+        FileWriter.writeJSONFile(fileOutput, outputFileName);
     }
 
     public static void main(String[] args) {                
@@ -40,7 +45,7 @@ public class TimeSheet {
         employe.initFromFirstTimeSheet(JSONParser.toTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
-        FileWriter.writeJSONFile(outputJSON, ouputFileName);           
+        FileWriter.writeJSONFile(outputJSON, outputFileName);           
         debug(employe, objectFromFile, outputJSON);   
     }
     
@@ -151,6 +156,6 @@ public class TimeSheet {
         System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);
 
         System.out.println("\nDEBUG JSON Output data : " + outputJSON.toString(2)); 
-        System.out.println("\nDEBUG JSON Data succesfully writen to : " + ouputFileName +"\n");                  
+        System.out.println("\nDEBUG JSON Data succesfully writen to : " + outputFileName +"\n");                  
     }
 }
