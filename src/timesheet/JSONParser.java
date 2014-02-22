@@ -26,6 +26,9 @@ public class JSONParser {
         TimeSheetData timeSheetData = new TimeSheetData();
         employeIdToTimeSheetData(timeSheetData, jsonObjectFromFile);
         createDaysWithTasksInTimeSheetData(timeSheetData, jsonObjectFromFile);
+        if (!timeSheetData.hasValidWeek()) {
+            throw new Exception("Semaine invalide! Ne comporte pas 7 jours...");
+        }
         return timeSheetData;
     }
 
