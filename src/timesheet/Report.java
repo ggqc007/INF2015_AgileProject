@@ -52,20 +52,8 @@ public class Report {
     }
 
     private Rules intitializeRulesForThisEmploye(Employe employe) {
-        Rules rules = getRulesForEmployeType(employe);
-        rules.setEmploye(employe);
-        rules.prepData();
-        return rules;
-    }
-
-    private Rules getRulesForEmployeType(Employe employe) {
-        Rules properRules;
-        if (employe.isAdmin()) {
-            properRules = new RulesAdmins();
-        } else {
-            properRules = new RulesEmployes();
-        }
-        return properRules;
+        RulesFactory rulesFactory = new RulesFactory();
+        return rulesFactory.makeRules(employe);
     }
 
     private void reportHasNotMinimumWeeklyTimeInOffice(Rules rules, List report) {
