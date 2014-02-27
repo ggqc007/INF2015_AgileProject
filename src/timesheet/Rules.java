@@ -25,7 +25,7 @@ abstract public class Rules {
     protected int totalWeekMinutes = 0;
     protected int totalOfficeWeekMinutes = 0;
     protected int totalRemoteWeekMinutes = 0;
-    protected int totalHolidayWeekMinutes;
+    protected int totalHolidayWeekMinutes = 0;
     protected Employe employe;
     
     public Rules() {
@@ -81,7 +81,11 @@ abstract public class Rules {
         totalWeekMinutes += minutes;
         if (task.isRemoteTask()) 
             totalRemoteWeekMinutes += minutes;
-        else 
+        else if (task.isPublicHolidayTask())
+            totalHolidayWeekMinutes+= minutes;
+        else if (task.isSickLeaveTask())
+            totalHolidayWeekMinutes+= minutes;
+        else
             totalOfficeWeekMinutes += minutes;        
     }
 
