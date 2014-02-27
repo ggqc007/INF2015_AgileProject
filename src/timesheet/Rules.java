@@ -20,14 +20,17 @@ abstract public class Rules {
     protected int maxOfficeWeekMinutes;
     protected int minOfficeWeekMinutes;
     protected int maxRemoteWeekMinutes;
+    protected int maxHolidayWeekMinutes;
     protected int minOfficeDailyMinutes;
     protected int totalWeekMinutes = 0;
     protected int totalOfficeWeekMinutes = 0;
     protected int totalRemoteWeekMinutes = 0;
+    protected int totalHolidayWeekMinutes;
     protected Employe employe;
     
     public Rules() {
         maxOfficeWeekMinutes = 43*60;
+        maxHolidayWeekMinutes = 420;
     }
     
     abstract public boolean hasValidWeeklyTimeRemote();
