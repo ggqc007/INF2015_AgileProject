@@ -101,8 +101,8 @@ public class Day {
         for (Task task : tasks) {
             if (!task.isRemoteTask() && !task.isPublicHolidayTask())
                 return false;
-            if (task.isPublicHolidayTask())
-               pubHolidayTask = task; 
+            else if (task.isPublicHolidayTask())
+                pubHolidayTask = task; 
         }           
         return (pubHolidayTask.getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
