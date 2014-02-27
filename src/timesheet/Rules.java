@@ -37,6 +37,8 @@ abstract public class Rules {
     
     abstract public boolean hasValidWeeklyTimeInOffice();
     
+    
+    
     public void prepData(){
         setTotalOfficeWeekMinutes();
         setTotalRemoteWeekMinutes();

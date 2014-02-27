@@ -18,6 +18,9 @@ import java.util.ArrayList;
 public class RulesProduction  extends Rules {
 
     public RulesProduction() {
+        minOfficeWeekMinutes = 38*60;
+        minOfficeDailyMinutes = 6*60; 
+        
     }
 
     @Override
@@ -27,8 +30,18 @@ public class RulesProduction  extends Rules {
     
     @Override
     public List<Day> getInvalidDaysWithMinimumDailyTimeInOffice(){
-        List<Day> days = employe.getTimeSheet(0).getDays();
-        return days; 
+       // Les employés normaux doivent faire un minimum de 6 heures au bureau pour les jours
+        // ouvrables (lundi au vendredi). 
+        List<Day> invalidDays = new ArrayList(); 
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++) {    
+            if (days.get(i).isWorkingDay() == true) {
+                if (getTotalOfficeMinutesByDay(days.get(i)) < minOfficeDailyMinutes) {
+                    invalidDays.add(days.get(i));
+                }
+            }
+        }
+        return invalidDays;
     }
     
     @Override
@@ -38,6 +51,8 @@ public class RulesProduction  extends Rules {
     
     @Override
     public boolean hasValidWeeklyTimeInOffice() { 
-         return true;
+         // Aucun employé n'a le droit de passer plus de 43 heures au bureau.
+        int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;
+        return (officeWeekMinutes <= maxOfficeWeekMinutes);
     }
 }
