@@ -28,13 +28,13 @@ public class TimeSheetData {
         for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
             days.add(new Day());                
     }     
-    
+    /*
     public TimeSheetData(final TimeSheetData timesheet) {
         if (timesheet.getEmployeId() < 0)
             throw new IllegalArgumentException("Employe id in timesheet is not valid!");  
         this.employeId = timesheet.getEmployeId();        
         this.days = timesheet.getDays();        
-    }   
+    }   */
     
     public Day addDay(final String name) {        
         Day day = new Day();                  

@@ -52,6 +52,7 @@ public class Employe {
         for(TimeSheetData timesheet : timesheets)            
             timesheet.setEmployeId(id);                            
     }
+   
     
     public TimeSheetData getTimeSheet(final int index) {        
         if (index < 0 || index >= timesheets.size())
@@ -60,7 +61,7 @@ public class Employe {
             return timesheets.get(index);            
         } catch (Exception e) { throw e; }        
     }
-    
+    /*
     public TimeSheetData setTimeSheet(final int index, final TimeSheetData timesheet) {   
         // TODO: PEUT-ETRE CLONER LE TIMESHEET ET MODIFIER LE ID COMME addTimeSheet
         if (timesheet.getEmployeId() < 0)
@@ -71,12 +72,13 @@ public class Employe {
             timesheets.set(index,timesheet);            
         } catch (Exception e) { throw e; } 
         return timesheet;        
-    }
+    }*/
     
     public List<TimeSheetData> getTimeSheets() {        
         return timesheets;        
     }
     
+    /*
     public TimeSheetData addTimeSheet(final TimeSheetData timesheet) { 
         if (timesheet.getEmployeId() < 0)
             throw new IllegalArgumentException("Employe id in timesheet is not valid!");        
@@ -90,7 +92,7 @@ public class Employe {
     
     public int getTimeSheetsNum() {        
         return timesheets.size();        
-    }      
+    }*/      
     
     // TODO : Répétition des méthodes de TimeSheetData
     public boolean isAdmin() {        
