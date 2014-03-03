@@ -26,7 +26,7 @@ public class Employe {
         timesheets.add(timesheet);        
     }
     
-    public Employe(final int id) {        
+    public Employe(int id) {        
         this();    
         if (id < 0)
             throw new IllegalArgumentException("Employe id " + id + " is not valid!");
@@ -34,7 +34,7 @@ public class Employe {
         timesheets.get(0).setEmployeId(id);        
     }
     
-    public void initFromFirstTimeSheet(final TimeSheetData timesheet) {
+    public void initFromFirstTimeSheet(TimeSheetData timesheet) {
         if (timesheet.getEmployeId() < 0)
             throw new IllegalArgumentException("Employe id in timesheet is not valid!");
         employeId = timesheet.getEmployeId();
@@ -45,7 +45,7 @@ public class Employe {
         return employeId;        
     }
     
-    public void setId(final int id) {  
+    public void setId(int id) {  
         if (id < 0)
             throw new IllegalArgumentException("Employe id " + id + " is not valid!");        
         employeId = id;                
@@ -54,45 +54,17 @@ public class Employe {
     }
    
     
-    public TimeSheetData getTimeSheet(final int index) {        
+    public TimeSheetData getTimeSheet(int index) {        
         if (index < 0 || index >= timesheets.size())
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                
         try {                    
             return timesheets.get(index);            
         } catch (Exception e) { throw e; }        
     }
-    /*
-    public TimeSheetData setTimeSheet(final int index, final TimeSheetData timesheet) {   
-        // TODO: PEUT-ETRE CLONER LE TIMESHEET ET MODIFIER LE ID COMME addTimeSheet
-        if (timesheet.getEmployeId() < 0)
-            throw new IllegalArgumentException("Employe id in timesheet is not valid!");        
-        if (index < 0 || index >= timesheets.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");        
-        try {                    
-            timesheets.set(index,timesheet);            
-        } catch (Exception e) { throw e; } 
-        return timesheet;        
-    }*/
     
     public List<TimeSheetData> getTimeSheets() {        
         return timesheets;        
-    }
-    
-    /*
-    public TimeSheetData addTimeSheet(final TimeSheetData timesheet) { 
-        if (timesheet.getEmployeId() < 0)
-            throw new IllegalArgumentException("Employe id in timesheet is not valid!");        
-        TimeSheetData newTimesheet = new TimeSheetData(timesheet);        
-        newTimesheet.setEmployeId(employeId);        
-        try {            
-            timesheets.add(newTimesheet);            
-        } catch (Exception e) { throw e; }        
-        return newTimesheet;        
-    }
-    
-    public int getTimeSheetsNum() {        
-        return timesheets.size();        
-    }*/      
+    }     
     
     // TODO : Répétition des méthodes de TimeSheetData
     public boolean isAdmin() {        

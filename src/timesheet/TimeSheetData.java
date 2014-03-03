@@ -28,15 +28,8 @@ public class TimeSheetData {
         for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
             days.add(new Day());                
     }     
-    /*
-    public TimeSheetData(final TimeSheetData timesheet) {
-        if (timesheet.getEmployeId() < 0)
-            throw new IllegalArgumentException("Employe id in timesheet is not valid!");  
-        this.employeId = timesheet.getEmployeId();        
-        this.days = timesheet.getDays();        
-    }   */
     
-    public Day addDay(final String name) {        
+    public Day addDay(String name) {        
         Day day = new Day();                  
         try {                    
             day.setName(name);
@@ -45,7 +38,7 @@ public class TimeSheetData {
         return day;        
     }
     
-    public Day setDay(final int index, final Day day) {        
+    public Day setDay(int index, Day day) {        
         if (index < 0 || index >= days.size())
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                     
         try {            
@@ -54,7 +47,7 @@ public class TimeSheetData {
         return day;        
     }     
          
-    public Day setDayByName(final Day day) {        
+    public Day setDayByName(Day day) {        
         if (containsDay(day.getName()))
             throw new IllegalArgumentException("Day name " + day.getName() + " is already in the timesheet!");             
         for (int i = 0; i < WEEKDAYS_NAMES.length; i++)            
@@ -71,13 +64,13 @@ public class TimeSheetData {
         return days.size();        
     }    
            
-    public Day getDay(final int index) {           
+    public Day getDay(int index) {           
         if (index < 0 || index >= days.size())
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                           
         return days.get(index);                    
     }    
     
-    public boolean containsDay(final String name) {
+    public boolean containsDay(String name) {
         try {        
             Day day = getDayByName(name);
         } catch (IllegalArgumentException e) {
@@ -86,7 +79,7 @@ public class TimeSheetData {
         return true;        
     }
         
-    public Day getDayByName(final String name) {
+    public Day getDayByName(String name) {
         String dayName;             
         for (Day day : days) {            
             dayName = day.getName();                        
@@ -100,7 +93,7 @@ public class TimeSheetData {
         return days;                    
     }       
        
-    public Task addTaskToDay(final Task task, final int dayIndex) {     
+    public Task addTaskToDay(Task task, int dayIndex) {     
         // TODO : J'ai ajouté newTask car j'ai rajouté le final pour task
         //        à repenser à ça quand je vais mettre des throw exceptions
         Task newTask;
@@ -112,14 +105,14 @@ public class TimeSheetData {
         return newTask;        
     }    
 
-    public Task addTaskToDayByName(final Task task, final String dayName) {        
+    public Task addTaskToDayByName(Task task, String dayName) {        
         Day day = getDayByName(dayName);        
         if (day != null)           
             return day.addTask(task);                            
         throw new NullPointerException("Task is null");                 
     }    
 
-    public Task getTaskFromDay(final int taskIndex, final int dayIndex) {  
+    public Task getTaskFromDay(int taskIndex, int dayIndex) {  
         Task task;
         if (dayIndex < 0 || dayIndex >= days.size())
             throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                
@@ -131,7 +124,7 @@ public class TimeSheetData {
         return task;                
     }    
 
-    public Task getTaskFromDayByName(final int taskIndex, final String dayName) { 
+    public Task getTaskFromDayByName(int taskIndex, String dayName) { 
         if (taskIndex < 0)
             return null;                
         Day day = getDayByName(dayName);        
@@ -152,19 +145,6 @@ public class TimeSheetData {
             throw new IllegalArgumentException("Employe id " + id + " is not valid!");
         employeId = id;        
     }
-    
-    // TODO : Répétition des méthodes de Employe
-    public boolean isAdmin() {        
-        return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
-    } 
-    
-    public boolean isProdEmploye() {        
-       return ((employeId >= TimeSheet.EMPLOYE_ADMIN_ID_CEILING) && (employeId < TimeSheet.EMPLOYE_PROD_ID_CEILING));           
-    }
-    
-    public boolean isExplEmploye() {        
-       return (employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
-    } 
     
     public boolean hasValidWeek() {        
         for (int i = 0; i < days.size(); i++) {

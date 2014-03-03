@@ -25,7 +25,7 @@ Les règles pour ce projet sont basées sur le "[Code Conventions For The Java P
 
 Voici un exemple du code attendu:
     
-    public Day setDayByName(final Day day) {  
+    public Day setDayByName(Day day) {  
         if (containsDay(day.getName()))
             throw new IllegalArgumentException("Day name " + day.getName() + " is already in the timesheet!"); 
         for (int i = 0; i < WEEKDAYS_NAMES.length; i++)

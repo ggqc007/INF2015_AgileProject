@@ -26,20 +26,20 @@ public class Day {
         tasks = new ArrayList<>();        
     }
     
-    public Day(final String name) { 
+    public Day(String name) { 
         this();
         if (!isValidDayName(name))
             throw new IllegalArgumentException("Day name " + name + " is not a valid day name!");         
         this.name = name;        
     }                 
     
-    public void setName(final String name) {
+    public void setName(String name) {
         if (!isValidDayName(name))
             throw new IllegalArgumentException("Day name " + name + " is not a valid day name!");         
         this.name = name;        
     }
 
-    public static boolean isValidDayName(final String name) {
+    public static boolean isValidDayName(String name) {
         for (String dayName : TimeSheetData.WEEKDAYS_NAMES) {
             if (dayName.equals(name))
                 return true;         
@@ -55,7 +55,7 @@ public class Day {
         return tasks.size();        
     }      
     
-    public Task addTask(final int id, final int time) {        
+    public Task addTask(int id, int time) {        
         Task task = new Task(id, time);         
         try {            
             tasks.add(task);            
@@ -63,14 +63,14 @@ public class Day {
         return task;        
     }    
     
-    public Task addTask(final Task task) {         
+    public Task addTask(Task task) {         
         try {           
             tasks.add(task);            
         } catch (Exception e) { throw e; }        
         return task;        
     }       
     
-    public Task getTask(final int index) {            
+    public Task getTask(int index) {            
         Task task;
         if (index < 0 || index >= tasks.size())
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                

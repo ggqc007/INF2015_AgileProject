@@ -22,7 +22,7 @@ public class Task {
         time = 0;                
     }
     
-    public Task(final int id, final int time) {        
+    public Task(int id, int time) {        
         projectId = id;
         this.time = time;        
     }
@@ -35,11 +35,11 @@ public class Task {
         return time;        
     }
     
-    public void setProjectId(final int id) {        
+    public void setProjectId(int id) {        
         projectId = id;        
     }
     
-    public void setTime(final int time) {        
+    public void setTime(int time) {        
         this.time = time;        
     }
     
