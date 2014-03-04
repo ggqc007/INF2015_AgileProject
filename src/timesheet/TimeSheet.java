@@ -230,7 +230,7 @@ public class TimeSheet {
             if (days_ph.contains(day) || days_sl.contains(day))            
                 System.out.printf("[" + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)],", hours, minutes);
             else
-                System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh),", hours, minutes);                
+                System.out.printf(" " + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh),", hours, minutes);                
         }
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
@@ -240,7 +240,7 @@ public class TimeSheet {
         if (days_ph.contains(day) || days_sl.contains(day))
             System.out.printf("[" + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)]\n", hours, minutes);        
         else
-            System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)\n", hours, minutes); 
+            System.out.printf(" " + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)\n", hours, minutes); 
         
         System.out.printf("      Total office by day  : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
@@ -249,9 +249,9 @@ public class TimeSheet {
             minutes = rules.getTotalOfficeMinutesByDay(day) % 60;
             //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
             if (days_ph.contains(day) || days_sl.contains(day))
-                System.out.printf("[" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);   
+                System.out.printf(" [" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);   
             else
-                System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
+                System.out.printf(" " + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
         }
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         hours = rules.getTotalOfficeMinutesByDay(day) / 60;
@@ -259,9 +259,9 @@ public class TimeSheet {
         
         //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
         if (days_ph.contains(day) || days_sl.contains(day))
-            System.out.printf("[" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
+            System.out.printf(" [" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
         else
-            System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
+            System.out.printf(" " + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
 
         System.out.printf("      Total remote by day  : ");       
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
@@ -270,18 +270,18 @@ public class TimeSheet {
             minutes = rules.getTotalRemoteMinutesByDay(day) % 60;    
             //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
             if (days_ph.contains(day) || days_sl.contains(day))
-                System.out.printf("[" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);
+                System.out.printf(" [" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);
             else
-                System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);                
+                System.out.printf(" " + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);                
         }
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         hours = rules.getTotalRemoteMinutesByDay(day) / 60;
         minutes = rules.getTotalRemoteMinutesByDay(day) % 60;   
         //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))        
         if (days_ph.contains(day) || days_sl.contains(day))    
-            System.out.printf("[" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
+            System.out.printf(" [" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
         else
-            System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
+            System.out.printf(" " + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
 
         System.out.println("\nDEBUG JSON Output data : " + outputJSON.toString(2)); 
         System.out.println("\nDEBUG JSON Data succesfully writen to : " + outputFileName +"\n");                  
