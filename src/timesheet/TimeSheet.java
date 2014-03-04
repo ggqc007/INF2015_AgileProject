@@ -172,6 +172,15 @@ public class TimeSheet {
         minutes = rules.getTotalRemoteWeekMinutes() % 60;        
         System.out.printf("      Total remote by week : " + rules.getTotalRemoteWeekMinutes() +"m(%d:%02dh)\n", hours, minutes);        
 
+        System.out.printf("\n      Day name             : ");               
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            System.out.printf(day.getName() + ",");
+        }   
+        
+        day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
+        System.out.printf(day.getName());
+            
         System.out.printf("\n      Day type             : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
