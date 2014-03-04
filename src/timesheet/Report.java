@@ -20,8 +20,8 @@ public class Report {
     private static final String RULES_ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
     private static final String RULES_ERROR_3 = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
     private static final String RULES_ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
-    private static final String RULES_ERROR_5 = "Cet employé a des journées invalides de congés de maladie.";
-    private static final String RULES_ERROR_6 = "Cet employé a des journées invalides de congés fériés.";
+    private static final String RULES_ERROR_5 = "Cet employé a une journée invalide de congé de maladie.";
+    private static final String RULES_ERROR_6 = "Cet employé a une journée invalide de congé férié.";
 
     private Employe employe;
 
@@ -60,29 +60,25 @@ public class Report {
     }
 
     private void reportHasNotMinimumWeeklyTimeInOffice(Rules rules, List<String> report) {
-        if (!rules.hasMinimumWeeklyTimeInOffice()) {
+        if (!rules.hasMinimumWeeklyTimeInOffice())
             report.add(RULES_ERROR_1);
-        }
     }
 
     private void reportInvalidDaysWithMinimumDailyTimeInOffice(Rules rules, List<String> report) {
         if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
-            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
+            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++)
                 report.add(RULES_ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
-            }
         }
     }
 
     private void reportHasNotValidWeeklyTimeRemote(Rules rules, List<String> report) {
-        if (!rules.hasValidWeeklyTimeRemote()) {
+        if (!rules.hasValidWeeklyTimeRemote())
             report.add(RULES_ERROR_3);
-        }
     }
 
     private void reportHasNotValidWeeklyTimeInOffice(Rules rules, List<String> report) {
-        if (!rules.hasValidWeeklyTimeInOffice()) {
+        if (!rules.hasValidWeeklyTimeInOffice())
             report.add(RULES_ERROR_4);
-        }
     }
     
     private void reportInvalidDaysWithSickLeave(Rules rules, List<String> report) {
@@ -104,7 +100,7 @@ public class Report {
                 if (rules.getInvalidDaysWithPublicHoliday().get(i).hasOfficeTask()) 
                     report.add(RULES_ERROR_6 + " (travail au bureau-" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
                 else
-                    report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");                    
+                    report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");                                    
             }
         }
     }    
