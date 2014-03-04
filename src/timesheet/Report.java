@@ -20,6 +20,8 @@ public class Report {
     private static final String RULES_ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
     private static final String RULES_ERROR_3 = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
     private static final String RULES_ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
+    private static final String RULES_ERROR_5 = "Cet employé a des journées invalides de congés de maladie.";
+    private static final String RULES_ERROR_6 = "Cet employé a des journées invalides de congés fériés.";
 
     private Employe employe;
 
@@ -39,6 +41,8 @@ public class Report {
         reportInvalidDaysWithMinimumDailyTimeInOffice(rules, report);
         reportHasNotValidWeeklyTimeRemote(rules, report);
         reportHasNotValidWeeklyTimeInOffice(rules, report);
+        reportInvalidDaysWithSickLeave(rules, report);
+        reportInvalidDaysWithPublicHoliday(rules, report);
         return report;
     }
 
@@ -80,4 +84,20 @@ public class Report {
             report.add(RULES_ERROR_4);
         }
     }
+    
+    private void reportInvalidDaysWithSickLeave(Rules rules, List report) {
+        if (rules.getInvalidDaysWithSickLeave().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
+                report.add(RULES_ERROR_5 + " (" + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
+            }
+        }
+    } 
+    
+    private void reportInvalidDaysWithPublicHoliday(Rules rules, List report) {
+        if (rules.getInvalidDaysWithSickLeave().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithPublicHoliday().size(); i++) {
+                report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
+            }
+        }
+    }    
 }
