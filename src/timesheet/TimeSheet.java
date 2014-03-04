@@ -177,18 +177,19 @@ public class TimeSheet {
             day = employe.getTimeSheet(0).getDay(i);
             if (day.hasSickLeaveTask()) {
                 if (!days_sl.contains(day) && day.isValidSickLeave())
-                    System.out.printf("SickLeave, ");
+                    System.out.printf("SickLeave,");
                 else
-                    System.out.printf("[SickLeave], ");
+                    System.out.printf("[SickLeave],");
             } else if (day.hasPublicHolidayTask()) {
                 if (!days_ph.contains(day) && day.isValidPublicHoliday())
-                    System.out.printf("PubHoli, ");
+                    System.out.printf("PubHoli,");
                 else
-                    System.out.printf("[PubHoli], ");
-            } else {
-                
-                System.out.printf("Normal, ");
-                
+                    System.out.printf("[PubHoli],");
+            } else {                
+                if (day.isWorkingDay())
+                    System.out.printf("Normal,");
+                else
+                    System.out.printf("Weekend,");
             }
         }   
         
@@ -204,8 +205,10 @@ public class TimeSheet {
             else
                 System.out.printf("[PubHoli]");
         } else {
-                
-            System.out.printf("Normal");
+                if (day.isWorkingDay())
+                    System.out.printf("Normal");
+                else
+                    System.out.printf("Weekend");
                 
         }        
         
