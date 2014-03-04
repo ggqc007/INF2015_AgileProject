@@ -52,21 +52,17 @@ public class Employe {
         for(TimeSheetData timesheet : timesheets)            
             timesheet.setEmployeId(id);                            
     }
-   
-    
+       
     public TimeSheetData getTimeSheet(int index) {        
         if (index < 0 || index >= timesheets.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                
-        try {                    
-            return timesheets.get(index);            
-        } catch (Exception e) { throw e; }        
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                   
+        return timesheets.get(index);                    
     }
     
     public List<TimeSheetData> getTimeSheets() {        
         return timesheets;        
     }     
     
-    // TODO : Répétition des méthodes de TimeSheetData
     public boolean isAdmin() {        
         return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
     } 

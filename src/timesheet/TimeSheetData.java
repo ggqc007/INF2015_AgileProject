@@ -30,20 +30,16 @@ public class TimeSheetData {
     }     
     
     public Day addDay(String name) {        
-        Day day = new Day();                  
-        try {                    
-            day.setName(name);
-            days.add(day);        
-        } catch (Exception e) { throw e; }                        
+        Day day = new Day();                                      
+        day.setName(name);
+        days.add(day);                               
         return day;        
     }
     
     public Day setDay(int index, Day day) {        
         if (index < 0 || index >= days.size())
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                     
-        try {            
-            days.set(index, day);        
-        } catch (Exception e) { throw e; }                        
+        days.set(index, day);                               
         return day;        
     }     
          
@@ -51,10 +47,8 @@ public class TimeSheetData {
         if (containsDay(day.getName()))
             throw new IllegalArgumentException("Day name " + day.getName() + " is already in the timesheet!");             
         for (int i = 0; i < WEEKDAYS_NAMES.length; i++)            
-            if (WEEKDAYS_NAMES[i].equals(day.getName())) {
-                try {                    
-                    days.set(i, day);                    
-                } catch (Exception e) { throw e; }            
+            if (WEEKDAYS_NAMES[i].equals(day.getName())) {                                    
+                days.set(i, day);                                
                 return day;                
             }                              
         throw new IllegalArgumentException("Day name " + day.getName() + " is not a valid day name!");    
@@ -94,15 +88,9 @@ public class TimeSheetData {
     }       
        
     public Task addTaskToDay(Task task, int dayIndex) {     
-        // TODO : J'ai ajouté newTask car j'ai rajouté le final pour task
-        //        à repenser à ça quand je vais mettre des throw exceptions
-        Task newTask;
         if (dayIndex < 0 || dayIndex >= days.size())
-            throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");         
-        try {            
-            newTask = days.get(dayIndex).addTask(task);            
-        } catch (Exception e) { throw e; }
-        return newTask;        
+            throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                                        
+        return days.get(dayIndex).addTask(task);        
     }    
 
     public Task addTaskToDayByName(Task task, String dayName) {        
@@ -117,10 +105,8 @@ public class TimeSheetData {
         if (dayIndex < 0 || dayIndex >= days.size())
             throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                
         if (taskIndex < 0 || taskIndex >= days.get(dayIndex).getTasksNum())
-            throw new IndexOutOfBoundsException("Index " + taskIndex + " is out of bounds!");                                      
-        try {            
-            task = days.get(dayIndex).getTask(dayIndex);            
-        } catch (Exception e) { throw e; }          
+            throw new IndexOutOfBoundsException("Index " + taskIndex + " is out of bounds!");                                                          
+        task = days.get(dayIndex).getTask(dayIndex);                     
         return task;                
     }    
 

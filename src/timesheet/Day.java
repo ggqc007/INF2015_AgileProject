@@ -56,27 +56,21 @@ public class Day {
     }      
     
     public Task addTask(int id, int time) {        
-        Task task = new Task(id, time);         
-        try {            
-            tasks.add(task);            
-        } catch (Exception e) { throw e; }        
+        Task task = new Task(id, time);                  
+        tasks.add(task);                   
         return task;        
     }    
     
-    public Task addTask(Task task) {         
-        try {           
-            tasks.add(task);            
-        } catch (Exception e) { throw e; }        
+    public Task addTask(Task task) {                   
+        tasks.add(task);                  
         return task;        
     }       
     
     public Task getTask(int index) {            
         Task task;
         if (index < 0 || index >= tasks.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                
-        try {            
-            task = tasks.get(index);            
-        } catch (Exception e) { throw e; }             
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                         
+        task = tasks.get(index);                        
         return task;                    
     }
     
@@ -84,7 +78,6 @@ public class Day {
         return tasks;                    
     }    
     
-    // DEVRAIT FAIRE AUTRE CHOSE A LA PLACE DU TRY CATCH ?
     public boolean isWorkingDay() {
         try {
             return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
@@ -99,14 +92,14 @@ public class Day {
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() || !hasPublicHolidayTask())
             return false; 
-        Task pubHolidayTask = new Task();
+        int pubHolidayTime = 0;
         for (Task task : tasks) {
-            if (!task.isRemoteTask() && !task.isPublicHolidayTask())
+            if (task.isPublicHolidayTask())
+                pubHolidayTime += task.getTime(); 
+            else if (task.isSickLeaveTask() || !task.isRemoteTask())
                 return false;
-            else if (task.isPublicHolidayTask())
-                pubHolidayTask = task; 
         }           
-        return (pubHolidayTask.getTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
+        return (pubHolidayTime == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
     
     public boolean hasPublicHolidayTask() {        
@@ -119,10 +112,17 @@ public class Day {
     
     // TODO Thomas, est-ce que tu peux valider si cet énoncé est respécté - Christian
     // Il n'est pas permis d'avoir d'autres activités professionnelles lors d'un congé de maladie (pas d'autre temps sur d'autres codes). 
-    public boolean isValidSickLeave() {
-        if (!isWorkingDay() || (tasks.size() != 1) || !tasks.get(0).isSickLeaveTask())
-            return false;        
-        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);
+    public boolean isValidSickLeave() {       
+        if (!isWorkingDay() || !hasSickLeaveTask())
+            return false; 
+        int sickLeaveTime = 0;
+        for (Task task : tasks) {
+            if (!task.isSickLeaveTask())
+                return false;
+            else
+                sickLeaveTime += task.getTime(); 
+        }           
+        return (sickLeaveTime == TimeSheet.SICK_LEAVE_TIME);          
     }     
     
     public boolean hasSickLeaveTask() {
