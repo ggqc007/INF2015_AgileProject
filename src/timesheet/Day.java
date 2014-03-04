@@ -135,7 +135,23 @@ public class Day {
                 return true;
         }          
         return false;
-    }      
+    } 
+    
+    public boolean hasOfficeTask() {
+        for (Task task : tasks) {
+            if (task.isOfficeTask())
+                return true;
+        }          
+        return false;
+    }   
+    
+    public boolean hasRemoteTask() {
+        for (Task task : tasks) {
+            if (task.isRemoteTask())
+                return true;
+        }          
+        return false;
+    }    
     
     public boolean hasValidHours() {
         int totalHours = 0;
