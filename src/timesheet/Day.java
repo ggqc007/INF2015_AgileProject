@@ -94,6 +94,8 @@ public class Day {
     }    
     
     // PEUT-ETRE A REFACTORER
+    // TODO Thomas, est-ce que tu peux valider que seulement télétravail est valide comme code supplémentaire lors d'un congé férié
+    // Lors d'un congé férié, il est permis de faire du télétravail en plus durant la journée.
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() || !hasPublicHolidayTask())
             return false; 
@@ -115,6 +117,8 @@ public class Day {
         return false;        
     }
     
+    // TODO Thomas, est-ce que tu peux valider si cet énoncé est respécté - Christian
+    // Il n'est pas permis d'avoir d'autres activités professionnelles lors d'un congé de maladie (pas d'autre temps sur d'autres codes). 
     public boolean isValidSickLeave() {
         if (!isWorkingDay() || (tasks.size() != 1) || !tasks.get(0).isSickLeaveTask())
             return false;        

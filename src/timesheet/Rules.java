@@ -25,7 +25,8 @@ abstract public class Rules {
     protected int totalWeekMinutes = 0;
     protected int totalOfficeWeekMinutes = 0;
     protected int totalRemoteWeekMinutes = 0;
-    protected int totalHolidayWeekMinutes = 0;
+    //protected int totalHolidayWeekMinutes = 0;
+    //protected int totalSickLeaveWeekMinutes = 0;
     protected Employe employe;
     
     public Rules() {
@@ -79,13 +80,9 @@ abstract public class Rules {
     protected void sumTotalMinutes(Task task) {
         int minutes = (int)task.getTime();
         totalWeekMinutes += minutes;
-        if (task.isRemoteTask()) 
+        if (task.isRemoteTask()) // Exclu les congés de maladie (999) et les congés fériés (998)
             totalRemoteWeekMinutes += minutes;
-        else if (task.isPublicHolidayTask())
-            totalHolidayWeekMinutes+= minutes;
-        else if (task.isSickLeaveTask())
-            totalHolidayWeekMinutes+= minutes;
-        else
+        else // Puisque les congés de maladie (999) et les congés fériés (998) NE SONT PLUS COMPTÉS COMME télétravail, par défaut on les additionne au total de présence au bureau
             totalOfficeWeekMinutes += minutes;        
     }
 

@@ -44,7 +44,7 @@ public class Task {
     }
     
     public boolean isRemoteTask() {        
-        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR);                
+        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR && !isPublicHolidayTask() && !isSickLeaveTask());                
     }
     
     public boolean isPublicHolidayTask() {        
