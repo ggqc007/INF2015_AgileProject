@@ -60,9 +60,9 @@ public class TimeSheet {
         JSONObject objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
         employe.initFromFirstTimeSheet(tryJSONParserToTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
-        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generate(employe));        
+        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generateReport(employe));        
         FileWriter.writeJSONFile(outputJSON, outputFileName);           
-        //debug(employe, objectFromFile, outputJSON);   
+        debug(employe, objectFromFile, outputJSON);   
     }
     
     // TODO: Cette methode a plus de 10 lignes ############################################################################  :o)

@@ -35,6 +35,7 @@ public class Report {
     }
 
     // TODO: Cette methode a plus de 10 lignes ############################################################################
+    /*
     public List<String> generate(Employe employe) {
         List<String> report = new ArrayList<>();
         Rules rules = intitializeRulesForThisEmploye(employe);
@@ -46,6 +47,7 @@ public class Report {
         reportInvalidDaysWithPublicHoliday(rules, report);
         return report;
     }
+    */
     
     // prototype pour bypass la limitation de 10 lignes... a propose au groupe a la rencontre de ce soir...
     public List<String> generateReport(Employe employe) {
