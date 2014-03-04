@@ -61,9 +61,9 @@ abstract public class Rules {
     
     
     
-    public void prepData(){
+    /*public void prepData(){
         calculateTotalWeekMinutes();
-    }
+    }*/
     
     protected void calculateTotalWeekMinutes() {
         List<Day> days = employe.getTimeSheet(0).getDays();       

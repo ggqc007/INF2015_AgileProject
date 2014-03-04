@@ -93,7 +93,7 @@ public class TimeSheet {
             rules = new RulesEmployes(employe);
         }        
         //rules.setEmploye(employe);
-        rules.prepData();    
+        //rules.prepData();    
         
         System.out.println("\nDEBUG JSON Validation :");
         System.out.print("\n      Weekdays valid : ");

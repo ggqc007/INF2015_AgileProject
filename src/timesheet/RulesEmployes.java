@@ -19,6 +19,7 @@ public class RulesEmployes extends Rules {
         minOfficeWeekMinutes = 38*60;
         minOfficeDailyMinutes = 6*60;
         setEmploye(employe);
+        calculateTotalWeekMinutes();
     }
     
     /*@Override

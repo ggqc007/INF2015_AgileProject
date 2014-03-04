@@ -20,6 +20,7 @@ public class RulesAdmins extends Rules {
         minOfficeDailyMinutes = 4*60; 
         maxRemoteWeekMinutes = 10*60;
         setEmploye(employe);
+        calculateTotalWeekMinutes();
     }
     
     /*@Override
