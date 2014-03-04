@@ -64,7 +64,7 @@ abstract public class Rules {
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
-            if (!days.get(i).isValidSickLeave()) 
+            if (!days.get(i).isValidSickLeave() && days.get(i).hasSickLeaveTask()) 
                 invalidDays.add(days.get(i));
        return invalidDays;       
     }
@@ -73,7 +73,7 @@ abstract public class Rules {
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
-            if (!days.get(i).isValidPublicHoliday()) 
+            if (!days.get(i).isValidPublicHoliday() && days.get(i).hasPublicHolidayTask()) 
                 invalidDays.add(days.get(i));
        return invalidDays;       
     }
