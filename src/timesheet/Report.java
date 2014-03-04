@@ -34,8 +34,8 @@ public class Report {
         this.employe = employe;
     }
 
-    public List generate(Employe employe) {
-        List report = new ArrayList<>();
+    public List<String> generate(Employe employe) {
+        List<String> report = new ArrayList<>();
         Rules rules = intitializeRulesForThisEmploye(employe);
         reportHasNotMinimumWeeklyTimeInOffice(rules, report);
         reportInvalidDaysWithMinimumDailyTimeInOffice(rules, report);
@@ -59,13 +59,13 @@ public class Report {
         return rulesFactory.makeRules(employe);
     }
 
-    private void reportHasNotMinimumWeeklyTimeInOffice(Rules rules, List report) {
+    private void reportHasNotMinimumWeeklyTimeInOffice(Rules rules, List<String> report) {
         if (!rules.hasMinimumWeeklyTimeInOffice()) {
             report.add(RULES_ERROR_1);
         }
     }
 
-    private void reportInvalidDaysWithMinimumDailyTimeInOffice(Rules rules, List report) {
+    private void reportInvalidDaysWithMinimumDailyTimeInOffice(Rules rules, List<String> report) {
         if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
                 report.add(RULES_ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
@@ -73,19 +73,19 @@ public class Report {
         }
     }
 
-    private void reportHasNotValidWeeklyTimeRemote(Rules rules, List report) {
+    private void reportHasNotValidWeeklyTimeRemote(Rules rules, List<String> report) {
         if (!rules.hasValidWeeklyTimeRemote()) {
             report.add(RULES_ERROR_3);
         }
     }
 
-    private void reportHasNotValidWeeklyTimeInOffice(Rules rules, List report) {
+    private void reportHasNotValidWeeklyTimeInOffice(Rules rules, List<String> report) {
         if (!rules.hasValidWeeklyTimeInOffice()) {
             report.add(RULES_ERROR_4);
         }
     }
     
-    private void reportInvalidDaysWithSickLeave(Rules rules, List report) {
+    private void reportInvalidDaysWithSickLeave(Rules rules, List<String> report) {
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithSickLeave().size(); i++) {
                 report.add(RULES_ERROR_5 + " (" + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
@@ -93,7 +93,7 @@ public class Report {
         }
     } 
     
-    private void reportInvalidDaysWithPublicHoliday(Rules rules, List report) {
+    private void reportInvalidDaysWithPublicHoliday(Rules rules, List<String> report) {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithPublicHoliday().size(); i++) {
                 report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
