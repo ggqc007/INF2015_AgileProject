@@ -43,8 +43,12 @@ public class Task {
         this.time = time;        
     }
     
+    public boolean isOfficeTask() {        
+        return (projectId <= TimeSheet.REMOTE_TASK_ID_FLOOR);
+    }
+    
     public boolean isRemoteTask() {        
-        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR);                
+        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR && !isPublicHolidayTask() && !isSickLeaveTask());                
     }
     
     public boolean isPublicHolidayTask() {        
