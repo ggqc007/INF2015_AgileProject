@@ -123,7 +123,11 @@ public class Day {
                 sickLeaveTime += task.getTime(); 
         }           
         return (sickLeaveTime == TimeSheet.SICK_LEAVE_TIME);          
-    }     
+    }    
+    
+    public boolean isNormalDay () {        
+        return (!hasSickLeaveTask() && !hasPublicHolidayTask());
+    }
     
     public boolean hasSickLeaveTask() {
         for (Task task : tasks) {
