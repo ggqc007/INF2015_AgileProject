@@ -98,7 +98,7 @@ public class Report {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithPublicHoliday().size(); i++) {
                 if (rules.getInvalidDaysWithPublicHoliday().get(i).hasOfficeTask()) 
-                    report.add(RULES_ERROR_6 + " (travail au bureau-" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
+                    report.add(RULES_ERROR_6 + " (travail au bureau - " + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
                 else
                     report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");                                    
             }
