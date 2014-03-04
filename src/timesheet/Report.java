@@ -65,10 +65,9 @@ public class Report {
     }
 
     private void reportInvalidDaysWithMinimumDailyTimeInOffice(Rules rules, List<String> report) {
-        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
+        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0)
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++)
                 report.add(RULES_ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
-        }
     }
 
     private void reportHasNotValidWeeklyTimeRemote(Rules rules, List<String> report) {
