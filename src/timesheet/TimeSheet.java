@@ -87,13 +87,15 @@ public class TimeSheet {
         Day day;        
         Rules rules;   
         int hours, minutes;
-        if (employe.isAdmin()) {
+        /*if (employe.isAdmin()) {
             rules = new RulesAdmins(employe);
         } else {
             rules = new RulesEmployes(employe);
-        }        
+        } */       
         //rules.setEmploye(employe);
         //rules.prepData();    
+        RulesFactory rulesFactory = new RulesFactory();
+        rules = rulesFactory.makeRules(employe);
         
         System.out.println("\nDEBUG JSON Validation :");
         System.out.print("\n      Weekdays valid : ");
