@@ -52,7 +52,7 @@ abstract public class Rules {
     public List<Day> getInvalidDaysWithMinimumDailyTimeInOffice(){
         // Les employés normaux doivent faire un minimum de 6 heures au bureau pour les jours
         // ouvrables (lundi au vendredi). 
-        List<Day> invalidDays = new ArrayList(); 
+        List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
             if (days.get(i).isWorkingDay() == true && getTotalOfficeMinutesByDay(days.get(i)) < minOfficeDailyMinutes) 

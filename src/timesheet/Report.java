@@ -33,7 +33,7 @@ public class Report {
     }
 
     public List generate(Employe employe) {
-        List report = new ArrayList();
+        List report = new ArrayList<>();
         Rules rules = intitializeRulesForThisEmploye(employe);
         reportHasNotMinimumWeeklyTimeInOffice(rules, report);
         reportInvalidDaysWithMinimumDailyTimeInOffice(rules, report);
