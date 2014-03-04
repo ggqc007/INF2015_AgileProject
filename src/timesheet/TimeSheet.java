@@ -221,7 +221,7 @@ public class TimeSheet {
                 
         }        
         
-        System.out.printf("\n      Total by day         : ");               
+        System.out.printf("\n\n      Total by day         : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
             hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
