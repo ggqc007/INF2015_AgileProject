@@ -88,13 +88,9 @@ public class TimeSheetData {
     }       
        
     public Task addTaskToDay(Task task, int dayIndex) {     
-        // TODO : J'ai ajouté newTask car j'ai rajouté le final pour task
-        //        à repenser à ça quand je vais mettre des throw exceptions
-        Task newTask;
         if (dayIndex < 0 || dayIndex >= days.size())
-            throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                             
-        newTask = days.get(dayIndex).addTask(task);            
-        return newTask;        
+            throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                                        
+        return days.get(dayIndex).addTask(task);        
     }    
 
     public Task addTaskToDayByName(Task task, String dayName) {        

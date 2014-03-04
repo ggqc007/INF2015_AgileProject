@@ -78,7 +78,6 @@ public class Day {
         return tasks;                    
     }    
     
-    // DEVRAIT FAIRE AUTRE CHOSE A LA PLACE DU TRY CATCH ?
     public boolean isWorkingDay() {
         try {
             return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
@@ -87,7 +86,6 @@ public class Day {
         }
     }    
     
-    // PEUT-ETRE A REFACTORER
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() || !hasPublicHolidayTask())
             return false; 
