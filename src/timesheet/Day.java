@@ -99,10 +99,10 @@ public class Day {
             return false; 
         int pubHolidayTime = 0;
         for (Task task : tasks) {
-            if (task.isSickLeaveTask() || (!task.isRemoteTask() && !task.isPublicHolidayTask()))
-                return false;
-            else if (task.isPublicHolidayTask())
+            if (task.isPublicHolidayTask())
                 pubHolidayTime += task.getTime(); 
+            else if (task.isSickLeaveTask() || !task.isRemoteTask())
+                return false;
         }           
         return (pubHolidayTime == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
@@ -115,11 +115,7 @@ public class Day {
         return false;        
     }
     
-    public boolean isValidSickLeave() {
-        /*if (!isWorkingDay() || (tasks.size() != 1) || !tasks.get(0).isSickLeaveTask())
-            return false;        
-        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);*/
-        
+    public boolean isValidSickLeave() {       
         if (!isWorkingDay() || !hasSickLeaveTask())
             return false; 
         int sickLeaveTime = 0;
