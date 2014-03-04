@@ -16,6 +16,9 @@ package timesheet;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+// POUR DEBUG A ENLEVER
+import java.util.List;
+
 public class TimeSheet {    
     protected static final int REMOTE_TASK_ID_FLOOR = 900;
     protected static final int SICK_LEAVE_TASK_ID = 999;
@@ -66,7 +69,7 @@ public class TimeSheet {
     }
     
     // TODO: Cette methode a plus de 10 lignes ############################################################################  :o)
-    // Mais surtout... ne pas oublier d'enlever ce bloc avant la remise..............................!!!!!
+    // Mais surtout... ne pas oublier d'enlever ce bloc avant la remise..............................!!!!!       
     private static void debug (Employe employe, JSONObject objectFromFile, JSONArray outputJSON) { 
         System.out.println("\nDEBUG JSON Input filename : " + inputFileName);
         System.out.println("\nDEBUG JSON Input data : " + objectFromFile.toString(2));        
@@ -113,28 +116,39 @@ public class TimeSheet {
             if (!day.hasValidHours())
                 System.out.printf(day.getName() + " ");
         }  
+        
+        List<Day> days_ph = rules.getInvalidDaysWithPublicHoliday();
+        
         System.out.printf("\n      Valid pub holiday    : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.hasPublicHolidayTask() && day.isValidPublicHoliday())
+            //if (!days.contains(day))
+            if (!days_ph.contains(day) && day.hasPublicHolidayTask() && day.isValidPublicHoliday())
+            //if (day.hasPublicHolidayTask() && day.isValidPublicHoliday())
                 System.out.printf(day.getName() + " ");
         }          
         System.out.printf("\n      Invalid pub holiday  : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.hasPublicHolidayTask() && !day.isValidPublicHoliday())
+            if (days_ph.contains(day))
+            //if (day.hasPublicHolidayTask() && !day.isValidPublicHoliday())
                 System.out.printf(day.getName() + " ");
         }  
-        System.out.printf("\n      Valid sick leave     : ");
+        
+        List<Day> days_sl = rules.getInvalidDaysWithSickLeave();       
+        
+        System.out.printf("\n      Valid sick leave     : ");        
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.hasSickLeaveTask() && day.isValidSickLeave())
+            if (!days_sl.contains(day) && day.hasSickLeaveTask() && day.isValidSickLeave())
+            //if (day.hasSickLeaveTask() && day.isValidSickLeave())
                 System.out.printf(day.getName() + " ");
         }  
         System.out.printf("\n      Invalid sick leave   : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            if (day.hasSickLeaveTask() && !day.isValidSickLeave())
+            if (days_sl.contains(day))
+            //if (day.hasSickLeaveTask() && !day.isValidSickLeave())
                 System.out.printf(day.getName() + " ");
         } 
         
@@ -158,6 +172,43 @@ public class TimeSheet {
         minutes = rules.getTotalRemoteWeekMinutes() % 60;        
         System.out.printf("      Total remote by week : " + rules.getTotalRemoteWeekMinutes() +"m(%d:%02dh)\n", hours, minutes);        
 
+        System.out.printf("\n      Day type             : ");               
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (day.hasSickLeaveTask()) {
+                if (!days_sl.contains(day) && day.isValidSickLeave())
+                    System.out.printf("SickLeave, ");
+                else
+                    System.out.printf("[SickLeave], ");
+            } else if (day.hasPublicHolidayTask()) {
+                if (!days_ph.contains(day) && day.isValidPublicHoliday())
+                    System.out.printf("PubHoli, ");
+                else
+                    System.out.printf("[PubHoli], ");
+            } else {
+                
+                System.out.printf("Normal, ");
+                
+            }
+        }   
+        
+        day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
+        if (day.hasSickLeaveTask()) {
+            if (!days_sl.contains(day) && day.isValidSickLeave())
+                System.out.printf("SickLeave");
+            else
+                System.out.printf("[SickLeave]");
+        } else if (day.hasPublicHolidayTask()) {
+            if (!days_ph.contains(day) && day.isValidPublicHoliday())
+                System.out.printf("PubHoli");
+            else
+                System.out.printf("[PubHoli]");
+        } else {
+                
+            System.out.printf("Normal");
+                
+        }        
+        
         System.out.printf("\n      Total by day         : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
