@@ -81,19 +81,24 @@ public class Report {
             report.add(RULES_ERROR_4);
     }
     
-    // TODO: Cette methode a plus de 10 lignes ############################################################################
     private void reportInvalidDaysWithSickLeave(Rules rules, List<String> report) {
-        String errorType = "";
+        String errorType;
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithSickLeave().size(); i++) {
-                if (rules.getInvalidDaysWithSickLeave().get(i).hasOfficeTask())
-                    errorType = "travail au bureau - ";
-                if (rules.getInvalidDaysWithSickLeave().get(i).hasRemoteTask())
-                    errorType += "télé-travail - ";                
+                errorType = getErrorTypeForWorkWhileSick(rules.getInvalidDaysWithSickLeave().get(i));
                 report.add(RULES_ERROR_5 + " (" + errorType + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
             }
         }
     } 
+    
+    private String getErrorTypeForWorkWhileSick(Day day) {
+        String errorType = "";
+        if (day.hasOfficeTask())
+            errorType = "travail au bureau - ";
+        if (day.hasRemoteTask())
+            errorType += "télé-travail - ";
+        return errorType;
+    }
     
     private void reportInvalidDaysWithPublicHoliday(Rules rules, List<String> report) {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
