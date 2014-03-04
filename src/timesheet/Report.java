@@ -34,6 +34,8 @@ public class Report {
         this.employe = employe;
     }
 
+    // TODO: Cette methode a plus de 10 lignes ############################################################################
+    /*
     public List<String> generate(Employe employe) {
         List<String> report = new ArrayList<>();
         Rules rules = intitializeRulesForThisEmploye(employe);
@@ -45,6 +47,25 @@ public class Report {
         reportInvalidDaysWithPublicHoliday(rules, report);
         return report;
     }
+    */
+    
+    // prototype pour bypass la limitation de 10 lignes... a propose au groupe a la rencontre de ce soir...
+    public List<String> generateReport(Employe employe) {
+        List<String> report = new ArrayList<>();
+        Rules rules = intitializeRulesForThisEmploye(employe);
+        buildReports(rules, report);
+        return report;
+    }
+    // bloc private a deplacer a la fin de la classe si proposityion accepte...
+    private void buildReports(Rules rules, List<String> report) {
+        reportHasNotMinimumWeeklyTimeInOffice(rules, report);
+        reportInvalidDaysWithMinimumDailyTimeInOffice(rules, report);
+        reportHasNotValidWeeklyTimeRemote(rules, report);
+        reportHasNotValidWeeklyTimeInOffice(rules, report);
+        reportInvalidDaysWithSickLeave(rules, report);
+        reportInvalidDaysWithPublicHoliday(rules, report);
+    }
+    
 
     public Employe getEmploye() {
         return employe;
@@ -65,10 +86,9 @@ public class Report {
     }
 
     private void reportInvalidDaysWithMinimumDailyTimeInOffice(Rules rules, List<String> report) {
-        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0) {
+        if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0)
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++)
                 report.add(RULES_ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
-        }
     }
 
     private void reportHasNotValidWeeklyTimeRemote(Rules rules, List<String> report) {
@@ -82,17 +102,23 @@ public class Report {
     }
     
     private void reportInvalidDaysWithSickLeave(Rules rules, List<String> report) {
-        String errorType = "";
+        String errorType;
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithSickLeave().size(); i++) {
-                if (rules.getInvalidDaysWithSickLeave().get(i).hasOfficeTask())
-                    errorType = "travail au bureau - ";
-                if (rules.getInvalidDaysWithSickLeave().get(i).hasRemoteTask())
-                    errorType += "télé-travail - ";                
+                errorType = getErrorTypeForWorkWhileSick(rules.getInvalidDaysWithSickLeave().get(i));
                 report.add(RULES_ERROR_5 + " (" + errorType + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
             }
         }
     } 
+    
+    private String getErrorTypeForWorkWhileSick(Day day) {
+        String errorType = "";
+        if (day.hasOfficeTask())
+            errorType = "travail au bureau - ";
+        if (day.hasRemoteTask())
+            errorType += "télé-travail - ";
+        return errorType;
+    }
     
     private void reportInvalidDaysWithPublicHoliday(Rules rules, List<String> report) {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {

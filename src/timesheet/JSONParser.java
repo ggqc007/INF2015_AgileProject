@@ -26,48 +26,41 @@ public class JSONParser {
         TimeSheetData timeSheetData = new TimeSheetData();
         employeIdToTimeSheetData(timeSheetData, jsonObjectFromFile);
         createDaysWithTasksInTimeSheetData(timeSheetData, jsonObjectFromFile);
-        if (!timeSheetData.hasValidWeek()) {
+        if (!timeSheetData.hasValidWeek())
             throw new Exception("Semaine invalide! Ne comporte pas 7 jours...");
-        }
         return timeSheetData;
     }
 
     public static JSONArray reportToJSONArray(List errorReport) {
         JSONArray jsonErrorReport = new JSONArray();
-        for (int i = 0; i < errorReport.size(); i++) {
+        for (int i = 0; i < errorReport.size(); i++)
             jsonErrorReport.add(errorReport.get(i));
-        }
         return jsonErrorReport;
     }
 
     private static void employeIdToTimeSheetData(TimeSheetData timeSheetData, JSONObject jsonObjectFromFile) {
         JSONArray jsonKeysFromFile = jsonObjectFromFile.names();
-        for (int i = 0; i < jsonKeysFromFile.size(); i++) {
-            if (jsonKeysFromFile.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE)) {
+        for (int i = 0; i < jsonKeysFromFile.size(); i++)
+            if (jsonKeysFromFile.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE))
                 timeSheetData.setEmployeId(jsonObjectFromFile.getInt(jsonKeysFromFile.getString(i))); 
-            }
-        }
     }
 
     private static void createDaysWithTasksInTimeSheetData(TimeSheetData timeSheetData, JSONObject jsonObjectFromFile) {
         JSONArray jsonKeysFromFile = jsonObjectFromFile.names();
-        for (int i = 0; i < jsonKeysFromFile.size(); i++) {
+        for (int i = 0; i < jsonKeysFromFile.size(); i++)
             if (!jsonKeysFromFile.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE)) {
                 Day aDay = timeSheetData.setDayByName(new Day(jsonKeysFromFile.getString(i)));
                 JSONArray taskForADay = jsonObjectFromFile.getJSONArray(jsonKeysFromFile.getString(i));
                 tasksToADayIfAny(aDay, taskForADay);
             }
-        }
     }
     
     private static void tasksToADayIfAny(Day aDay, JSONArray taskForADay) {
-        if (!taskForADay.isEmpty()) {
+        if (!taskForADay.isEmpty())
             for (int i = 0; i < taskForADay.size(); i++) {
                 JSONObject taskObj = taskForADay.getJSONObject(i);
-                if (!taskObj.isNullObject()) {
+                if (!taskObj.isNullObject()) 
                     aDay.addTask(taskObj.getInt(NOM_CHAMP_PROJET), taskObj.getInt(NOM_CHAMP_MINUTES));
-                }
             }
-        }
     }
 }

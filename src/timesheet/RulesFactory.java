@@ -15,6 +15,7 @@ package timesheet;
 
 public class RulesFactory {
     
+    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public Rules makeRules(Employe employe) {
         Rules rules;
         if (employe.isAdmin()) 

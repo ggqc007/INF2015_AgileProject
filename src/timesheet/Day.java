@@ -86,6 +86,7 @@ public class Day {
         }
     }    
 
+    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() || !hasPublicHolidayTask())
             return false; 
@@ -107,6 +108,7 @@ public class Day {
         return false;        
     }
     
+    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public boolean isValidSickLeave() {       
         if (!isWorkingDay() || !hasSickLeaveTask())
             return false; 
