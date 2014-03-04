@@ -87,13 +87,7 @@ public class TimeSheet {
         Day day;        
         Rules rules;   
         int hours, minutes;
-        /*if (employe.isAdmin()) {
-            rules = new RulesAdmins(employe);
-        } else {
-            rules = new RulesEmployes(employe);
-        } */       
-        //rules.setEmploye(employe);
-        //rules.prepData();    
+ 
         RulesFactory rulesFactory = new RulesFactory();
         rules = rulesFactory.makeRules(employe);
         
@@ -166,37 +160,57 @@ public class TimeSheet {
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
             hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
-            minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60;            
-            System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh),", hours, minutes);
+            minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60; 
+            if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
+                System.out.printf("[" + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)],", hours, minutes);
+            else
+                System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh),", hours, minutes);                
         }
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
-        minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60;        
-        System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)\n", hours, minutes);        
+        minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60;  
+        
+        if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
+            System.out.printf("[" + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)]\n", hours, minutes);        
+        else
+            System.out.printf((rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)\n", hours, minutes); 
         
         System.out.printf("      Total office by day  : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
             hours = rules.getTotalOfficeMinutesByDay(day) / 60;
-            minutes = rules.getTotalOfficeMinutesByDay(day) % 60;            
-            System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
+            minutes = rules.getTotalOfficeMinutesByDay(day) % 60;
+            if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
+                System.out.printf("[" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);   
+            else
+                System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
         }
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         hours = rules.getTotalOfficeMinutesByDay(day) / 60;
-        minutes = rules.getTotalOfficeMinutesByDay(day) % 60;        
-        System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);
+        minutes = rules.getTotalOfficeMinutesByDay(day) % 60;    
+        
+        if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
+            System.out.printf("[" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
+        else
+            System.out.printf(rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
 
         System.out.printf("      Total remote by day  : ");       
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
             hours = rules.getTotalRemoteMinutesByDay(day) / 60;
-            minutes = rules.getTotalRemoteMinutesByDay(day) % 60;            
-            System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
+            minutes = rules.getTotalRemoteMinutesByDay(day) % 60;    
+            if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
+                System.out.printf("[" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);
+            else
+                System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);                
         }
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         hours = rules.getTotalRemoteMinutesByDay(day) / 60;
-        minutes = rules.getTotalRemoteMinutesByDay(day) % 60;        
-        System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);
+        minutes = rules.getTotalRemoteMinutesByDay(day) % 60;   
+        if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))        
+            System.out.printf("[" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
+        else
+            System.out.printf(rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
 
         System.out.println("\nDEBUG JSON Output data : " + outputJSON.toString(2)); 
         System.out.println("\nDEBUG JSON Data succesfully writen to : " + outputFileName +"\n");                  
