@@ -125,7 +125,7 @@ public class Day {
         return (sickLeaveTime == TimeSheet.SICK_LEAVE_TIME);          
     }    
     
-    public boolean isNormalDay () {        
+    public boolean isNormalDay() {        
         return (!hasSickLeaveTask() && !hasPublicHolidayTask());
     }
     

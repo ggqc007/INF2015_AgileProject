@@ -87,7 +87,7 @@ public class Report {
     
     private void reportInvalidDaysWithSickLeave(Rules rules, List report) {
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {
-            for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++) {
+            for (int i = 0; i < rules.getInvalidDaysWithSickLeave().size(); i++) {
                 report.add(RULES_ERROR_5 + " (" + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
             }
         }
