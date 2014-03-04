@@ -56,10 +56,8 @@ public class Employe {
     
     public TimeSheetData getTimeSheet(int index) {        
         if (index < 0 || index >= timesheets.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                
-        try {                    
-            return timesheets.get(index);            
-        } catch (Exception e) { throw e; }        
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                   
+        return timesheets.get(index);                    
     }
     
     public List<TimeSheetData> getTimeSheets() {        

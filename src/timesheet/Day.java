@@ -56,27 +56,21 @@ public class Day {
     }      
     
     public Task addTask(int id, int time) {        
-        Task task = new Task(id, time);         
-        try {            
-            tasks.add(task);            
-        } catch (Exception e) { throw e; }        
+        Task task = new Task(id, time);                  
+        tasks.add(task);                   
         return task;        
     }    
     
-    public Task addTask(Task task) {         
-        try {           
-            tasks.add(task);            
-        } catch (Exception e) { throw e; }        
+    public Task addTask(Task task) {                   
+        tasks.add(task);                  
         return task;        
     }       
     
     public Task getTask(int index) {            
         Task task;
         if (index < 0 || index >= tasks.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                
-        try {            
-            task = tasks.get(index);            
-        } catch (Exception e) { throw e; }             
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                                         
+        task = tasks.get(index);                        
         return task;                    
     }
     

@@ -28,7 +28,7 @@ public class TimeSheet {
     private static String inputFileName;
     private static String outputFileName;
     
-    public static void verifyCmdArgs(final String[] args) {
+    public static void verifyCmdArgs(String[] args) {
         if (args.length != 2) {
             System.out.println("Utilisation: TimeSheet.jar input.json output.json\n");
             System.exit(1);
@@ -65,7 +65,7 @@ public class TimeSheet {
         debug(employe, objectFromFile, outputJSON);   
     }
     
-    private static void debug (final Employe employe, final JSONObject objectFromFile, final JSONArray outputJSON) { 
+    private static void debug (Employe employe, JSONObject objectFromFile, JSONArray outputJSON) { 
         System.out.println("\nDEBUG JSON Input filename : " + inputFileName);
         System.out.println("\nDEBUG JSON Input data : " + objectFromFile.toString(2));        
         System.out.println("\nDEBUG Parsed TimeSheetData : " + employe.getTimeSheet(0));

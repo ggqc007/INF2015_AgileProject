@@ -30,10 +30,8 @@ Voici un exemple du code attendu:
             throw new IllegalArgumentException("Day name " + day.getName() + " is already in the timesheet!"); 
         for (int i = 0; i < WEEKDAYS_NAMES.length; i++)
             if (WEEKDAYS_NAMES[i].equals(day.getName())) {
-                try {
-                    days.set(i, day);
-                } catch (Exception e) { throw e; }
-            return day;
+                days.set(i, day);                
+                return day;
             }  
         throw new IllegalArgumentException("Day name " + day.getName() + " is not a valid day name!");
     }
