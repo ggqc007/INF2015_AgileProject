@@ -34,6 +34,7 @@ public class Report {
         this.employe = employe;
     }
 
+    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public List<String> generate(Employe employe) {
         List<String> report = new ArrayList<>();
         Rules rules = intitializeRulesForThisEmploye(employe);
@@ -80,6 +81,7 @@ public class Report {
             report.add(RULES_ERROR_4);
     }
     
+    // TODO: Cette methode a plus de 10 lignes ############################################################################
     private void reportInvalidDaysWithSickLeave(Rules rules, List<String> report) {
         String errorType = "";
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {

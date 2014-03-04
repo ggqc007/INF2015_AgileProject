@@ -65,6 +65,8 @@ public class TimeSheet {
         debug(employe, objectFromFile, outputJSON);   
     }
     
+    // TODO: Cette methode a plus de 10 lignes ############################################################################  :o)
+    // Mais surtout... ne pas oublier d'enlever ce bloc avant la remise..............................!!!!!
     private static void debug (Employe employe, JSONObject objectFromFile, JSONArray outputJSON) { 
         System.out.println("\nDEBUG JSON Input filename : " + inputFileName);
         System.out.println("\nDEBUG JSON Input data : " + objectFromFile.toString(2));        
