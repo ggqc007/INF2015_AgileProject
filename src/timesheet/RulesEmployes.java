@@ -15,9 +15,10 @@ package timesheet;
 
 public class RulesEmployes extends Rules {
 
-    public RulesEmployes() {
+    public RulesEmployes(Employe employe) {
         minOfficeWeekMinutes = 38*60;
-        minOfficeDailyMinutes = 6*60;       
+        minOfficeDailyMinutes = 6*60;
+        setEmploye(employe);
     }
     
     /*@Override

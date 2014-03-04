@@ -18,11 +18,11 @@ public class RulesFactory {
     public Rules makeRules(Employe employe) {
         Rules rules;
         if (employe.isAdmin()) 
-            rules = new RulesAdmins();
+            rules = new RulesAdmins(employe);
         else if(employe.isExplEmploye())
-            rules = new RulesExploitation();
+            rules = new RulesExploitation(employe);
         else if(employe.isProdEmploye())
-            rules = new RulesProduction();
+            rules = new RulesProduction(employe);
         else 
             rules = (Rules) new Object();
         rules.setEmploye(employe);

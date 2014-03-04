@@ -88,11 +88,11 @@ public class TimeSheet {
         Rules rules;   
         int hours, minutes;
         if (employe.isAdmin()) {
-            rules = new RulesAdmins();
+            rules = new RulesAdmins(employe);
         } else {
-            rules = new RulesEmployes();
+            rules = new RulesEmployes(employe);
         }        
-        rules.setEmploye(employe);
+        //rules.setEmploye(employe);
         rules.prepData();    
         
         System.out.println("\nDEBUG JSON Validation :");
