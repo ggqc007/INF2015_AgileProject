@@ -68,8 +68,9 @@ abstract public class Rules {
     
     protected void calculateTotalWeekMinutes() {
         List<Day> days = employe.getTimeSheet(0).getDays();       
-        for (int i = 0; i < days.size(); i++)     
-            calculateTotalWeekMinutesByTasks(days.get(i).getTasks());       
+        for (int i = 0; i < days.size(); i++)  
+            if (days.get(i).isNormalDay() || days.get(i).isValidSickLeave() || days.get(i).isValidPublicHoliday())
+                calculateTotalWeekMinutesByTasks(days.get(i).getTasks());       
     }
     
     protected void calculateTotalWeekMinutesByTasks(List<Task> tasks) {
