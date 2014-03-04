@@ -116,9 +116,20 @@ public class Day {
     }
     
     public boolean isValidSickLeave() {
-        if (!isWorkingDay() || (tasks.size() != 1) || !tasks.get(0).isSickLeaveTask())
+       /* if (!isWorkingDay() || (tasks.size() != 1) || !tasks.get(0).isSickLeaveTask())
             return false;        
-        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);
+        return (tasks.get(0).getTime() == TimeSheet.SICK_LEAVE_TIME);*/
+        
+        if (!isWorkingDay() || !hasSickLeaveTask())
+            return false; 
+        Task pubSickLeaveTask = new Task();
+        for (Task task : tasks) {
+            if (!task.isSickLeaveTask())
+                return false;
+            else
+                pubSickLeaveTask = task; 
+        }           
+        return (pubSickLeaveTask.getTime() == TimeSheet.SICK_LEAVE_TIME);               
     }     
     
     public boolean hasSickLeaveTask() {
