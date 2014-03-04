@@ -175,49 +175,49 @@ public class TimeSheet {
         System.out.printf("\n      Day name             : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
-            System.out.printf(day.getName() + ",");
+            System.out.printf("%11s,", day.getName());
         }   
         
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
-        System.out.printf(day.getName());
+        System.out.printf("%11s", day.getName());
             
         System.out.printf("\n      Day type             : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (day.hasSickLeaveTask()) {
                 if (!days_sl.contains(day) && day.isValidSickLeave())
-                    System.out.printf("SickLeave,");
+                    System.out.printf("%11s,", "SickLeave");
                 else
-                    System.out.printf("[SickLeave],");
+                    System.out.printf("%11s,", "[SickLeave]");
             } else if (day.hasPublicHolidayTask()) {
                 if (!days_ph.contains(day) && day.isValidPublicHoliday())
-                    System.out.printf("PubHoli,");
+                    System.out.printf("%11s,", "PubHoli");
                 else
-                    System.out.printf("[PubHoli],");
+                    System.out.printf("%11s,", "[PubHoli]");
             } else {                
                 if (day.isWorkingDay())
-                    System.out.printf("Normal,");
+                    System.out.printf("%11s,", "Normal");
                 else
-                    System.out.printf("Weekend,");
+                    System.out.printf("%11s,", "Weekend");
             }
         }   
         
         day = employe.getTimeSheet(0).getDay(employe.getTimeSheet(0).getDaysNum()-1);
         if (day.hasSickLeaveTask()) {
             if (!days_sl.contains(day) && day.isValidSickLeave())
-                System.out.printf("SickLeave");
+                System.out.printf("%11s", "SickLeave");
             else
-                System.out.printf("[SickLeave]");
+                System.out.printf("%11s", "[SickLeave]");
         } else if (day.hasPublicHolidayTask()) {
             if (!days_ph.contains(day) && day.isValidPublicHoliday())
-                System.out.printf("PubHoli");
+                System.out.printf("%11s", "PubHoli");
             else
-                System.out.printf("[PubHoli]");
+                System.out.printf("%11s", "[PubHoli]");
         } else {
                 if (day.isWorkingDay())
-                    System.out.printf("Normal");
+                    System.out.printf("%11s", "Normal");
                 else
-                    System.out.printf("Weekend");
+                    System.out.printf("%11s", "Weekend");
                 
         }        
         
