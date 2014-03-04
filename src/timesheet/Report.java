@@ -94,7 +94,7 @@ public class Report {
     } 
     
     private void reportInvalidDaysWithPublicHoliday(Rules rules, List report) {
-        if (rules.getInvalidDaysWithSickLeave().size() > 0) {
+        if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithPublicHoliday().size(); i++) {
                 report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
             }
