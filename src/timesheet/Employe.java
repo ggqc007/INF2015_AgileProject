@@ -13,14 +13,6 @@ public class Employe {
         timesheets.add(timesheet);        
     }
     
-    public Employe(int id) {        
-        this();    
-        if (id < 0)
-            throw new IllegalArgumentException("Employe id " + id + " is not valid!");
-        employeId = id;        
-        timesheets.get(0).setEmployeId(id);        
-    }
-    
     public void initFromFirstTimeSheet(TimeSheetData timesheet) {
         if (timesheet.getEmployeId() < 0)
             throw new IllegalArgumentException("Employe id in timesheet is not valid!");
@@ -28,16 +20,9 @@ public class Employe {
         timesheets.set(0, timesheet);        
     }
     
+    // TODO: REMOVE - Utilisée seulement dans DEBUG
     public int getId() {        
         return employeId;        
-    }
-    
-    public void setId(int id) {  
-        if (id < 0)
-            throw new IllegalArgumentException("Employe id " + id + " is not valid!");        
-        employeId = id;                
-        for(TimeSheetData timesheet : timesheets)            
-            timesheet.setEmployeId(id);                            
     }
        
     public TimeSheetData getTimeSheet(int index) {        
@@ -48,7 +33,7 @@ public class Employe {
     
     public List<TimeSheetData> getTimeSheets() {        
         return timesheets;        
-    }     
+    }
     
     public boolean isAdmin() {        
         return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
