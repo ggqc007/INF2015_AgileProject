@@ -21,10 +21,9 @@ public class Day {
     }                 
 
     public static boolean isValidDayName(String name) {
-        for (String dayName : TimeSheetData.WEEKDAYS_NAMES) {
+        for (String dayName : TimeSheetData.WEEKDAYS_NAMES)
             if (dayName.equals(name))
                 return true;         
-        }
         return false;
     }
     
@@ -52,31 +51,28 @@ public class Day {
 
     public boolean isValidPublicHoliday() {
         int pubHolidayTime = 0;
-        for (Task task : tasks) {
+        for (Task task : tasks)
             if (task.isPublicHolidayTask())
                 pubHolidayTime += task.getTime(); 
             else if (!isWorkingDay() || !hasPublicHolidayTask() || task.isSickLeaveTask() || !task.isRemoteTask())
-                return false;
-        }           
+                return false;                   
         return (pubHolidayTime == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
     
     public boolean hasPublicHolidayTask() {        
-        for (Task task : tasks) {
+        for (Task task : tasks)
             if (task.isPublicHolidayTask())
-                return true;
-        }
+                return true;        
         return false;        
     }
     
     public boolean isValidSickLeave() {       
         int sickLeaveTime = 0;
-        for (Task task : tasks) {
+        for (Task task : tasks)
             if (!task.isSickLeaveTask() || !hasSickLeaveTask() || !isWorkingDay())
                 return false;
             else
-                sickLeaveTime += task.getTime(); 
-        }           
+                sickLeaveTime += task.getTime();                   
         return (sickLeaveTime == TimeSheet.SICK_LEAVE_TIME);          
     }    
     
@@ -85,26 +81,23 @@ public class Day {
     }
     
     public boolean hasSickLeaveTask() {
-        for (Task task : tasks) {
+        for (Task task : tasks)
             if (task.isSickLeaveTask())
-                return true;
-        }          
+                return true;                  
         return false;
     } 
     
     public boolean hasOfficeTask() {
-        for (Task task : tasks) {
+        for (Task task : tasks)
             if (task.isOfficeTask())
-                return true;
-        }          
+                return true;       
         return false;
     }   
     
     public boolean hasRemoteTask() {
-        for (Task task : tasks) {
+        for (Task task : tasks)
             if (task.isRemoteTask())
-                return true;
-        }          
+                return true;                  
         return false;
     }    
     
