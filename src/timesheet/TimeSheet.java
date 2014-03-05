@@ -43,7 +43,7 @@ public class TimeSheet {
         try {
             newTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
         } catch (Exception e) {
-            System.out.println("Erreur dans le traitement du fichier JSON, Fin du programme. : ("+ e +")");
+            System.out.println("Erreur dans le traitement du fichier JSON, Fin du programme. : (" + e + ")");
             exitWithEmptyJSONArrayFile();
         }
         return newTimeSheetData;
