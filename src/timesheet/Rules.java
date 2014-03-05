@@ -78,6 +78,15 @@ abstract public class Rules {
        return invalidDays;       
     }
     
+    public List<Day> getInvalidDaysWithWrongTime() {
+        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++)    
+            if (!days.get(i).hasValidHours()) 
+                invalidDays.add(days.get(i));
+       return invalidDays;       
+    }    
+    
     /*public void prepData(){
         calculateTotalWeekMinutes();
     }*/
