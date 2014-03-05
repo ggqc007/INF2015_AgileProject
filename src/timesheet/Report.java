@@ -66,7 +66,8 @@ public class Report {
     private void reportInvalidDaysWithMinimumDailyTimeInOffice() {
         if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0)
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++)
-                report.add(RULES_ERROR_2 + " (" + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
+                report.add(RULES_ERROR_2 + " (" 
+                        + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
     }
 
     private void reportHasNotValidWeeklyTimeRemote() {
@@ -84,7 +85,8 @@ public class Report {
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithSickLeave().size(); i++) {
                 errorType = getErrorTypeForWorkWhileSick(rules.getInvalidDaysWithSickLeave().get(i));
-                report.add(RULES_ERROR_5 + " (" + errorType + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
+                report.add(RULES_ERROR_5 + " (" 
+                        + errorType + rules.getInvalidDaysWithSickLeave().get(i).getName() + ")");
             }
         }
     } 
@@ -102,7 +104,8 @@ public class Report {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithPublicHoliday().size(); i++) {
                 if (rules.getInvalidDaysWithPublicHoliday().get(i).hasOfficeTask()) 
-                    report.add(RULES_ERROR_6 + " (travail au bureau - " + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
+                    report.add(RULES_ERROR_6 + " (travail au bureau - " 
+                            + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");
                 else
                     report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");                                    
             }
