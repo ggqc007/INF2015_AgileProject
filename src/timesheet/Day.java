@@ -73,15 +73,12 @@ public class Day {
         }
     }    
 
-    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public boolean isValidPublicHoliday() {
-        if (!isWorkingDay() || !hasPublicHolidayTask())
-            return false; 
         int pubHolidayTime = 0;
         for (Task task : tasks) {
             if (task.isPublicHolidayTask())
                 pubHolidayTime += task.getTime(); 
-            else if (task.isSickLeaveTask() || !task.isRemoteTask())
+            else if (!isWorkingDay() || !hasPublicHolidayTask() || task.isSickLeaveTask() || !task.isRemoteTask())
                 return false;
         }           
         return (pubHolidayTime == TimeSheet.PUBLIC_HOLIDAY_TIME);        
@@ -95,13 +92,10 @@ public class Day {
         return false;        
     }
     
-    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public boolean isValidSickLeave() {       
-        if (!isWorkingDay() || !hasSickLeaveTask())
-            return false; 
         int sickLeaveTime = 0;
         for (Task task : tasks) {
-            if (!task.isSickLeaveTask())
+            if (!task.isSickLeaveTask() || !hasSickLeaveTask() || !isWorkingDay())
                 return false;
             else
                 sickLeaveTime += task.getTime(); 
