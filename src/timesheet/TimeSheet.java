@@ -30,6 +30,7 @@ public class TimeSheet {
 
     private static String inputFileName;
     private static String outputFileName;
+    private static JSONObject objectFromFile;
     
     public static void verifyCmdArgs(String[] args) {
         if (args.length != 2) {
@@ -38,6 +39,16 @@ public class TimeSheet {
         }
         inputFileName = args[0];
         outputFileName = args[1];        
+    }
+    
+    private static JSONObject validateAndLoadJSONObjectFromFile(String inputFileName) {
+        try {
+            objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
+        } catch (Exception e) {
+            System.out.println("Erreur, fichier JSON non valide, Fin du programme. : ("+ e +")");
+            exitWithEmptyJSONArrayFile();
+        }
+        return objectFromFile;
     }
     
     private static TimeSheetData tryJSONParserToTimeSheetData(JSONObject objectFromFile) {
@@ -60,7 +71,7 @@ public class TimeSheet {
     public static void main(String[] args) {                
         verifyCmdArgs(args);                
         Employe employe = new Employe();
-        JSONObject objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
+        validateAndLoadJSONObjectFromFile(inputFileName);
         employe.initFromFirstTimeSheet(tryJSONParserToTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generateReport(employe));        
