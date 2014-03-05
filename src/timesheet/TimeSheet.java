@@ -45,7 +45,7 @@ public class TimeSheet {
         try {
             objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
         } catch (Exception e) {
-            System.out.println("Erreur, fichier JSON non valide, Fin du programme. : ("+ e +")");
+            System.out.println("Erreur, fichier JSON non valide, Fin du programme.");
             exitWithEmptyJSONArrayFile();
         }
         return objectFromFile;
