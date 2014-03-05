@@ -110,10 +110,7 @@ public class TimeSheetData {
         return task;                
     }    
 
-    // TODO: Cette methode a plus de 10 lignes ############################################################################
-    public Task getTaskFromDayByName(int taskIndex, String dayName) { 
-        if (taskIndex < 0)
-            return null;                
+    public Task getTaskFromDayByName(int taskIndex, String dayName) {                
         Day day = getDayByName(dayName);        
         if (day != null) {            
             if (taskIndex >= day.getTasksNum())
