@@ -8,7 +8,7 @@
 
 ## Membres de l'équipe 8 ##
 
-- Christian Cornero ***cornejo.christian@courrier.uqam.ca***
+- Christian Cornejo ***cornejo.christian@courrier.uqam.ca***
 - Guillaume Gagnon ***gagnon.guillaume.5@courrier.uqam.ca***
 - Khaled El-Sheikh ***khaled_elshikh@yahoo.com***
 - Thomas Robert de Massy ***robert_de_massy.thomas@courrier.uqam.ca***
