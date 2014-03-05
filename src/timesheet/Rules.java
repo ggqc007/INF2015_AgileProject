@@ -134,6 +134,7 @@ abstract public class Rules {
         this.employe = employe;
     }
     
+    // TODO Enlever getter au moment d'enlever méthode debug
     public int getMaxOfficeWeekMinutes() {
         return maxOfficeWeekMinutes;
     }
