@@ -38,7 +38,7 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)    
             if (days.get(i).isWorkingDay() == true && getTotalOfficeMinutesByDay(days.get(i)) < minOfficeDailyMinutes)
                 invalidDays.add(days.get(i));
-       return invalidDays;
+        return invalidDays;
     }    
     
     public List<Day> getInvalidDaysWithSickLeave() {
@@ -47,7 +47,7 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).isValidSickLeave() && days.get(i).hasSickLeaveTask()) 
                 invalidDays.add(days.get(i));
-       return invalidDays;       
+        return invalidDays;       
     }
  
     public List<Day> getInvalidDaysWithPublicHoliday() {
@@ -56,7 +56,7 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).isValidPublicHoliday() && days.get(i).hasPublicHolidayTask()) 
                 invalidDays.add(days.get(i));
-       return invalidDays;       
+        return invalidDays;       
     }
     
     public List<Day> getInvalidDaysWithWrongTime() {
@@ -65,7 +65,7 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).hasValidHours()) 
                 invalidDays.add(days.get(i));
-       return invalidDays;       
+        return invalidDays;       
     }    
     
     protected void calculateTotalWeekMinutes() {
