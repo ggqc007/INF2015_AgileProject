@@ -4,10 +4,14 @@ import java.util.List;
 
 public class Report {
 
-    private static final String RULES_ERROR_1 = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
-    private static final String RULES_ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
-    private static final String RULES_ERROR_3 = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
-    private static final String RULES_ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
+    private static final String RULES_ERROR_1 = "Cet employé n'a pas fait le minimum d'heures requis du"
+            + " lundi au vendredi physiquement au bureau.";
+    private static final String RULES_ERROR_2 = "Cet employé n'a pas travaillé le nombre d'heures minimal"
+            + " physiquement au bureau.";
+    private static final String RULES_ERROR_3 = "Cet employé a fait plus d'heures de télétravail que la"
+            + " quantité permise.";
+    private static final String RULES_ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau"
+            + " que la quantité permise.";
     private static final String RULES_ERROR_5 = "Cet employé a une journée invalide de congé de maladie.";
     private static final String RULES_ERROR_6 = "Cet employé a une journée invalide de congé férié.";
     private static final String RULES_ERROR_7 = "Cet employé a une journée avec plus de 24 heures travaillé.";
