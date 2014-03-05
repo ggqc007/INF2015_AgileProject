@@ -22,6 +22,7 @@ public class Report {
     private static final String RULES_ERROR_4 = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
     private static final String RULES_ERROR_5 = "Cet employé a une journée invalide de congé de maladie.";
     private static final String RULES_ERROR_6 = "Cet employé a une journée invalide de congé férié.";
+    private static final String RULES_ERROR_7 = "Cet employé a une journée avec plus de 24 heures travaillé.";
 
     private Employe employe;
     private List<String> report = new ArrayList<>();
@@ -49,6 +50,7 @@ public class Report {
         reportHasNotValidWeeklyTimeInOffice();
         reportInvalidDaysWithSickLeave();
         reportInvalidDaysWithPublicHoliday();
+        reportInvalidDaysWithWrongTime();
     }
     
     public Employe getEmploye() {
@@ -113,5 +115,12 @@ public class Report {
                     report.add(RULES_ERROR_6 + " (" + rules.getInvalidDaysWithPublicHoliday().get(i).getName() + ")");                                    
             }
         }
-    }    
+    }
+    
+    private void reportInvalidDaysWithWrongTime() {
+        if (rules.getInvalidDaysWithWrongTime().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithWrongTime().size(); i++)
+                report.add(RULES_ERROR_7 + " (" + rules.getInvalidDaysWithWrongTime().get(i).getName() + ")");
+        }
+    }
 }
