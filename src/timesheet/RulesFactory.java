@@ -12,4 +12,3 @@ public class RulesFactory {
         return (Rules) new Object();
     }
 }
-
