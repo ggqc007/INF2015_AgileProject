@@ -4,30 +4,13 @@ public class Task {
     private int projectId;
     private int time;    
     
-    public Task() {
-        projectId = 0;
-        time = 0;                
-    }
-    
     public Task(int id, int time) {        
         projectId = id;
         this.time = time;        
     }
     
-    public int getProjectId() {        
-        return projectId;        
-    }
-    
     public int getTime() {        
         return time;        
-    }
-    
-    public void setProjectId(int id) {        
-        projectId = id;        
-    }
-    
-    public void setTime(int time) {        
-        this.time = time;        
     }
     
     public boolean isOfficeTask() {        
