@@ -10,7 +10,8 @@ public class FileReader {
     private static final String FILE_ENCODING = "UTF-8";
     private static String JSONStringFromFile = "";
 
-    private static String loadFileIntoString(String filePath, String fileEncoding) throws FileNotFoundException, IOException {
+    private static String loadFileIntoString(String filePath, String fileEncoding) 
+            throws FileNotFoundException, IOException {
         return IOUtils.toString(new FileInputStream(filePath), fileEncoding);
     }
 
