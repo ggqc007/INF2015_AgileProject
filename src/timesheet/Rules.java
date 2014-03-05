@@ -95,7 +95,9 @@ abstract public class Rules {
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)  
             if (days.get(i).isNormalDay() || days.get(i).isValidSickLeave() || days.get(i).isValidPublicHoliday())
-                calculateTotalWeekMinutesByTasks(days.get(i).getTasks());       
+                calculateTotalWeekMinutesByTasks(days.get(i).getTasks());
+            else if ( (days.get(i).hasSickLeaveTask() && !days.get(i).isValidSickLeave()) || (days.get(i).hasPublicHolidayTask() && !days.get(i).isValidPublicHoliday()))
+                calculateTotalWeekMinutesByTasks(days.get(i).getTasks());
     }
     
     protected void calculateTotalWeekMinutesByTasks(List<Task> tasks) {
