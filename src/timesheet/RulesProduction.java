@@ -8,13 +8,6 @@ public class RulesProduction  extends Rules {
         setEmploye(employe);
     }
 
-    /* @Override
-    public boolean hasMinimumWeeklyTimeInOffice() {
-        int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;        
-        return (officeWeekMinutes >= minOfficeWeekMinutes);
-    }*/
-    
-    
     @Override
     public boolean hasValidWeeklyTimeRemote(){ 
      return true;

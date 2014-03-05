@@ -13,8 +13,6 @@ public class RulesFactory {
             rules = new RulesProduction(employe);
         else 
             rules = (Rules) new Object();
-        //rules.setEmploye(employe);
-        //rules.prepData();
         return rules;
     }
 }

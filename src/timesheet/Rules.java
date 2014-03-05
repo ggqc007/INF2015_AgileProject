@@ -12,8 +12,6 @@ abstract public class Rules {
     protected int totalWeekMinutes = 0;
     protected int totalOfficeWeekMinutes = 0;
     protected int totalRemoteWeekMinutes = 0;
-    //protected int totalHolidayWeekMinutes = 0;
-    //protected int totalSickLeaveWeekMinutes = 0;
     protected Employe employe;
     
     public Rules() {
@@ -73,10 +71,6 @@ abstract public class Rules {
                 invalidDays.add(days.get(i));
        return invalidDays;       
     }    
-    
-    /*public void prepData(){
-        calculateTotalWeekMinutes();
-    }*/
     
     protected void calculateTotalWeekMinutes() {
         List<Day> days = employe.getTimeSheet(0).getDays();       
