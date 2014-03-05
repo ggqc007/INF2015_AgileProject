@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TimeSheetData {    
-    protected static final String[] WEEKDAYS_NAMES = {"weekend2", "jour1", "jour2", "jour3", "jour4", "jour5", "weekend1"};     
+    protected static final String[] WEEKDAYS_NAMES = {"weekend2", "jour1", "jour2", "jour3", "jour4",
+        "jour5", "weekend1"};    
     
     private static final int DEFAULT_DAYS_NUM = 7;       
     private int employeId;
