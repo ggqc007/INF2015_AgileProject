@@ -1,4 +1,5 @@
 package timesheet;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,21 +23,16 @@ abstract public class Rules {
     abstract public boolean hasValidWeeklyTimeRemote();
     
     public boolean hasValidWeeklyTimeInOffice() {
-        // Aucun employé n'a le droit de passer plus de 43 heures au bureau.
         int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;
         return (officeWeekMinutes <= maxOfficeWeekMinutes);
     }
     
     public boolean hasMinimumWeeklyTimeInOffice() {
-        // Les employés normaux doivent travailler au moins 38 heures au bureau par semaine
-        // (excluant le télétravail).
         int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;        
         return (officeWeekMinutes >= minOfficeWeekMinutes);
     }    
     
     public List<Day> getInvalidDaysWithMinimumDailyTimeInOffice(){
-        // Les employés normaux doivent faire un minimum de 6 heures au bureau pour les jours
-        // ouvrables (lundi au vendredi). 
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
@@ -92,8 +88,7 @@ abstract public class Rules {
         totalWeekMinutes += minutes;
         if (task.isRemoteTask()) // Exclu les congés de maladie (999) et les congés fériés (998)
             totalRemoteWeekMinutes += minutes;
-        else // Puisque les congés de maladie (999) et les congés fériés (998) NE SONT PLUS COMPTÉS COMME télétravail,
-             // par défaut on les additionne au total de présence au bureau
+        else
             totalOfficeWeekMinutes += minutes;        
     }
 

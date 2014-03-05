@@ -12,8 +12,6 @@ public class RulesAdmins extends Rules {
     
     @Override
     public boolean hasValidWeeklyTimeRemote(){
-        // Les employés de l'administration ne doivent pas faire plus de 10 heures de télétravail par
-        // semaine.
         return (totalRemoteWeekMinutes <= maxRemoteWeekMinutes);
     }
 }
