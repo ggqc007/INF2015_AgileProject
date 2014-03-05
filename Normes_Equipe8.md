@@ -21,6 +21,7 @@ Les règles pour ce projet sont basées sur le "[Code Conventions For The Java P
 - La langue utilisée pour le nom des variables, méthodes, classe, commentaires est l'anglais *(precision)*.
 - Il n'est pas nécessaire de mettre les {} si un if, while ou for comporte une seule instruction.
 - Un maximum de 120 caracteres sur une ligne est accepté.
+- Un maximum de 10 lignes pour une methode.
 
 
 Voici un exemple du code attendu:
