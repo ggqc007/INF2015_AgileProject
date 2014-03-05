@@ -42,7 +42,7 @@ abstract public class Rules {
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
-            if (days.get(i).isWorkingDay() == true && getTotalOfficeMinutesByDay(days.get(i)) < minOfficeDailyMinutes) 
+            if (days.get(i).isWorkingDay() == true && getTotalOfficeMinutesByDay(days.get(i)) < minOfficeDailyMinutes)
                 invalidDays.add(days.get(i));
        return invalidDays;
     }    
@@ -83,7 +83,8 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)  
             if (days.get(i).isNormalDay() || days.get(i).isValidSickLeave() || days.get(i).isValidPublicHoliday())
                 calculateTotalWeekMinutesByTasks(days.get(i).getTasks());
-            else if ( (days.get(i).hasSickLeaveTask() && !days.get(i).isValidSickLeave()) || (days.get(i).hasPublicHolidayTask() && !days.get(i).isValidPublicHoliday()))
+            else if ( (days.get(i).hasSickLeaveTask() && !days.get(i).isValidSickLeave()) 
+                    || (days.get(i).hasPublicHolidayTask() && !days.get(i).isValidPublicHoliday()))
                 calculateTotalWeekMinutesByTasks(days.get(i).getTasks());
     }
     
@@ -97,7 +98,8 @@ abstract public class Rules {
         totalWeekMinutes += minutes;
         if (task.isRemoteTask()) // Exclu les congés de maladie (999) et les congés fériés (998)
             totalRemoteWeekMinutes += minutes;
-        else // Puisque les congés de maladie (999) et les congés fériés (998) NE SONT PLUS COMPTÉS COMME télétravail, par défaut on les additionne au total de présence au bureau
+        else // Puisque les congés de maladie (999) et les congés fériés (998) NE SONT PLUS COMPTÉS COMME télétravail,
+             // par défaut on les additionne au total de présence au bureau
             totalOfficeWeekMinutes += minutes;        
     }
 
