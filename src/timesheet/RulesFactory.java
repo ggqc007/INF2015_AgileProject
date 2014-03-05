@@ -1,18 +1,14 @@
 package timesheet;
 
-public class RulesFactory {
+public class RulesFactory {   
     
-    // TODO: Cette methode a plus de 10 lignes ############################################################################
     public Rules makeRules(Employe employe) {
-        Rules rules;
         if (employe.isAdmin()) 
-            rules = new RulesAdmins(employe);
+            return (Rules) new RulesAdmins(employe);
         else if(employe.isExplEmploye())
-            rules = new RulesExploitation(employe);
+            return (Rules) new RulesExploitation(employe);
         else if(employe.isProdEmploye())
-            rules = new RulesProduction(employe);
-        else 
-            rules = (Rules) new Object();
-        return rules;
+            return (Rules) new RulesProduction(employe);
+        return (Rules) new Object();
     }
 }
