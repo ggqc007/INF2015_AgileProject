@@ -15,21 +15,7 @@ public class TimeSheetData {
         for (int i = 0; i < DEFAULT_DAYS_NUM; i++)
             days.add(new Day());                
     }     
-    
-    public Day addDay(String name) {        
-        Day day = new Day();                                      
-        day.setName(name);
-        days.add(day);                               
-        return day;        
-    }
-    
-    public Day setDay(int index, Day day) {        
-        if (index < 0 || index >= days.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                     
-        days.set(index, day);                               
-        return day;        
-    }     
-         
+           
     public Day setDayByName(Day day) {        
         if (containsDay(day.getName()))
             throw new IllegalArgumentException("Day name " + day.getName() + " is already in the timesheet!");             
@@ -39,17 +25,7 @@ public class TimeSheetData {
                 return day;                
             }                              
         throw new IllegalArgumentException("Day name " + day.getName() + " is not a valid day name!");    
-    }    
-    
-    public int getDaysNum() {        
-        return days.size();        
-    }    
-           
-    public Day getDay(int index) {           
-        if (index < 0 || index >= days.size())
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                           
-        return days.get(index);                    
-    }    
+    }
     
     public boolean containsDay(String name) {
         try {        
@@ -58,7 +34,19 @@ public class TimeSheetData {
             return false;
         }        
         return true;        
+    }    
+    
+    // TODO: REMOVE - Utilisée seulement dans DEBUG
+    public int getDaysNum() {        
+        return days.size();        
     }
+    
+    // TODO: REMOVE - Utilisée seulement dans DEBUG
+    public Day getDay(int index) {           
+        if (index < 0 || index >= days.size())
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                           
+        return days.get(index);                    
+    }       
         
     public Day getDayByName(String name) {
         String dayName;             
@@ -68,44 +56,11 @@ public class TimeSheetData {
                 return day;                        
         }  
         throw new IllegalArgumentException("Day name " + name + " is not found!");                    
-    }      
+    }  
            
     public List<Day> getDays() {      
         return days;                    
-    }       
-       
-    public Task addTaskToDay(Task task, int dayIndex) {     
-        if (dayIndex < 0 || dayIndex >= days.size())
-            throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                                        
-        return days.get(dayIndex).addTask(task);        
-    }    
-
-    public Task addTaskToDayByName(Task task, String dayName) {        
-        Day day = getDayByName(dayName);        
-        if (day != null)           
-            return day.addTask(task);                            
-        throw new NullPointerException("Task is null");                 
-    }    
-
-    public Task getTaskFromDay(int taskIndex, int dayIndex) {  
-        Task task;
-        if (dayIndex < 0 || dayIndex >= days.size())
-            throw new IndexOutOfBoundsException("Index " + dayIndex + " is out of bounds!");                
-        if (taskIndex < 0 || taskIndex >= days.get(dayIndex).getTasksNum())
-            throw new IndexOutOfBoundsException("Index " + taskIndex + " is out of bounds!");                                                          
-        task = days.get(dayIndex).getTask(dayIndex);                     
-        return task;                
-    }    
-
-    public Task getTaskFromDayByName(int taskIndex, String dayName) {                
-        Day day = getDayByName(dayName);        
-        if (day != null) {            
-            if (taskIndex >= day.getTasksNum())
-                throw new IndexOutOfBoundsException("Index " + taskIndex + " is out of bounds!");                       
-            return day.getTask(taskIndex);            
-        }        
-        throw new IllegalArgumentException("Day name " + dayName + " is not found!");         
-    }  
+    }         
     
     public int getEmployeId() {        
         return employeId;        
