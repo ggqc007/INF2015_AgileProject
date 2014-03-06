@@ -82,7 +82,7 @@ abstract public class Rules {
     protected void sumTotalMinutes(Task task) {
         int minutes = (int)task.getTime();
         totalWeekMinutes += minutes;
-        if (task.isRemoteTask()) // Exclu les congés de maladie (999) et les congés fériés (998)
+        if (task.isRemoteTask())
             totalRemoteWeekMinutes += minutes;
         else
             totalOfficeWeekMinutes += minutes;        
