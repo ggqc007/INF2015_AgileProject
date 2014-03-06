@@ -1,6 +1,0 @@
-Employé admin a exactement le temps min (36h) par semaine. Temps minimum par jours respectés.
-L'employé dans ce timesheet n'a rien fait la fin de semaine. Aucun télétravail
-
-Résultat attendu :
-
-[]

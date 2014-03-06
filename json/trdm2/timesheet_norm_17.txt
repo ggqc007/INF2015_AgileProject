@@ -1,5 +1,0 @@
-Employe norm. Exactement min bureau, max teletravail. Total Semaine plus grand que Total Office max semaine.
-
-Résultat attendu :
-
-DEBUG JSON Output data : []

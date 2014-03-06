@@ -19,11 +19,6 @@ public class Employe {
         employeId = timesheet.getEmployeId();
         timesheets.set(0, timesheet);        
     }
-    
-    // TODO: REMOVE - Utilisée seulement dans DEBUG
-    public int getId() {        
-        return employeId;        
-    }
        
     public TimeSheetData getTimeSheet(int index) {        
         if (index < 0 || index >= timesheets.size())
@@ -45,10 +40,5 @@ public class Employe {
     
     public boolean isExplEmploye() {        
        return (employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
-    }    
-       
-    @Override
-    public String toString() {        
-        return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";        
-    }    
+    }       
 }

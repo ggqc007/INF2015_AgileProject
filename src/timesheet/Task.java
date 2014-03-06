@@ -27,10 +27,5 @@ public class Task {
     
     public boolean isSickLeaveTask() {      
         return (projectId == TimeSheet.SICK_LEAVE_TASK_ID); 
-    }    
-
-    @Override
-    public String toString() {        
-        return "Task{projectId: " + projectId + ", time: " + time +"}";        
-    }    
+    }        
 }

@@ -108,34 +108,5 @@ abstract public class Rules {
     
     public void setEmploye(Employe employe) {
         this.employe = employe;
-    }
-    
-    // TODO Enlever getter au moment d'enlever méthode debug
-    public int getMaxOfficeWeekMinutes() {
-        return maxOfficeWeekMinutes;
-    }
-
-    public int getMinOfficeWeekMinutes() {
-        return minOfficeWeekMinutes;
-    }
-
-    public int getMaxRemoteWeekMinutes() {
-        return maxRemoteWeekMinutes;
-    }
-
-    public int getMinOfficeDailyMinutes() {
-        return minOfficeDailyMinutes;
-    }
-
-    public int getTotalWeekMinutes() {
-        return totalWeekMinutes;
-    }
-
-    public int getTotalOfficeWeekMinutes() {
-        return totalOfficeWeekMinutes;
-    }
-
-    public int getTotalRemoteWeekMinutes() {
-        return totalRemoteWeekMinutes;
-    }
+    }        
 }

@@ -1,6 +1,0 @@
-Employé normal minimum requis par jour de semaine (6 heures) mais sur plusieurs jobs. Fait du télétravail et à travaillé au bureau 
-la fin de semaine. 33h au bureau donc pas le minimum de 38h
-
-Résultat attendu :
-
-DEBUG JSON Output data : ["Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau."]

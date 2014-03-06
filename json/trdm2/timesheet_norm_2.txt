@@ -1,9 +1,0 @@
-Employé normal minimum requis par jour de semaine (6 heures), mais pas minimum par semaine (30 au lieu de 38)
-L'employé dans ce timesheet à fait exactement 360 minutes par jour (le 6 heures minimum requis) et rien la
-fin de semaine. Aucun télétravail
-
-Résultat attendu :
-
-[
-  "Cet employe n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau ",
-]
