@@ -50,31 +50,43 @@ public class Day {
     }    
 
     public boolean isValidPublicHoliday() {
+        if (!isWorkingDay() || !hasPublicHolidayTask())
+            return false;         
+        return (getPublicHolidayTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
+    }
+        
+    private int getPublicHolidayTime() {             
         int pubHolidayTime = 0;
         for (Task task : tasks)
             if (task.isPublicHolidayTask())
                 pubHolidayTime += task.getTime(); 
-            else if (!isWorkingDay() || !hasPublicHolidayTask() || task.isSickLeaveTask() || !task.isRemoteTask())
-                return false;                   
-        return (pubHolidayTime == TimeSheet.PUBLIC_HOLIDAY_TIME);        
-    }
+            else if (task.isSickLeaveTask() || !task.isRemoteTask())
+                return 0;                   
+        return pubHolidayTime;          
+    }  
     
     public boolean hasPublicHolidayTask() {        
         for (Task task : tasks)
             if (task.isPublicHolidayTask())
                 return true;        
         return false;        
-    }
+    } 
     
     public boolean isValidSickLeave() {       
+        if (!isWorkingDay() || !hasSickLeaveTask())
+            return false;         
+        return (getSickLeaveTime() == TimeSheet.SICK_LEAVE_TIME);          
+    }   
+    
+    private int getSickLeaveTime() {             
         int sickLeaveTime = 0;
         for (Task task : tasks)
-            if (!task.isSickLeaveTask() || !hasSickLeaveTask() || !isWorkingDay())
-                return false;
+            if (!task.isSickLeaveTask())
+                return 0;
             else
-                sickLeaveTime += task.getTime();                   
-        return (sickLeaveTime == TimeSheet.SICK_LEAVE_TIME);          
-    }    
+                sickLeaveTime += task.getTime();                  
+        return sickLeaveTime;          
+    }     
     
     public boolean isNormalDay() {        
         return (!hasSickLeaveTask() && !hasPublicHolidayTask());
