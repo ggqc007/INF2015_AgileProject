@@ -68,13 +68,12 @@ abstract public class Rules {
         return invalidDays;       
     }
     
-    public List<Day> getInvalidDaysWithMinimumMinutesForTask() {
+    public List<Day> getInvalidDaysWithoutMinimumMinutesForTask() {
         List<Day> invalidDays = new ArrayList<>();
         List<Day> days = employe.getTimeSheet(0).getDays();
-        
         for (int i = 0; i < days.size(); i++)
-            // if invalide task
-            invalidDays.add(days.get(i));
+            if (days.get(i).hasTaskWithLessThanMinimumMinutesAmount())
+                invalidDays.add(days.get(i));
         return invalidDays;
     }
     
