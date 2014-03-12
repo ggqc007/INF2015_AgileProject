@@ -11,6 +11,7 @@ public class TimeSheet {
     protected static final int PUBLIC_HOLIDAY_TIME = 420;    
     protected static final int EMPLOYE_ADMIN_ID_CEILING = 1000;
     protected static final int EMPLOYE_PROD_ID_CEILING = 2000;
+    protected static final int MINIMUM_MINUTES_AMOUNT_FOR_TASK = 0;
 
     private static String inputFileName;
     private static String outputFileName;

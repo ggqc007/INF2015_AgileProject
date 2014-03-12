@@ -27,5 +27,9 @@ public class Task {
     
     public boolean isSickLeaveTask() {      
         return (projectId == TimeSheet.SICK_LEAVE_TASK_ID); 
-    }        
+    }
+    
+    public boolean hasMininumMinutesAmountForTask() {
+        return (time > TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK);
+    }
 }

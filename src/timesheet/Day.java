@@ -3,7 +3,7 @@ package timesheet;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Day {  
+public class Day {
     protected static final String WEEKDAY_STR_MATCH = "jour";
     
     private String name = "";
@@ -121,5 +121,12 @@ public class Day {
                 return false;            
         }                
         return true;        
-    }   
+    }
+    
+    public boolean hasTaskWithLessThanMinimumMinutesAmount() {
+        for (Task task : tasks)
+            if (!task.hasMininumMinutesAmountForTask())
+                return true;
+        return false;
+    }
 }
