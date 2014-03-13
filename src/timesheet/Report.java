@@ -15,7 +15,8 @@ public class Report {
             + " que la quantité permise.";
     private static final String RULES_ERROR_5 = "Cet employé a une journée invalide de congé de maladie.";
     private static final String RULES_ERROR_6 = "Cet employé a une journée invalide de congé férié.";
-    private static final String RULES_ERROR_7 = "Cet employé a une journée avec plus de 24 heures travaillé.";
+    private static final String RULES_ERROR_7 = "Cet employé a une journée avec plus de "
+            + TimeSheet.MAXIMUM_HOURS_FOR_DAY + " heures travaillé.";
     private static final String RULES_ERROR_8 = "Cet employé a une journée qui ne respecte pas le nombre minimum"
             + " de minutes (" + TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK + ") pour une tache.";
 

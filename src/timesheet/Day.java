@@ -117,8 +117,8 @@ public class Day {
         int totalHours = 0;
         for (Task task : getTasks()) {            
             totalHours += task.getTime();
-            if (totalHours > 24*60)
-                return false;            
+            if (totalHours > TimeSheet.MAXIMUM_HOURS_FOR_DAY*60)
+                return false;
         }                
         return true;        
     }
