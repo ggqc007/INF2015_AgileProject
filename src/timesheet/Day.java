@@ -113,7 +113,7 @@ public class Day {
         return false;
     }    
     
-    public boolean hasValidHours() {
+    public boolean hasValidMaximumHours() {
         int totalHours = 0;
         for (Task task : getTasks()) {            
             totalHours += task.getTime();
