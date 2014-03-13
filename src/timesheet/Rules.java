@@ -59,7 +59,7 @@ abstract public class Rules {
         return invalidDays;       
     }
     
-    public List<Day> getInvalidDaysWithWrongTime() {
+    public List<Day> getInvalidDaysWithToMuchTime() {
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
