@@ -68,6 +68,13 @@ abstract public class Rules {
         return invalidDays;       
     }
     
+    private List<Day> getInvalidDaysWithInvalidTasksAfter24Hours() {
+        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> days = employe.getTimeSheet(0).getDays();
+        // TODO GG: A IMPLENTE. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return invalidDays;
+    }
+    
     public List<Day> getInvalidDaysWithoutMinimumMinutesForTask() {
         List<Day> invalidDays = new ArrayList<>();
         List<Day> days = employe.getTimeSheet(0).getDays();

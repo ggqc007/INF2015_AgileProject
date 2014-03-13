@@ -46,7 +46,8 @@ public class Report {
         reportHasNotValidWeeklyTimeInOffice();
         reportInvalidDaysWithSickLeave();
         reportInvalidDaysWithPublicHoliday();
-        reportInvalidDaysWithToMuchTime(); // TODO GG
+        reportInvalidDaysWithToMuchTime();
+        
         reportDaysHasNotMinimumMinutesForATask();
     }
     
@@ -122,6 +123,10 @@ public class Report {
             for (int i = 0; i < rules.getInvalidDaysWithToMuchTime().size(); i++)
                 report.add(RULES_ERROR_7 + " (" + rules.getInvalidDaysWithToMuchTime().get(i).getName() + ")");
         }
+    }
+    
+    private void reportInvalidDaysWithInvalidTasksAfter24Hours() {
+        // TODO GG: A IMPLENTE. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     }
     
     private void reportDaysHasNotMinimumMinutesForATask() {

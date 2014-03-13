@@ -123,6 +123,11 @@ public class Day {
         return true;        
     }
     
+    public boolean hasValidTasksAfter24Hours() {
+        //TODO GG: methode qui calcul que le type de tache entre 24 et 32 hrs est valide. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        return true;
+    }
+    
     public boolean hasTaskWithLessThanMinimumMinutesAmount() {
         for (Task task : tasks)
             if (!task.hasMininumMinutesAmountForTask())
