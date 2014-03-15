@@ -114,18 +114,13 @@ public class Day {
     }    
     
     public boolean hasValidMaximumHours() {
-        int totalHours = 0;
-        for (Task task : getTasks()) {            
-            totalHours += task.getTime();
-            if (totalHours > TimeSheet.MAXIMUM_HOURS_FOR_DAY*60)
-                return false;
-        }                
-        return true;        
+        return getTotalMinutesWorkedThisDay() <= TimeSheet.MAXIMUM_HOURS_FOR_DAY*60;        
     }
     
     public boolean hasValidTasksAfter24Hours() {
         //TODO GG: methode qui calcul que le type de tache entre 24 et 32 hrs est valide. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // NOTE: 24:01 hrs est invalide... 24:00 est valide.
+        //if ()
         return true;
     }
     
@@ -134,5 +129,12 @@ public class Day {
             if (!task.hasMininumMinutesAmountForTask())
                 return true;
         return false;
+    }
+    
+    private int getTotalMinutesWorkedThisDay() {
+        int totalMinutes = 0;
+        for (Task task : getTasks())          
+            totalMinutes += task.getTime();
+        return totalMinutes;
     }
 }
