@@ -120,7 +120,13 @@ public class Day {
     public boolean hasValidTasksAfter24Hours() {
         //TODO GG: methode qui calcul que le type de tache entre 24 et 32 hrs est valide. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // NOTE: 24:01 hrs est invalide... 24:00 est valide.
-        //if ()
+        int TotalMinutesForDay = getTotalMinutesWorkedThisDay();
+        if (TotalMinutesForDay > 24*60 && TotalMinutesForDay <= TimeSheet.MAXIMUM_HOURS_FOR_DAY*60)
+            // check for task type.. et soustraire minutes des taches authorises... resultat final doit etre 24hrs ou moin.
+            for (Task task : tasks)
+                //if (task.)
+                return false;
+            
         return true;
     }
     

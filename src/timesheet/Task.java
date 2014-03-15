@@ -25,6 +25,10 @@ public class Task {
         return (projectId == TimeSheet.PUBLIC_HOLIDAY_TASK_ID);        
     }
     
+    public boolean isVacancyDayTask() {
+        return (projectId == TimeSheet.VACANCY_DAY_TASK_ID);
+    }
+    
     public boolean isSickLeaveTask() {      
         return (projectId == TimeSheet.SICK_LEAVE_TASK_ID); 
     }
