@@ -68,5 +68,22 @@ public class TimeSheetData {
                 return false;  
         }
         return true;        
-    }   
+    }
+    
+    // TODO: REMOVE - Utilisée seulement dans DEBUG
+    public int getDaysNum() {        
+        return days.size();        
+    }
+    
+    // TODO: REMOVE - Utilisée seulement dans DEBUG
+    public Day getDay(int index) {           
+        if (index < 0 || index >= days.size())
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds!");                           
+        return days.get(index);                    
+    }
+    
+    @Override
+    public String toString() {        
+        return "TimeSheetData{employeId: " + employeId + ", days: " + getDays() + "}";        
+    }    
 }

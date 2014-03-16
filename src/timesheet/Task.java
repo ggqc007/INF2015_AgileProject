@@ -36,4 +36,9 @@ public class Task {
     public boolean hasMininumMinutesAmountForTask() {
         return (time > TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK);
     }
+    
+    @Override
+    public String toString() {        
+        return "Task{projectId: " + projectId + ", time: " + time +"}";        
+    }    
 }

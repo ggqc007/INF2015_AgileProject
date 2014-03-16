@@ -40,5 +40,15 @@ public class Employe {
     
     public boolean isExplEmploye() {        
        return (employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
-    }       
+    }    
+    
+    // TODO: REMOVE - Utilisée seulement dans DEBUG
+    public int getId() {        
+        return employeId;        
+    }
+    
+    @Override
+    public String toString() {        
+        return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";        
+    } 
 }

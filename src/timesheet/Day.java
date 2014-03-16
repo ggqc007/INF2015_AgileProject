@@ -138,4 +138,9 @@ public class Day {
             totalMinutes += task.getTime();
         return totalMinutes;
     }
+    
+    @Override
+    public String toString() {        
+        return "Day{name: \"" + name + "\", tasks:" + getTasks() + "}";        
+    }     
 }
