@@ -117,17 +117,17 @@ public class Day {
         return getTotalMinutesWorkedThisDay() <= TimeSheet.MAXIMUM_HOURS_FOR_DAY*60;        
     }
     
-    public boolean hasValidTasksAfter24Hours() {
-        //TODO GG: methode qui calcul que le type de tache entre 24 et 32 hrs est valide. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        // NOTE: 24:01 hrs est invalide... 24:00 est valide.
-        int TotalMinutesForDay = getTotalMinutesWorkedThisDay();
-        if (TotalMinutesForDay > 24*60 && TotalMinutesForDay <= TimeSheet.MAXIMUM_HOURS_FOR_DAY*60)
+    public boolean hasValidTasksAfter24Hours() { //TODO GG: methode qui calcul que le type de tache entre 24 et 32 hrs est valide. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        int totalMinutesForDay = getTotalMinutesWorkedThisDay();
+        if (totalMinutesForDay > 24*60 && totalMinutesForDay <= TimeSheet.MAXIMUM_HOURS_FOR_DAY*60)
             // check for task type.. et soustraire minutes des taches authorises... resultat final doit etre 24hrs ou moin.
-            for (Task task : tasks)
-                //if (task.)
-                return false;
-            
-        return true;
+            for (Task task : tasks) {
+                if (task.isPublicHolidayTask())
+                    totalMinutesForDay -= TimeSheet.PUBLIC_HOLIDAY_TIME;
+                else if (task.isVacancyDayTask())
+                    totalMinutesForDay -= TimeSheet.VACANCY_DAY_TIME;
+            }
+        return totalMinutesForDay <= 24*60; // NOTE: 24:01 hrs est invalide... 24:00 est valide.
     }
     
     public boolean hasTaskWithLessThanMinimumMinutesAmount() {
