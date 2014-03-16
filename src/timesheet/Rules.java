@@ -68,10 +68,13 @@ abstract public class Rules {
         return invalidDays;       
     }
     
-    private List<Day> getInvalidDaysWithInvalidTasksAfter24Hours() {
+    public List<Day> getInvalidDaysWithInvalidTasksAfter24Hours() {
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();
-        // TODO GG: A IMPLENTE. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        for (int i = 0; i < days.size(); i++)
+            if (days.get(i).getTotalMinutesWorkedThisDay() > 60*24 && days.get(i).hasValidMaximumHours())
+                if (!days.get(i).hasValidTasksAfter24Hours())
+                    invalidDays.add(days.get(i));
         return invalidDays;
     }
     

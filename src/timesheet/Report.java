@@ -19,6 +19,8 @@ public class Report {
             + TimeSheet.MAXIMUM_HOURS_FOR_DAY + " heures travaillé.";
     private static final String RULES_ERROR_8 = "Cet employé a une journée qui ne respecte pas le nombre minimum"
             + " de minutes (" + TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK + ") pour une tache.";
+    private static final String RULES_ERROR_9 = "Cet employé a une journée avec plus de 24 heures qui ne"
+            + " comporte pas de temps de journée de vacances ou de congé férié";
 
     private Employe employe;
     private List<String> report = new ArrayList<>();
@@ -47,8 +49,8 @@ public class Report {
         reportInvalidDaysWithSickLeave();
         reportInvalidDaysWithPublicHoliday();
         reportInvalidDaysWithToMuchTime();
-        
         reportDaysHasNotMinimumMinutesForATask();
+        reportInvalidDaysWithInvalidTasksAfter24Hours();
     }
     
     public Employe getEmploye() {
@@ -125,15 +127,19 @@ public class Report {
         }
     }
     
-    private void reportInvalidDaysWithInvalidTasksAfter24Hours() {
-        // TODO GG: A IMPLENTE. !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    }
-    
     private void reportDaysHasNotMinimumMinutesForATask() {
         if (rules.getInvalidDaysWithoutMinimumMinutesForTask().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithoutMinimumMinutesForTask().size(); i++)
                 report.add(RULES_ERROR_8 + " (" 
                         + rules.getInvalidDaysWithoutMinimumMinutesForTask().get(i).getName() + ")");
+        }
+    }
+    
+    private void reportInvalidDaysWithInvalidTasksAfter24Hours() {
+        if (rules.getInvalidDaysWithInvalidTasksAfter24Hours().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithInvalidTasksAfter24Hours().size(); i++)
+                report.add(RULES_ERROR_9 + " (" 
+                        + rules.getInvalidDaysWithInvalidTasksAfter24Hours().get(i).getName() + ")");
         }
     }
 }

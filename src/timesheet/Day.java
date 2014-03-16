@@ -49,6 +49,7 @@ public class Day {
         }
     }    
 
+    // TODO Anyone - Valider... il semble que cette methode ne prend pas en charge la possibilite de faire du teletravail un jour de conge ferie...
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() || !hasPublicHolidayTask())
             return false;         
@@ -118,9 +119,7 @@ public class Day {
     }
     
     public boolean hasValidTasksAfter24Hours() {
-        int totalMinutesForDay = getTotalMinutesWorkedThisDay();
-        if (totalMinutesForDay > 24*60 && totalMinutesForDay <= TimeSheet.MAXIMUM_HOURS_FOR_DAY*60)
-            for (Task task : tasks)
+        for (Task task : tasks)
                 if (task.isPublicHolidayTask() || task.isVacancyDayTask())
                     return true;
         return false;
@@ -133,7 +132,7 @@ public class Day {
         return false;
     }
     
-    private int getTotalMinutesWorkedThisDay() {
+    public int getTotalMinutesWorkedThisDay() {
         int totalMinutes = 0;
         for (Task task : getTasks())          
             totalMinutes += task.getTime();
