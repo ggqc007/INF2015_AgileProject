@@ -119,7 +119,7 @@ public class Day {
     
     public boolean hasValidTasksAfter24Hours() {
         for (Task task : tasks)
-                if (task.isPublicHolidayTask() || task.isVacancyDayTask())
+                if (task.isPublicHolidayTask() || task.isHolidayTask())
                     return true;
         return false;
     }

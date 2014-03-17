@@ -18,16 +18,24 @@ public class Task {
     }
     
     public boolean isRemoteTask() {        
-        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR && !isPublicHolidayTask() && !isSickLeaveTask());                
+        return (projectId > TimeSheet.REMOTE_TASK_ID_FLOOR && isWorkTask());                
     }
+    
+    public boolean isWorkTask() {        
+        return (!isPublicHolidayTask() && !isSickLeaveTask() && !isHolidayTask() && !isParentalHolidayTask());                
+    }    
     
     public boolean isPublicHolidayTask() {        
         return (projectId == TimeSheet.PUBLIC_HOLIDAY_TASK_ID);        
     }
     
-    public boolean isVacancyDayTask() {
-        return (projectId == TimeSheet.VACANCY_DAY_TASK_ID);
+    public boolean isHolidayTask() {
+        return (projectId == TimeSheet.HOLIDAY_TASK_ID);
     }
+    
+    public boolean isParentalHolidayTask() {
+        return (projectId == TimeSheet.PARENTAL_HOLIDAY_TASK_ID);
+    }    
     
     public boolean isSickLeaveTask() {      
         return (projectId == TimeSheet.SICK_LEAVE_TASK_ID); 

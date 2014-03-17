@@ -39,7 +39,7 @@ public class Employe {
     }
     
     public boolean isExplEmploye() {        
-       return (employeId >= TimeSheet.EMPLOYE_DEVEL_ID_CEILING);           
+       return ((employeId >= TimeSheet.EMPLOYE_DEVEL_ID_CEILING) && (employeId <= TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR));       
     }    
     
     // TODO: REMOVE - Utilisée seulement dans DEBUG
