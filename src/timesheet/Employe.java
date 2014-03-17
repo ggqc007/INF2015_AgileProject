@@ -34,12 +34,12 @@ public class Employe {
         return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
     } 
     
-    public boolean isProdEmploye() {        
-       return ((employeId >= TimeSheet.EMPLOYE_ADMIN_ID_CEILING) && (employeId < TimeSheet.EMPLOYE_PROD_ID_CEILING));           
+    public boolean isDevelEmploye() {        
+       return ((employeId >= TimeSheet.EMPLOYE_ADMIN_ID_CEILING) && (employeId < TimeSheet.EMPLOYE_DEVEL_ID_CEILING));           
     }
     
     public boolean isExplEmploye() {        
-       return (employeId >= TimeSheet.EMPLOYE_PROD_ID_CEILING);           
+       return (employeId >= TimeSheet.EMPLOYE_DEVEL_ID_CEILING);           
     }    
     
     // TODO: REMOVE - Utilisée seulement dans DEBUG

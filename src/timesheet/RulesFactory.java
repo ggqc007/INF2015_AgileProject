@@ -7,7 +7,7 @@ public class RulesFactory {
             return new RulesAdmins(employe);
         else if(employe.isExplEmploye())
             return new RulesExploitation(employe);
-        else if(employe.isProdEmploye())
+        else if(employe.isDevelEmploye())
             return new RulesProduction(employe);
         return (Rules) new Object();
     }

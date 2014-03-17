@@ -15,7 +15,7 @@ public class TimeSheet {
     protected static final int PUBLIC_HOLIDAY_TASK_ID = 998;    
     protected static final int PUBLIC_HOLIDAY_TIME = 480;    
     protected static final int EMPLOYE_ADMIN_ID_CEILING = 1000;
-    protected static final int EMPLOYE_PROD_ID_CEILING = 2000;
+    protected static final int EMPLOYE_DEVEL_ID_CEILING = 2000;
     protected static final int MINIMUM_MINUTES_AMOUNT_FOR_TASK = 0;
     protected static final int MAXIMUM_HOURS_FOR_DAY = 32;
 
@@ -84,7 +84,7 @@ public class TimeSheet {
             if ((employe.isExplEmploye()))
                 System.out.println(" is an EXPLOITATION employe");
             else {
-                if ((employe.isProdEmploye()))
+                if ((employe.isDevelEmploye()))
                     System.out.println(" is an PRODUCTION employe");
                 else
                     System.out.println(" is an UNKNOWN employe"); 
