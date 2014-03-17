@@ -9,11 +9,11 @@ import java.util.List;
 public class TimeSheet {    
     protected static final int REMOTE_TASK_ID_FLOOR = 900;
     protected static final int SICK_LEAVE_TASK_ID = 999;
-    protected static final int SICK_LEAVE_TIME = 420;
+    protected static final int SICK_LEAVE_TIME = 480;
     protected static final int VACANCY_DAY_TASK_ID = 997;
-    protected static final int VACANCY_DAY_TIME = 420;
+    protected static final int VACANCY_DAY_TIME = 480;
     protected static final int PUBLIC_HOLIDAY_TASK_ID = 998;    
-    protected static final int PUBLIC_HOLIDAY_TIME = 420;    
+    protected static final int PUBLIC_HOLIDAY_TIME = 480;    
     protected static final int EMPLOYE_ADMIN_ID_CEILING = 1000;
     protected static final int EMPLOYE_PROD_ID_CEILING = 2000;
     protected static final int MINIMUM_MINUTES_AMOUNT_FOR_TASK = 0;
