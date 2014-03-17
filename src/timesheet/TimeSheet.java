@@ -86,12 +86,13 @@ public class TimeSheet {
         else {
             if ((employe.isExplEmploye()))
                 System.out.println(" is an EXPLOITATION employe");
-            else {
-                if ((employe.isDevelEmploye()))
-                    System.out.println(" is an PRODUCTION employe");
-                else
-                    System.out.println(" is an UNKNOWN employe"); 
-            }
+            else if ((employe.isDevelEmploye()))
+                System.out.println(" is an DEVELOPMENT employe");
+            else if ((employe.isDirectionEmploye()))
+                System.out.println(" is an DIRECTION employe");            
+            else
+                System.out.println(" is an UNKNOWN employe"); 
+            
         }
         
         Day day;        
@@ -120,7 +121,7 @@ public class TimeSheet {
             day = employe.getTimeSheet(0).getDay(i);
             if (!day.hasValidMaximumHours())
                 System.out.printf(day.getName() + " ");
-        }  
+        }   
         
         List<Day> days_ph = rules.getInvalidDaysWithPublicHoliday();
         
