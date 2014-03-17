@@ -14,7 +14,7 @@ public class Task {
     }
     
     public boolean isOfficeTask() {        
-        return (projectId <= TimeSheet.REMOTE_TASK_ID_FLOOR);
+        return (projectId <= TimeSheet.REMOTE_TASK_ID_FLOOR && isWorkTask());
     }
     
     public boolean isRemoteTask() {        

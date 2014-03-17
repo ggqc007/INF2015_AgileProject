@@ -108,7 +108,7 @@ public class Day {
     private int getHolidayTime() {             
         int holidayTime = 0;
         for (Task task : tasks)
-            if (!task.isHolidayTask())
+            if (!task.isHolidayTask() && !(task.isOfficeTask() || task.isRemoteTask()))
                 return 0;
             else
                 holidayTime += task.getTime();                  
