@@ -49,7 +49,6 @@ public class Day {
         }
     }    
 
-    // TODO Anyone - Valider... il semble que cette methode ne prend pas en charge la possibilite de faire du teletravail un jour de conge ferie...
     public boolean isValidPublicHoliday() {
         if (!isWorkingDay() || !hasPublicHolidayTask())
             return false;         
