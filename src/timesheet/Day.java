@@ -89,12 +89,26 @@ public class Day {
     }     
     
     public boolean isNormalDay() {        
-        return (!hasSickLeaveTask() && !hasPublicHolidayTask());
+        return (!hasSickLeaveTask() && !hasPublicHolidayTask() && !hasHolidayTask() && !hasParentalHolidayTask());
     }
     
     public boolean hasSickLeaveTask() {
         for (Task task : tasks)
             if (task.isSickLeaveTask())
+                return true;                  
+        return false;
+    } 
+    
+    public boolean hasHolidayTask() {
+        for (Task task : tasks)
+            if (task.isHolidayTask())
+                return true;                  
+        return false;
+    }     
+
+    public boolean hasParentalHolidayTask() {
+        for (Task task : tasks)
+            if (task.isParentalHolidayTask())
                 return true;                  
         return false;
     } 
