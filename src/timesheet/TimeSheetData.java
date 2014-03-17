@@ -70,6 +70,19 @@ public class TimeSheetData {
         return true;        
     }
     
+    // ATTENTION IL FAUT APPELER CETTE METHODE DANS RULES QUAND ON FAIT LES TESTS
+    // DE isValidParentalHoliday() POUR SAVOIR SI IL Y A JUSTE UN ParentalHoliday
+    // PAR SEMAINE, SINON ILS SONT TOUS INVALIDES
+    public boolean hasOnlyOneParentalHolidayByWeek() {
+        boolean foundParentalHoliday = false;
+        for (Day day : days)
+            if (day.hasParentalHolidayTask() && !foundParentalHoliday)
+                return false;   
+            else if (day.hasParentalHolidayTask())
+                foundParentalHoliday = true;
+        return true;
+    } 
+    
     // TODO: REMOVE - Utilisée seulement dans DEBUG
     public int getDaysNum() {        
         return days.size();        

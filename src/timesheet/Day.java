@@ -124,7 +124,7 @@ public class Day {
     
     public boolean isValidParentalHoliday() {       
         if (!isWorkingDay() || !hasParentalHolidayTask() || hasPublicHolidayTask() || hasSickLeaveTask() || hasHolidayTask())
-            return false;         
+            return false;      
         return (getParentalHolidayTime() == TimeSheet.PARENTAL_HOLIDAY_TIME);          
     } 
     
@@ -143,7 +143,7 @@ public class Day {
             if (task.isParentalHolidayTask())
                 return true;                  
         return false;
-    } 
+    }      
     
     public boolean hasOfficeTask() {
         for (Task task : tasks)
