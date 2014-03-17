@@ -50,7 +50,7 @@ public class Day {
     }    
 
     public boolean isValidPublicHoliday() {
-        if (!isWorkingDay() || !hasPublicHolidayTask())
+        if (!isWorkingDay() || !hasPublicHolidayTask() || hasHolidayTask() || hasSickLeaveTask() || hasParentalHolidayTask())
             return false;         
         return (getPublicHolidayTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
@@ -73,7 +73,7 @@ public class Day {
     } 
     
     public boolean isValidSickLeave() {       
-        if (!isWorkingDay() || !hasSickLeaveTask())
+        if (!isWorkingDay() || !hasSickLeaveTask() || hasHolidayTask() || hasPublicHolidayTask() || hasParentalHolidayTask())
             return false;         
         return (getSickLeaveTime() == TimeSheet.SICK_LEAVE_TIME);          
     }   
@@ -99,12 +99,44 @@ public class Day {
         return false;
     } 
     
+    public boolean isValidHoliday() {       
+        if (!isWorkingDay() || !hasHolidayTask() || hasPublicHolidayTask() || hasSickLeaveTask() || hasParentalHolidayTask())
+            return false;         
+        return (getHolidayTime() == TimeSheet.HOLIDAY_TIME);          
+    }   
+    
+    private int getHolidayTime() {             
+        int holidayTime = 0;
+        for (Task task : tasks)
+            if (!task.isHolidayTask())
+                return 0;
+            else
+                holidayTime += task.getTime();                  
+        return holidayTime;          
+    }      
+    
     public boolean hasHolidayTask() {
         for (Task task : tasks)
             if (task.isHolidayTask())
                 return true;                  
         return false;
-    }     
+    }    
+    
+    public boolean isValidParentalHoliday() {       
+        if (!isWorkingDay() || !hasParentalHolidayTask() || hasPublicHolidayTask() || hasSickLeaveTask() || hasHolidayTask())
+            return false;         
+        return (getParentalHolidayTime() == TimeSheet.PARENTAL_HOLIDAY_TIME);          
+    } 
+    
+    private int getParentalHolidayTime() {             
+        int parentalHolidayTime = 0;
+        for (Task task : tasks)
+            if (!task.isParentalHolidayTask())
+                return 0;
+            else
+                parentalHolidayTime += task.getTime();                  
+        return parentalHolidayTime;          
+    }    
 
     public boolean hasParentalHolidayTask() {
         for (Task task : tasks)
