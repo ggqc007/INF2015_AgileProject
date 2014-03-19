@@ -21,6 +21,8 @@ public class Report {
             + " de minutes (" + TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK + ") pour une tache.";
     private static final String RULES_ERROR_9 = "Cet employé a une journée avec plus de 24 heures qui ne"
             + " comporte pas de temps de journée de vacances ou de congé férié";
+    
+    private static final String RULES_ERROR_10 = "Cet employé a au moins une journée de congé parental invalide";
 
     private Employe employe;
     private List<String> report = new ArrayList<>();
@@ -51,6 +53,7 @@ public class Report {
         reportInvalidDaysWithToMuchTime();
         reportDaysHasNotMinimumMinutesForATask();
         reportInvalidDaysWithInvalidTasksAfter24Hours();
+        reportInvalidDaysOfParentalHoliday();
     }
     
     public Employe getEmploye() {
@@ -141,5 +144,13 @@ public class Report {
                 report.add(RULES_ERROR_9 + " (" 
                         + rules.getInvalidDaysWithInvalidTasksAfter24Hours().get(i).getName() + ")");
         }
+    }
+    
+    private void reportInvalidDaysOfParentalHoliday() {
+        if (rules.getInvalidDaysOfParentalHoliday().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysOfParentalHoliday().size(); i++)
+                report.add(RULES_ERROR_10 + " (" 
+                        + rules.getInvalidDaysOfParentalHoliday().get(i).getName() + ")");
+        }        
     }
 }
