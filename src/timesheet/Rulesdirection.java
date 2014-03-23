@@ -1,9 +1,9 @@
 package timesheet;
 
-public class RulesProduction extends Rules {
+public class Rulesdirection extends Rules {
 
-    public RulesProduction(Employe employe) {
-        minOfficeWeekMinutes = 38*60;
+    public Rulesdirection(Employe employe) {
+        minOfficeWeekMinutes = 43*60;
         minOfficeDailyMinutes = 6*60; 
         setEmploye(employe);
         calculateTotalWeekMinutes();
