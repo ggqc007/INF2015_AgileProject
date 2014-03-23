@@ -26,15 +26,15 @@ public class JSONParser {
         return jsonErrorReport;
     }
 
-    private static void employeIdToTimeSheetData(TimeSheetData timeSheetData, JSONObject jsonObjectFromFile) {
+    protected static void employeIdToTimeSheetData(TimeSheetData timeSheetData, JSONObject jsonObjectFromFile) {
         JSONArray jsonKeysFromFile = jsonObjectFromFile.names();
         for (int i = 0; i < jsonKeysFromFile.size(); i++)
             if (jsonKeysFromFile.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE))
                 timeSheetData.setEmployeId(jsonObjectFromFile.getInt(jsonKeysFromFile.getString(i))); 
     }
 
-    private static void createDaysWithTasksInTimeSheetData(TimeSheetData timeSheetData, 
-            JSONObject jsonObjectFromFile) {
+    protected static void createDaysWithTasksInTimeSheetData(TimeSheetData timeSheetData, 
+        JSONObject jsonObjectFromFile) {
         JSONArray jsonKeysFromFile = jsonObjectFromFile.names();
         for (int i = 0; i < jsonKeysFromFile.size(); i++)
             if (!jsonKeysFromFile.get(i).equals(NOM_CHAMP_NUMERO_EMPLOYE)) {
@@ -44,7 +44,7 @@ public class JSONParser {
             }
     }
     
-    private static void tasksToADayIfAny(Day aDay, JSONArray taskForADay) {
+    protected static void tasksToADayIfAny(Day aDay, JSONArray taskForADay) {
         if (!taskForADay.isEmpty())
             for (int i = 0; i < taskForADay.size(); i++) {
                 JSONObject taskObj = taskForADay.getJSONObject(i);
