@@ -26,7 +26,7 @@ public class TimeSheet {
     private static String outputFileName;
     private static JSONObject objectFromFile;
     
-    public static void verifyCmdArgs(String[] args) {
+    protected static void verifyCmdArgs(String[] args) {
         if (args.length != 2) {
             System.out.println("Utilisation: TimeSheet.jar input.json output.json\n");
             System.exit(1);
@@ -35,7 +35,7 @@ public class TimeSheet {
         outputFileName = args[1];        
     }
     
-    private static JSONObject validateAndLoadJSONObjectFromFile(String inputFileName) {
+    protected static JSONObject validateAndLoadJSONObjectFromFile(String inputFileName) {
         try {
             objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class TimeSheet {
         return objectFromFile;
     }
     
-    private static TimeSheetData tryJSONParserToTimeSheetData(JSONObject objectFromFile) {
+    protected static TimeSheetData tryJSONParserToTimeSheetData(JSONObject objectFromFile) {
         TimeSheetData newTimeSheetData = null;
         try {
             newTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
@@ -56,7 +56,7 @@ public class TimeSheet {
         return newTimeSheetData;
     }
     
-    private static void exitWithEmptyJSONArrayFile() {
+    protected static void exitWithEmptyJSONArrayFile() {
         JSONArray fileOutput = new JSONArray();
         FileWriter.writeJSONFile(fileOutput, outputFileName);
         System.exit(1);
@@ -75,7 +75,7 @@ public class TimeSheet {
     
     // TODO: Cette methode a plus de 10 lignes ############################################################################  :o)
     // Mais surtout... ne pas oublier d'enlever ce bloc avant la remise..............................!!!!!       
-    private static void debug (Employe employe, JSONObject objectFromFile, JSONArray outputJSON) { 
+    protected static void debug (Employe employe, JSONObject objectFromFile, JSONArray outputJSON) { 
         System.out.println("\nDEBUG JSON Input filename : " + inputFileName);
         System.out.println("\nDEBUG JSON Input data : " + objectFromFile.toString(2));        
         System.out.println("\nDEBUG Parsed TimeSheetData : " + employe.getTimeSheet(0));
