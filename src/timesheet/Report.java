@@ -43,7 +43,7 @@ public class Report {
         return report;
     }
 
-    private void buildReports() {
+    protected void buildReports() {
         reportHasNotMinimumWeeklyTimeInOffice();
         reportInvalidDaysWithMinimumDailyTimeInOffice();
         reportHasNotValidWeeklyTimeRemote();
@@ -64,34 +64,34 @@ public class Report {
         this.employe = employe;
     }
 
-    private Rules intitializeRulesForThisEmploye(Employe employe) {
+    protected Rules intitializeRulesForThisEmploye(Employe employe) {
         RulesFactory rulesFactory = new RulesFactory();
         return rulesFactory.makeRules(employe);
     }
 
-    private void reportHasNotMinimumWeeklyTimeInOffice() {
+    protected void reportHasNotMinimumWeeklyTimeInOffice() {
         if (!rules.hasMinimumWeeklyTimeInOffice())
             report.add(RULES_ERROR_1);
     }
 
-    private void reportInvalidDaysWithMinimumDailyTimeInOffice() {
+    protected void reportInvalidDaysWithMinimumDailyTimeInOffice() {
         if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0)
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++)
                 report.add(RULES_ERROR_2 + " (" 
                         + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
     }
 
-    private void reportHasNotValidWeeklyTimeRemote() {
+    protected void reportHasNotValidWeeklyTimeRemote() {
         if (!rules.hasValidWeeklyTimeRemote())
             report.add(RULES_ERROR_3);
     }
 
-    private void reportHasNotValidWeeklyTimeInOffice() {
+    protected void reportHasNotValidWeeklyTimeInOffice() {
         if (!rules.hasValidWeeklyTimeInOffice())
             report.add(RULES_ERROR_4);
     }
     
-    private void reportInvalidDaysWithSickLeave() {
+    protected void reportInvalidDaysWithSickLeave() {
         String errorType;
         if (rules.getInvalidDaysWithSickLeave().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithSickLeave().size(); i++) {
@@ -102,7 +102,7 @@ public class Report {
         }
     } 
     
-    private String getErrorTypeForWorkWhileSick(Day day) {
+    protected String getErrorTypeForWorkWhileSick(Day day) {
         String errorType = "";
         if (day.hasOfficeTask())
             errorType = "travail au bureau - ";
@@ -111,7 +111,7 @@ public class Report {
         return errorType;
     }
     
-    private void reportInvalidDaysWithPublicHoliday() {
+    protected void reportInvalidDaysWithPublicHoliday() {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithPublicHoliday().size(); i++) {
                 if (rules.getInvalidDaysWithPublicHoliday().get(i).hasOfficeTask()) 
@@ -123,14 +123,14 @@ public class Report {
         }
     }
     
-    private void reportInvalidDaysWithToMuchTime() {
+    protected void reportInvalidDaysWithToMuchTime() {
         if (rules.getInvalidDaysWithToMuchTime().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithToMuchTime().size(); i++)
                 report.add(RULES_ERROR_7 + " (" + rules.getInvalidDaysWithToMuchTime().get(i).getName() + ")");
         }
     }
     
-    private void reportDaysHasNotMinimumMinutesForATask() {
+    protected void reportDaysHasNotMinimumMinutesForATask() {
         if (rules.getInvalidDaysWithoutMinimumMinutesForTask().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithoutMinimumMinutesForTask().size(); i++)
                 report.add(RULES_ERROR_8 + " (" 
@@ -138,7 +138,7 @@ public class Report {
         }
     }
     
-    private void reportInvalidDaysWithInvalidTasksAfter24Hours() {
+    protected void reportInvalidDaysWithInvalidTasksAfter24Hours() {
         if (rules.getInvalidDaysWithInvalidTasksAfter24Hours().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysWithInvalidTasksAfter24Hours().size(); i++)
                 report.add(RULES_ERROR_9 + " (" 
@@ -146,7 +146,7 @@ public class Report {
         }
     }
     
-    private void reportInvalidDaysOfParentalHoliday() {
+    protected void reportInvalidDaysOfParentalHoliday() {
         if (rules.getInvalidDaysOfParentalHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysOfParentalHoliday().size(); i++)
                 report.add(RULES_ERROR_10 + " (" 
