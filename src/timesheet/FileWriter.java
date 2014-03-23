@@ -9,7 +9,7 @@ public class FileWriter {
     private static final String FILE_ENCODING = "UTF-8";
     private static final int JSON_OUTPUT_IDENTATION = 2;
 
-    private static void writeStringIntoFile(String data, String unFile, String encoding) throws IOException {
+    protected static void writeStringIntoFile(String data, String unFile, String encoding) throws IOException {
         IOUtils.write(data, new FileOutputStream(unFile), encoding);
     }
 
