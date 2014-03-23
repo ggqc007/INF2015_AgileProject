@@ -5,13 +5,13 @@ import java.util.List;
 
 abstract public class Rules {
     
-    protected int maxOfficeWeekMinutes;
-    protected int minOfficeWeekMinutes;
-    protected int maxRemoteWeekMinutes;
-    protected int minOfficeDailyMinutes;
-    protected int totalWeekMinutes = 0;
-    protected int totalOfficeWeekMinutes = 0;
-    protected int totalRemoteWeekMinutes = 0;
+    protected double maxOfficeWeekMinutes;
+    protected double minOfficeWeekMinutes;
+    protected double maxRemoteWeekMinutes;
+    protected double minOfficeDailyMinutes;
+    protected double totalWeekMinutes = 0;
+    protected double totalOfficeWeekMinutes = 0;
+    protected double totalRemoteWeekMinutes = 0;
     protected Employe employe;
     
     public Rules() {
@@ -21,12 +21,12 @@ abstract public class Rules {
     abstract public boolean hasValidWeeklyTimeRemote();
     
     public boolean hasValidWeeklyTimeInOffice() {
-        int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;
+        double officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;
         return (officeWeekMinutes <= maxOfficeWeekMinutes);
     }
     
     public boolean hasMinimumWeeklyTimeInOffice() {
-        int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;        
+        double officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;        
         return (officeWeekMinutes >= minOfficeWeekMinutes);
     }    
     
@@ -138,31 +138,31 @@ abstract public class Rules {
     } 
     
     // TODO Enlever getter au moment d'enlever méthode debug
-    public int getMaxOfficeWeekMinutes() {
+    public double getMaxOfficeWeekMinutes() {
         return maxOfficeWeekMinutes;
     }
 
-    public int getMinOfficeWeekMinutes() {
+    public double getMinOfficeWeekMinutes() {
         return minOfficeWeekMinutes;
     }
 
-    public int getMaxRemoteWeekMinutes() {
+    public double getMaxRemoteWeekMinutes() {
         return maxRemoteWeekMinutes;
     }
 
-    public int getMinOfficeDailyMinutes() {
+    public double getMinOfficeDailyMinutes() {
         return minOfficeDailyMinutes;
     }
 
-    public int getTotalWeekMinutes() {
+    public double getTotalWeekMinutes() {
         return totalWeekMinutes;
     }
 
-    public int getTotalOfficeWeekMinutes() {
+    public double getTotalOfficeWeekMinutes() {
         return totalOfficeWeekMinutes;
     }
 
-    public int getTotalRemoteWeekMinutes() {
+    public double getTotalRemoteWeekMinutes() {
         return totalRemoteWeekMinutes;
     }    
 }

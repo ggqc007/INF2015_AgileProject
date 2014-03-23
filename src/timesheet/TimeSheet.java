@@ -97,7 +97,7 @@ public class TimeSheet {
         
         Day day;        
         Rules rules;   
-        int hours, minutes;
+        double hours, minutes;
  
         RulesFactory rulesFactory = new RulesFactory();
         rules = rulesFactory.makeRules(employe);
