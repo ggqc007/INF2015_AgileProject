@@ -55,7 +55,7 @@ public class Day {
         return (getPublicHolidayTime() == TimeSheet.PUBLIC_HOLIDAY_TIME);        
     }
         
-    private int getPublicHolidayTime() {             
+    protected int getPublicHolidayTime() {             
         int pubHolidayTime = 0;
         for (Task task : tasks)
             if (task.isPublicHolidayTask())
@@ -78,7 +78,7 @@ public class Day {
         return (getSickLeaveTime() == TimeSheet.SICK_LEAVE_TIME);          
     }   
     
-    private int getSickLeaveTime() {             
+    protected int getSickLeaveTime() {             
         int sickLeaveTime = 0;
         for (Task task : tasks)
             if (!task.isSickLeaveTask())
@@ -105,7 +105,7 @@ public class Day {
         return (getHolidayTime() == TimeSheet.HOLIDAY_TIME);          
     }   
     
-    private int getHolidayTime() {             
+    protected int getHolidayTime() {             
         int holidayTime = 0;
         for (Task task : tasks)
             if (!task.isHolidayTask() && !(task.isOfficeTask() || task.isRemoteTask()))
@@ -128,7 +128,7 @@ public class Day {
         return (getParentalHolidayTime() == TimeSheet.PARENTAL_HOLIDAY_TIME);          
     } 
     
-    private int getParentalHolidayTime() {             
+    protected int getParentalHolidayTime() {             
         int parentalHolidayTime = 0;
         for (Task task : tasks)
             if (!task.isParentalHolidayTask())
