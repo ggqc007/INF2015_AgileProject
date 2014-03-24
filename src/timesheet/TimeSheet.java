@@ -175,7 +175,7 @@ public class TimeSheet {
                 System.out.printf(day.getName() + " ");
         } 
         
-        List<Day> days_holiday = rules.getInvalidDaysOfParentalHoliday();       
+        List<Day> days_holiday = rules.getInvalidDaysOfHoliday();       
         
         System.out.printf("\n      Valid holiday        : ");        
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
