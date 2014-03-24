@@ -98,17 +98,22 @@ abstract public class Rules {
     public List<Day> getInvalidDaysWithDuplicateTasks() {
         List<Day> days = employe.getTimeSheet(0).getDays();
         List<Day> invalidDays = new ArrayList<>();
-        List<String> listTask;
         for (int i = 0; i < days.size(); i++) {
-            listTask = new ArrayList<>();
-            for(Task task : days.get(i).getTasks()) {
-                listTask.add(task.toString());
-                if (listTask.contains(task.toString()))
-                    invalidDays.add(days.get(i));
-            }
-            listTask = null;
+            if (isDuplicateTask(days.get(i).getTasks()))
+                invalidDays.add(days.get(i));
         }
         return invalidDays;
+    }
+    
+    protected boolean isDuplicateTask(List<Task> tasks) {
+        boolean isDuplicate = false;
+        List listTask = new ArrayList<>();
+        for(Task task : tasks) {
+            if (listTask.contains(task.getProjectId()))
+                isDuplicate = true;
+            listTask.add(task.getProjectId());
+        }
+        return isDuplicate;
     }
     
     protected void calculateTotalWeekMinutes() {

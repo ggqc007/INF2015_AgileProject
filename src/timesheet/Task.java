@@ -49,4 +49,8 @@ public class Task {
     public String toString() {        
         return "Task{projectId: " + projectId + ", time: " + time +"}";        
     }    
+
+    public int getProjectId() {
+        return projectId;
+    }
 }
