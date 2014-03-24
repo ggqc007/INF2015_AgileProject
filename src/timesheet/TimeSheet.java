@@ -87,9 +87,9 @@ public class TimeSheet {
             if ((employe.isExplEmploye()))
                 System.out.println(" is an EXPLOITATION employe");
             else if ((employe.isDevelEmploye()))
-                System.out.println(" is an DEVELOPMENT employe");
+                System.out.println(" is a DEVELOPMENT employe");
             else if ((employe.isDirectionEmploye()))
-                System.out.println(" is an DIRECTION employe");            
+                System.out.println(" is a DIRECTION employe");            
             else
                 System.out.println(" is an UNKNOWN employe"); 
             
