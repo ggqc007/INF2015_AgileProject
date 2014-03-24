@@ -3,8 +3,8 @@ package timesheet;
 public class RulesProdution extends Rules {
 
     public RulesProdution(Employe employe) {
-        minOfficeWeekMinutes = 38*60;
-        minOfficeDailyMinutes = 6*60; 
+        minOfficeWeekMinutes = 2280;
+        minOfficeDailyMinutes = 360; 
         setEmploye(employe);
         calculateTotalWeekMinutes();
     }

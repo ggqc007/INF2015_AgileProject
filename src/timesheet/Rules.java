@@ -15,7 +15,7 @@ abstract public class Rules {
     protected Employe employe;
     
     public Rules() {
-        maxOfficeWeekMinutes = 43*60;
+        maxOfficeWeekMinutes = 2580;
     }
     
     abstract public boolean hasValidWeeklyTimeRemote();
