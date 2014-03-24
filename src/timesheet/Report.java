@@ -23,6 +23,7 @@ public class Report {
             + " comporte pas de temps de journée de vacances ou de congé férié";
     
     private static final String RULES_ERROR_10 = "Cet employé a au moins une journée de congé parental invalide";
+    private static final String RULES_ERROR_11 = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
 
     private Employe employe;
     private List<String> report = new ArrayList<>();
@@ -54,6 +55,7 @@ public class Report {
         reportDaysHasNotMinimumMinutesForATask();
         reportInvalidDaysWithInvalidTasksAfter24Hours();
         reportInvalidDaysOfParentalHoliday();
+        reportInvalidWithDuplicateTasks();
     }
     
     public Employe getEmploye() {
@@ -152,5 +154,13 @@ public class Report {
                 report.add(RULES_ERROR_10 + " (" 
                         + rules.getInvalidDaysOfParentalHoliday().get(i).getName() + ")");
         }        
+    }
+    
+    protected void reportInvalidWithDuplicateTasks() {
+        if (rules.getInvalidDaysWithDuplicateTasks().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithDuplicateTasks().size(); i++)
+                report.add(RULES_ERROR_11 + " (" 
+                        + rules.getInvalidDaysWithDuplicateTasks().get(i).getName() + ")");
+        }  
     }
 }

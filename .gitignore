@@ -1,4 +1,4 @@
-/nbproject/private/
+/nbproject/*
 /build/
 /dist/
 build.xml
@@ -7,3 +7,4 @@ nbbuild.xml
 /nbproject/
 /json/fichier_out.json 
 /build
+*.json

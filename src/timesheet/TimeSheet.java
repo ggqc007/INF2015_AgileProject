@@ -168,7 +168,7 @@ public class TimeSheet {
         else        
             System.out.println("      Remote week max      : N/A");               
 
-        hours = rules.getTotalWeekMinutes() / 60;
+/*        hours = rules.getTotalWeekMinutes() / 60;
         minutes = rules.getTotalWeekMinutes() % 60;
         System.out.printf("\n      Total by week        : " + rules.getTotalWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
         hours = rules.getTotalOfficeWeekMinutes() / 60;
@@ -177,7 +177,7 @@ public class TimeSheet {
         hours = rules.getTotalRemoteWeekMinutes() / 60;
         minutes = rules.getTotalRemoteWeekMinutes() % 60;        
         System.out.printf("      Total remote by week : " + rules.getTotalRemoteWeekMinutes() +"m(%d:%02dh)\n", hours, minutes);        
-
+*/
         System.out.printf("\n      Day name             : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
@@ -226,7 +226,7 @@ public class TimeSheet {
                     System.out.printf("%11s", "Weekend");
                 
         }        
-        
+/*        
         System.out.printf("\n\n      Total by day         : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
@@ -288,7 +288,7 @@ public class TimeSheet {
             System.out.printf(" [" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
         else
             System.out.printf(" " + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
-
+*/
         System.out.println("\nDEBUG JSON Output data : " + outputJSON.toString(2)); 
         System.out.println("\nDEBUG JSON Data succesfully writen to : " + outputFileName +"\n");                  
     }

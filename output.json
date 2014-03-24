@@ -1,5 +1,18 @@
 [
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour2)",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)",
+  "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)",
   "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour5)",
   "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.",
-  "Cet employé a une journée invalide de congé férié. (jour1)"
+  "Cet employé a une journée invalide de congé de maladie. (weekend2)",
+  "Cet employé a une journée invalide de congé de maladie. (jour3)",
+  "Cet employé a une journée invalide de congé férié. (jour2)",
+  "Cet employé a une journée avec plus de 32 heures travaillé. (jour1)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (weekend2)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour1)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour1)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour1)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour2)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour3)",
+  "Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour4)"
 ]

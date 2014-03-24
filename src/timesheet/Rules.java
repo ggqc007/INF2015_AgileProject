@@ -94,6 +94,22 @@ abstract public class Rules {
                 invalidDays.add(days.get(i));
         return invalidDays;
     }
+
+    public List<Day> getInvalidDaysWithDuplicateTasks() {
+        List<Day> days = employe.getTimeSheet(0).getDays();
+        List<Day> invalidDays = new ArrayList<>();
+        List<String> listTask;
+        for (int i = 0; i < days.size(); i++) {
+            listTask = new ArrayList<>();
+            for(Task task : days.get(i).getTasks()) {
+                listTask.add(task.toString());
+                if (listTask.contains(task.toString()))
+                    invalidDays.add(days.get(i));
+            }
+            listTask = null;
+        }
+        return invalidDays;
+    }
     
     protected void calculateTotalWeekMinutes() {
         List<Day> days = employe.getTimeSheet(0).getDays();       
