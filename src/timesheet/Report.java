@@ -20,10 +20,10 @@ public class Report {
     private static final String RULES_ERROR_8 = "Cet employé a une journée qui ne respecte pas le nombre minimum"
             + " de minutes (" + TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK + ") pour une tache.";
     private static final String RULES_ERROR_9 = "Cet employé a une journée avec plus de 24 heures qui ne"
-            + " comporte pas de temps de journée de vacances ou de congé férié";
-    
+            + " comporte pas de temps de journée de vacances ou de congé férié";    
     private static final String RULES_ERROR_10 = "Cet employé a au moins une journée de congé parental invalide";
     private static final String RULES_ERROR_11 = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
+    private static final String RULES_ERROR_12 = "Cet employé a une journée invalide de congé.";
 
     private Employe employe;
     private List<String> report = new ArrayList<>();
@@ -44,6 +44,7 @@ public class Report {
         return report;
     }
 
+    // TODO: Contient plus de 10 lignes!
     protected void buildReports() {
         reportHasNotMinimumWeeklyTimeInOffice();
         reportInvalidDaysWithMinimumDailyTimeInOffice();
@@ -55,6 +56,7 @@ public class Report {
         reportDaysHasNotMinimumMinutesForATask();
         reportInvalidDaysWithInvalidTasksAfter24Hours();
         reportInvalidDaysOfParentalHoliday();
+        reportInvalidDaysOfHoliday();        
         reportInvalidWithDuplicateTasks();
     }
     
@@ -153,6 +155,14 @@ public class Report {
             for (int i = 0; i < rules.getInvalidDaysOfParentalHoliday().size(); i++)
                 report.add(RULES_ERROR_10 + " (" 
                         + rules.getInvalidDaysOfParentalHoliday().get(i).getName() + ")");
+        }        
+    }
+    
+    protected void reportInvalidDaysOfHoliday() {
+        if (rules.getInvalidDaysOfHoliday().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysOfHoliday().size(); i++)
+                report.add(RULES_ERROR_12 + " (" 
+                        + rules.getInvalidDaysOfHoliday().get(i).getName() + ")");
         }        
     }
     
