@@ -107,7 +107,7 @@ abstract public class Rules {
     
     protected boolean isDuplicateTask(List<Task> tasks) {
         boolean isDuplicate = false;
-        List listTask = new ArrayList<>();
+        List<Integer> listTask = new ArrayList<>();
         for(Task task : tasks) {
             if (listTask.contains(task.getProjectId()))
                 isDuplicate = true;
