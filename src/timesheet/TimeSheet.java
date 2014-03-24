@@ -157,6 +157,40 @@ public class TimeSheet {
             //if (day.hasSickLeaveTask() && !day.isValidSickLeave())
                 System.out.printf(day.getName() + " ");
         } 
+ 
+        // DEBUT - NOUVELLE MODIFICATIONS
+        
+        List<Day> days_parenth = rules.getInvalidDaysOfParentalHoliday();       
+        
+        System.out.printf("\n      Valid parent holiday : ");        
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (!days_parenth.contains(day) && day.hasParentalHolidayTask() && day.isValidParentalHoliday())
+                System.out.printf(day.getName() + " ");
+        }  
+        System.out.printf("\n      Invalid parent holi  : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (days_parenth.contains(day))
+                System.out.printf(day.getName() + " ");
+        } 
+        
+        List<Day> days_holiday = rules.getInvalidDaysOfParentalHoliday();       
+        
+        System.out.printf("\n      Valid holiday        : ");        
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (!days_holiday.contains(day) && day.hasHolidayTask() && day.isValidHoliday())
+                System.out.printf(day.getName() + " ");
+        }  
+        System.out.printf("\n      Invalid holiday      : ");
+        for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
+            day = employe.getTimeSheet(0).getDay(i);
+            if (days_holiday.contains(day))
+                System.out.printf(day.getName() + " ");
+        }
+        
+        // FIN - NOUVELLE MODIFICATIONS
         
         System.out.printf("\n\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
 
@@ -200,6 +234,16 @@ public class TimeSheet {
                     System.out.printf("%11s,", "PubHoli");
                 else
                     System.out.printf("%11s,", "[PubHoli]");
+            } else if (day.hasParentalHolidayTask()) {
+                if (!days_parenth.contains(day) && day.isValidParentalHoliday())
+                    System.out.printf("%11s,", "ParentHoli");
+                else
+                    System.out.printf("%11s,", "[ParentHoli]");
+            } else if (day.hasHolidayTask()) {
+                if (!days_holiday.contains(day) && day.isValidHoliday())
+                    System.out.printf("%11s,", "Holiday");
+                else
+                    System.out.printf("%11s,", "[Holiday]");
             } else {                
                 if (day.isWorkingDay())
                     System.out.printf("%11s,", "Normal");
@@ -219,12 +263,21 @@ public class TimeSheet {
                 System.out.printf("%11s", "PubHoli");
             else
                 System.out.printf("%11s", "[PubHoli]");
+        } else if (day.hasParentalHolidayTask()) {
+                if (!days_parenth.contains(day) && day.isValidParentalHoliday())
+                    System.out.printf("%11s,", "ParentHoli");
+                else
+                    System.out.printf("%11s,", "[ParentHoli]");
+        } else if (day.hasHolidayTask()) {
+                if (!days_holiday.contains(day) && day.isValidHoliday())
+                    System.out.printf("%11s,", "Holiday");
+                else
+                    System.out.printf("%11s,", "[Holiday]");
         } else {
                 if (day.isWorkingDay())
                     System.out.printf("%11s", "Normal");
                 else
-                    System.out.printf("%11s", "Weekend");
-                
+                    System.out.printf("%11s", "Weekend");                                
         }        
         
         System.out.printf("\n\n      Total by day         : ");               
@@ -233,7 +286,7 @@ public class TimeSheet {
             hours = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) / 60;
             minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60; 
             //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
-            if (days_ph.contains(day) || days_sl.contains(day))            
+            if (days_ph.contains(day) || days_sl.contains(day) || days_parenth.contains(day) || days_holiday.contains(day))            
                 System.out.printf("[" + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)],", hours, minutes);
             else
                 System.out.printf(" " + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh),", hours, minutes);                
@@ -243,7 +296,7 @@ public class TimeSheet {
         minutes = (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) % 60;  
         
         //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
-        if (days_ph.contains(day) || days_sl.contains(day))
+        if (days_ph.contains(day) || days_sl.contains(day) || days_parenth.contains(day) || days_holiday.contains(day))
             System.out.printf("[" + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)]\n", hours, minutes);        
         else
             System.out.printf(" " + (rules.getTotalOfficeMinutesByDay(day)+rules.getTotalRemoteMinutesByDay(day)) + "m(%d:%02dh)\n", hours, minutes); 
@@ -254,7 +307,7 @@ public class TimeSheet {
             hours = rules.getTotalOfficeMinutesByDay(day) / 60;
             minutes = rules.getTotalOfficeMinutesByDay(day) % 60;
             //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
-            if (days_ph.contains(day) || days_sl.contains(day))
+            if (days_ph.contains(day) || days_sl.contains(day) || days_parenth.contains(day) || days_holiday.contains(day))
                 System.out.printf(" [" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);   
             else
                 System.out.printf(" " + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);
@@ -264,7 +317,7 @@ public class TimeSheet {
         minutes = rules.getTotalOfficeMinutesByDay(day) % 60;    
         
         //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
-        if (days_ph.contains(day) || days_sl.contains(day))
+        if (days_ph.contains(day) || days_sl.contains(day) || days_parenth.contains(day) || days_holiday.contains(day))
             System.out.printf(" [" + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
         else
             System.out.printf(" " + rules.getTotalOfficeMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
@@ -275,7 +328,7 @@ public class TimeSheet {
             hours = rules.getTotalRemoteMinutesByDay(day) / 60;
             minutes = rules.getTotalRemoteMinutesByDay(day) % 60;    
             //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))
-            if (days_ph.contains(day) || days_sl.contains(day))
+            if (days_ph.contains(day) || days_sl.contains(day) || days_parenth.contains(day) || days_holiday.contains(day))
                 System.out.printf(" [" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)],", hours, minutes);
             else
                 System.out.printf(" " + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh),", hours, minutes);                
@@ -284,7 +337,7 @@ public class TimeSheet {
         hours = rules.getTotalRemoteMinutesByDay(day) / 60;
         minutes = rules.getTotalRemoteMinutesByDay(day) % 60;   
         //if ((day.hasPublicHolidayTask() && !day.isValidPublicHoliday()) || (day.hasSickLeaveTask() && !day.isValidSickLeave()))        
-        if (days_ph.contains(day) || days_sl.contains(day))    
+        if (days_ph.contains(day) || days_sl.contains(day) || days_parenth.contains(day) || days_holiday.contains(day))    
             System.out.printf(" [" + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)]\n", hours, minutes);
         else
             System.out.printf(" " + rules.getTotalRemoteMinutesByDay(day) + "m(%d:%02dh)\n", hours, minutes);            
