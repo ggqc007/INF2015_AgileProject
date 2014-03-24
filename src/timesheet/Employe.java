@@ -42,9 +42,8 @@ public class Employe {
        return ((employeId >= TimeSheet.EMPLOYE_DEVEL_ID_CEILING) && (employeId <= TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR));       
     }    
     
-    // TODO: A faire par Khaled - Méthode vide pour l'instant pour pouvoir s'en servir dans DEBUG
     public boolean isDirectionEmploye() {        
-       return false;       
+       return (employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR);      
     } 
     
     // TODO: REMOVE - Utilisée seulement dans DEBUG
