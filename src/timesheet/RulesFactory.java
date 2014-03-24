@@ -8,7 +8,7 @@ public class RulesFactory {
         else if(employe.isExplEmploye())
             return new RulesExploitation(employe);
         else if(employe.isDevelEmploye())
-            return new Rulesdirection(employe);
+            return new RulesDirection(employe);
         return (Rules) new Object();
     }
 }
