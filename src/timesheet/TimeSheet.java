@@ -110,7 +110,7 @@ public class TimeSheet {
             System.out.println("NO (one or more invalid name(s) or not 7 days)");
         
         System.out.println("\nDEBUG Working hours stats :");
-        System.out.printf("\n      Valid days           : ");
+        System.out.printf("\n    > Valid days           : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (day.hasValidMaximumHours())
@@ -125,7 +125,7 @@ public class TimeSheet {
         
         List<Day> days_ph = rules.getInvalidDaysWithPublicHoliday();
         
-        System.out.printf("\n      Valid pub holiday    : ");
+        System.out.printf("\n    > Valid pub holiday    : ");
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             //if (!days.contains(day))
@@ -143,7 +143,7 @@ public class TimeSheet {
         
         List<Day> days_sl = rules.getInvalidDaysWithSickLeave();       
         
-        System.out.printf("\n      Valid sick leave     : ");        
+        System.out.printf("\n    > Valid sick leave     : ");        
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (!days_sl.contains(day) && day.hasSickLeaveTask() && day.isValidSickLeave())
@@ -162,7 +162,7 @@ public class TimeSheet {
         
         List<Day> days_parenth = rules.getInvalidDaysOfParentalHoliday();       
         
-        System.out.printf("\n      Valid parent holiday : ");        
+        System.out.printf("\n    > Valid parent holiday : ");        
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (!days_parenth.contains(day) && day.hasParentalHolidayTask() && day.isValidParentalHoliday())
@@ -177,7 +177,7 @@ public class TimeSheet {
         
         List<Day> days_holiday = rules.getInvalidDaysOfHoliday();       
         
-        System.out.printf("\n      Valid holiday        : ");        
+        System.out.printf("\n    > Valid holiday        : ");        
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum(); i++) {
             day = employe.getTimeSheet(0).getDay(i);
             if (!days_holiday.contains(day) && day.hasHolidayTask() && day.isValidHoliday())
