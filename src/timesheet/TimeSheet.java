@@ -192,13 +192,26 @@ public class TimeSheet {
         
         // FIN - NOUVELLE MODIFICATIONS
         
-        System.out.printf("\n\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%.0fh)\n", rules.getMinOfficeDailyMinutes()/60.0);
+        hours = rules.getMinOfficeDailyMinutes() / 60;
+        minutes = rules.getMinOfficeDailyMinutes() % 60;
+        
+        System.out.printf("\n\n      Office day min       : " + rules.getMinOfficeDailyMinutes() + "m(%d:%02dh)\n", hours, minutes);
 
-        System.out.printf("      Office week min/max  : " + rules.getMinOfficeWeekMinutes() + "m(%.0fh)/", rules.getMinOfficeWeekMinutes()/60.0);
-        System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%.0fh)\n", rules.getMaxOfficeWeekMinutes()/60.0);
+        hours = rules.getMinOfficeWeekMinutes() / 60;
+        minutes = rules.getMinOfficeWeekMinutes() % 60;        
+        
+        System.out.printf("      Office week min/max  : " + rules.getMinOfficeWeekMinutes() + "m(%d:%02dh)/", hours, minutes);
+ 
+        hours = rules.getMaxOfficeWeekMinutes() / 60;
+        minutes = rules.getMaxOfficeWeekMinutes() % 60;  
+        
+        System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
 
+        hours = rules.getMaxRemoteWeekMinutes() / 60;
+        minutes = rules.getMaxRemoteWeekMinutes() % 60; 
+        
         if (rules.getMaxRemoteWeekMinutes() != 0)
-            System.out.printf("      Remote week max      : " + rules.getMaxRemoteWeekMinutes() + "m(%.0fh)\n", rules.getMaxRemoteWeekMinutes()/60.0);
+            System.out.printf("      Remote week max      : " + rules.getMaxRemoteWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
         else        
             System.out.println("      Remote week max      : N/A");               
 
