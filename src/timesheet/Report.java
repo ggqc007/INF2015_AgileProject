@@ -44,20 +44,31 @@ public class Report {
         return report;
     }
 
-    // TODO: Contient plus de 10 lignes!
     protected void buildReports() {
-        reportHasNotMinimumWeeklyTimeInOffice();
+        buildInvalidTasksReports();
+        buildInvalidDaysReports();
+        buildInvalidWeekReports();
+    }
+    
+    protected void buildInvalidTasksReports() {
+        reportDaysHasNotMinimumMinutesForATask();
+        reportInvalidDaysWithInvalidTasksAfter24Hours();
+        reportInvalidWithDuplicateTasks();
+    }
+        
+    protected void buildInvalidDaysReports() {
         reportInvalidDaysWithMinimumDailyTimeInOffice();
-        reportHasNotValidWeeklyTimeRemote();
-        reportHasNotValidWeeklyTimeInOffice();
         reportInvalidDaysWithSickLeave();
         reportInvalidDaysWithPublicHoliday();
         reportInvalidDaysWithToMuchTime();
-        reportDaysHasNotMinimumMinutesForATask();
-        reportInvalidDaysWithInvalidTasksAfter24Hours();
         reportInvalidDaysOfParentalHoliday();
-        reportInvalidDaysOfHoliday();        
-        reportInvalidWithDuplicateTasks();
+        reportInvalidDaysOfHoliday();
+    }
+    
+    protected void buildInvalidWeekReports() {
+        reportHasNotMinimumWeeklyTimeInOffice();
+        reportHasNotValidWeeklyTimeRemote();
+        reportHasNotValidWeeklyTimeInOffice();
     }
     
     public Employe getEmploye() {
