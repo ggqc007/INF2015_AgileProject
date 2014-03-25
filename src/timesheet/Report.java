@@ -84,26 +84,35 @@ public class Report {
         return rulesFactory.makeRules(employe);
     }
 
-    protected void reportHasNotMinimumWeeklyTimeInOffice() {
-        if (!rules.hasMinimumWeeklyTimeInOffice())
-            report.add(RULES_ERROR_1);
+    protected void reportDaysHasNotMinimumMinutesForATask() {
+        if (rules.getInvalidDaysWithoutMinimumMinutesForTask().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithoutMinimumMinutesForTask().size(); i++)
+                report.add(RULES_ERROR_8 + " (" 
+                        + rules.getInvalidDaysWithoutMinimumMinutesForTask().get(i).getName() + ")");
+        }
     }
-
+    
+    protected void reportInvalidDaysWithInvalidTasksAfter24Hours() {
+        if (rules.getInvalidDaysWithInvalidTasksAfter24Hours().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithInvalidTasksAfter24Hours().size(); i++)
+                report.add(RULES_ERROR_9 + " (" 
+                        + rules.getInvalidDaysWithInvalidTasksAfter24Hours().get(i).getName() + ")");
+        }
+    }
+    
+    protected void reportInvalidWithDuplicateTasks() {
+        if (rules.getInvalidDaysWithDuplicateTasks().size() > 0) {
+            for (int i = 0; i < rules.getInvalidDaysWithDuplicateTasks().size(); i++)
+                report.add(RULES_ERROR_11 + " (" 
+                        + rules.getInvalidDaysWithDuplicateTasks().get(i).getName() + ")");
+        }  
+    }
+    
     protected void reportInvalidDaysWithMinimumDailyTimeInOffice() {
         if (rules.getInvalidDaysWithMinimumDailyTimeInOffice().size() > 0)
             for (int i = 0; i < rules.getInvalidDaysWithMinimumDailyTimeInOffice().size(); i++)
                 report.add(RULES_ERROR_2 + " (" 
                         + rules.getInvalidDaysWithMinimumDailyTimeInOffice().get(i).getName() + ")");
-    }
-
-    protected void reportHasNotValidWeeklyTimeRemote() {
-        if (!rules.hasValidWeeklyTimeRemote())
-            report.add(RULES_ERROR_3);
-    }
-
-    protected void reportHasNotValidWeeklyTimeInOffice() {
-        if (!rules.hasValidWeeklyTimeInOffice())
-            report.add(RULES_ERROR_4);
     }
     
     protected void reportInvalidDaysWithSickLeave() {
@@ -116,15 +125,6 @@ public class Report {
             }
         }
     } 
-    
-    protected String getErrorTypeForWorkWhileSick(Day day) {
-        String errorType = "";
-        if (day.hasOfficeTask())
-            errorType = "travail au bureau - ";
-        if (day.hasRemoteTask())
-            errorType += "télé-travail - ";
-        return errorType;
-    }
     
     protected void reportInvalidDaysWithPublicHoliday() {
         if (rules.getInvalidDaysWithPublicHoliday().size() > 0) {
@@ -145,22 +145,6 @@ public class Report {
         }
     }
     
-    protected void reportDaysHasNotMinimumMinutesForATask() {
-        if (rules.getInvalidDaysWithoutMinimumMinutesForTask().size() > 0) {
-            for (int i = 0; i < rules.getInvalidDaysWithoutMinimumMinutesForTask().size(); i++)
-                report.add(RULES_ERROR_8 + " (" 
-                        + rules.getInvalidDaysWithoutMinimumMinutesForTask().get(i).getName() + ")");
-        }
-    }
-    
-    protected void reportInvalidDaysWithInvalidTasksAfter24Hours() {
-        if (rules.getInvalidDaysWithInvalidTasksAfter24Hours().size() > 0) {
-            for (int i = 0; i < rules.getInvalidDaysWithInvalidTasksAfter24Hours().size(); i++)
-                report.add(RULES_ERROR_9 + " (" 
-                        + rules.getInvalidDaysWithInvalidTasksAfter24Hours().get(i).getName() + ")");
-        }
-    }
-    
     protected void reportInvalidDaysOfParentalHoliday() {
         if (rules.getInvalidDaysOfParentalHoliday().size() > 0) {
             for (int i = 0; i < rules.getInvalidDaysOfParentalHoliday().size(); i++)
@@ -177,11 +161,27 @@ public class Report {
         }        
     }
     
-    protected void reportInvalidWithDuplicateTasks() {
-        if (rules.getInvalidDaysWithDuplicateTasks().size() > 0) {
-            for (int i = 0; i < rules.getInvalidDaysWithDuplicateTasks().size(); i++)
-                report.add(RULES_ERROR_11 + " (" 
-                        + rules.getInvalidDaysWithDuplicateTasks().get(i).getName() + ")");
-        }  
+    protected void reportHasNotMinimumWeeklyTimeInOffice() {
+        if (!rules.hasMinimumWeeklyTimeInOffice())
+            report.add(RULES_ERROR_1);
     }
+
+    protected void reportHasNotValidWeeklyTimeRemote() {
+        if (!rules.hasValidWeeklyTimeRemote())
+            report.add(RULES_ERROR_3);
+    }
+
+    protected void reportHasNotValidWeeklyTimeInOffice() {
+        if (!rules.hasValidWeeklyTimeInOffice())
+            report.add(RULES_ERROR_4);
+    }
+    
+    protected String getErrorTypeForWorkWhileSick(Day day) {
+        String errorType = "";
+        if (day.hasOfficeTask())
+            errorType = "travail au bureau - ";
+        if (day.hasRemoteTask())
+            errorType += "télé-travail - ";
+        return errorType;
+    }  
 }
