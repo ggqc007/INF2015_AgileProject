@@ -62,7 +62,7 @@ abstract public class Rules {
         List<Day> days = employe.getTimeSheet(0).getDays();
         int nbDaysWithParentalHoliday = 0;
         for (int i = 0; i < days.size(); i++)    
-            if (days.get(i).isValidParentalHoliday() && days.get(i).hasParentalHolidayTask()) {
+            if (days.get(i).hasParentalHolidayTask()) {
                 nbDaysWithParentalHoliday++;
                 if(nbDaysWithParentalHoliday > 1)
                     invalidDays.add(days.get(i));
