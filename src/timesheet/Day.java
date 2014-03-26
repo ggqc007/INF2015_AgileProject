@@ -99,7 +99,16 @@ public class Day {
         return false;
     } 
     
-    public boolean isValidHoliday() {       
+    public boolean isValidHoliday() { 
+        System.out.println("\n\n ******** test: "+this.name+" s*********");
+        System.out.println("isWorkingDay: " + isWorkingDay());
+        System.out.println("hasHolidayTask: " + hasHolidayTask());
+        System.out.println("hasPublicHolidayTask: " + hasPublicHolidayTask());
+        System.out.println("hasSickLeaveTask: " + hasSickLeaveTask());
+        System.out.println("hasParentalHolidayTask: " + hasParentalHolidayTask());
+        System.out.println("getHolidayTime: " + getHolidayTime());
+        System.out.println("isValidHoliday: " + (getHolidayTime() == TimeSheet.HOLIDAY_TIME));
+        System.out.println("******** end test ********* \n\n ");
         if (!isWorkingDay() || !hasHolidayTask() || hasPublicHolidayTask() || hasSickLeaveTask() || hasParentalHolidayTask())
             return false;         
         return (getHolidayTime() == TimeSheet.HOLIDAY_TIME);          
@@ -110,7 +119,7 @@ public class Day {
         for (Task task : tasks)
             if (!task.isHolidayTask() && !(task.isOfficeTask() || task.isRemoteTask()))
                 return 0;
-            else
+            else if (task.isHolidayTask())
                 holidayTime += task.getTime();                  
         return holidayTime;          
     }      
@@ -122,7 +131,16 @@ public class Day {
         return false;
     }    
     
-    public boolean isValidParentalHoliday() {       
+    public boolean isValidParentalHoliday() {  
+        /*System.out.println("\n\n ******** test: "+this.name+" s*********");
+        System.out.println("isWorkingDay: " + isWorkingDay());
+        System.out.println("hasParentalHolidayTask: " + hasParentalHolidayTask());     
+        System.out.println("hasPublicHolidayTask: " + hasPublicHolidayTask()); 
+        System.out.println("hasSickLeaveTask: " + hasSickLeaveTask());        
+        System.out.println("hasHolidayTask: " + hasHolidayTask());
+        System.out.println("getParentalHolidayTime: " + getParentalHolidayTime());
+        System.out.println("isValidParentalHoliday: " + (getParentalHolidayTime() == TimeSheet.PARENTAL_HOLIDAY_TIME));
+        System.out.println("******** end test ********* \n\n ");*/       
         if (!isWorkingDay() || !hasParentalHolidayTask() || hasPublicHolidayTask() || hasSickLeaveTask() || hasHolidayTask())
             return false;      
         return (getParentalHolidayTime() == TimeSheet.PARENTAL_HOLIDAY_TIME);          
