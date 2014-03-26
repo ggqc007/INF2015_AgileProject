@@ -60,7 +60,7 @@ public class Day {
         for (Task task : tasks)
             if (task.isPublicHolidayTask())
                 pubHolidayTime += task.getTime(); 
-            else if (task.isSickLeaveTask() || !task.isRemoteTask())
+            else if (!task.isWorkTask())
                 return 0;                   
         return pubHolidayTime;          
     }  
