@@ -76,7 +76,7 @@ public class TimeSheetData {
     public boolean hasOnlyOneParentalHolidayByWeek() {
         boolean foundParentalHoliday = false;
         for (Day day : days)
-            if (day.hasParentalHolidayTask() && !foundParentalHoliday)
+            if (day.hasParentalHolidayTask() && foundParentalHoliday)
                 return false;   
             else if (day.hasParentalHolidayTask())
                 foundParentalHoliday = true;
