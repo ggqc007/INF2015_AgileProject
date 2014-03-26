@@ -24,6 +24,7 @@ public class Report {
     private static final String RULES_ERROR_10 = "Cet employé a au moins une journée de congé parental invalide";
     private static final String RULES_ERROR_11 = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
     private static final String RULES_ERROR_12 = "Cet employé a une journée invalide de congé.";
+    private static final String RULES_ERROR_13 = "Cet employé a plus d'une journée de congé parental par semaine.";    
 
     private Employe employe;
     private List<String> report = new ArrayList<>();
@@ -69,6 +70,7 @@ public class Report {
         reportHasNotMinimumWeeklyTimeInOffice();
         reportHasNotValidWeeklyTimeRemote();
         reportHasNotValidWeeklyTimeInOffice();
+        reportHasOnlyOneParentalHolidayByWeek();
     }
     
     public Employe getEmploye() {
@@ -159,6 +161,11 @@ public class Report {
                 report.add(RULES_ERROR_12 + " (" 
                         + rules.getInvalidDaysOfHoliday().get(i).getName() + ")");
         }        
+    }
+    
+    protected void reportHasOnlyOneParentalHolidayByWeek() {
+        if (!employe.getTimeSheet(0).hasOnlyOneParentalHolidayByWeek())
+            report.add(RULES_ERROR_13);                
     }
     
     protected void reportHasNotMinimumWeeklyTimeInOffice() {
