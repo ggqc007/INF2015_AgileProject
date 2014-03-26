@@ -59,10 +59,13 @@ abstract public class Rules {
     
     public List<Day> getInvalidDaysOfParentalHoliday() {
         List<Day> invalidDays = new ArrayList<>(); 
-        List<Day> days = employe.getTimeSheet(0).getDays();   
+        List<Day> days = employe.getTimeSheet(0).getDays();
+        int nbDaysWithParentalHoliday = 0;
         for (int i = 0; i < days.size(); i++)    
-            if (!days.get(i).isValidParentalHoliday() && days.get(i).hasParentalHolidayTask()) {
-                invalidDays.add(days.get(i));
+            if (days.get(i).isValidParentalHoliday() && days.get(i).hasParentalHolidayTask()) {
+                nbDaysWithParentalHoliday++;
+                if(nbDaysWithParentalHoliday > 1)
+                    invalidDays.add(days.get(i));
             }
         return invalidDays;         
     }
