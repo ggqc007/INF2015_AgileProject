@@ -64,7 +64,7 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)    
             if (days.get(i).hasParentalHolidayTask()) {
                 nbDaysWithParentalHoliday++;
-                if(nbDaysWithParentalHoliday > 1)
+                if(nbDaysWithParentalHoliday > 1 || !days.get(i).isValidParentalHoliday())
                     invalidDays.add(days.get(i));
             }
         return invalidDays;         
