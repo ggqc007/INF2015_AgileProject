@@ -71,9 +71,8 @@ abstract public class Rules {
         List<Day> invalidDays = new ArrayList<>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();   
         for (int i = 0; i < days.size(); i++)    
-            if (!days.get(i).isValidHoliday() && days.get(i).hasHolidayTask()) {
+            if (!days.get(i).isValidHoliday() && days.get(i).hasHolidayTask())
                 invalidDays.add(days.get(i));
-            }
         return invalidDays;         
     }    
     
