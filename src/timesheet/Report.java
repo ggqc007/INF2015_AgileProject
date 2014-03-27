@@ -23,7 +23,7 @@ public class Report {
             + " comporte pas de temps de journée de vacances ou de congé férié";    
     private static final String RULES_ERROR_10 = "Cet employé a au moins une journée de congé parental invalide";
     private static final String RULES_ERROR_11 = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
-    private static final String RULES_ERROR_12 = "Cet employé a une journée invalide de congé.";
+    private static final String RULES_ERROR_12 = "Cet employé a une journée invalide de congé de vacances.";
     private static final String RULES_ERROR_13 = "Cet employé a plus d'une journée de congé parental par semaine.";    
 
     private Employe employe;
