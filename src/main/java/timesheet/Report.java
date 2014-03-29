@@ -27,7 +27,7 @@ public class Report {
     private static final String RULES_ERROR_13 = "Cet employé a plus d'une journée de congé parental par semaine.";    
 
     private Employe employe;
-    private List<String> report = new ArrayList<>();
+    private List<String> report = new ArrayList<String>();
     private Rules rules;
 
     public Report() {

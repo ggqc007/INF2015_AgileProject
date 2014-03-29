@@ -10,7 +10,7 @@ public class Day {
     private final List<Task> tasks;
     
     public Day() {        
-        tasks = new ArrayList<>();        
+        tasks = new ArrayList<Task>();        
     }
     
     public Day(String name) { 

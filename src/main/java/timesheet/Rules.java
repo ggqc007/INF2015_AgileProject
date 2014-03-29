@@ -31,7 +31,7 @@ abstract public class Rules {
     }    
     
     public List<Day> getInvalidDaysWithMinimumDailyTimeInOffice(){
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
             if (days.get(i).isWorkingDay() == true && getTotalOfficeMinutesByDay(days.get(i)) < minOfficeDailyMinutes)
@@ -40,7 +40,7 @@ abstract public class Rules {
     }    
     
     public List<Day> getInvalidDaysWithSickLeave() {
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).isValidSickLeave() && days.get(i).hasSickLeaveTask()) 
@@ -49,7 +49,7 @@ abstract public class Rules {
     }
  
     public List<Day> getInvalidDaysWithPublicHoliday() {
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).isValidPublicHoliday() && days.get(i).hasPublicHolidayTask()) 
@@ -58,7 +58,7 @@ abstract public class Rules {
     }
     
     public List<Day> getInvalidDaysOfParentalHoliday() {
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();
         int nbDaysWithParentalHoliday = 0;
         for (int i = 0; i < days.size(); i++)    
@@ -71,7 +71,7 @@ abstract public class Rules {
     }
     
     public List<Day> getInvalidDaysOfHoliday() {
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();   
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).isValidHoliday() && days.get(i).hasHolidayTask())
@@ -80,7 +80,7 @@ abstract public class Rules {
     }    
     
     public List<Day> getInvalidDaysWithToMuchTime() {
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();       
         for (int i = 0; i < days.size(); i++)    
             if (!days.get(i).hasValidMaximumHours()) 
@@ -89,7 +89,7 @@ abstract public class Rules {
     }
     
     public List<Day> getInvalidDaysWithInvalidTasksAfter24Hours() {
-        List<Day> invalidDays = new ArrayList<>(); 
+        List<Day> invalidDays = new ArrayList<Day>(); 
         List<Day> days = employe.getTimeSheet(0).getDays();
         for (int i = 0; i < days.size(); i++)
             if (days.get(i).getTotalMinutesWorkedThisDay() > 60*24 && days.get(i).hasValidMaximumHours())
@@ -99,7 +99,7 @@ abstract public class Rules {
     }
     
     public List<Day> getInvalidDaysWithoutMinimumMinutesForTask() {
-        List<Day> invalidDays = new ArrayList<>();
+        List<Day> invalidDays = new ArrayList<Day>();
         List<Day> days = employe.getTimeSheet(0).getDays();
         for (int i = 0; i < days.size(); i++)
             if (days.get(i).hasTaskWithLessThanMinimumMinutesAmount())
@@ -109,7 +109,7 @@ abstract public class Rules {
 
     public List<Day> getInvalidDaysWithDuplicateTasks() {
         List<Day> days = employe.getTimeSheet(0).getDays();
-        List<Day> invalidDays = new ArrayList<>();
+        List<Day> invalidDays = new ArrayList<Day>();
         for (int i = 0; i < days.size(); i++) {
             if (isDuplicateTask(days.get(i).getTasks()))
                 invalidDays.add(days.get(i));
@@ -119,7 +119,7 @@ abstract public class Rules {
     
     protected boolean isDuplicateTask(List<Task> tasks) {
         boolean isDuplicate = false;
-        List<Integer> listTask = new ArrayList<>();
+        List<Integer> listTask = new ArrayList<Integer>();
         for(Task task : tasks) {
             if (listTask.contains(task.getProjectId()))
                 isDuplicate = true;
