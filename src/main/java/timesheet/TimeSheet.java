@@ -58,7 +58,7 @@ public class TimeSheet {
     
     protected static void exitWithEmptyJSONArrayFile() {
         JSONArray fileOutput = new JSONArray();
-        FileWriter.writeJSONFile(fileOutput, outputFileName);
+        FileWriterWrapper.writeJSONFile(fileOutput, outputFileName);
         System.exit(1);
     }
 
@@ -69,7 +69,7 @@ public class TimeSheet {
         employe.initFromFirstTimeSheet(tryJSONParserToTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
         JSONArray outputJSON = JSONParser.reportToJSONArray(report.generateReport(employe));        
-        FileWriter.writeJSONFile(outputJSON, outputFileName); 
+        FileWriterWrapper.writeJSONFile(outputJSON, outputFileName); 
         //debug(employe, objectFromFile, outputJSON);
     }    
     
