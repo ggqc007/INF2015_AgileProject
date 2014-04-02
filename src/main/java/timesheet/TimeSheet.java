@@ -1,5 +1,7 @@
 package timesheet;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -21,6 +23,8 @@ public class TimeSheet {
     protected static final int EMPLOYE_DIRECTION_ID_FLOOR = 5000;    
     protected static final int MINIMUM_MINUTES_AMOUNT_FOR_TASK = 0;
     protected static final int MAXIMUM_HOURS_FOR_DAY = 32;
+    
+    private static final String FILE_ENCODING = "UTF-8";
 
     private static String inputFileName;
     private static String outputFileName;
@@ -35,7 +39,7 @@ public class TimeSheet {
         outputFileName = args[1];        
     }
     
-    protected static JSONObject validateAndLoadJSONObjectFromFile(String inputFileName) {
+    protected static JSONObject validateAndLoadJSONObjectFromFile(String inputFileName) throws Exception {
         try {
             objectFromFile = JSONObject.fromObject(FileReader.readJSONFile(inputFileName));
         } catch (Exception e) {
@@ -45,7 +49,7 @@ public class TimeSheet {
         return objectFromFile;
     }
     
-    protected static TimeSheetData tryJSONParserToTimeSheetData(JSONObject objectFromFile) {
+    protected static TimeSheetData tryJSONParserToTimeSheetData(JSONObject objectFromFile) throws Exception{
         TimeSheetData newTimeSheetData = null;
         try {
             newTimeSheetData = JSONParser.toTimeSheetData(objectFromFile);
@@ -56,20 +60,38 @@ public class TimeSheet {
         return newTimeSheetData;
     }
     
-    protected static void exitWithEmptyJSONArrayFile() {
+    protected static void exitWithEmptyJSONArrayFile() throws Exception{
         JSONArray fileOutput = new JSONArray();
-        FileWriterWrapper.writeJSONFile(fileOutput, outputFileName);
+        FileWriterWrapper writer = initializeOutputStreamWriterWrapper();
+        writer.writeJSONFile(fileOutput);
+        //FileWriterWrapper.writeJSONFile(fileOutput, outputFileName);
         System.exit(1);
     }
+    
+    protected static FileWriterWrapper initializeOutputStreamWriterWrapper() {
+        FileWriterWrapper writer = null;
+        try {
+            OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(outputFileName), FILE_ENCODING);
+            writer = new FileWriterWrapper(osw);
+        } catch (Exception e) {
+            System.out.println("Erreur! ("+ e +")");
+        }
+        return writer;
+    }
 
-    public static void main(String[] args) {                
+    public static void main(String[] args) throws Exception {                
         verifyCmdArgs(args);                
         Employe employe = new Employe();
+        System.out.println("DEBUG: "+ inputFileName);
         validateAndLoadJSONObjectFromFile(inputFileName);
         employe.initFromFirstTimeSheet(tryJSONParserToTimeSheetData(objectFromFile));        
         Report report = new Report(employe);             
-        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generateReport(employe));        
-        FileWriterWrapper.writeJSONFile(outputJSON, outputFileName); 
+        JSONArray outputJSON = JSONParser.reportToJSONArray(report.generateReport(employe));
+        
+        OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(outputFileName), FILE_ENCODING);
+        FileWriterWrapper writer = new FileWriterWrapper(osw);
+        
+        writer.writeJSONFile(outputJSON); 
         //debug(employe, objectFromFile, outputJSON);
     }    
     
