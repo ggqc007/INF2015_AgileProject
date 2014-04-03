@@ -10,11 +10,6 @@ public class FileReader {
     private static final String FILE_ENCODING = "UTF-8";
     private static String JSONStringFromFile = "";
 
-    protected static String loadFileIntoString(String filePath, String fileEncoding) 
-            throws FileNotFoundException, IOException {
-        return IOUtils.toString(new FileInputStream(filePath), fileEncoding);
-    }
-
     public static String readJSONFile(String fileInPath) {
         try {
             JSONStringFromFile = FileReader.loadFileIntoString(fileInPath, FILE_ENCODING);
@@ -24,5 +19,10 @@ public class FileReader {
             System.out.println(e);
         }
         return JSONStringFromFile;
+    }
+
+    protected static String loadFileIntoString(String filePath, String fileEncoding)
+            throws FileNotFoundException, IOException {
+        return IOUtils.toString(new FileInputStream(filePath), fileEncoding);
     }
 }
