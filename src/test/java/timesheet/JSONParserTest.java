@@ -16,19 +16,21 @@ public class JSONParserTest {
     @Before
     public void setUp() {
         // create JSONObject
+        String jsonString = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": 998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n \"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+        JSONObject jsonObject = JSONObject.fromObject(jsonString);
+        System.out.println(jsonObject);
     }
     
     @After
     public void tearDown() {
         // detruit JSONObject
-        String jsonString = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": 998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n \"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
-        JSONObject jsonObject = JSONObject.fromObject(jsonString);
-        System.out.println(jsonObject);
+        
     }
 
     /**
      * Test of toTimeSheetData method, of class JSONParser.
      */
+    /*
     @Test
     public void testToTimeSheetData() throws Exception {
         System.out.println("toTimeSheetData");
@@ -39,10 +41,12 @@ public class JSONParserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
      * Test of reportToJSONArray method, of class JSONParser.
      */
+    /*
     @Test
     public void testReportToJSONArray() {
         System.out.println("reportToJSONArray");
@@ -53,10 +57,12 @@ public class JSONParserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
      * Test of employeIdToTimeSheetData method, of class JSONParser.
      */
+    /*
     @Test
     public void testEmployeIdToTimeSheetData() {
         System.out.println("employeIdToTimeSheetData");
@@ -66,10 +72,12 @@ public class JSONParserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
      * Test of createDaysWithTasksInTimeSheetData method, of class JSONParser.
      */
+    /*
     @Test
     public void testCreateDaysWithTasksInTimeSheetData() {
         System.out.println("createDaysWithTasksInTimeSheetData");
@@ -79,10 +87,12 @@ public class JSONParserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
 
     /**
      * Test of tasksToADayIfAny method, of class JSONParser.
      */
+    /*
     @Test
     public void testTasksToADayIfAny() {
         System.out.println("tasksToADayIfAny");
@@ -92,5 +102,6 @@ public class JSONParserTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    */
     
 }
