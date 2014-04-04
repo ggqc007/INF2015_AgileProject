@@ -1,9 +1,9 @@
 package timesheet;
 
+import java.util.ArrayList;
 import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -35,23 +35,20 @@ public class JSONParserTest {
         assertEquals(expectedTimeSheet, result); // Fail if Exception not thrown.
     }
     
-    /*
     @Test
     public void testReportToJSONArray() {
-        List errorReport = null;
-        errorReport.add("Error1");
-        errorReport.add("Error2");
-        errorReport.add("Error3");
-        errorReport.add("Error4");
+        List<String> errorReport = new ArrayList<String>();
+        JSONArray expArray = new JSONArray();
         
-        String expString = "[\n    \"Error1\",\n    \"Error2\",\n    \"Error3\",\n    \"Error4\"\n]";
-        JSONArray expArray = new JSONArray(expString);
-        JSONArray result = JSONParser.reportToJSONArray(errorReport);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for (int i = 1; i < 5; i++) {
+            errorReport.add("Error"+i);
+            expArray.add("Error"+i);
+        }
+        System.out.println("Debug1: "+ errorReport.toString());
+        System.out.println("Debug2: "+ expArray.toString());
+        assertEquals(expArray.toString(), JSONParser.reportToJSONArray(errorReport).toString());
     }
-    */
+    
 
 
     /**
