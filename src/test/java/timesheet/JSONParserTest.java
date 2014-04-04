@@ -10,54 +10,49 @@ import static org.junit.Assert.*;
 
 public class JSONParserTest {
     
-    public JSONParserTest() {
-    }
-
+    private String expectedTimeSheet;
+    private String validJSONString;
+    private JSONObject validJSONObject;
+    
     @Before
-    public void setUp() {
-        // create JSONObject
-        String jsonString = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": 998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n \"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
-        JSONObject jsonObject = JSONObject.fromObject(jsonString);
-        System.out.println(jsonObject);
+    public void initObjects() {
+        expectedTimeSheet = "TimeSheetData{employeId: 5001, days: [Day{name: \"weekend2\", tasks:[Task{projectId: 990, time: 30}]}, Day{name: \"jour1\", tasks:[Task{projectId: 998, time: 480}, Task{projectId: 911, time: 36}, Task{projectId: 910, time: 8}]}, Day{name: \"jour2\", tasks:[Task{projectId: 125, time: 552}]}, Day{name: \"jour3\", tasks:[Task{projectId: 996, time: 80}]}, Day{name: \"jour4\", tasks:[Task{projectId: 996, time: 80}]}, Day{name: \"jour5\", tasks:[Task{projectId: 125, time: 516}]}, Day{name: \"weekend1\", tasks:[]}]}";
+        validJSONString = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": 998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n \"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+        validJSONObject = JSONObject.fromObject(validJSONString);
     }
     
-    @After
-    public void tearDown() {
-        // detruit JSONObject
-        
-    }
-
-    /**
-     * Test of toTimeSheetData method, of class JSONParser.
-     */
-    /*
     @Test
-    public void testToTimeSheetData() throws Exception {
-        System.out.println("toTimeSheetData");
-        JSONObject jsonObjectFromFile = null;
-        TimeSheetData expResult = null;
-        TimeSheetData result = JSONParser.toTimeSheetData(jsonObjectFromFile);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testToTimeSheetDataValidTimeSheetGeneration() throws Exception {
+        String timeSheetData = JSONParser.toTimeSheetData(validJSONObject).toString();
+        assertEquals(expectedTimeSheet, timeSheetData);
     }
-    */
-
-    /**
-     * Test of reportToJSONArray method, of class JSONParser.
-     */
+    
+    @Test(expected = Exception.class)
+    public void testToTimeSheetDataMissingDayTimeSheetGeneration() throws Exception {
+        String missingDayJSONString = "{\n \"numero_employe\": 5001,\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+        JSONObject missingDayJSONObject = JSONObject.fromObject(missingDayJSONString);
+        String result = JSONParser.toTimeSheetData(missingDayJSONObject).toString();
+        assertEquals(expectedTimeSheet, result); // Fail if Exception not thrown.
+    }
+    
     /*
     @Test
     public void testReportToJSONArray() {
-        System.out.println("reportToJSONArray");
         List errorReport = null;
-        JSONArray expResult = null;
+        errorReport.add("Error1");
+        errorReport.add("Error2");
+        errorReport.add("Error3");
+        errorReport.add("Error4");
+        
+        String expString = "[\n    \"Error1\",\n    \"Error2\",\n    \"Error3\",\n    \"Error4\"\n]";
+        JSONArray expArray = new JSONArray(expString);
         JSONArray result = JSONParser.reportToJSONArray(errorReport);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
     */
+
 
     /**
      * Test of employeIdToTimeSheetData method, of class JSONParser.
