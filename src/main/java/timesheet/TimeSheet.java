@@ -89,7 +89,7 @@ public class TimeSheet {
         OutputStreamWriterWrapper writer = initializeOutputStreamWriterWrapper();
         writer.writeJSONFile(outputJSON);
         
-        //debug(employe, objectFromFile, outputJSON);
+        debug(employe, objectFromFile, outputJSON);
     }    
     
     // TODO: Cette methode a plus de 10 lignes ############################################################################  :o)
