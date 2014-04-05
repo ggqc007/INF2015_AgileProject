@@ -1,18 +1,10 @@
 package timesheet;
 
-import java.util.List;
 import net.sf.json.JSONObject;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author GG
- */
 public class EmployeTest {
 
     private Employe employe;
@@ -188,5 +180,4 @@ public class EmployeTest {
         employe.initFromFirstTimeSheet(validTimeSheetDataForAdmin);
         assertTrue(employe.isDirectionEmploye());
     }
-
 }
