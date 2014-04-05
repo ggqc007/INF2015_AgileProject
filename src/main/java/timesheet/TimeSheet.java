@@ -98,6 +98,7 @@ public class TimeSheet {
         System.out.println("\nDEBUG JSON Input filename : " + inputFileName);
         System.out.println("\nDEBUG JSON Input data : " + objectFromFile.toString(2));        
         System.out.println("\nDEBUG Parsed TimeSheetData : " + employe.getTimeSheet(0));
+        System.out.println("\nDEBUG Employe toString : " + employe.toString());
 
         System.out.print("\nDEBUG Employe ID " + employe.getId());
         if (employe.isAdmin())
