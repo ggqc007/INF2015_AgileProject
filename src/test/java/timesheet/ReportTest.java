@@ -237,10 +237,9 @@ public class ReportTest {
         List<String> generatedReport = testReport.generateReport(employeDirection);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
-    
-    
-          @Test
-    public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSick() throws Exception {
+
+    @Test
+    public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickRemoteWork() throws Exception {
         Employe employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "901,\n \"minutes\": 440\n },\n {\n \"projet\": 999,\n \"minutes\": 480\n },\n {\n \"projet\": 910,\n "
@@ -259,10 +258,31 @@ public class ReportTest {
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
         assertEquals(expectedReport.toString(), generatedReport.toString());
-    } 
-    
-    
-              @Test
+    }
+
+    @Test
+    public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickOfficeWork() throws Exception {
+        Employe employeDirection = new Employe();
+        validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
+                + "10,\n \"minutes\": 2\n },\n {\n \"projet\": 999,\n \"minutes\": 480\n },\n {\n \"projet\": 91,\n "
+                + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
+                + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
+                + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
+                + "\"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
+        employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé a une journée invalide de congé de maladie. (travail au bureau - jour1)");
+        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
+
+        Report testReport = new Report(employeDirection);
+        List<String> generatedReport = testReport.generateReport(employeDirection);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }
+
+    @Test
     public void testReportInvalidDaysWithPublicHolidayOfficeTaskOnPublicHoliday() throws Exception {
         Employe employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
@@ -282,7 +302,68 @@ public class ReportTest {
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
         assertEquals(expectedReport.toString(), generatedReport.toString());
-    } 
-    
-            
+    }
+
+    @Test
+    public void testReportInvalidDaysWithToMuchTime() throws Exception {
+        Employe employeDirection = new Employe();
+        validJSONStringDirection = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
+                + "994,\n \"minutes\": 1920\n },\n {\n \"projet\": 10,\n \"minutes\": 480\n },\n {\n \"projet\": 910,\n "
+                + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
+                + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
+                + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
+                + "\"weekend2\": [\n {\n \"projet\": 910,\n \"minutes\": 480\n }\n ]\n}";
+        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
+        employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé a une journée avec plus de 32 heures travaillé. (jour1)");
+
+        Report testReport = new Report(employeDirection);
+        List<String> generatedReport = testReport.generateReport(employeDirection);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }
+
+    @Test
+    public void testReportInvalidDaysOfHolidayCausedByWrongTime() throws Exception {
+        Employe employeDirection = new Employe();
+        validJSONStringDirection = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
+                + "997,\n \"minutes\": 500\n },\n {\n \"projet\": 10,\n \"minutes\": 4\n },\n {\n \"projet\": 910,\n "
+                + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
+                + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
+                + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
+                + "\"weekend2\": [\n {\n \"projet\": 910,\n \"minutes\": 480\n }\n ]\n}";
+        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
+        employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé a une journée invalide de congé de vacances. (jour1)");
+
+        Report testReport = new Report(employeDirection);
+        List<String> generatedReport = testReport.generateReport(employeDirection);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }
+
+    @Test
+    public void testReportHasNotValidWeeklyTimeRemoteTooMuchTime() throws Exception {
+        Employe employeDirection = new Employe();
+        validJSONStringDirection = "{\n \"numero_employe\": " + ADMIN_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
+                + "907,\n \"minutes\": 601\n },\n {\n \"projet\": 10,\n \"minutes\": 240\n },\n {\n \"projet\": 910,\n "
+                + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
+                + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
+                + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
+                + "\"weekend2\": [\n {\n \"projet\": 910,\n \"minutes\": 480\n }\n ]\n}";
+        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
+        employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé a fait plus d'heures de télétravail que la quantité permise.");
+
+        Report testReport = new Report(employeDirection);
+        List<String> generatedReport = testReport.generateReport(employeDirection);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }
 }
