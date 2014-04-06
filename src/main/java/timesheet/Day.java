@@ -42,11 +42,7 @@ public class Day {
     }    
     
     public boolean isWorkingDay() {
-        try {
-            return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
-        } catch (Exception e) {            
-            return false;
-        }
+        return name.substring(0, 4).equals(WEEKDAY_STR_MATCH);        
     }    
 
     public boolean isValidPublicHoliday() {

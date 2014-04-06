@@ -334,5 +334,19 @@ public class DayTest {
         Day day = new Day("jour1");
         day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);         
         assertFalse(day.isNormalDay());       
-    }     
+    }  
+    
+    @Test
+    public void testIsWorkingDayTrue() {
+        Day day = new Day("jour1");
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);      
+        assertTrue(day.isWorkingDay());
+    }
+    
+    @Test
+    public void testIsWorkingDayFalse() {
+        Day day = new Day("weekend1");
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME); 
+        assertFalse(day.isWorkingDay());
+    }    
 }
