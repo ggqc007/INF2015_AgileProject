@@ -338,7 +338,7 @@ public class ReportTest {
 
         List<String> expectedReport = new ArrayList<String>();
         expectedReport.add("Cet employé a une journée invalide de congé férié. (weekend2)");
-        expectedReport.add("Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.");
+        //expectedReport.add("Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
