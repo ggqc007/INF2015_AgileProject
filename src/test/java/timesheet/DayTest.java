@@ -277,4 +277,27 @@ public class DayTest {
         day.addTask(PUBLIC_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     } 
+    
+    @Test
+    public void hasValidTasksAfter24HoursPublicHolidayTask() {
+        Day day = new Day("jour1");
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME); 
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
+        assertTrue(day.hasValidTasksAfter24Hours());
+    }
+    
+    @Test
+    public void hasValidTasksAfter24HoursHolidayTask() {
+        Day day = new Day("jour1");
+        day.addTask(HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME); 
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
+        assertTrue(day.hasValidTasksAfter24Hours());
+    }    
+    
+    @Test
+    public void hasValidTasksAfter24HoursOnlyParentalHolidayTask() {
+        Day day = new Day("jour1");
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
+        assertFalse(day.hasValidTasksAfter24Hours());
+    }     
 }
