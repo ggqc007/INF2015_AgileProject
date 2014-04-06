@@ -14,8 +14,6 @@ public class Employe {
     }
     
     public void initFromFirstTimeSheet(TimeSheetData timesheet) {
-        if (timesheet.getEmployeId() < 0)
-            throw new IllegalArgumentException("Employe id in timesheet is not valid!");
         employeId = timesheet.getEmployeId();
         timesheets.set(0, timesheet);        
     }
