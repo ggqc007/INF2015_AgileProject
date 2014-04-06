@@ -6,7 +6,7 @@ public class RulesPresident extends Rules {
     // place du temps de transport pour compléter cet classe
     public RulesPresident(Employe employe) {
         minOfficeWeekMinutes = 2580;
-        minOfficeDailyMinutes = 360;
+        minOfficeDailyMinutes = 480;
         maxOfficeWeekMinutes = 0;        
         setEmploye(employe);
         calculateTotalWeekMinutes();

@@ -4,7 +4,7 @@ public class RulesDirection extends Rules {
 
     public RulesDirection(Employe employe) {
         minOfficeWeekMinutes = 2580;
-        minOfficeDailyMinutes = 360;
+        minOfficeDailyMinutes = 480;
         maxOfficeWeekMinutes = 0;
         setEmploye(employe);
         calculateTotalWeekMinutes();
