@@ -44,7 +44,13 @@ public class Employe {
     
     public boolean isDirectionEmploye() {        
        return (employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR);      
-    } 
+    }
+    
+    public boolean isPresident() {
+        
+        return false;
+        
+    }
     
     // TODO: REMOVE - Utilisée seulement dans DEBUG
     public int getId() {        

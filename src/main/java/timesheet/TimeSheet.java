@@ -20,7 +20,8 @@ public class TimeSheet {
     protected static final int PARENTAL_HOLIDAY_TIME = 480;    
     protected static final int EMPLOYE_ADMIN_ID_CEILING = 1000;
     protected static final int EMPLOYE_DEVEL_ID_CEILING = 2000;
-    protected static final int EMPLOYE_DIRECTION_ID_FLOOR = 5000;    
+    protected static final int EMPLOYE_DIRECTION_ID_FLOOR = 5000;
+    protected static final int PREDIDENT_ID = 6000;    
     protected static final int MINIMUM_MINUTES_AMOUNT_FOR_TASK = 0;
     protected static final int MAXIMUM_HOURS_FOR_DAY = 32;
     
