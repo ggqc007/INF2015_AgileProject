@@ -446,5 +446,87 @@ public class ReportTest {
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
         assertEquals(expectedReport.toString(), generatedReport.toString());
-    }      
+    }  
+    
+    @Test
+    public void testReportEmployeDirectionMinOfficeTime8hFail() throws Exception {
+        Employe employeDirection = new Employe();
+        validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
+                + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
+                + "\"projet\": 125,\n \"minutes\": 479\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
+                + "], \"jour4\": [\n {\n \"projet\": 896,\n \"minutes\": 580\n  }\n ],\n \"jour5\": [\n {\n \"projet\": 125,\n "
+                + "\"minutes\": 480\n }\n ],\n \"weekend1\": [],\n \"weekend2\": []\n }";
+        
+        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
+        employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour2)");
+
+        Report testReport = new Report(employeDirection);
+        List<String> generatedReport = testReport.generateReport(employeDirection);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }  
+    
+    @Test
+    public void testReportEmployeDirectionMinOfficeTime8hPass() throws Exception {
+        Employe employeDirection = new Employe();
+        validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
+                + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
+                + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
+                + "], \"jour4\": [\n {\n \"projet\": 896,\n \"minutes\": 580\n  }\n ],\n \"jour5\": [\n {\n \"projet\": 125,\n "
+                + "\"minutes\": 480\n }\n ],\n \"weekend1\": [],\n \"weekend2\": []\n }";
+        
+        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
+        employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+
+        List<String> expectedReport = new ArrayList<String>();
+        
+        Report testReport = new Report(employeDirection);
+        List<String> generatedReport = testReport.generateReport(employeDirection);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }   
+    
+    @Test
+    public void testReportPresidentMinOfficeTime8hFail() throws Exception {
+        Employe employePresident = new Employe();
+        validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
+                + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
+                + "\"projet\": 125,\n \"minutes\": 479\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
+                + "], \"jour4\": [\n {\n \"projet\": 896,\n \"minutes\": 580\n  }\n ],\n \"jour5\": [\n {\n \"projet\": 125,\n "
+                + "\"minutes\": 480\n }\n ],\n \"weekend1\": [],\n \"weekend2\": []\n }";
+        
+        validJSONObjectPresident = JSONObject.fromObject(validJSONStringPresident);
+        validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
+        employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
+
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour2)");
+
+        Report testReport = new Report(employePresident);
+        List<String> generatedReport = testReport.generateReport(employePresident);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }  
+    
+    @Test
+    public void testReportEmployePresidentMinOfficeTime8hPass() throws Exception {
+        Employe employePresident = new Employe();
+        validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
+                + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
+                + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
+                + "], \"jour4\": [\n {\n \"projet\": 896,\n \"minutes\": 580\n  }\n ],\n \"jour5\": [\n {\n \"projet\": 125,\n "
+                + "\"minutes\": 480\n }\n ],\n \"weekend1\": [],\n \"weekend2\": []\n }";
+        
+        validJSONObjectPresident = JSONObject.fromObject(validJSONStringPresident);
+        validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
+        employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
+
+        List<String> expectedReport = new ArrayList<String>();
+        
+        Report testReport = new Report(employePresident);
+        List<String> generatedReport = testReport.generateReport(employePresident);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }     
 }
