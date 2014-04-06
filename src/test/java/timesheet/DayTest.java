@@ -348,5 +348,47 @@ public class DayTest {
         Day day = new Day("weekend1");
         day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME); 
         assertFalse(day.isWorkingDay());
+    }   
+    
+    @Test
+    public void testGetPublicHolidayTimeWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);      
+        assertEquals(day.getPublicHolidayTime(),0);               
+    }
+    
+    @Test
+    public void testGetPublicHolidayTimeGoodTime() {
+        Day day = new Day("jour1");
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);      
+        assertEquals(day.getPublicHolidayTime(),PUBLIC_HOLIDAY_TIME);               
+    }
+    
+    @Test
+    public void testGetHolidayTimeWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);      
+        assertEquals(day.getHolidayTime(),0);               
+    }
+    
+    @Test
+    public void testGetHolidayTimeGoodTime() {
+        Day day = new Day("jour1");
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);      
+        assertEquals(day.getHolidayTime(),HOLIDAY_TIME);               
+    } 
+    
+    @Test
+    public void testGetParentalHolidayTimeWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);      
+        assertEquals(day.getParentalHolidayTime(),0);               
+    }
+    
+    @Test
+    public void testGetParentalHolidayTimeGoodTime() {
+        Day day = new Day("jour1");
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);      
+        assertEquals(day.getParentalHolidayTime(),PARENTAL_HOLIDAY_TIME);               
     }    
 }
