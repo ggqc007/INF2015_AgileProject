@@ -7,6 +7,7 @@ public class RulesPresident extends Rules {
     public RulesPresident(Employe employe) {
         minOfficeWeekMinutes = 2580;
         minOfficeDailyMinutes = 360;
+        maxOfficeWeekMinutes = 0;        
         setEmploye(employe);
         calculateTotalWeekMinutes();
     }
@@ -15,4 +16,9 @@ public class RulesPresident extends Rules {
     public boolean hasValidWeeklyTimeRemote() {
         return true;
     }
+    
+    @Override
+    public boolean hasValidWeeklyTimeInOffice () {
+        return true;
+    }    
 }

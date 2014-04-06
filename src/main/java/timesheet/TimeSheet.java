@@ -226,8 +226,11 @@ public class TimeSheet {
         hours = rules.getMaxOfficeWeekMinutes() / 60;
         minutes = rules.getMaxOfficeWeekMinutes() % 60;  
         
-        System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
-
+        if (rules.getMaxOfficeWeekMinutes() != 0)
+            System.out.printf(rules.getMaxOfficeWeekMinutes() + "m(%d:%02dh)\n", hours, minutes);
+        else
+            System.out.printf(" N/A\n");
+        
         hours = rules.getMaxRemoteWeekMinutes() / 60;
         minutes = rules.getMaxRemoteWeekMinutes() % 60; 
         
