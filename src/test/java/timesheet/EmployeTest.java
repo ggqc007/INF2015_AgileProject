@@ -183,7 +183,7 @@ public class EmployeTest {
     }
     
     @Test
-    public void testDirectionEmployeCodePresident() throws Exception {
+    public void testDirectionEmployePresidentID() throws Exception {
         String validJSONStringForAdmin = "{\n \"numero_employe\": " + PREDIDENT_ID + ",\n \"jour1\": [\n {\n \"projet\": 998,\n \"minutes\": 480\n },"
                 + "\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n \"minutes\": 8\n }\n ],\n "
                 + "\"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,"
@@ -209,8 +209,7 @@ public class EmployeTest {
         JSONObject validJSONObjectForAdmin = JSONObject.fromObject(validJSONStringForAdmin);
         TimeSheetData validTimeSheetDataForAdmin = JSONParser.toTimeSheetData(validJSONObjectForAdmin);
         employe.initFromFirstTimeSheet(validTimeSheetDataForAdmin);    
-        assertTrue(employe.isPresident());
-        
+        assertTrue(employe.isPresident());        
     }
     
     @Test
@@ -225,8 +224,7 @@ public class EmployeTest {
         JSONObject validJSONObjectForAdmin = JSONObject.fromObject(validJSONStringForAdmin);
         TimeSheetData validTimeSheetDataForAdmin = JSONParser.toTimeSheetData(validJSONObjectForAdmin);
         employe.initFromFirstTimeSheet(validTimeSheetDataForAdmin);         
-        assertFalse(employe.isPresident());
-        
+        assertFalse(employe.isPresident());        
     }    
     
 }

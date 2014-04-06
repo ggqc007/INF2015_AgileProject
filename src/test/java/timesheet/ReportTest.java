@@ -3,6 +3,7 @@ package timesheet;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.json.JSONObject;
+import org.junit.Ignore; // À retirer plus tard
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -13,24 +14,29 @@ public class ReportTest {
     private static final int DEVELOPMENT_EMPLOYE_ID = 1000;
     private static final int EXPLOITATION_EMPLOYE_ID = 2000;
     private static final int DIRECTION_EMPLOYE_ID = 5001;
-
+    private static final int PRESIDENT_ID = 6000;
+    
     private String validJSONStringAdmin;
     private String validJSONStringDevelopment;
     private String validJSONStringExploitation;
     private String validJSONStringDirection;
+    private String validJSONStringPresident;    
     private JSONObject validJSONObjectAdmin;
     private JSONObject validJSONObjectDevelopment;
     private JSONObject validJSONObjectExploitation;
     private JSONObject validJSONObjectDirection;
+    private JSONObject validJSONObjectPresident;    
     private Employe employeAdmin;
     private Employe employeDevelopment;
     private Employe employeExploitation;
     private Employe employeDirection;
+    private Employe employePresident;    
     private TimeSheetData validTimeSheetDataAdmin;
     private TimeSheetData validTimeSheetDataDevelopment;
     private TimeSheetData validTimeSheetDataExploitation;
     private TimeSheetData validTimeSheetDataDirection;
-
+    private TimeSheetData validTimeSheetDataPresident;
+    
     @Before
     public void initObjects() throws Exception {
         employeAdmin = new Employe();
@@ -77,6 +83,17 @@ public class ReportTest {
         validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
+        
+        employePresident = new Employe();
+        validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\": [\n {\n \"projet\": "
+                + "998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
+                + "\"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
+                + "[\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": "
+                + "80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
+                + "\"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+        validJSONObjectPresident = JSONObject.fromObject(validJSONStringPresident);
+        validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
+        employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);        
     }
 
     @Test
@@ -106,6 +123,13 @@ public class ReportTest {
         Rules generatedRule = testReport.intitializeRulesForThisEmploye(employeDirection);
         assertEquals(generatedRule.getClass().getName(), "timesheet.RulesDirection");
     }
+    
+    @Test
+    public void testIntitializeRulesForThisPresident() {
+        Report testReport = new Report(employePresident);
+        Rules generatedRule = testReport.intitializeRulesForThisEmploye(employePresident);
+        assertEquals(generatedRule.getClass().getName(), "timesheet.RulesPresident");
+    }    
 
     @Test
     public void testgenerateReportAdmin() {
@@ -166,6 +190,23 @@ public class ReportTest {
         List<String> generatedReport = testReport.generateReport(employeDirection);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
+    
+    // Je dois attendre l'implémentation de temps de transport pour compléter ce test
+    @Ignore ("Je dois attendre l'implémentation de temps de transport pour compléter ce test")
+    @Test
+    public void testgenerateReportPresident() {
+        List<String> expectedReport = new ArrayList<String>();
+        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)");
+        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)");
+        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
+        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
+        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
+        expectedReport.add("Cet employé a plus d'une journée de congé parental par semaine.");
+
+        Report testReport = new Report(employePresident);
+        List<String> generatedReport = testReport.generateReport(employePresident);
+        assertEquals(expectedReport.toString(), generatedReport.toString());
+    }    
 
     @Test
     public void testgenerateReportDirectionInvalidWorkAfter24hrsNoHoliday() throws Exception {
