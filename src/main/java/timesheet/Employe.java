@@ -9,7 +9,7 @@ public class Employe {
         
     public Employe() {        
         TimeSheetData timesheet = new TimeSheetData();        
-        timesheets = new ArrayList<TimeSheetData>();        
+        timesheets = new ArrayList<>();        
         timesheets.add(timesheet);        
     }
     
@@ -43,13 +43,11 @@ public class Employe {
     }    
     
     public boolean isDirectionEmploye() {        
-       return (employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR);      
+       return ((employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR) && (employeId != TimeSheet.PREDIDENT_ID));      
     }
     
     public boolean isPresident() {
-        
-        return false;
-        
+        return (employeId == TimeSheet.PREDIDENT_ID);          
     }
     
     // TODO: REMOVE - Utilisée seulement dans DEBUG
