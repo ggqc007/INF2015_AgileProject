@@ -7,6 +7,16 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DayTest {
+    
+    private static final int NORMAL_TASK_ID = 900;
+    private static final int SICK_LEAVE_TASK_ID = 999;
+    private static final int SICK_LEAVE_TIME = 480;
+    private static final int PUBLIC_HOLIDAY_TASK_ID = 998;    
+    private static final int PUBLIC_HOLIDAY_TIME = 480;  
+    private static final int HOLIDAY_TASK_ID = 997;    
+    private static final int HOLIDAY_TIME = 480;
+    private static final int PARENTAL_HOLIDAY_TASK_ID = 996;    
+    private static final int PARENTAL_HOLIDAY_TIME = 480;  
 
     @Before
     public void initObjects() {
@@ -43,228 +53,228 @@ public class DayTest {
     @Test
     public void testIsValidPublicHolidayWeekend() {
         Day day = new Day("weekend1");
-        day.addTask(998, 480);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertFalse(day.isValidPublicHoliday());
     }
 
     @Test
     public void testIsValidPublicHolidayWeek() {
         Day day = new Day("jour1");
-        day.addTask(998, 480);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertTrue(day.isValidPublicHoliday());
     }  
     
     @Test
     public void testIsValidPublicHolidayWrongTime() {
         Day day = new Day("jour1");
-        day.addTask(998, 481);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME + 1);
         assertFalse(day.isValidPublicHoliday());
     } 
     
     @Test
     public void testIsValidPublicHolidayIDSickLeave() {
         Day day = new Day("jour1");
-        day.addTask(999, 480);
+        day.addTask(SICK_LEAVE_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertFalse(day.isValidPublicHoliday());
     }    
     
     @Test
     public void testIsValidPublicHolidayIDHoliday() {
         Day day = new Day("jour1");
-        day.addTask(997, 480);
+        day.addTask(HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertFalse(day.isValidPublicHoliday());
     }    
     
     @Test
     public void testIsValidPublicHolidayIDParentalHoliday() {
         Day day = new Day("jour1");
-        day.addTask(996, 480);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertFalse(day.isValidPublicHoliday());
     }   
     
     @Test
     public void testIsValidPublicHolidayIDNormal() {
         Day day = new Day("jour1");
-        day.addTask(900, 480);
+        day.addTask(NORMAL_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertFalse(day.isValidPublicHoliday());
     }    
     
     @Test
     public void testIsValidPublicHolidayMoreThanOneHolidayCode() {
         Day day = new Day("jour1");
-        day.addTask(998, 480);
-        day.addTask(997, 480);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);
+        day.addTask(HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);
         assertFalse(day.isValidPublicHoliday());
     }             
     
     @Test
     public void testIsValidSickLeaveWeekend() {
         Day day = new Day("weekend1");
-        day.addTask(999, 480);
+        day.addTask(SICK_LEAVE_TASK_ID, SICK_LEAVE_TIME);
         assertFalse(day.isValidSickLeave());
     }
 
     @Test
     public void testIsValidSickLeaveWeek() {
         Day day = new Day("jour1");
-        day.addTask(999, 480);
+        day.addTask(SICK_LEAVE_TASK_ID, SICK_LEAVE_TIME);
         assertTrue(day.isValidSickLeave());
     }  
     
     @Test
     public void testIsValidSickLeaveWrongTime() {
         Day day = new Day("jour1");
-        day.addTask(999, 481);
+        day.addTask(SICK_LEAVE_TASK_ID, SICK_LEAVE_TIME + 1);
         assertFalse(day.isValidSickLeave());
     } 
     
     @Test
     public void testIsValidSickLeaveIDPublicHoliday() {
         Day day = new Day("jour1");
-        day.addTask(998, 480);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, SICK_LEAVE_TIME);
         assertFalse(day.isValidSickLeave());
     }    
     
     @Test
     public void testIsValidSickLeaveIDHoliday() {
         Day day = new Day("jour1");
-        day.addTask(997, 480);
+        day.addTask(HOLIDAY_TASK_ID, SICK_LEAVE_TIME);
         assertFalse(day.isValidSickLeave());
     }    
     
     @Test
     public void testIsValidSickLeaveIDParentalHoliday() {
         Day day = new Day("jour1");
-        day.addTask(996, 480);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, SICK_LEAVE_TIME);
         assertFalse(day.isValidSickLeave());
     }   
     
     @Test
     public void testIsValidSickLeaveIDNormal() {
         Day day = new Day("jour1");
-        day.addTask(900, 480);
+        day.addTask(NORMAL_TASK_ID, SICK_LEAVE_TIME);
         assertFalse(day.isValidSickLeave());
     }    
     
     @Test
     public void testIsValidSickLeaveMoreThanOneHolidayCode() {
         Day day = new Day("jour1");
-        day.addTask(999, 480);
-        day.addTask(997, 480);
+        day.addTask(SICK_LEAVE_TASK_ID, SICK_LEAVE_TIME);
+        day.addTask(HOLIDAY_TASK_ID, SICK_LEAVE_TIME);
         assertFalse(day.isValidSickLeave());
     }         
     
     @Test
     public void testIsValidHolidayWeekend() {
         Day day = new Day("weekend1");
-        day.addTask(997, 480);
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);
         assertFalse(day.isValidHoliday());
     }
 
     @Test
     public void testIsValidHolidayWeek() {
         Day day = new Day("jour1");
-        day.addTask(997, 480);
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);
         assertTrue(day.isValidHoliday());
     }  
     
     @Test
     public void testIsValidHolidayWrongTime() {
         Day day = new Day("jour1");
-        day.addTask(997, 481);
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME + 1);
         assertFalse(day.isValidHoliday());
     } 
     
     @Test
     public void testIsValidHolidayIDPublicHoliday() {
         Day day = new Day("jour1");
-        day.addTask(998, 480);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, HOLIDAY_TIME);
         assertFalse(day.isValidHoliday());
     }    
     
     @Test
     public void testIsValidHolidayIDSickLeave() {
         Day day = new Day("jour1");
-        day.addTask(999, 480);
+        day.addTask(SICK_LEAVE_TASK_ID, HOLIDAY_TIME);
         assertFalse(day.isValidHoliday());
     }    
     
     @Test
     public void testIsValidHolidayIDParentalHoliday() {
         Day day = new Day("jour1");
-        day.addTask(996, 480);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, HOLIDAY_TIME);
         assertFalse(day.isValidHoliday());
     }   
     
     @Test
     public void testIsValidHolidayIDNormal() {
         Day day = new Day("jour1");
-        day.addTask(900, 480);
+        day.addTask(NORMAL_TASK_ID, HOLIDAY_TIME);
         assertFalse(day.isValidHoliday());
     }    
     
     @Test
     public void testIsValidHolidayMoreThanOneHolidayCode() {
         Day day = new Day("jour1");
-        day.addTask(997, 480);
-        day.addTask(998, 480);
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, HOLIDAY_TIME);
         assertFalse(day.isValidHoliday());
     }            
     
     @Test
     public void testIsValidParentalHolidayWeekend() {
         Day day = new Day("weekend1");
-        day.addTask(996, 480);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     }
 
     @Test
     public void testIsValidParentalHolidayWeek() {
         Day day = new Day("jour1");
-        day.addTask(996, 480);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertTrue(day.isValidParentalHoliday());
     }  
     
     @Test
     public void testIsValidParentalHolidayWrongTime() {
         Day day = new Day("jour1");
-        day.addTask(996, 481);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME + 1);
         assertFalse(day.isValidParentalHoliday());
     } 
     
     @Test
     public void testIsValidParentalHolidayIDPublicHoliday() {
         Day day = new Day("jour1");
-        day.addTask(998, 480);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     }    
     
     @Test
     public void testIsValidParentalHolidayIDSickLeave() {
         Day day = new Day("jour1");
-        day.addTask(999, 480);
+        day.addTask(SICK_LEAVE_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     }    
     
     @Test
     public void testIsValidParentalHolidayIDHoliday() {
         Day day = new Day("jour1");
-        day.addTask(997, 480);
+        day.addTask(HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     }   
     
     @Test
     public void testIsValidParentalHolidayIDNormal() {
         Day day = new Day("jour1");
-        day.addTask(900, 480);
+        day.addTask(NORMAL_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     }    
     
     @Test
     public void testIsValidParentalHolidayMoreThanOneHolidayCode() {
         Day day = new Day("jour1");
-        day.addTask(996, 480);
-        day.addTask(998, 480);
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);
         assertFalse(day.isValidParentalHoliday());
     } 
 }
