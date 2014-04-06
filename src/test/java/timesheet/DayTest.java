@@ -279,7 +279,7 @@ public class DayTest {
     } 
     
     @Test
-    public void hasValidTasksAfter24HoursPublicHolidayTask() {
+    public void testHasValidTasksAfter24HoursPublicHolidayTask() {
         Day day = new Day("jour1");
         day.addTask(PUBLIC_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME); 
         day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
@@ -287,7 +287,7 @@ public class DayTest {
     }
     
     @Test
-    public void hasValidTasksAfter24HoursHolidayTask() {
+    public void testHasValidTasksAfter24HoursHolidayTask() {
         Day day = new Day("jour1");
         day.addTask(HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME); 
         day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
@@ -295,9 +295,44 @@ public class DayTest {
     }    
     
     @Test
-    public void hasValidTasksAfter24HoursOnlyParentalHolidayTask() {
+    public void testHasValidTasksAfter24HoursOnlyParentalHolidayTask() {
         Day day = new Day("jour1");
         day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
         assertFalse(day.hasValidTasksAfter24Hours());
+    }
+
+    @Test
+    public void testIsNormalDayPass() {
+        Day day = new Day("jour1");
+        day.addTask(NORMAL_TASK_ID, 200);         
+        assertTrue(day.isNormalDay());       
+    }
+    
+    @Test
+    public void testIsNormalDayPublicHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(PUBLIC_HOLIDAY_TASK_ID, PUBLIC_HOLIDAY_TIME);         
+        assertFalse(day.isNormalDay());       
+    }
+    
+    @Test
+    public void testIsNormalDayParentalHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(PARENTAL_HOLIDAY_TASK_ID, PARENTAL_HOLIDAY_TIME);         
+        assertFalse(day.isNormalDay());       
+    }  
+    
+    @Test
+    public void testIsNormalDaySickLeave() {
+        Day day = new Day("jour1");
+        day.addTask(SICK_LEAVE_TASK_ID, SICK_LEAVE_TIME);         
+        assertFalse(day.isNormalDay());       
+    } 
+    
+    @Test
+    public void testIsNormalDayHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(HOLIDAY_TASK_ID, HOLIDAY_TIME);         
+        assertFalse(day.isNormalDay());       
     }     
 }
