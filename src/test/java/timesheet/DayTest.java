@@ -39,5 +39,232 @@ public class DayTest {
         TimeSheetData validTimeSheetDataAdmin = JSONParser.toTimeSheetData(validJSONObjectAdmin);
         employeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
     }
+    
+    @Test
+    public void testIsValidPublicHolidayWeekend() {
+        Day day = new Day("weekend1");
+        day.addTask(998, 480);
+        assertFalse(day.isValidPublicHoliday());
+    }
 
+    @Test
+    public void testIsValidPublicHolidayWeek() {
+        Day day = new Day("jour1");
+        day.addTask(998, 480);
+        assertTrue(day.isValidPublicHoliday());
+    }  
+    
+    @Test
+    public void testIsValidPublicHolidayWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(998, 481);
+        assertFalse(day.isValidPublicHoliday());
+    } 
+    
+    @Test
+    public void testIsValidPublicHolidayIDSickLeave() {
+        Day day = new Day("jour1");
+        day.addTask(999, 480);
+        assertFalse(day.isValidPublicHoliday());
+    }    
+    
+    @Test
+    public void testIsValidPublicHolidayIDHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(997, 480);
+        assertFalse(day.isValidPublicHoliday());
+    }    
+    
+    @Test
+    public void testIsValidPublicHolidayIDParentalHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(996, 480);
+        assertFalse(day.isValidPublicHoliday());
+    }   
+    
+    @Test
+    public void testIsValidPublicHolidayIDNormal() {
+        Day day = new Day("jour1");
+        day.addTask(900, 480);
+        assertFalse(day.isValidPublicHoliday());
+    }    
+    
+    @Test
+    public void testIsValidPublicHolidayMoreThanOneHolidayCode() {
+        Day day = new Day("jour1");
+        day.addTask(998, 480);
+        day.addTask(997, 480);
+        assertFalse(day.isValidPublicHoliday());
+    }             
+    
+    @Test
+    public void testIsValidSickLeaveWeekend() {
+        Day day = new Day("weekend1");
+        day.addTask(999, 480);
+        assertFalse(day.isValidSickLeave());
+    }
+
+    @Test
+    public void testIsValidSickLeaveWeek() {
+        Day day = new Day("jour1");
+        day.addTask(999, 480);
+        assertTrue(day.isValidSickLeave());
+    }  
+    
+    @Test
+    public void testIsValidSickLeaveWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(999, 481);
+        assertFalse(day.isValidSickLeave());
+    } 
+    
+    @Test
+    public void testIsValidSickLeaveIDPublicHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(998, 480);
+        assertFalse(day.isValidSickLeave());
+    }    
+    
+    @Test
+    public void testIsValidSickLeaveIDHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(997, 480);
+        assertFalse(day.isValidSickLeave());
+    }    
+    
+    @Test
+    public void testIsValidSickLeaveIDParentalHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(996, 480);
+        assertFalse(day.isValidSickLeave());
+    }   
+    
+    @Test
+    public void testIsValidSickLeaveIDNormal() {
+        Day day = new Day("jour1");
+        day.addTask(900, 480);
+        assertFalse(day.isValidSickLeave());
+    }    
+    
+    @Test
+    public void testIsValidSickLeaveMoreThanOneHolidayCode() {
+        Day day = new Day("jour1");
+        day.addTask(999, 480);
+        day.addTask(997, 480);
+        assertFalse(day.isValidSickLeave());
+    }         
+    
+    @Test
+    public void testIsValidHolidayWeekend() {
+        Day day = new Day("weekend1");
+        day.addTask(997, 480);
+        assertFalse(day.isValidHoliday());
+    }
+
+    @Test
+    public void testIsValidHolidayWeek() {
+        Day day = new Day("jour1");
+        day.addTask(997, 480);
+        assertTrue(day.isValidHoliday());
+    }  
+    
+    @Test
+    public void testIsValidHolidayWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(997, 481);
+        assertFalse(day.isValidHoliday());
+    } 
+    
+    @Test
+    public void testIsValidHolidayIDPublicHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(998, 480);
+        assertFalse(day.isValidHoliday());
+    }    
+    
+    @Test
+    public void testIsValidHolidayIDSickLeave() {
+        Day day = new Day("jour1");
+        day.addTask(999, 480);
+        assertFalse(day.isValidHoliday());
+    }    
+    
+    @Test
+    public void testIsValidHolidayIDParentalHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(996, 480);
+        assertFalse(day.isValidHoliday());
+    }   
+    
+    @Test
+    public void testIsValidHolidayIDNormal() {
+        Day day = new Day("jour1");
+        day.addTask(900, 480);
+        assertFalse(day.isValidHoliday());
+    }    
+    
+    @Test
+    public void testIsValidHolidayMoreThanOneHolidayCode() {
+        Day day = new Day("jour1");
+        day.addTask(997, 480);
+        day.addTask(998, 480);
+        assertFalse(day.isValidHoliday());
+    }            
+    
+    @Test
+    public void testIsValidParentalHolidayWeekend() {
+        Day day = new Day("weekend1");
+        day.addTask(996, 480);
+        assertFalse(day.isValidParentalHoliday());
+    }
+
+    @Test
+    public void testIsValidParentalHolidayWeek() {
+        Day day = new Day("jour1");
+        day.addTask(996, 480);
+        assertTrue(day.isValidParentalHoliday());
+    }  
+    
+    @Test
+    public void testIsValidParentalHolidayWrongTime() {
+        Day day = new Day("jour1");
+        day.addTask(996, 481);
+        assertFalse(day.isValidParentalHoliday());
+    } 
+    
+    @Test
+    public void testIsValidParentalHolidayIDPublicHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(998, 480);
+        assertFalse(day.isValidParentalHoliday());
+    }    
+    
+    @Test
+    public void testIsValidParentalHolidayIDSickLeave() {
+        Day day = new Day("jour1");
+        day.addTask(999, 480);
+        assertFalse(day.isValidParentalHoliday());
+    }    
+    
+    @Test
+    public void testIsValidParentalHolidayIDHoliday() {
+        Day day = new Day("jour1");
+        day.addTask(997, 480);
+        assertFalse(day.isValidParentalHoliday());
+    }   
+    
+    @Test
+    public void testIsValidParentalHolidayIDNormal() {
+        Day day = new Day("jour1");
+        day.addTask(900, 480);
+        assertFalse(day.isValidParentalHoliday());
+    }    
+    
+    @Test
+    public void testIsValidParentalHolidayMoreThanOneHolidayCode() {
+        Day day = new Day("jour1");
+        day.addTask(996, 480);
+        day.addTask(998, 480);
+        assertFalse(day.isValidParentalHoliday());
+    } 
 }
