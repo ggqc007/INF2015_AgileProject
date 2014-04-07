@@ -20,7 +20,8 @@ public class TaskTest {
     private static final int HOLIDAY_TASK_ID = 997;    
     private static final int HOLIDAY_TIME = 480;
     private static final int PARENTAL_HOLIDAY_TASK_ID = 996;    
-    private static final int PARENTAL_HOLIDAY_TIME = 480;     
+    private static final int PARENTAL_HOLIDAY_TIME = 480;
+    private static final int TRANSPORTATION_ID = 777;     
 
     @Test
     public void testGetTime() {
@@ -123,4 +124,10 @@ public class TaskTest {
         Task task = new Task (PARENTAL_HOLIDAY_TASK_ID, 0);
         assertFalse (task.hasMininumMinutesAmountForTask());         
     }      
+    
+    @Test
+    public void testIsTransportationTask() {
+        Task task = new Task(TRANSPORTATION_ID, TRANSPORTATION_ID);
+        assertTrue(task.isTransportationTask());
+    }
 }
