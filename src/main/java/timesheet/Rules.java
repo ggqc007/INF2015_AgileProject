@@ -166,6 +166,10 @@ abstract public class Rules {
         return totalMinutes;
     }
     
+    protected boolean canChargeTransportation() {
+        return (employe.isAdmin() || employe.isDirectionEmploye());
+    }
+    
     public void setEmploye(Employe employe) {
         this.employe = employe;
     } 

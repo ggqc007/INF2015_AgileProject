@@ -45,6 +45,10 @@ public class Task {
         return (time > TimeSheet.MINIMUM_MINUTES_AMOUNT_FOR_TASK);
     }
     
+    public boolean isTransportationTask() {
+        return (projectId == TimeSheet.TRANSPORTATION_ID);
+    }
+    
     @Override
     public String toString() {        
         return "Task{projectId: " + projectId + ", time: " + time +"}";        
