@@ -25,6 +25,10 @@ abstract public class Rules {
         return (officeWeekMinutes <= maxOfficeWeekMinutes);
     }
     
+    public boolean hasValidWeeklyTransportTime() {        
+        return true;
+    }
+    
     public boolean hasMinimumWeeklyTimeInOffice() {
         int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;        
         return (officeWeekMinutes >= minOfficeWeekMinutes);
