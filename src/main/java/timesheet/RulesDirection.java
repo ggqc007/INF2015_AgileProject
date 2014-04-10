@@ -19,4 +19,10 @@ public class RulesDirection extends Rules {
     public boolean hasValidWeeklyTimeInOffice () {
         return true;
     }
+    
+    @Override
+    public boolean hasValidWeeklyTransportTime() {        
+        // TODO
+        return true;
+    }
 }

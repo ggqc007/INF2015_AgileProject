@@ -12,6 +12,7 @@ abstract public class Rules {
     protected int totalWeekMinutes = 0;
     protected int totalOfficeWeekMinutes = 0;
     protected int totalRemoteWeekMinutes = 0;
+    protected int totalTransportWeekMinutes = 0;    
     protected Employe employe;
     
     public Rules() {
@@ -143,6 +144,10 @@ abstract public class Rules {
             sumTotalMinutes(tasks.get(i));
     }
     
+    protected void calculateTotalWeekTransportTime() {
+        // TODO
+    }    
+    
     protected void sumTotalMinutes(Task task) {
         int minutes = (int)task.getTime();
         totalWeekMinutes += minutes;
@@ -168,6 +173,11 @@ abstract public class Rules {
             if (tasks.get(i).isRemoteTask()) 
                 totalMinutes += (int)tasks.get(i).getTime();        
         return totalMinutes;
+    }
+    
+    protected int getTotalTransportTime() {
+        // TODO
+        return 0;
     }
     
     protected boolean canChargeTransportation() {
