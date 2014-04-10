@@ -103,7 +103,7 @@ public class RulesTest {
         assertTrue(rules.hasValidWeeklyTransportTime());
     }   
  
-   @Test
+    @Test
     public void testHasValidWeeklyTransportTimeDevelopmentPass() {   
         Employe employe = makeEmployeFactory(VALID_DEVELOPMENT_EMPLOYE_ID);
         Rules rules = new RulesDevelopment(employe);
@@ -112,7 +112,7 @@ public class RulesTest {
         assertTrue(rules.hasValidWeeklyTransportTime());
     }    
     
-   @Test
+    @Test
     public void testHasValidWeeklyTransportTimeExploitationPass() {   
         Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
         Rules rules = new RulesExploitation(employe);
@@ -121,7 +121,7 @@ public class RulesTest {
         assertTrue(rules.hasValidWeeklyTransportTime());
     }     
     
-   @Test
+    @Test
     public void testHasValidWeeklyTransportTimeDevelopmentFail() {   
         Employe employe = makeEmployeFactory(VALID_DEVELOPMENT_EMPLOYE_ID);
         Rules rules = new RulesDevelopment(employe);
@@ -131,7 +131,7 @@ public class RulesTest {
         assertFalse(rules.hasValidWeeklyTransportTime());
     }    
     
-   @Test
+    @Test
     public void testHasValidWeeklyTransportTimeExploitationFail() {   
         Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
         Rules rules = new RulesExploitation(employe);
