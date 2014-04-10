@@ -73,6 +73,7 @@ public class Report {
         reportHasNotValidWeeklyTimeRemote();
         reportHasNotValidWeeklyTimeInOffice();
         reportHasOnlyOneParentalHolidayByWeek();
+        reportHasNotValidWeeklyTransportTime();
     }
     
     public Employe getEmploye() {
@@ -183,6 +184,14 @@ public class Report {
     protected void reportHasNotValidWeeklyTimeInOffice() {
         if (!rules.hasValidWeeklyTimeInOffice())
             report.add(RULES_ERROR_4);
+    }
+    
+    protected void reportHasNotValidWeeklyTransportTime() {
+        if (!rules.hasValidWeeklyTransportTime())
+            if (employe.isDirectionEmploye() || employe.isAdmin())
+                report.add(RULES_ERROR_15);
+            else
+                report.add(RULES_ERROR_14);                
     }
     
     protected String getErrorTypeForWorkWhileSick(Day day) {

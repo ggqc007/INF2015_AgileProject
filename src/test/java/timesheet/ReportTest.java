@@ -191,8 +191,6 @@ public class ReportTest {
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
     
-    // Je dois attendre l'implémentation de temps de transport pour compléter ce test
-    @Ignore ("Je dois attendre l'implémentation de temps de transport pour compléter ce test")
     @Test
     public void testgenerateReportPresident() {
         List<String> expectedReport = new ArrayList<String>();
