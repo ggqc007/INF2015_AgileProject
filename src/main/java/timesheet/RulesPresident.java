@@ -20,5 +20,10 @@ public class RulesPresident extends Rules {
     @Override
     public boolean hasValidWeeklyTimeInOffice () {
         return true;
+    }
+    
+    @Override
+    public boolean hasValidWeeklyTransportTime() {                
+        return true;
     }    
 }

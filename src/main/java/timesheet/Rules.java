@@ -26,7 +26,14 @@ abstract public class Rules {
         return (officeWeekMinutes <= maxOfficeWeekMinutes);
     }
     
-    public boolean hasValidWeeklyTransportTime() {        
+    public boolean hasValidWeeklyTransportTime() { 
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++) { 
+            List<Task> tasks = days.get(i).getTasks();
+            for (int j = 0; j < tasks.size(); j++)
+                if (tasks.get(j).isTransportationTask())
+                    return false;
+        }
         return true;
     }
     
@@ -145,7 +152,9 @@ abstract public class Rules {
     }
     
     protected void calculateTotalWeekTransportTime() {
-        // TODO
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++)  
+            totalTransportWeekMinutes += getTotalTransportMinutesByDay(days.get(i));
     }    
     
     protected void sumTotalMinutes(Task task) {
@@ -176,8 +185,12 @@ abstract public class Rules {
     }
     
     protected int getTotalTransportMinutesByDay(Day day) {
-        // TODO
-        return 0;
+        int totalMinutes = 0;
+        List<Task> tasks = day.getTasks();
+        for (int i = 0; i < tasks.size(); i++) 
+            if (tasks.get(i).isTransportationTask()) 
+                totalMinutes += (int)tasks.get(i).getTime();        
+        return totalMinutes;
     }    
     
     protected int getTotalTransportTime() {       

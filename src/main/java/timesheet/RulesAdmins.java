@@ -18,7 +18,6 @@ public class RulesAdmins extends Rules {
     
     @Override
     public boolean hasValidWeeklyTransportTime() {        
-        // TODO
-        return true;
+        return (this.getTotalTransportTime() <= TimeSheet.MAX_TRANSPORTATION_TIME_ADMIN);
     }    
 }

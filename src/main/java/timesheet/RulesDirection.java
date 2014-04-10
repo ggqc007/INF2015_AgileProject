@@ -21,8 +21,7 @@ public class RulesDirection extends Rules {
     }
     
     @Override
-    public boolean hasValidWeeklyTransportTime() {        
-        // TODO
-        return true;
+    public boolean hasValidWeeklyTransportTime() {                
+        return (this.getTotalTransportTime() <= TimeSheet.MAX_TRANSPORTATION_TIME_DIRECTION);
     }
 }
