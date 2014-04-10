@@ -10,7 +10,8 @@ public class RulesFactory {
             return new RulesExploitation(employe);
         else if(employe.isDevelEmploye())
             return new RulesDevelopment(employe);
-        else if(employe.isDirectionEmploye())
+        // Le président est aussi un membre de la direction, à discuter
+        else if(employe.isDirectionEmploye() && !employe.isPresident())
             return new RulesDirection(employe);  
         else if(employe.isPresident())
             return new RulesPresident(employe);         
