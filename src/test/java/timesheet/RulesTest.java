@@ -42,7 +42,7 @@ public class RulesTest {
         Rules rules = new RulesDirection(employe);
         assertTrue(rules.canChargeTransportation());
     }   
-   
+   /*
     @Test
     public void testHasValidWeeklyTransportTimeDirectionPass() {   
         Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
@@ -113,7 +113,7 @@ public class RulesTest {
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
         timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 1000000);
         assertTrue(rules.hasValidWeeklyTransportTime());
-    }      
+    }   */   
     
     private Employe makeEmployeFactory(int employeId) {
         TimeSheetData timeSheetData = new TimeSheetData();
