@@ -188,9 +188,7 @@ public class Report {
     
     protected void reportHasNotValidWeeklyTransportTime() {
         if (!rules.hasValidWeeklyTransportTime())
-            // Ici j'ai mis quand même employe.isPresident() au cas ou on décide de ne
-            // plus considérer le président comme un employé de direction
-            if (employe.isDirectionEmploye() || employe.isAdmin() || employe.isPresident())
+            if (rules.canChargeTransportation())
                 report.add(RULES_ERROR_15);
             else
                 report.add(RULES_ERROR_14);                
