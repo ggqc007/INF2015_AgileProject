@@ -139,6 +139,18 @@ public class RulesTest {
         assertEquals(219,rules.getTotalTransportTime());                
     }
     
+    @Test    
+    public void testGetTotalTransportMinutesByDay() {
+        Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
+        Rules rules = new RulesExploitation(employe);
+        TimeSheetData timeSheetData = employe.getTimeSheet(0);
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName("jour3").addTask(TRANSPORTATION_ID, 99); 
+        timeSheetData.getDayByName("jour4").addTask(TRANSPORTATION_ID, 10);  
+        assertEquals(110,rules.getTotalTransportMinutesByDay(timeSheetData.getDayByName("jour1")));               
+    }
+    
     private Employe makeEmployeFactory(int employeId) {
         TimeSheetData timeSheetData = new TimeSheetData();
         timeSheetData.setDayByName(new Day("jour1"));

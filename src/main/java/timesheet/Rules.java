@@ -175,9 +175,13 @@ abstract public class Rules {
         return totalMinutes;
     }
     
-    protected int getTotalTransportTime() {
+    protected int getTotalTransportMinutesByDay(Day day) {
         // TODO
         return 0;
+    }    
+    
+    protected int getTotalTransportTime() {       
+        return totalTransportWeekMinutes;
     }
     
     protected boolean canChargeTransportation() {
