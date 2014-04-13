@@ -11,6 +11,7 @@ public class RulesTest {
     private static final int VALID_EXPLOITATION_EMPLOYE_ID = 2500;
     private static final int VALID_DIRECTION_EMPLOYE_ID = 5100;
     private static final int TRANSPORTATION_ID = 777;
+    private static final int VALID_OFFICE_TASK_ID = 800;
     private static final int MAX_TRANSPORT_TIME_DIRECTION = 300;
     private static final int MAX_TRANSPORT_TIME_ADMIN = 300;      
     private static final int PRESIDENT_ID = 6000;
@@ -179,6 +180,42 @@ public class RulesTest {
         assertEquals(110,rules.getTotalTransportMinutesByDay(timeSheetData.getDayByName("jour1")));               
     }
     
+    @Test 
+    public void testTransportationAsOfficeForAdministration() {
+        Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
+        Rules rules = new RulesAdmins(employe);
+        TimeSheetData timeSheetData = employe.getTimeSheet(0);
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName("jour3").addTask(VALID_OFFICE_TASK_ID, 30); 
+        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        rules.calculateTotalWeekMinutes();
+        assertEquals(150, rules.getTotalOfficeWeekMinutes());
+    }
+ 
+    @Test 
+    public void testTransportationAsOfficeForAdministrationFail() {
+        Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
+        Rules rules = new RulesAdmins(employe);
+        TimeSheetData timeSheetData = employe.getTimeSheet(0);
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName("jour3").addTask(VALID_OFFICE_TASK_ID, 30); 
+        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        rules.calculateTotalWeekMinutes();
+        assertFalse(rules.getTotalOfficeWeekMinutes() == 40);
+    }
+    
+    @Test 
+    public void testTransportationAsRemoteForDirection() {
+
+    }
+ 
+    @Test
+    public void testTransportationAsOfficeForDirectionFail() {
+    
+    }   
+            
     private Employe makeEmployeFactory(int employeId) {
         TimeSheetData timeSheetData = new TimeSheetData();
         timeSheetData.setDayByName(new Day("jour1"));
