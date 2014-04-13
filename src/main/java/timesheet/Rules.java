@@ -142,7 +142,7 @@ abstract public class Rules {
     protected void sumTotalMinutes(Task task) {
         int minutes = (int)task.getTime();
         totalWeekMinutes += minutes;
-        if (task.isRemoteTask())
+        if (task.isRemoteTask() || (employe.isDirectionEmploye() && task.isTransportationTask()))
             totalRemoteWeekMinutes += minutes;
         else
             totalOfficeWeekMinutes += minutes;        
