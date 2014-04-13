@@ -25,7 +25,9 @@ public class Report {
     private static final String RULES_ERROR_11 = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
     private static final String RULES_ERROR_12 = "Cet employé a une journée invalide de congé de vacances.";
     private static final String RULES_ERROR_13 = "Cet employé a plus d'une journée de congé parental par semaine.";    
-
+    private static final String RULES_ERROR_14 = "Cet employé a déclaré du temps de transport non permis."; 
+    private static final String RULES_ERROR_15 = "Cet employé a déclaré plus de temps de transport par semaine que la limite permise."; 
+    
     private Employe employe;
     private List<String> report = new ArrayList<String>();
     private Rules rules;
@@ -71,6 +73,7 @@ public class Report {
         reportHasNotValidWeeklyTimeRemote();
         reportHasNotValidWeeklyTimeInOffice();
         reportHasOnlyOneParentalHolidayByWeek();
+        reportHasNotValidWeeklyTransportTime();
     }
     
     public Employe getEmploye() {
@@ -181,6 +184,14 @@ public class Report {
     protected void reportHasNotValidWeeklyTimeInOffice() {
         if (!rules.hasValidWeeklyTimeInOffice())
             report.add(RULES_ERROR_4);
+    }
+    
+    protected void reportHasNotValidWeeklyTransportTime() {
+        if (!rules.hasValidWeeklyTransportTime())
+            if (rules.canChargeTransportation())
+                report.add(RULES_ERROR_15);
+            else
+                report.add(RULES_ERROR_14);                
     }
     
     protected String getErrorTypeForWorkWhileSick(Day day) {

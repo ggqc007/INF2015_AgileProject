@@ -194,7 +194,8 @@ public class EmployeTest {
         JSONObject validJSONObjectForAdmin = JSONObject.fromObject(validJSONStringForAdmin);
         TimeSheetData validTimeSheetDataForAdmin = JSONParser.toTimeSheetData(validJSONObjectForAdmin);
         employe.initFromFirstTimeSheet(validTimeSheetDataForAdmin);
-        assertFalse(employe.isDirectionEmploye());
+        // Le président est aussi un employé de la direction, à discuter
+        assertTrue(employe.isDirectionEmploye());
     }    
     
     @Test

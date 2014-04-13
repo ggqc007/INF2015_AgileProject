@@ -12,6 +12,7 @@ abstract public class Rules {
     protected int totalWeekMinutes = 0;
     protected int totalOfficeWeekMinutes = 0;
     protected int totalRemoteWeekMinutes = 0;
+    protected int totalTransportWeekMinutes = 0;    
     protected Employe employe;
     
     public Rules() {
@@ -23,6 +24,17 @@ abstract public class Rules {
     public boolean hasValidWeeklyTimeInOffice() {
         int officeWeekMinutes = totalWeekMinutes - totalRemoteWeekMinutes;
         return (officeWeekMinutes <= maxOfficeWeekMinutes);
+    }
+    
+    public boolean hasValidWeeklyTransportTime() { 
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++) { 
+            List<Task> tasks = days.get(i).getTasks();
+            for (int j = 0; j < tasks.size(); j++)
+                if (tasks.get(j).isTransportationTask())
+                    return false;
+        }
+        return true;
     }
     
     public boolean hasMinimumWeeklyTimeInOffice() {
@@ -139,6 +151,12 @@ abstract public class Rules {
             sumTotalMinutes(tasks.get(i));
     }
     
+    protected void calculateTotalWeekTransportTime() {
+        List<Day> days = employe.getTimeSheet(0).getDays();       
+        for (int i = 0; i < days.size(); i++)  
+            totalTransportWeekMinutes += getTotalTransportMinutesByDay(days.get(i));
+    }    
+    
     protected void sumTotalMinutes(Task task) {
         int minutes = (int)task.getTime();
         totalWeekMinutes += minutes;
@@ -164,6 +182,19 @@ abstract public class Rules {
             if (tasks.get(i).isRemoteTask()) 
                 totalMinutes += (int)tasks.get(i).getTime();        
         return totalMinutes;
+    }
+    
+    protected int getTotalTransportMinutesByDay(Day day) {
+        int totalMinutes = 0;
+        List<Task> tasks = day.getTasks();
+        for (int i = 0; i < tasks.size(); i++) 
+            if (tasks.get(i).isTransportationTask()) 
+                totalMinutes += (int)tasks.get(i).getTime();        
+        return totalMinutes;
+    }    
+    
+    protected int getTotalTransportTime() {       
+        return totalTransportWeekMinutes;
     }
     
     protected boolean canChargeTransportation() {

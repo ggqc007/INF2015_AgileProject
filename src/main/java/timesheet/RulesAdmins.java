@@ -15,4 +15,9 @@ public class RulesAdmins extends Rules {
     public boolean hasValidWeeklyTimeRemote(){
         return (totalRemoteWeekMinutes <= maxRemoteWeekMinutes);
     }
+    
+    @Override
+    public boolean hasValidWeeklyTransportTime() {        
+        return (this.getTotalTransportTime() <= TimeSheet.MAX_TRANSPORTATION_TIME_ADMIN);
+    }    
 }

@@ -25,7 +25,10 @@ public class TimeSheet {
     protected static final int MINIMUM_MINUTES_AMOUNT_FOR_TASK = 0;
     protected static final int MAXIMUM_HOURS_FOR_DAY = 32;
     protected static final int TRANSPORTATION_ID = 777;  
-    
+    protected static final int MAX_TRANSPORTATION_TIME_ADMIN = 300;
+    protected static final int MAX_TRANSPORTATION_TIME_DIRECTION = 300;
+    protected static final int MAX_TRANSPORTATION_TIME_PRESIDENT = 0;
+        
     protected static String inputFileName;
     protected static String outputFileName;
     private static final String FILE_ENCODING = "UTF-8";

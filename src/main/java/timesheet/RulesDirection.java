@@ -19,4 +19,9 @@ public class RulesDirection extends Rules {
     public boolean hasValidWeeklyTimeInOffice () {
         return true;
     }
+    
+    @Override
+    public boolean hasValidWeeklyTransportTime() {                
+        return (this.getTotalTransportTime() <= TimeSheet.MAX_TRANSPORTATION_TIME_DIRECTION);
+    }
 }
