@@ -12,6 +12,7 @@ public class RulesTest {
     private static final int VALID_DIRECTION_EMPLOYE_ID = 5100;
     private static final int TRANSPORTATION_ID = 777;
     private static final int VALID_OFFICE_TASK_ID = 800;
+    private static final int VALID_REMOTE_TASK_ID = 901;
     private static final int MAX_TRANSPORT_TIME_DIRECTION = 300;
     private static final int MAX_TRANSPORT_TIME_ADMIN = 300;      
     private static final int PRESIDENT_ID = 6000;
@@ -208,12 +209,28 @@ public class RulesTest {
     
     @Test 
     public void testTransportationAsRemoteForDirection() {
-
+        Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
+        Rules rules = new RulesDirection(employe);
+        TimeSheetData timeSheetData = employe.getTimeSheet(0);
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName("jour3").addTask(VALID_REMOTE_TASK_ID, 30); 
+        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        rules.calculateTotalWeekMinutes();
+        assertEquals(140, rules.getTotalRemoteWeekMinutes());
     }
  
     @Test
     public void testTransportationAsOfficeForDirectionFail() {
-    
+        Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
+        Rules rules = new RulesDirection(employe);
+        TimeSheetData timeSheetData = employe.getTimeSheet(0);
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName("jour3").addTask(VALID_REMOTE_TASK_ID, 30); 
+        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        rules.calculateTotalWeekMinutes();
+        assertFalse(rules.getTotalRemoteWeekMinutes() == 30);
     }   
             
     private Employe makeEmployeFactory(int employeId) {
@@ -230,5 +247,4 @@ public class RulesTest {
         employe.initFromFirstTimeSheet(timeSheetData);
         return employe;
     } 
-    
 }
