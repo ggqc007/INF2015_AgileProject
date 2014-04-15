@@ -146,7 +146,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportAdmin() {
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
         expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
@@ -161,7 +161,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportDevelopment() {
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
         expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
@@ -176,7 +176,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportExploitation() {
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
         expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
@@ -191,7 +191,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportDirection() {
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
         expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
@@ -206,7 +206,7 @@ public class ReportTest {
     
     @Test
     public void testgenerateReportPresident() {
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
         expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");

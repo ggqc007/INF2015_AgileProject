@@ -51,7 +51,7 @@ public class JSONParserTest {
     
     @Test
     public void testReportToJSONArray() {
-        List<String> errorReport = new ArrayList<String>();
+        List<String> errorReport = new ArrayList<>();
         JSONArray expArray = new JSONArray();
         for (int i = 1; i < 5; i++) {
             errorReport.add("Error"+i);

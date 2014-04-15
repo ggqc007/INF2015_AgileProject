@@ -39,26 +39,4 @@ public class TimeSheetTest {
         receivedArgs[1] = TimeSheet.outputFileName;
         assertEquals(args.toString(), receivedArgs.toString());
     }
-
-    @Test
-    public void testValidateAndLoadJSONObjectFromFileFailMissingFile() {
-
-    }
-
-    @Test
-    public void testTryJSONParserToTimeSheetData() {
-    }
-
-    @Test
-    public void testExitWithEmptyJSONArrayFile() {
-    }
-
-    @Test
-    public void testInitializeOutputStreamWriterWrapper() {
-    }
-
-    @Test
-    public void testMain() throws Exception {
-    }
-
 }
