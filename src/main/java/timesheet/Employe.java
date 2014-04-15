@@ -28,6 +28,10 @@ public class Employe {
         return timesheets;        
     }
     
+    public void setEmployeId(int id) {
+        employeId = id;
+    }
+    
     public boolean isAdmin() {        
         return ((employeId >= 0) && (employeId < TimeSheet.EMPLOYE_ADMIN_ID_CEILING));        
     } 
