@@ -7,6 +7,7 @@ public class RulesDevelopment extends Rules {
         minOfficeDailyMinutes = 360; 
         setEmploye(employe);
         calculateTotalWeekMinutes();
+        calculateTotalWeekTransportTime();        
     }
 
     @Override

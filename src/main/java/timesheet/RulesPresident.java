@@ -10,6 +10,7 @@ public class RulesPresident extends Rules {
         maxOfficeWeekMinutes = 0;        
         setEmploye(employe);
         calculateTotalWeekMinutes();
+        calculateTotalWeekTransportTime();        
     }
 
     @Override

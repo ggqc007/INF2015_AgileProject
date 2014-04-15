@@ -8,6 +8,7 @@ public class RulesDirection extends Rules {
         maxOfficeWeekMinutes = 0;
         setEmploye(employe);
         calculateTotalWeekMinutes();
+        calculateTotalWeekTransportTime();        
     }
 
     @Override

@@ -9,6 +9,7 @@ public class RulesAdmins extends Rules {
         maxOfficeWeekMinutes = 2490;
         setEmploye(employe);
         calculateTotalWeekMinutes();
+        calculateTotalWeekTransportTime();
     }
     
     @Override
