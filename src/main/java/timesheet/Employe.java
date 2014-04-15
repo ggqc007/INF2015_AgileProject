@@ -45,12 +45,7 @@ public class Employe {
     }    
     
     public boolean isDirectionEmploye() {        
-       // Note le prof à dit que le président est un employé de direction donc ici on ne test pas si il 
-       // est président, il faut qu'on en discute pour être sûr. J'ai enlevé le test de président car 
-       // dans la méthode test canChargeTransport... de Christian il ne test pas le président.
-       return (employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR); 
-       
-       // return ((employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR) && (employeId != TimeSheet.PREDIDENT_ID));      
+       return (employeId > TimeSheet.EMPLOYE_DIRECTION_ID_FLOOR);    
     }
     
     public boolean isPresident() {
