@@ -147,10 +147,10 @@ public class ReportTest {
     @Test
     public void testgenerateReportAdmin() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
         expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
@@ -162,10 +162,10 @@ public class ReportTest {
     @Test
     public void testgenerateReportDevelopment() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
         expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
@@ -177,10 +177,10 @@ public class ReportTest {
     @Test
     public void testgenerateReportExploitation() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
         expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
@@ -192,10 +192,10 @@ public class ReportTest {
     @Test
     public void testgenerateReportDirection() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
         expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
@@ -207,10 +207,10 @@ public class ReportTest {
     @Test
     public void testgenerateReportPresident() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
         expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
@@ -234,7 +234,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_TASK_AFTER_24_HOURS +" (jour1)");
+        expectedReport.add(ERROR_INVALID_TASK_AFTER_24_HOURS + " (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -256,7 +256,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK +" (jour1)");
+        expectedReport.add(ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK + " (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -277,8 +277,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_WORK_SAME_PROJECT_FOR_DAY +" (jour1)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_WORK_SAME_PROJECT_FOR_DAY + " (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -299,8 +299,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_SICK_HOLIDAY +" (télé-travail - jour1)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_INVALID_SICK_HOLIDAY + " (télé-travail - jour1)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
 
         Report testReport = new Report(employeDirection);
@@ -322,8 +322,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_SICK_HOLIDAY +" (travail au bureau - jour1)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_INVALID_SICK_HOLIDAY + " (travail au bureau - jour1)");
         expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
 
         Report testReport = new Report(employeDirection);
@@ -344,8 +344,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_PUBLIC_HOLIDAY +" (weekend2)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_INVALID_PUBLIC_HOLIDAY + " (weekend2)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -366,8 +366,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY +" (jour1)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY + " (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -388,8 +388,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_INVALID_HOLIDAY +" (jour1)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_INVALID_HOLIDAY + " (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -409,7 +409,7 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_TOO_MANY_MINUTES_OF_REMOTE_WORK);
 
         Report testReport = new Report(employeDirection);
@@ -430,7 +430,7 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -450,7 +450,7 @@ public class ReportTest {
         validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
         employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
 
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
@@ -471,8 +471,8 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour2)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour2)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -492,7 +492,7 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -513,8 +513,8 @@ public class ReportTest {
         validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
         employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
 
-        List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour2)");
+        List<String> expectedReport = new ArrayList<>();
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour2)");
 
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
@@ -534,7 +534,7 @@ public class ReportTest {
         validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
         employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
