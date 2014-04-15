@@ -16,7 +16,18 @@ public class ReportTest {
     private static final int DIRECTION_EMPLOYE_ID = 5001;
     private static final int PRESIDENT_ID = 6000;
     
-    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
+    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
+    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
+    private static final String ERROR_INVALID_PARENTAL_HOLIDAY = "Cet employé a au moins une journée de congé parental invalide";
+    private static final String ERROR_TOO_MANY_PARENTAL_HOLIDAY = "Cet employé a plus d'une journée de congé parental par semaine.";
+    private static final String ERROR_INVALID_TASK_AFTER_24_HOURS = "Cet employé a une journée avec plus de 24 heures qui ne comporte pas de temps de journée de vacances ou de congé férié";
+    private static final String ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY = "Cet employé a une journée avec plus de 32 heures travaillé.";
+    private static final String ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK = "Cet employé a une journée qui ne respecte pas le nombre minimum de minutes (0) pour une tache.";
+    private static final String ERROR_WORK_SAME_PROJECT_FOR_DAY = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
+    private static final String ERROR_INVALID_SICK_HOLIDAY = "Cet employé a une journée invalide de congé de maladie.";
+    private static final String ERROR_INVALID_PUBLIC_HOLIDAY = "Cet employé a une journée invalide de congé férié.";
+    private static final String ERROR_INVALID_HOLIDAY = "Cet employé a une journée invalide de congé de vacances.";
+    private static final String ERROR_TOO_MANY_MINUTES_OF_REMOTE_WORK = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
     
     private String validJSONStringAdmin;
     private String validJSONStringDevelopment;
@@ -136,12 +147,12 @@ public class ReportTest {
     @Test
     public void testgenerateReportAdmin() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
-        expectedReport.add("Cet employé a plus d'une journée de congé parental par semaine.");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
+        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
         Report testReport = new Report(employeAdmin);
         List<String> generatedReport = testReport.generateReport(employeAdmin);
@@ -151,12 +162,12 @@ public class ReportTest {
     @Test
     public void testgenerateReportDevelopment() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
-        expectedReport.add("Cet employé a plus d'une journée de congé parental par semaine.");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
+        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
         Report testReport = new Report(employeDevelopment);
         List<String> generatedReport = testReport.generateReport(employeDevelopment);
@@ -166,12 +177,12 @@ public class ReportTest {
     @Test
     public void testgenerateReportExploitation() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
-        expectedReport.add("Cet employé a plus d'une journée de congé parental par semaine.");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
+        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
         Report testReport = new Report(employeExploitation);
         List<String> generatedReport = testReport.generateReport(employeExploitation);
@@ -181,12 +192,12 @@ public class ReportTest {
     @Test
     public void testgenerateReportDirection() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
-        expectedReport.add("Cet employé a plus d'une journée de congé parental par semaine.");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
+        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -196,12 +207,12 @@ public class ReportTest {
     @Test
     public void testgenerateReportPresident() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
-        expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
-        expectedReport.add("Cet employé a plus d'une journée de congé parental par semaine.");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour4)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour3)");
+        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY +" (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
+        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
 
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
@@ -223,7 +234,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée avec plus de 24 heures qui ne comporte pas de temps de journée de vacances ou de congé férié (jour1)");
+        expectedReport.add(ERROR_INVALID_TASK_AFTER_24_HOURS +" (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -245,7 +256,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée qui ne respecte pas le nombre minimum de minutes (0) pour une tache. (jour1)");
+        expectedReport.add(ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK +" (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -267,7 +278,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour1)");
+        expectedReport.add(ERROR_WORK_SAME_PROJECT_FOR_DAY +" (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -289,8 +300,8 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée invalide de congé de maladie. (télé-travail - jour1)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
+        expectedReport.add(ERROR_INVALID_SICK_HOLIDAY +" (télé-travail - jour1)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -312,8 +323,8 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée invalide de congé de maladie. (travail au bureau - jour1)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
+        expectedReport.add(ERROR_INVALID_SICK_HOLIDAY +" (travail au bureau - jour1)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -334,7 +345,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée invalide de congé férié. (weekend2)");
+        expectedReport.add(ERROR_INVALID_PUBLIC_HOLIDAY +" (weekend2)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -356,7 +367,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée avec plus de 32 heures travaillé. (jour1)");
+        expectedReport.add(ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY +" (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -378,7 +389,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée invalide de congé de vacances. (jour1)");
+        expectedReport.add(ERROR_INVALID_HOLIDAY +" (jour1)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -399,7 +410,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a fait plus d'heures de télétravail que la quantité permise.");
+        expectedReport.add(ERROR_TOO_MANY_MINUTES_OF_REMOTE_WORK);
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -461,7 +472,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour2)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour2)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -503,7 +514,7 @@ public class ReportTest {
         employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour2)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY +" (jour2)");
 
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
