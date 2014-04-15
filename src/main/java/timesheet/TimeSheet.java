@@ -111,16 +111,18 @@ public class TimeSheet {
         if (employe.isAdmin())
             System.out.println(" is an ADMIN employe");
         else {
-            if ((employe.isExplEmploye()))
+            if (employe.isExplEmploye())
                 System.out.println(" is an EXPLOITATION employe");
-            else if ((employe.isDevelEmploye()))
+            else if (employe.isDevelEmploye())
                 System.out.println(" is a DEVELOPMENT employe");
-            else if ((employe.isDirectionEmploye()))
-                System.out.println(" is a DIRECTION employe");            
+            else if (employe.isDirectionEmploye() && !employe.isPresident())
+                System.out.println(" is a DIRECTION employe"); 
+            else if (employe.isPresident())
+                System.out.println(" is a PRESIDENT (DIRECTION) employe");            
             else
                 System.out.println(" is an UNKNOWN employe"); 
             
-        }
+        }       
         
         Day day;        
         Rules rules;   
@@ -128,6 +130,11 @@ public class TimeSheet {
  
         RulesFactory rulesFactory = new RulesFactory();
         rules = rulesFactory.makeRules(employe);
+        
+        if (rules.canChargeTransportation())
+            System.out.printf("\n      Can declare transport time : YES\n");
+        else
+            System.out.printf("\n      Can declare transport time : NO\n");        
         
         System.out.println("\nDEBUG JSON Validation :");
         System.out.print("\n      Weekdays valid : ");
@@ -255,6 +262,18 @@ public class TimeSheet {
         minutes = rules.getTotalRemoteWeekMinutes() % 60;        
         System.out.printf("      Total remote by week : " + rules.getTotalRemoteWeekMinutes() +"m(%d:%02dh)\n", hours, minutes);        
 
+        hours = rules.getTotalTransportTime() / 60;
+        minutes = rules.getTotalTransportTime() % 60;  
+        System.out.printf("\n      Total transport time : " + rules.getTotalTransportTime()+"m(%d:%02dh)\n", hours, minutes);
+        
+        if (rules.canChargeTransportation())
+            if (rules.hasValidWeeklyTransportTime())
+                System.out.printf("      Valid transport time : YES\n");
+            else
+                System.out.printf("      Valid transport time : NO (too much time)\n");
+        else
+            System.out.printf("      Valid transport time : NO (not allowed)\n");
+        
         System.out.printf("\n      Day name             : ");               
         for(int i = 0; i < employe.getTimeSheet(0).getDaysNum()-1; i++) {
             day = employe.getTimeSheet(0).getDay(i);
