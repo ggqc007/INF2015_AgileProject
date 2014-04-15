@@ -16,6 +16,8 @@ public class ReportTest {
     private static final int DIRECTION_EMPLOYE_ID = 5001;
     private static final int PRESIDENT_ID = 6000;
     
+    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
+    
     private String validJSONStringAdmin;
     private String validJSONStringDevelopment;
     private String validJSONStringExploitation;
@@ -134,8 +136,8 @@ public class ReportTest {
     @Test
     public void testgenerateReportAdmin() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
         expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
@@ -149,8 +151,8 @@ public class ReportTest {
     @Test
     public void testgenerateReportDevelopment() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
         expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
@@ -164,8 +166,8 @@ public class ReportTest {
     @Test
     public void testgenerateReportExploitation() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
         expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
@@ -179,8 +181,8 @@ public class ReportTest {
     @Test
     public void testgenerateReportDirection() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
         expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
@@ -194,8 +196,8 @@ public class ReportTest {
     @Test
     public void testgenerateReportPresident() {
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour3)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour4)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour3)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour4)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour3)");
         expectedReport.add("Cet employé a au moins une journée de congé parental invalide (jour4)");
         expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
@@ -209,8 +211,9 @@ public class ReportTest {
     @Test
     public void testgenerateReportDirectionInvalidWorkAfter24hrsNoHoliday() throws Exception {
         Employe employeDirection = new Employe();
+        //j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
-                + "901,\n \"minutes\": 1440\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
+                + "99,\n \"minutes\": 1440\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
                 + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
                 + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
@@ -221,8 +224,6 @@ public class ReportTest {
 
         List<String> expectedReport = new ArrayList<String>();
         expectedReport.add("Cet employé a une journée avec plus de 24 heures qui ne comporte pas de temps de journée de vacances ou de congé férié (jour1)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour1)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -232,8 +233,9 @@ public class ReportTest {
     @Test
     public void testgenerateReportDirectionInvalid0MinuteTask() throws Exception {
         Employe employeDirection = new Employe();
+        // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
-                + "901,\n \"minutes\": 1440\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
+                + "99,\n \"minutes\": 600\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 0\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
                 + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
                 + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
@@ -244,9 +246,6 @@ public class ReportTest {
 
         List<String> expectedReport = new ArrayList<String>();
         expectedReport.add("Cet employé a une journée qui ne respecte pas le nombre minimum de minutes (0) pour une tache. (jour1)");
-        expectedReport.add("Cet employé a une journée avec plus de 24 heures qui ne comporte pas de temps de journée de vacances ou de congé férié (jour1)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour1)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");;
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -256,8 +255,9 @@ public class ReportTest {
     @Test
     public void testgenerateReportDirectionInvalidDuplicateTasksForADay() throws Exception {
         Employe employeDirection = new Employe();
+        // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
-                + "901,\n \"minutes\": 1440\n },\n {\n \"projet\": 910,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
+                + "99,\n \"minutes\": 600\n },\n {\n \"projet\": 910,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
                 + "[\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,\n \"minutes\": "
                 + "480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
@@ -267,10 +267,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé a une journée avec plus de 24 heures qui ne comporte pas de temps de journée de vacances ou de congé férié (jour1)");
         expectedReport.add("Cet employé a plusieurs activités avec le même code de projet pour une même journée (jour1)");
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour1)");
-        expectedReport.add("Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -280,6 +277,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickRemoteWork() throws Exception {
         Employe employeDirection = new Employe();
+        // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "901,\n \"minutes\": 440\n },\n {\n \"projet\": 999,\n \"minutes\": 480\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
@@ -302,6 +300,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickOfficeWork() throws Exception {
         Employe employeDirection = new Employe();
+        // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "10,\n \"minutes\": 2\n },\n {\n \"projet\": 999,\n \"minutes\": 480\n },\n {\n \"projet\": 91,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
@@ -336,7 +335,6 @@ public class ReportTest {
 
         List<String> expectedReport = new ArrayList<String>();
         expectedReport.add("Cet employé a une journée invalide de congé férié. (weekend2)");
-        //expectedReport.add("Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -346,6 +344,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithToMuchTime() throws Exception {
         Employe employeDirection = new Employe();
+        // j2+ valide??
         validJSONStringDirection = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "994,\n \"minutes\": 1920\n },\n {\n \"projet\": 10,\n \"minutes\": 480\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
@@ -367,6 +366,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysOfHolidayCausedByWrongTime() throws Exception {
         Employe employeDirection = new Employe();
+        // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "997,\n \"minutes\": 500\n },\n {\n \"projet\": 10,\n \"minutes\": 4\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
@@ -448,6 +448,7 @@ public class ReportTest {
     
     @Test
     public void testReportEmployeDirectionMinOfficeTime8hFail() throws Exception {
+        // jour 2 different!!!!!!!!!!!!!!!
         Employe employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
@@ -460,7 +461,7 @@ public class ReportTest {
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour2)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour2)");
 
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
@@ -489,6 +490,7 @@ public class ReportTest {
     
     @Test
     public void testReportPresidentMinOfficeTime8hFail() throws Exception {
+        // jour2 different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         Employe employePresident = new Employe();
         validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
@@ -501,7 +503,7 @@ public class ReportTest {
         employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
 
         List<String> expectedReport = new ArrayList<String>();
-        expectedReport.add("Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau. (jour2)");
+        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME +" (jour2)");
 
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
