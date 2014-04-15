@@ -1,7 +1,9 @@
 package timesheet;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -76,7 +78,7 @@ public class TimeSheet {
         try {
             OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(outputFileName), FILE_ENCODING);
             writer = new OutputStreamWriterWrapper(osw);
-        } catch (Exception e) {
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
             System.out.println("Erreur! ("+ e +")");
         }
         return writer;
