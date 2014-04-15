@@ -7,7 +7,7 @@ import net.sf.json.JSONArray;
 public class OutputStreamWriterWrapper {
 
     private static final int JSON_OUTPUT_IDENTATION = 2;
-    private OutputStreamWriter fileWriter;
+    private final OutputStreamWriter fileWriter;
     
     public OutputStreamWriterWrapper(OutputStreamWriter fileWriter) {
         this.fileWriter = fileWriter;

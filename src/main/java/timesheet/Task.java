@@ -1,8 +1,8 @@
 package timesheet;
 
 public class Task {         
-    private int projectId;
-    private int time;    
+    private final int projectId;
+    private final int time;    
     
     public Task(int id, int time) {        
         projectId = id;

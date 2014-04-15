@@ -29,7 +29,7 @@ public class Report {
     private static final String RULES_ERROR_15 = "Cet employé a déclaré plus de temps de transport par semaine que la limite permise."; 
     
     private Employe employe;
-    private List<String> report = new ArrayList<String>();
+    private final List<String> report = new ArrayList<>();
     private Rules rules;
 
     public Report() {
