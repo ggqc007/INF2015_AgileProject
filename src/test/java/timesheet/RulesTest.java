@@ -16,6 +16,14 @@ public class RulesTest {
     private static final int MAX_TRANSPORT_TIME_ADMIN = 300;      
     private static final int PRESIDENT_ID = 6000;
             
+    private static final String JOUR1_KEY = "jour1";
+    private static final String JOUR2_KEY = "jour2";
+    private static final String JOUR3_KEY = "jour3";
+    private static final String JOUR4_KEY = "jour4";
+    private static final String JOUR5_KEY = "jour5";
+    private static final String WEEKEND1_KEY = "weekend1";
+    private static final String WEEKEND2_KEY = "weekend2";
+    
     @Test
     public void testCanChargeTransportationAdmin() {
         Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
@@ -49,7 +57,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
         Rules rules = new RulesDirection(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION);
         rules.calculateTotalWeekTransportTime();
         assertTrue(rules.hasValidWeeklyTransportTime());
     }    
@@ -59,7 +67,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
         Rules rules = new RulesDirection(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION + 1);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION + 1);
         rules.calculateTotalWeekTransportTime();
         assertFalse(rules.hasValidWeeklyTransportTime());
     }   
@@ -69,7 +77,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
         Rules rules = new RulesAdmins(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_ADMIN);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_ADMIN);
         rules.calculateTotalWeekTransportTime();
         assertTrue(rules.hasValidWeeklyTransportTime());
     }    
@@ -79,7 +87,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
         Rules rules = new RulesAdmins(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_ADMIN + 1);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_ADMIN + 1);
         rules.calculateTotalWeekTransportTime();
         assertFalse(rules.hasValidWeeklyTransportTime());
     }    
@@ -89,7 +97,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(PRESIDENT_ID);
         Rules rules = new RulesAdmins(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION);
         rules.calculateTotalWeekTransportTime();
         assertTrue(rules.hasValidWeeklyTransportTime());
     }    
@@ -99,7 +107,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(PRESIDENT_ID);
         Rules rules = new RulesPresident(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION + 1);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, MAX_TRANSPORT_TIME_DIRECTION + 1);
         rules.calculateTotalWeekTransportTime();
         assertTrue(rules.hasValidWeeklyTransportTime());
     }   
@@ -127,7 +135,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_DEVELOPMENT_EMPLOYE_ID);
         Rules rules = new RulesDevelopment(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);        
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100);
         rules.calculateTotalWeekTransportTime();
         assertFalse(rules.hasValidWeeklyTransportTime());
     }    
@@ -137,7 +145,7 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
         Rules rules = new RulesExploitation(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100);
         rules.calculateTotalWeekTransportTime();
         assertFalse(rules.hasValidWeeklyTransportTime());
     }   
@@ -147,10 +155,10 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
         Rules rules = new RulesExploitation(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(TRANSPORTATION_ID, 99); 
-        timeSheetData.getDayByName("jour4").addTask(TRANSPORTATION_ID, 10);  
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(TRANSPORTATION_ID, 99); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(TRANSPORTATION_ID, 10);  
         rules.calculateTotalWeekTransportTime();
         assertEquals(219,rules.totalTransportWeekMinutes);
     }
@@ -160,10 +168,10 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
         Rules rules = new RulesExploitation(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(TRANSPORTATION_ID, 99); 
-        timeSheetData.getDayByName("jour4").addTask(TRANSPORTATION_ID, 10);  
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(TRANSPORTATION_ID, 99); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(TRANSPORTATION_ID, 10);  
         rules.calculateTotalWeekTransportTime();
         assertEquals(219,rules.getTotalTransportTime());                
     }
@@ -173,10 +181,10 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID);
         Rules rules = new RulesExploitation(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(TRANSPORTATION_ID, 99); 
-        timeSheetData.getDayByName("jour4").addTask(TRANSPORTATION_ID, 10);  
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(TRANSPORTATION_ID, 99); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(TRANSPORTATION_ID, 10);  
         assertEquals(110,rules.getTotalTransportMinutesByDay(timeSheetData.getDayByName("jour1")));               
     }
     
@@ -185,10 +193,10 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
         Rules rules = new RulesAdmins(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(VALID_OFFICE_TASK_ID, 30); 
-        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(VALID_OFFICE_TASK_ID, 30); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(VALID_OFFICE_TASK_ID, 10);
         rules.calculateTotalWeekMinutes();
         assertEquals(150, rules.getTotalOfficeWeekMinutes());
     }
@@ -198,10 +206,10 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID);
         Rules rules = new RulesAdmins(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(VALID_OFFICE_TASK_ID, 30); 
-        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(VALID_OFFICE_TASK_ID, 30); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(VALID_OFFICE_TASK_ID, 10);
         rules.calculateTotalWeekMinutes();
         assertFalse(rules.getTotalOfficeWeekMinutes() == 40);
     }
@@ -211,10 +219,10 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
         Rules rules = new RulesDirection(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(VALID_REMOTE_TASK_ID, 30); 
-        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(VALID_REMOTE_TASK_ID, 30); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(VALID_OFFICE_TASK_ID, 10);
         rules.calculateTotalWeekMinutes();
         assertEquals(140, rules.getTotalRemoteWeekMinutes());
     }
@@ -224,23 +232,23 @@ public class RulesTest {
         Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID);
         Rules rules = new RulesDirection(employe);
         TimeSheetData timeSheetData = employe.getTimeSheet(0);
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 10); 
-        timeSheetData.getDayByName("jour1").addTask(TRANSPORTATION_ID, 100); 
-        timeSheetData.getDayByName("jour3").addTask(VALID_REMOTE_TASK_ID, 30); 
-        timeSheetData.getDayByName("jour4").addTask(VALID_OFFICE_TASK_ID, 10);
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 10); 
+        timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
+        timeSheetData.getDayByName(JOUR3_KEY).addTask(VALID_REMOTE_TASK_ID, 30); 
+        timeSheetData.getDayByName(JOUR4_KEY).addTask(VALID_OFFICE_TASK_ID, 10);
         rules.calculateTotalWeekMinutes();
         assertFalse(rules.getTotalRemoteWeekMinutes() == 30);
     }   
             
     private Employe makeEmployeFactory(int employeId) {
         TimeSheetData timeSheetData = new TimeSheetData();
-        timeSheetData.setDayByName(new Day("jour1"));
-        timeSheetData.setDayByName(new Day("jour2"));
-        timeSheetData.setDayByName(new Day("jour3"));
-        timeSheetData.setDayByName(new Day("jour4"));
-        timeSheetData.setDayByName(new Day("jour5"));
-        timeSheetData.setDayByName(new Day("weekend1"));
-        timeSheetData.setDayByName(new Day("weekend2"));         
+        timeSheetData.setDayByName(new Day(JOUR1_KEY));
+        timeSheetData.setDayByName(new Day(JOUR2_KEY));
+        timeSheetData.setDayByName(new Day(JOUR3_KEY));
+        timeSheetData.setDayByName(new Day(JOUR4_KEY));
+        timeSheetData.setDayByName(new Day(JOUR5_KEY));
+        timeSheetData.setDayByName(new Day(WEEKEND1_KEY));
+        timeSheetData.setDayByName(new Day(WEEKEND2_KEY));         
         timeSheetData.setEmployeId(employeId);
         Employe employe= new Employe();
         employe.initFromFirstTimeSheet(timeSheetData);
