@@ -131,10 +131,18 @@ public class TimeSheet {
         RulesFactory rulesFactory = new RulesFactory();
         rules = rulesFactory.makeRules(employe);
         
-        if (rules.canChargeTransportation())
+        if (rules.canChargeTransportation()) {
             System.out.printf("\n      Can declare transport time : YES\n");
-        else
-            System.out.printf("\n      Can declare transport time : NO\n");        
+            if (employe.isAdmin())
+                System.out.printf("      Declared has               : OFFICE TIME\n");
+            else if ((employe.isDirectionEmploye()))
+                System.out.printf("      Declared has               : REMOTE TIME\n");                                
+            else 
+                System.out.printf("      Declared has               : UNKNOWN\n");
+        } else {
+            System.out.printf("\n      Can declare transport time : NO\n"); 
+            System.out.printf("      Declared has               : N/A\n");
+        }
         
         System.out.println("\nDEBUG JSON Validation :");
         System.out.print("\n      Weekdays valid : ");
