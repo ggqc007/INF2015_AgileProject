@@ -15,6 +15,11 @@ public class ReportTest {
     private static final int DIRECTION_EMPLOYE_ID = 5001;
     private static final int PRESIDENT_ID = 6000;
     
+    private static final int TRANSPORTATION_ID = 777;
+    private static final int SICK_LEAVE_TASK_ID = 999;
+    private static final int PUBLIC_HOLIDAY_TASK_ID = 998;
+    private static final int HOLIDAY_TASK_ID = 997;
+    
     private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
     private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
     private static final String ERROR_INVALID_PARENTAL_HOLIDAY = "Cet employé a au moins une journée de congé parental invalide";
@@ -52,15 +57,9 @@ public class ReportTest {
     private static final String RULES_PRESIDENT_CLASS_PATH_AND_NAME = "timesheet.RulesPresident";
     
     private static final String JOUR1_KEY = "jour1";
-    private static final String JOUR2_KEY = "jour2";
     private static final String JOUR3_KEY = "jour3";
     private static final String WEEKEND2_KEY = "weekend2";
-            
-    private String validJSONStringAdmin;
-    private String validJSONStringDevelopment;
-    private String validJSONStringExploitation;
-    private String validJSONStringDirection;
-    private String validJSONStringPresident;    
+               
     private JSONObject validJSONObjectAdmin;
     private JSONObject validJSONObjectDevelopment;
     private JSONObject validJSONObjectExploitation;
@@ -235,7 +234,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickRemoteWork() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(0).setProjectId(999);
+        tasksForDay.get(0).setProjectId(SICK_LEAVE_TASK_ID);
         tasksForDay.get(0).setTime(480);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_SICK_HOLIDAY + " (télé-travail - " + JOUR1_KEY + ")");
@@ -247,7 +246,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickOfficeWork() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(0).setProjectId(999);
+        tasksForDay.get(0).setProjectId(SICK_LEAVE_TASK_ID);
         tasksForDay.get(0).setTime(480);
         tasksForDay.get(1).setProjectId(80);
         tasksForDay.get(2).setProjectId(81);
@@ -261,7 +260,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithPublicHolidayOfficeTaskOnPublicHoliday() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(WEEKEND2_KEY).getTasks();
-        tasksForDay.get(0).setProjectId(998);
+        tasksForDay.get(0).setProjectId(PUBLIC_HOLIDAY_TASK_ID);
         tasksForDay.get(0).setTime(480);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_PUBLIC_HOLIDAY + " (" + WEEKEND2_KEY + ")");
@@ -273,7 +272,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysWithToMuchTime() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(1).setProjectId(994);
+        tasksForDay.get(1).setProjectId(914);
         tasksForDay.get(1).setTime(1920);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY + " (" + JOUR1_KEY + ")");
@@ -285,7 +284,7 @@ public class ReportTest {
     @Test
     public void testReportInvalidDaysOfHolidayCausedByWrongTime() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(0).setProjectId(997);
+        tasksForDay.get(0).setProjectId(HOLIDAY_TASK_ID);
         tasksForDay.get(0).setTime(500);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_HOLIDAY + " (" + JOUR1_KEY + ")");
@@ -370,7 +369,7 @@ public class ReportTest {
     @Test
     public void testReportPresidentValidTransportTime301m() throws Exception {
         List<Task> tasksForDay = validEmployePresident.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(301);
         List<String> expectedReport = new ArrayList<>();
         Report testReport = new Report(validEmployePresident);
@@ -381,7 +380,7 @@ public class ReportTest {
     @Test
     public void testReportDirectionInvalidTransportTime301m() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(301);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_TOO_MUCH_TRANSPORT_TIME);
@@ -393,7 +392,7 @@ public class ReportTest {
     @Test
     public void testReportDirectionValidTransportTime300m() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(300);
         List<String> expectedReport = new ArrayList<>();
         Report testReport = new Report(validEmployeDirection);
@@ -405,7 +404,7 @@ public class ReportTest {
     public void testReportAdminInvalidTransportTime301m() throws Exception {
         List<Task> tasksForDay = validEmployeAdmin.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
         tasksForDay.get(0).setTime(89);
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(301);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_TOO_MUCH_TRANSPORT_TIME);
@@ -418,7 +417,7 @@ public class ReportTest {
     public void testReportAdminValidTransportTime300m() throws Exception {
         List<Task> tasksForDay = validEmployeAdmin.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
         tasksForDay.get(0).setTime(89);
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(300);
         List<String> expectedReport = new ArrayList<>();
         Report testReport = new Report(validEmployeAdmin);
@@ -430,7 +429,7 @@ public class ReportTest {
     public void testReportDevelopmentInvalidTransportTime300m() throws Exception {
         List<Task> tasksForDay = validEmployeDevelopment.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
         tasksForDay.get(0).setTime(100);
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(301);
         List<String> expectedReport = new ArrayList<>();   
         expectedReport.add(ERROR_INVALID_TRANSPORT_TIME);
@@ -443,7 +442,7 @@ public class ReportTest {
     public void testReportExploitationInvalidTransportTime300m() throws Exception {
         List<Task> tasksForDay = validEmployeExploitation.getTimeSheet(0).getDayByName(JOUR1_KEY).getTasks();
         tasksForDay.get(0).setTime(200);
-        tasksForDay.get(2).setProjectId(777);
+        tasksForDay.get(2).setProjectId(TRANSPORTATION_ID);
         tasksForDay.get(2).setTime(300);
         List<String> expectedReport = new ArrayList<>();   
         expectedReport.add(ERROR_INVALID_TRANSPORT_TIME);
