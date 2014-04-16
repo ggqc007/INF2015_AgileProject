@@ -182,7 +182,7 @@ public class RulesTest {
         timeSheetData.getDayByName(JOUR1_KEY).addTask(TRANSPORTATION_ID, 100); 
         timeSheetData.getDayByName(JOUR3_KEY).addTask(TRANSPORTATION_ID, 99); 
         timeSheetData.getDayByName(JOUR4_KEY).addTask(TRANSPORTATION_ID, 10);  
-        assertEquals(110,rules.getTotalTransportMinutesByDay(timeSheetData.getDayByName("jour1")));               
+        assertEquals(110,rules.getTotalTransportMinutesByDay(timeSheetData.getDayByName(JOUR1_KEY)));               
     }
     
     @Test 
