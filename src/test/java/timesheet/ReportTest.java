@@ -3,7 +3,6 @@ package timesheet;
 import java.util.ArrayList;
 import java.util.List;
 import net.sf.json.JSONObject;
-import org.junit.Ignore; // À retirer plus tard
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -224,7 +223,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportDirectionInvalidWorkAfter24hrsNoHoliday() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         //j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "99,\n \"minutes\": 1440\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
@@ -236,7 +235,7 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_TASK_AFTER_24_HOURS + " (jour1)");
 
         Report testReport = new Report(employeDirection);
@@ -246,7 +245,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportDirectionInvalid0MinuteTask() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "99,\n \"minutes\": 600\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
@@ -258,7 +257,7 @@ public class ReportTest {
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
 
-        List<String> expectedReport = new ArrayList<String>();
+        List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK + " (jour1)");
 
         Report testReport = new Report(employeDirection);
@@ -268,7 +267,7 @@ public class ReportTest {
 
     @Test
     public void testgenerateReportDirectionInvalidDuplicateTasksForADay() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "99,\n \"minutes\": 600\n },\n {\n \"projet\": 910,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
@@ -290,7 +289,7 @@ public class ReportTest {
 
     @Test
     public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickRemoteWork() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "901,\n \"minutes\": 440\n },\n {\n \"projet\": 999,\n \"minutes\": 480\n },\n {\n \"projet\": 910,\n "
@@ -313,7 +312,7 @@ public class ReportTest {
 
     @Test
     public void testReportInvalidDaysWithSickLeaveOtherTasksWhileSickOfficeWork() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "10,\n \"minutes\": 2\n },\n {\n \"projet\": 999,\n \"minutes\": 480\n },\n {\n \"projet\": 91,\n "
@@ -336,7 +335,7 @@ public class ReportTest {
 
     @Test
     public void testReportInvalidDaysWithPublicHolidayOfficeTaskOnPublicHoliday() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "99,\n \"minutes\": 480\n },\n {\n \"projet\": 10,\n \"minutes\": 4\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
@@ -357,7 +356,7 @@ public class ReportTest {
 
     @Test
     public void testReportInvalidDaysWithToMuchTime() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         // j2+ valide??
         validJSONStringDirection = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "994,\n \"minutes\": 1920\n },\n {\n \"projet\": 10,\n \"minutes\": 480\n },\n {\n \"projet\": 910,\n "
@@ -379,7 +378,7 @@ public class ReportTest {
 
     @Test
     public void testReportInvalidDaysOfHolidayCausedByWrongTime() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         // j2+ valide
         validJSONStringDirection = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "997,\n \"minutes\": 500\n },\n {\n \"projet\": 10,\n \"minutes\": 4\n },\n {\n \"projet\": 910,\n "
@@ -401,7 +400,7 @@ public class ReportTest {
 
     @Test
     public void testReportHasNotValidWeeklyTimeRemoteTooMuchTime() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + ADMIN_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
                 + "907,\n \"minutes\": 601\n },\n {\n \"projet\": 10,\n \"minutes\": 240\n },\n {\n \"projet\": 910,\n "
                 + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
@@ -422,7 +421,7 @@ public class ReportTest {
     
     @Test
     public void testReportEmployeDirectionNoMaxHoursWeekly43_01h() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -442,7 +441,7 @@ public class ReportTest {
     
     @Test
     public void testReportPresidentNoMaxHoursWeekly43_01h() throws Exception {
-        Employe employePresident = new Employe();
+        employePresident = new Employe();
         validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -463,7 +462,7 @@ public class ReportTest {
     @Test
     public void testReportEmployeDirectionMinOfficeTime8hFail() throws Exception {
         // jour 2 different!!!!!!!!!!!!!!!
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 479\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -484,7 +483,7 @@ public class ReportTest {
     
     @Test
     public void testReportEmployeDirectionMinOfficeTime8hPass() throws Exception {
-        Employe employeDirection = new Employe();
+        employeDirection = new Employe();
         validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -505,7 +504,7 @@ public class ReportTest {
     @Test
     public void testReportPresidentMinOfficeTime8hFail() throws Exception {
         // jour2 different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        Employe employePresident = new Employe();
+        employePresident = new Employe();
         validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 479\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -526,7 +525,7 @@ public class ReportTest {
     
     @Test
     public void testReportEmployePresidentMinOfficeTime8hPass() throws Exception {
-        Employe employePresident = new Employe();
+        employePresident = new Employe();
         validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 1000,\n \"minutes\": 420\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
