@@ -21,21 +21,32 @@ public class ReportTest {
     private static final int HOLIDAY_TASK_ID = 997;
     private static final int PARENTAL_HOLIDAY_TASK_ID = 996;
 
-    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY = "Cet employé n'a pas travaillé le nombre d'heures minimal physiquement au bureau.";
-    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK = "Cet employé n'a pas fait le minimum d'heures requis du lundi au vendredi physiquement au bureau.";
-    private static final String ERROR_INVALID_PARENTAL_HOLIDAY = "Cet employé a au moins une journée de congé parental invalide";
-    private static final String ERROR_TOO_MANY_PARENTAL_HOLIDAY = "Cet employé a plus d'une journée de congé parental par semaine.";
-    private static final String ERROR_INVALID_TASK_AFTER_24_HOURS = "Cet employé a une journée avec plus de 24 heures qui ne comporte pas de temps de journée de vacances ou de congé férié";
-    private static final String ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY = "Cet employé a une journée avec plus de 32 heures travaillé.";
-    private static final String ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK = "Cet employé a une journée qui ne respecte pas le nombre minimum de minutes (0) pour une tache.";
-    private static final String ERROR_WORK_SAME_PROJECT_FOR_DAY = "Cet employé a plusieurs activités avec le même code de projet pour une même journée";
+    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY = "Cet employé n'a pas travaillé le nombre "
+            + "d'heures minimal physiquement au bureau.";
+    private static final String ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK = "Cet employé n'a pas fait le minimum "
+            + "d'heures requis du lundi au vendredi physiquement au bureau.";
+    private static final String ERROR_INVALID_PARENTAL_HOLIDAY = "Cet employé a au moins une journée de congé parental "
+            + "invalide";
+    private static final String ERROR_TOO_MANY_PARENTAL_HOLIDAY = "Cet employé a plus d'une journée de congé parental "
+            + "par semaine.";
+    private static final String ERROR_INVALID_TASK_AFTER_24_HOURS = "Cet employé a une journée avec plus de 24 heures "
+            + "qui ne comporte pas de temps de journée de vacances ou de congé férié";
+    private static final String ERROR_INVALID_MAXIMUM_MINUTES_FOR_DAY = "Cet employé a une journée avec plus de 32 "
+            + "heures travaillé.";
+    private static final String ERROR_INVALID_MINIMUM_MINUTES_FOR_TASK = "Cet employé a une journée qui ne respecte "
+            + "pas le nombre minimum de minutes (0) pour une tache.";
+    private static final String ERROR_WORK_SAME_PROJECT_FOR_DAY = "Cet employé a plusieurs activités avec le même "
+            + "code de projet pour une même journée";
     private static final String ERROR_INVALID_SICK_HOLIDAY = "Cet employé a une journée invalide de congé de maladie.";
     private static final String ERROR_INVALID_PUBLIC_HOLIDAY = "Cet employé a une journée invalide de congé férié.";
     private static final String ERROR_INVALID_HOLIDAY = "Cet employé a une journée invalide de congé de vacances.";
-    private static final String ERROR_TOO_MANY_MINUTES_OF_REMOTE_WORK = "Cet employé a fait plus d'heures de télétravail que la quantité permise.";
-    private static final String ERROR_TOO_MANY_MINUTES_OF_OFFICE_WORK = "Cet employé a passé plus d'heures physiquement au bureau que la quantité permise.";
+    private static final String ERROR_TOO_MANY_MINUTES_OF_REMOTE_WORK = "Cet employé a fait plus d'heures de "
+            + "télétravail que la quantité permise.";
+    private static final String ERROR_TOO_MANY_MINUTES_OF_OFFICE_WORK = "Cet employé a passé plus d'heures physiquement "
+            + "au bureau que la quantité permise.";
     private static final String ERROR_INVALID_TRANSPORT_TIME = "Cet employé a déclaré du temps de transport non permis.";
-    private static final String ERROR_TOO_MUCH_TRANSPORT_TIME = "Cet employé a déclaré plus de temps de transport par semaine que la limite permise.";
+    private static final String ERROR_TOO_MUCH_TRANSPORT_TIME = "Cet employé a déclaré plus de temps de transport par "
+            + "semaine que la limite permise.";
 
     private static final String VALID_JSON_40HRS_WEEK = "{\n \"numero_employe\": 4,\n \"jour1\": [\n {\n \"projet\": 90,"
             + "\n \"minutes\": 480\n },\n {\n \"projet\": 904,\n \"minutes\": 480\n },\n {\n \"projet\": 905,\n "
@@ -44,8 +55,8 @@ public class ReportTest {
             + "\n \"minutes\": 480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 480 }\n ],\n "
             + "\"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
 
-    private static final String VALID_JSON_43HRS_WEEK = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": 90,"
-            + "\n \"minutes\": 480\n },\n {\n \"projet\": 904,\n \"minutes\": 480\n },\n {\n \"projet\": 905,\n "
+    private static final String VALID_JSON_43HRS_WEEK = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": "
+            + "90,\n \"minutes\": 480\n },\n {\n \"projet\": 904,\n \"minutes\": 480\n },\n {\n \"projet\": 905,\n "
             + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 660\n }\n ],\n "
             + "\"jour3\": [\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,"
             + "\n \"minutes\": 480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 480 }\n ],\n "
@@ -258,9 +269,9 @@ public class ReportTest {
         List<String> generatedReport = testReport.generateReport(validEmployeDirection);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
-
+    
     @Test
-    public void testReportInvalidDaysWithPublicHolidayOfficeTaskOnPublicHoliday() throws Exception {
+    public void testReportInvalidDaysWithPublicHolidayFailWhenUsedOnWeekEnd() throws Exception {
         List<Task> tasksForDay = validEmployeDirection.getTimeSheet(0).getDayByName(WEEKEND2_KEY).getTasks();
         tasksForDay.get(0).setProjectId(PUBLIC_HOLIDAY_TASK_ID);
         tasksForDay.get(0).setTime(480);
