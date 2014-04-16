@@ -31,6 +31,26 @@ public class ReportTest {
     private static final String ERROR_INVALID_TRANSPORT_TIME = "Cet employé a déclaré du temps de transport non permis."; 
     private static final String ERROR_TOO_MUCH_TRANSPORT_TIME = "Cet employé a déclaré plus de temps de transport par semaine que la limite permise.";    
     
+    private static final String VALID_JSON_40HRS_WEEK = "{\n \"numero_employe\": 4,\n \"jour1\": [\n {\n \"projet\": 90,"
+                + "\n \"minutes\": 480\n },\n {\n \"projet\": 904,\n \"minutes\": 480\n },\n {\n \"projet\": 905,\n "
+                + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 480\n }\n ],\n "
+                + "\"jour3\": [\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,"
+                + "\n \"minutes\": 480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 480 }\n ],\n "
+                + "\"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+    
+    private static final String VALID_JSON_43HRS_WEEK = "{\n \"numero_employe\": 5001,\n \"jour1\": [\n {\n \"projet\": 90,"
+                + "\n \"minutes\": 480\n },\n {\n \"projet\": 904,\n \"minutes\": 480\n },\n {\n \"projet\": 905,\n "
+                + "\"minutes\": 10\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 660\n }\n ],\n "
+                + "\"jour3\": [\n {\n \"projet\": 96,\n \"minutes\": 480\n }\n ],\n \"jour4\": [\n {\n \"projet\": 99,"
+                + "\n \"minutes\": 480 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 480 }\n ],\n "
+                + "\"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
+    
+    private static final String RULES_ADMINS_CLASS_PATH_AND_NAME = "timesheet.RulesAdmins";
+    private static final String RULES_DEVELOPMENT_CLASS_PATH_AND_NAME = "timesheet.RulesDevelopment";
+    private static final String RULES_EXPLOITATION_CLASS_PATH_AND_NAME = "timesheet.RulesExploitation";
+    private static final String RULES_DIRECTION_CLASS_PATH_AND_NAME = "timesheet.RulesDirection";
+    private static final String RULES_PRESIDENT_CLASS_PATH_AND_NAME = "timesheet.RulesPresident";
+            
     private String validJSONStringAdmin;
     private String validJSONStringDevelopment;
     private String validJSONStringExploitation;
@@ -41,9 +61,9 @@ public class ReportTest {
     private JSONObject validJSONObjectExploitation;
     private JSONObject validJSONObjectDirection;
     private JSONObject validJSONObjectPresident;    
-    private Employe employeAdmin;
-    private Employe employeDevelopment;
-    private Employe employeExploitation;
+    private Employe validEmployeAdmin;
+    private Employe validEmployeDevelopment;
+    private Employe validEmployeExploitation;
     private Employe employeDirection;
     private Employe employePresident;    
     private TimeSheetData validTimeSheetDataAdmin;
@@ -54,153 +74,115 @@ public class ReportTest {
     
     @Before
     public void initObjects() throws Exception {
-        employeAdmin = new Employe();
-        validJSONStringAdmin = "{\n \"numero_employe\": " + ADMIN_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": 998,"
-                + "\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
-                + "\"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n "
-                + "\"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,"
-                + "\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n "
-                + "\"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
-        validJSONObjectAdmin = JSONObject.fromObject(validJSONStringAdmin);
+        generateValidEmployeAdministration();
+        generateValidEmployeExploitation();
+        generateValidEmployeDirection();
+        generateValidEmployePresident();
+        generateValidEmployeDevelopment();
+    }
+    
+    private void generateValidEmployeAdministration() throws Exception {
+        validEmployeAdmin = new Employe();
+        validJSONObjectAdmin = JSONObject.fromObject(VALID_JSON_40HRS_WEEK);    
         validTimeSheetDataAdmin = JSONParser.toTimeSheetData(validJSONObjectAdmin);
-        employeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
-
-        employeDevelopment = new Employe();
-        validJSONStringDevelopment = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\": [\n {\n "
-                + "\"projet\": 998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n "
-                + "\"projet\": 910,\n \"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": "
-                + "552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n "
-                + "{\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": "
-                + "516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
-        validJSONObjectDevelopment = JSONObject.fromObject(validJSONStringDevelopment);
+        validEmployeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
+        validEmployeAdmin.setEmployeId(ADMIN_EMPLOYE_ID);
+    }
+    
+    private void generateValidEmployeDevelopment() throws Exception {
+        validEmployeDevelopment = new Employe();
+        validJSONObjectDevelopment = JSONObject.fromObject(VALID_JSON_40HRS_WEEK);
         validTimeSheetDataDevelopment = JSONParser.toTimeSheetData(validJSONObjectDevelopment);
-        employeDevelopment.initFromFirstTimeSheet(validTimeSheetDataDevelopment);
-
-        employeExploitation = new Employe();
-        validJSONStringExploitation = "{\n \"numero_employe\": " + EXPLOITATION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n "
-                + "\"projet\": 998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n "
-                + "\"projet\": 910,\n \"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": "
-                + "552\n }\n ],\n \"jour3\": [\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": "
-                + "[\n {\n \"projet\": 996,\n \"minutes\": 80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n "
-                + "\"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": "
-                + "30\n }\n ]\n}";
-        validJSONObjectExploitation = JSONObject.fromObject(validJSONStringExploitation);
+        validEmployeDevelopment.initFromFirstTimeSheet(validTimeSheetDataDevelopment);
+        validEmployeDevelopment.setEmployeId(DEVELOPMENT_EMPLOYE_ID);
+    }
+    
+    private void generateValidEmployeExploitation() throws Exception {
+        validEmployeExploitation = new Employe();
+        validJSONObjectExploitation = JSONObject.fromObject(VALID_JSON_40HRS_WEEK);
         validTimeSheetDataExploitation = JSONParser.toTimeSheetData(validJSONObjectExploitation);
-        employeExploitation.initFromFirstTimeSheet(validTimeSheetDataExploitation);
-
+        validEmployeExploitation.initFromFirstTimeSheet(validTimeSheetDataExploitation);
+        validEmployeExploitation.setEmployeId(EXPLOITATION_EMPLOYE_ID);
+    }
+    
+    private void generateValidEmployeDirection() throws Exception {
         employeDirection = new Employe();
-        validJSONStringDirection = "{\n \"numero_employe\": " + DIRECTION_EMPLOYE_ID + ",\n \"jour1\": [\n {\n \"projet\": "
-                + "998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
-                + "\"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
-                + "[\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": "
-                + "80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
-                + "\"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
-        validJSONObjectDirection = JSONObject.fromObject(validJSONStringDirection);
+        validJSONObjectDirection = JSONObject.fromObject(VALID_JSON_43HRS_WEEK);
         validTimeSheetDataDirection = JSONParser.toTimeSheetData(validJSONObjectDirection);
         employeDirection.initFromFirstTimeSheet(validTimeSheetDataDirection);
-        
+        employeDirection.setEmployeId(DIRECTION_EMPLOYE_ID);
+    }
+    
+    private void generateValidEmployePresident() throws Exception {
         employePresident = new Employe();
-        validJSONStringPresident = "{\n \"numero_employe\": " + PRESIDENT_ID + ",\n \"jour1\": [\n {\n \"projet\": "
-                + "998,\n \"minutes\": 480\n },\n {\n \"projet\": 911,\n \"minutes\": 36\n },\n {\n \"projet\": 910,\n "
-                + "\"minutes\": 8\n }\n ],\n \"jour2\": [\n {\n \"projet\": 125,\n \"minutes\": 552\n }\n ],\n \"jour3\": "
-                + "[\n {\n \"projet\": 996,\n \"minutes\": 80\n }\n ],\n \"jour4\": [\n {\n \"projet\": 996,\n \"minutes\": "
-                + "80 }\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n "
-                + "\"weekend2\": [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
-        validJSONObjectPresident = JSONObject.fromObject(validJSONStringPresident);
+        validJSONObjectPresident = JSONObject.fromObject(VALID_JSON_43HRS_WEEK);
         validTimeSheetDataPresident = JSONParser.toTimeSheetData(validJSONObjectPresident);
-        employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);        
+        employePresident.initFromFirstTimeSheet(validTimeSheetDataPresident);
+        employePresident.setEmployeId(PRESIDENT_ID);
     }
 
     @Test
     public void testIntitializeRulesForThisEmployeAdmin() {
-        Report testReport = new Report(employeAdmin);
-        Rules generatedRule = testReport.intitializeRulesForThisEmploye(employeAdmin);
-        assertEquals(generatedRule.getClass().getName(), "timesheet.RulesAdmins");
+        Report testReport = new Report(validEmployeAdmin);
+        Rules generatedRule = testReport.intitializeRulesForThisEmploye(validEmployeAdmin);
+        assertEquals(generatedRule.getClass().getName(), RULES_ADMINS_CLASS_PATH_AND_NAME);
     }
 
     @Test
     public void testIntitializeRulesForThisEmployeDevelopment() {
-        Report testReport = new Report(employeDevelopment);
-        Rules generatedRule = testReport.intitializeRulesForThisEmploye(employeDevelopment);
-        assertEquals(generatedRule.getClass().getName(), "timesheet.RulesDevelopment");
+        Report testReport = new Report(validEmployeDevelopment);
+        Rules generatedRule = testReport.intitializeRulesForThisEmploye(validEmployeDevelopment);
+        assertEquals(generatedRule.getClass().getName(), RULES_DEVELOPMENT_CLASS_PATH_AND_NAME);
     }
 
     @Test
     public void testIntitializeRulesForThisEmployeExploitation() {
-        Report testReport = new Report(employeExploitation);
-        Rules generatedRule = testReport.intitializeRulesForThisEmploye(employeExploitation);
-        assertEquals(generatedRule.getClass().getName(), "timesheet.RulesExploitation");
+        Report testReport = new Report(validEmployeExploitation);
+        Rules generatedRule = testReport.intitializeRulesForThisEmploye(validEmployeExploitation);
+        assertEquals(generatedRule.getClass().getName(), RULES_EXPLOITATION_CLASS_PATH_AND_NAME);
     }
 
     @Test
     public void testIntitializeRulesForThisEmployeDirection() {
         Report testReport = new Report(employeDirection);
         Rules generatedRule = testReport.intitializeRulesForThisEmploye(employeDirection);
-        assertEquals(generatedRule.getClass().getName(), "timesheet.RulesDirection");
+        assertEquals(generatedRule.getClass().getName(), RULES_DIRECTION_CLASS_PATH_AND_NAME);
     }
     
     @Test
     public void testIntitializeRulesForThisPresident() {
         Report testReport = new Report(employePresident);
         Rules generatedRule = testReport.intitializeRulesForThisEmploye(employePresident);
-        assertEquals(generatedRule.getClass().getName(), "timesheet.RulesPresident");
+        assertEquals(generatedRule.getClass().getName(), RULES_PRESIDENT_CLASS_PATH_AND_NAME);
     }    
 
     @Test
     public void testgenerateReportAdmin() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
-        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
-
-        Report testReport = new Report(employeAdmin);
-        List<String> generatedReport = testReport.generateReport(employeAdmin);
+        Report testReport = new Report(validEmployeAdmin);
+        List<String> generatedReport = testReport.generateReport(validEmployeAdmin);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
 
     @Test
     public void testgenerateReportDevelopment() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
-        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
-
-        Report testReport = new Report(employeDevelopment);
-        List<String> generatedReport = testReport.generateReport(employeDevelopment);
+        Report testReport = new Report(validEmployeDevelopment);
+        List<String> generatedReport = testReport.generateReport(validEmployeDevelopment);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
 
     @Test
     public void testgenerateReportExploitation() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
-        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
-
-        Report testReport = new Report(employeExploitation);
-        List<String> generatedReport = testReport.generateReport(employeExploitation);
+        Report testReport = new Report(validEmployeExploitation);
+        List<String> generatedReport = testReport.generateReport(validEmployeExploitation);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }
 
     @Test
     public void testgenerateReportDirection() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
-        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
-
         Report testReport = new Report(employeDirection);
         List<String> generatedReport = testReport.generateReport(employeDirection);
         assertEquals(expectedReport.toString(), generatedReport.toString());
@@ -209,13 +191,6 @@ public class ReportTest {
     @Test
     public void testgenerateReportPresident() {
         List<String> expectedReport = new ArrayList<>();
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour3)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_DAY + " (jour4)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour3)");
-        expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (jour4)");
-        expectedReport.add(ERROR_NOT_ENOUGH_PHYSICAL_TIME_FOR_WEEK);
-        expectedReport.add(ERROR_TOO_MANY_PARENTAL_HOLIDAY);
-
         Report testReport = new Report(employePresident);
         List<String> generatedReport = testReport.generateReport(employePresident);
         assertEquals(expectedReport.toString(), generatedReport.toString());
@@ -610,7 +585,7 @@ public class ReportTest {
     @Test
     public void testReportAdminInvalidTransportTime301m() throws Exception {
         // jour2 different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        employeAdmin = new Employe();
+        validEmployeAdmin = new Employe();
         validJSONStringAdmin = "{\n \"numero_employe\": " + ADMIN_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 777,\n \"minutes\": 301\n },\n { \"projet\":895,\n \"minutes\":18\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -619,20 +594,20 @@ public class ReportTest {
         
         validJSONObjectAdmin = JSONObject.fromObject(validJSONStringAdmin);
         validTimeSheetDataAdmin = JSONParser.toTimeSheetData(validJSONObjectAdmin);
-        employeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
+        validEmployeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
 
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_TOO_MUCH_TRANSPORT_TIME);
 
-        Report testReport = new Report(employeAdmin);
-        List<String> generatedReport = testReport.generateReport(employeAdmin);
+        Report testReport = new Report(validEmployeAdmin);
+        List<String> generatedReport = testReport.generateReport(validEmployeAdmin);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }    
     
     @Test
     public void testReportAdminValidTransportTime300m() throws Exception {
         // jour2 different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        employeAdmin = new Employe();
+        validEmployeAdmin = new Employe();
         validJSONStringAdmin = "{\n \"numero_employe\": " + ADMIN_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 777,\n \"minutes\": 300\n },\n { \"projet\":895,\n \"minutes\":18\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -641,19 +616,19 @@ public class ReportTest {
         
         validJSONObjectAdmin = JSONObject.fromObject(validJSONStringAdmin);
         validTimeSheetDataAdmin = JSONParser.toTimeSheetData(validJSONObjectAdmin);
-        employeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
+        validEmployeAdmin.initFromFirstTimeSheet(validTimeSheetDataAdmin);
 
         List<String> expectedReport = new ArrayList<>();
 
-        Report testReport = new Report(employeAdmin);
-        List<String> generatedReport = testReport.generateReport(employeAdmin);
+        Report testReport = new Report(validEmployeAdmin);
+        List<String> generatedReport = testReport.generateReport(validEmployeAdmin);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }    
     
     @Test
     public void testReportDevelopmentInvalidTransportTime300m() throws Exception {
         // jour2 different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        employeDevelopment = new Employe();
+        validEmployeDevelopment = new Employe();
         validJSONStringDevelopment = "{\n \"numero_employe\": " + DEVELOPMENT_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 777,\n \"minutes\": 300\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -662,7 +637,7 @@ public class ReportTest {
         
         validJSONObjectDevelopment = JSONObject.fromObject(validJSONStringDevelopment);
         validTimeSheetDataDevelopment = JSONParser.toTimeSheetData(validJSONObjectDevelopment);
-        employeDevelopment.initFromFirstTimeSheet(validTimeSheetDataDevelopment);
+        validEmployeDevelopment.initFromFirstTimeSheet(validTimeSheetDataDevelopment);
 
         List<String> expectedReport = new ArrayList<>();   
         
@@ -671,15 +646,15 @@ public class ReportTest {
         
         expectedReport.add(ERROR_INVALID_TRANSPORT_TIME);
 
-        Report testReport = new Report(employeDevelopment);
-        List<String> generatedReport = testReport.generateReport(employeDevelopment);
+        Report testReport = new Report(validEmployeDevelopment);
+        List<String> generatedReport = testReport.generateReport(validEmployeDevelopment);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }  
     
     @Test
     public void testReportExploitationInvalidTransportTime300m() throws Exception {
         // jour2 different!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        employeExploitation = new Employe();
+        validEmployeExploitation = new Employe();
         validJSONStringExploitation = "{\n \"numero_employe\": " + EXPLOITATION_EMPLOYE_ID + ",\n \"jour1\":\n [\n {\n \"projet\" :"
                 + " 777,\n \"minutes\": 300\n },\n { \"projet\":895,\n \"minutes\":480\n }\n ],\n \"jour2\": [\n {\n "
                 + "\"projet\": 125,\n \"minutes\": 480\n }\n ],\n \"jour3\": [\n {\n \"projet\": 96, \"minutes\": 561\n }\n "
@@ -688,7 +663,7 @@ public class ReportTest {
         
         validJSONObjectExploitation = JSONObject.fromObject(validJSONStringExploitation);
         validTimeSheetDataExploitation = JSONParser.toTimeSheetData(validJSONObjectExploitation);
-        employeExploitation.initFromFirstTimeSheet(validTimeSheetDataExploitation);
+        validEmployeExploitation.initFromFirstTimeSheet(validTimeSheetDataExploitation);
 
         List<String> expectedReport = new ArrayList<>();   
         
@@ -697,8 +672,8 @@ public class ReportTest {
         
         expectedReport.add(ERROR_INVALID_TRANSPORT_TIME);
 
-        Report testReport = new Report(employeExploitation);
-        List<String> generatedReport = testReport.generateReport(employeExploitation);
+        Report testReport = new Report(validEmployeExploitation);
+        List<String> generatedReport = testReport.generateReport(validEmployeExploitation);
         assertEquals(expectedReport.toString(), generatedReport.toString());
     }    
 }
