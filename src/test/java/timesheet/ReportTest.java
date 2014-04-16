@@ -500,7 +500,6 @@ public class ReportTest {
     public void testInvalidDaysOfParentalHolidayFailOnWeekend() throws Exception {
         List<Task> tasksForDay = validEmployePresident.getTimeSheet(0).getDayByName(WEEKEND2_KEY).getTasks();
         tasksForDay.get(0).setProjectId(PARENTAL_HOLIDAY_TASK_ID);
-        //tasksForDay.get(1).setProjectId(SICK_LEAVE_TASK_ID);
         tasksForDay.get(0).setTime(480);
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add(ERROR_INVALID_PARENTAL_HOLIDAY + " (" + WEEKEND2_KEY + ")");
