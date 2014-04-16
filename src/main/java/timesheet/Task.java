@@ -1,16 +1,28 @@
 package timesheet;
 
 public class Task {         
-    private final int projectId;
-    private final int time;    
+    private int projectId;
+    private int time;    
     
     public Task(int id, int time) {        
         projectId = id;
         this.time = time;        
     }
     
+    public int getProjectId() {
+        return projectId;
+    }
+    
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+    
     public int getTime() {        
         return time;        
+    }
+    
+    public void setTime(int time) {
+        this.time = time;
     }
     
     public boolean isOfficeTask() {        
@@ -53,8 +65,4 @@ public class Task {
     public String toString() {        
         return "Task{projectId: " + projectId + ", time: " + time +"}";        
     }    
-
-    public int getProjectId() {
-        return projectId;
-    }
 }
