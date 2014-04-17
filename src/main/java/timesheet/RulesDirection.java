@@ -22,6 +22,16 @@ public class RulesDirection extends Rules {
                 totalMinutes += (int)tasks.get(i).getTime();
         return totalMinutes;
     }
+    
+    @Override
+    protected int getTotalRemoteMinutesByDay(Day day) {
+        int totalMinutes = 0;
+        List<Task> tasks = day.getTasks();
+        for (int i = 0; i < tasks.size(); i++) 
+            if (tasks.get(i).isRemoteTask() || tasks.get(i).isTransportationTask()) 
+                totalMinutes += (int)tasks.get(i).getTime();        
+        return totalMinutes;
+    }
 
     @Override
     public boolean hasValidWeeklyTimeRemote() {
