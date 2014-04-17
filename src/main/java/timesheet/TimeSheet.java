@@ -133,7 +133,7 @@ public class TimeSheet {
         
         if (rules.canChargeTransportation()) {
             System.out.printf("\n      Can declare transport time : YES\n");
-            if (employe.isAdmin())
+            if (employe.isAdmin() || employe.isPresident())
                 System.out.printf("      Declared has               : OFFICE TIME\n");
             else if ((employe.isDirectionEmploye()))
                 System.out.printf("      Declared has               : REMOTE TIME\n");                                
