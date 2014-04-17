@@ -342,10 +342,57 @@ public class RulesTest {
         Rules rules = rulesFactory.makeRules(employe);        
         assertEquals(0, rules.getTotalRemoteMinutesByDay(timeSheetData.getDayByName(JOUR1_KEY)));      
     }      
-       
+           
+    @Test
+    public void testSumTotalMinutesTransportDirection() {
+        Employe employe = makeEmployeFactory(VALID_DIRECTION_EMPLOYE_ID); 
+        Task task = new Task (TRANSPORTATION_ID, 100);
+        RulesFactory rulesFactory = new RulesFactory();
+        Rules rules = rulesFactory.makeRules(employe);
+        rules.sumTotalMinutes(task);
+        assertEquals(100, rules.totalRemoteWeekMinutes);
+    }
     
-    // TODO testSumTotalMinutes()
-
+    @Test
+    public void testSumTotalMinutesTransportPresident() {
+        Employe employe = makeEmployeFactory(PRESIDENT_ID); 
+        Task task = new Task (TRANSPORTATION_ID, 100);
+        RulesFactory rulesFactory = new RulesFactory();
+        Rules rules = rulesFactory.makeRules(employe);
+        rules.sumTotalMinutes(task);
+        assertEquals(100, rules.totalOfficeWeekMinutes);
+    }  
+    
+    @Test
+    public void testSumTotalMinutesTransportExploitation() {
+        Employe employe = makeEmployeFactory(VALID_EXPLOITATION_EMPLOYE_ID); 
+        Task task = new Task (TRANSPORTATION_ID, 100);
+        RulesFactory rulesFactory = new RulesFactory();
+        Rules rules = rulesFactory.makeRules(employe);
+        rules.sumTotalMinutes(task);
+        assertEquals(100, rules.totalOfficeWeekMinutes);
+    }   
+    
+    @Test
+    public void testSumTotalMinutesTransportDevel() {
+        Employe employe = makeEmployeFactory(VALID_DEVELOPMENT_EMPLOYE_ID); 
+        Task task = new Task (TRANSPORTATION_ID, 100);
+        RulesFactory rulesFactory = new RulesFactory();
+        Rules rules = rulesFactory.makeRules(employe);
+        rules.sumTotalMinutes(task);
+        assertEquals(100, rules.totalOfficeWeekMinutes);
+    }    
+ 
+    @Test
+    public void testSumTotalMinutesTransportAdmin() {
+        Employe employe = makeEmployeFactory(VALID_ADMIN_EMPLOYE_ID); 
+        Task task = new Task (TRANSPORTATION_ID, 100);
+        RulesFactory rulesFactory = new RulesFactory();
+        Rules rules = rulesFactory.makeRules(employe);
+        rules.sumTotalMinutes(task);
+        assertEquals(100, rules.totalOfficeWeekMinutes);
+    } 
+    
     private Employe makeEmployeFactory(int employeId) {
         TimeSheetData timeSheetData = new TimeSheetData();
         timeSheetData.setDayByName(new Day(JOUR1_KEY));
