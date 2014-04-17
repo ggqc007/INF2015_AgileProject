@@ -32,8 +32,8 @@ public class EmployeTest {
             + "\n ],\n \"jour5\": [\n  {\n \"projet\": 125,\n \"minutes\": 516 }\n ],\n \"weekend1\": [],\n \"weekend2\":"
             + " [\n {\n \"projet\": 990,\n \"minutes\": 30\n }\n ]\n}";
 
-    private static final String EXPECTED_EMPLOYE_STRING = "Employe{employeId: 5001, timesheets: [TimeSheetData{employeId: 5001, "
-            + "days: [Day{name: \"weekend2\", tasks:[Task{projectId: 990, time: 30}]}, Day{name: \"jour1\", "
+    private static final String EXPECTED_EMPLOYE_STRING = "Employe{employeId: 5001, timesheets: [TimeSheetData{employeId: "
+            + "5001, days: [Day{name: \"weekend2\", tasks:[Task{projectId: 990, time: 30}]}, Day{name: \"jour1\", "
             + "tasks:[Task{projectId: 998, time: 480}, Task{projectId: 911, time: 36}, Task{projectId: 910, "
             + "time: 8}]}, Day{name: \"jour2\", tasks:[Task{projectId: 125, time: 552}]}, Day{name: \"jour3\", "
             + "tasks:[Task{projectId: 996, time: 80}]}, Day{name: \"jour4\", tasks:[Task{projectId: 996, time: 80}]}, "
