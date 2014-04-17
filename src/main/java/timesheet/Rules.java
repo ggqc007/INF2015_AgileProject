@@ -76,7 +76,7 @@ abstract public class Rules {
         for (int i = 0; i < days.size(); i++)    
             if (days.get(i).hasParentalHolidayTask()) {
                 nbDaysWithParentalHoliday++;
-                if(nbDaysWithParentalHoliday > 1 || !days.get(i).isValidParentalHoliday())
+                if (nbDaysWithParentalHoliday > 1 || !days.get(i).isValidParentalHoliday())
                     invalidDays.add(days.get(i));
             }
         return invalidDays;         
@@ -132,7 +132,7 @@ abstract public class Rules {
     protected boolean isDuplicateTask(List<Task> tasks) {
         boolean isDuplicate = false;
         List<Integer> listTask = new ArrayList<>();
-        for(Task task : tasks) {
+        for (Task task : tasks) {
             if (listTask.contains(task.getProjectId()))
                 isDuplicate = true;
             listTask.add(task.getProjectId());
