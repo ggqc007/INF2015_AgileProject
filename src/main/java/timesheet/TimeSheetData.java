@@ -70,9 +70,6 @@ public class TimeSheetData {
         return true;        
     }
     
-    // ATTENTION IL FAUT APPELER CETTE METHODE DANS RULES QUAND ON FAIT LES TESTS
-    // DE isValidParentalHoliday() POUR SAVOIR SI IL Y A JUSTE UN ParentalHoliday
-    // PAR SEMAINE, SINON ILS SONT TOUS INVALIDES
     public boolean hasOnlyOneParentalHolidayByWeek() {
         boolean foundParentalHoliday = false;
         for (Day day : days)
