@@ -18,5 +18,4 @@ public class MockSecurityManager extends SecurityManager {
     public void checkPermission(final Permission perm, final Object context) {
         // allow full control
     }
-
 }

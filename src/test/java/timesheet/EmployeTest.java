@@ -196,5 +196,4 @@ public class EmployeTest {
         testEmploye.setEmployeId(DEVELOPMENT_EMPLOYE_MIN);
         assertFalse(testEmploye.isPresident());
     }
-
 }

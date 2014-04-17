@@ -52,11 +52,6 @@ public class Employe {
         return (employeId == TimeSheet.PREDIDENT_ID);          
     }
     
-    // TODO: REMOVE - Utilisée seulement dans DEBUG
-    public int getId() {        
-        return employeId;        
-    }
-    
     @Override
     public String toString() {        
         return "Employe{employeId: " + employeId + ", timesheets: " + getTimeSheets() + "}";        

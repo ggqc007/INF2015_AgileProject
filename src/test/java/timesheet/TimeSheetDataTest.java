@@ -88,6 +88,5 @@ public class TimeSheetDataTest {
         timeSheetData.setDayByName(new Day(JOUR5_KEY));
         timeSheetData.setDayByName(new Day(WEEKEND2_KEY));
         assertFalse(timeSheetData.hasValidWeek());
-    }
-    
+    }    
 }
